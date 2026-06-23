@@ -3,7 +3,11 @@ import { Typography } from "@ds-12/ui/typography";
 
 function StorySectionTitle({ children }: { children: ReactNode }) {
   return (
-    <Typography variant="h3" render="h3" style={{ margin: "0 0 12px", textTransform: "capitalize" }}>
+    <Typography
+      variant="h3"
+      render="h3"
+      style={{ margin: "0 0 12px", textTransform: "capitalize" }}
+    >
       {children}
     </Typography>
   );

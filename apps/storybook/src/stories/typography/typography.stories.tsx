@@ -146,7 +146,7 @@ export const A11y: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const text = canvas.getByText("Accessible text");
-    expect(text).toBeInTheDocument();
-    expect(text).toHaveTextContent("Accessible text");
+    await expect(text).toBeInTheDocument();
+    await expect(text).toHaveTextContent("Accessible text");
   },
 };

@@ -82,6 +82,6 @@ export const A11y: Story = {
   ...testStoryParams(),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    expect(canvas.getByRole("separator")).toBeInTheDocument();
+    await expect(canvas.getByRole("separator")).toBeInTheDocument();
   },
 };

@@ -114,8 +114,8 @@ export const A11y: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const status = canvas.getByRole("status", { name: "Loading" });
-    expect(status).toBeInTheDocument();
-    expect(status).toHaveAccessibleName("Loading");
-    expect(status).toHaveAttribute("aria-busy", "true");
+    await expect(status).toBeInTheDocument();
+    await expect(status).toHaveAccessibleName("Loading");
+    await expect(status).toHaveAttribute("aria-busy", "true");
   },
 };

@@ -115,12 +115,7 @@ export const AllVariants: Story = {
           <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
             <div>
               <StoryCaption>enabled</StoryCaption>
-              <TextareaField
-                variant={variant}
-                showLeadingIcon
-                suffix="0/100"
-                placeholder="Input"
-              />
+              <TextareaField variant={variant} showLeadingIcon suffix="0/100" placeholder="Input" />
             </div>
             <div>
               <StoryCaption>disabled</StoryCaption>

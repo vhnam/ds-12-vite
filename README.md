@@ -100,9 +100,9 @@ GitHub Actions workflows live in `.github/workflows/`. Run them locally with [ac
 
 **Prerequisites:** [Docker](https://docs.docker.com/get-docker/) and [act](https://github.com/nektos/act#installation) (`brew install act` on macOS).
 
-The repo includes a `.actrc` that maps `ubuntu-latest` to the medium `catthehacker/ubuntu:act-latest` image. On Apple Silicon Macs, use native arm64 containers (the default). Forcing `linux/amd64` can break Playwright's system dependency install step.
+The repo includes a `.actrc` that maps `ubuntu-latest` to the medium `catthehacker/ubuntu:act-latest` image. On Apple Silicon Macs, use native arm64 containers (the default).
 
-Run the Storybook workflow (install, Playwright, browser tests, and static build):
+Run the Storybook workflow (Chromatic visual tests):
 
 ```bash
 vp run ci:storybook
@@ -116,7 +116,7 @@ act pull_request -W .github/workflows/storybook.yml -j storybook --env CI=true
 
 ### GitHub Pages
 
-On every push to `main`, the Storybook workflow deploys `apps/storybook/storybook-static` to GitHub Pages after tests pass.
+On every push to `main`, the Storybook workflow deploys `apps/storybook/storybook-static` to GitHub Pages after Chromatic passes.
 
 **One-time setup:** In the repo on GitHub, open **Settings → Pages** and set **Build and deployment → Source** to **GitHub Actions**.
 
@@ -164,7 +164,7 @@ apps/
 - **CVA** (`class-variance-authority`) for variant class names
 - **Scoped CSS** (`ds-[component]` classes) backed by CSS custom properties — not Tailwind utilities in components
 - **Design tokens** as the single source of visual values (`var(--token)`)
-- **Storybook 10** with Vitest browser testing via Playwright
+- **Storybook 10** with Chromatic for visual regression; interaction `play` functions run in the Storybook UI
 
 ## Tooling
 

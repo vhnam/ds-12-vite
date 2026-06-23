@@ -83,9 +83,7 @@ export function Button({
   const label = isIconOnly && typeof children === "string" ? undefined : children;
   const textLabel = typeof children === "string" ? children : undefined;
   const resolvedAriaLabel =
-    ariaLabel ??
-    (isIconOnly ? textLabel : undefined) ??
-    (loading ? textLabel : undefined);
+    ariaLabel ?? (isIconOnly ? textLabel : undefined) ?? (loading ? textLabel : undefined);
 
   return (
     <BaseButton

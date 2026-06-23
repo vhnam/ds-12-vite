@@ -1,0 +1,38 @@
+{
+  "trailingComma": "all",
+  "printWidth": 120,
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": true,
+  "bracketSpacing": true,
+  "arrowParens": "always",
+  "overrides": [
+    {
+      "files": ["**/*.{ts,tsx,js,jsx}"],
+      "options": {
+        "singleQuote": true
+      }
+    }
+  ],
+  "sortImports": {
+    "customGroups": [
+      {
+        "groupName": "ds-12",
+        "elementNamePattern": ["@ds-12/**"]
+      },
+      {
+        "groupName": "app",
+        "elementNamePattern": ["#/**"]
+      }
+    ],
+    "newlinesBetween": true,
+    "groups": [
+      "builtin",
+      "external",
+      "ds-12",
+      "app",
+      ["parent", "sibling", "index", "style", "side_effect_style"],
+      "unknown"
+    ]
+  }
+}

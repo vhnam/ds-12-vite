@@ -4,7 +4,6 @@ import { expect, userEvent, within } from "storybook/test";
 import { Chip } from "@ds-12/ui/chip";
 import { StoryCaption, StorySectionTitle } from "../../lib/story-presentation.tsx";
 import {
-  createButtonA11yPlay,
   createButtonDisabledPlay,
   createButtonFocusVisiblePlay,
   createButtonKeyboardFocusPlay,
@@ -143,11 +142,11 @@ export const Toggle: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const chip = canvas.getByRole("button", { name: "Label" });
-    expect(chip).toHaveAttribute("aria-pressed", "false");
+    await expect(chip).toHaveAttribute("aria-pressed", "false");
     await userEvent.click(chip);
-    expect(chip).toHaveAttribute("aria-pressed", "true");
+    await expect(chip).toHaveAttribute("aria-pressed", "true");
     await userEvent.click(chip);
-    expect(chip).toHaveAttribute("aria-pressed", "false");
+    await expect(chip).toHaveAttribute("aria-pressed", "false");
   },
 };
 
@@ -157,8 +156,8 @@ export const A11y: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const chip = canvas.getByRole("button", { name: "Label" });
-    expect(chip).toBeInTheDocument();
-    expect(chip).toHaveAccessibleName("Label");
-    expect(chip).toHaveAttribute("aria-pressed", "false");
+    await expect(chip).toBeInTheDocument();
+    await expect(chip).toHaveAccessibleName("Label");
+    await expect(chip).toHaveAttribute("aria-pressed", "false");
   },
 };

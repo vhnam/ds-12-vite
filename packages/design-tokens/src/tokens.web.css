@@ -215,7 +215,9 @@
   --pagination-sm-button-default-border-color: var(--color-semantic-border-subtle);
   --pagination-sm-button-default-label-fill: var(--color-semantic-text-neutral-moderate);
   --pagination-sm-button-pressed-fill: var(--pagination-button-container-pressed-fill);
-  --pagination-sm-button-pressed-border-color: var(--pagination-button-container-pressed-border-color);
+  --pagination-sm-button-pressed-border-color: var(
+    --pagination-button-container-pressed-border-color
+  );
   --pagination-sm-button-pressed-label-fill: var(--color-semantic-brand-bold);
   --pagination-sm-button-label-font-family: var(--paragraph-default-strong-font-family);
   --pagination-sm-button-label-font-size: var(--paragraph-default-strong-font-size);

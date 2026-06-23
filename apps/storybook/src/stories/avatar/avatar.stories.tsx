@@ -119,7 +119,7 @@ export const A11y: Story = {
   args: { shape: "user", variant: "initial", initials: "BL" },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    expect(canvas.getByText("BL")).toBeInTheDocument();
-    expect(canvas.getByText("BL")).toHaveTextContent("BL");
+    await expect(canvas.getByText("BL")).toBeInTheDocument();
+    await expect(canvas.getByText("BL")).toHaveTextContent("BL");
   },
 };

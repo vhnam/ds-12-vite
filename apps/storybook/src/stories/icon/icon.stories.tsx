@@ -146,7 +146,7 @@ export const A11y: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const icon = canvas.getByText("check_circle");
-    expect(icon).toHaveAttribute("aria-hidden", "true");
-    expect(canvas.queryByRole("img")).not.toBeInTheDocument();
+    await expect(icon).toHaveAttribute("aria-hidden", "true");
+    await expect(canvas.queryByRole("img")).not.toBeInTheDocument();
   },
 };

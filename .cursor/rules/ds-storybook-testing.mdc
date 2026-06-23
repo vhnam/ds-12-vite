@@ -20,7 +20,7 @@ import { Button } from "@ds-12/ui/button";
 import { StoryCaption, StorySectionTitle } from "../../lib/story-presentation.tsx";
 ```
 
-Use `@ds-12/ui/[name]` subpath imports. Add a matching Vite alias in `apps/storybook/vite.config.ts` when introducing a new component.
+Use `@ds-12/ui/[name]` subpath imports. Storybook resolves these via the `@ds-12/ui` alias in `apps/storybook/vite.config.ts` (no per-component alias needed).
 
 ## Setup (already configured)
 
@@ -29,7 +29,6 @@ Storybook 10 is configured in `apps/storybook/.storybook/main.ts`:
 ```ts
 addons: [
   "@chromatic-com/storybook",
-  "@storybook/addon-vitest",   // runs play functions via Vitest browser mode
   "@storybook/addon-a11y",
   "@storybook/addon-docs",
   "@storybook/addon-mcp",
@@ -37,7 +36,7 @@ addons: [
 framework: "@storybook/react-vite",
 ```
 
-Interaction tests use `play` functions executed by `@storybook/addon-vitest` (not `@storybook/addon-interactions`). Test utilities come from `storybook/test` (Storybook 10), not `@storybook/test`.
+Interaction tests use `play` functions with utilities from `storybook/test` (Storybook 10), not `@storybook/test`. Run them manually from the Storybook UI (Interactions panel); CI uses Chromatic for visual regression only.
 
 A11y is enabled globally in `apps/storybook/.storybook/preview.tsx` with `a11y.test: "todo"`.
 
@@ -231,4 +230,4 @@ export const KeyboardFocus: Story = {
 - Do NOT assert visual styles (color, spacing) — that belongs to visual regression (Chromatic)
 - Always confirm the component's rendered role before writing `getByRole` queries
 - Keep visual stories and interaction stories in the same file; interaction stories use `play`, visual stories do not
-- Run story tests with `pnpm exec vitest` from `apps/storybook`
+- Run interaction tests from the Storybook UI (Interactions panel)

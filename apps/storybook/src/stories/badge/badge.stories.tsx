@@ -116,11 +116,15 @@ export const AllVariants: Story = {
 export const AllSizes: Story = {
   render: (args) => (
     <div style={{ display: "flex", gap: "16px", alignItems: "flex-end" }}>
-      <div style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: "flex-start" }}>
+      <div
+        style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: "flex-start" }}
+      >
         <StoryCaption>Small</StoryCaption>
         <Badge {...args} size="sm" />
       </div>
-      <div style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: "flex-start" }}>
+      <div
+        style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: "flex-start" }}
+      >
         <StoryCaption>Large</StoryCaption>
         <Badge {...args} size="lg" />
       </div>
@@ -138,7 +142,7 @@ export const A11y: Story = {
   ...testStoryParams(),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    expect(canvas.getByText("Badge")).toBeInTheDocument();
-    expect(canvas.getByText("Badge")).toHaveTextContent("Badge");
+    await expect(canvas.getByText("Badge")).toBeInTheDocument();
+    await expect(canvas.getByText("Badge")).toHaveTextContent("Badge");
   },
 };

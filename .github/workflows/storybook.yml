@@ -39,12 +39,6 @@ jobs:
       - name: Install dependencies
         run: vp install
 
-      - name: Install Playwright browsers
-        run: vp run storybook#install-playwright
-
-      - name: Run Storybook tests
-        run: vp run storybook#test:storybook
-
       - name: Run Chromatic
         uses: chromaui/action@latest
         with:

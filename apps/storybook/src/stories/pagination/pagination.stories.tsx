@@ -11,7 +11,7 @@ import {
   testStoryParams,
 } from "../../lib/component-tests.ts";
 
-function InteractivePagination({ page: initialPage = 1, ...props }: PaginationProps) {
+function InteractivePagination({ page: initialPage, ...props }: PaginationProps) {
   const [page, setPage] = useState(initialPage);
 
   return <Pagination {...props} page={page} onPageChange={setPage} />;
@@ -156,9 +156,9 @@ export const A11y: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const nav = canvas.getByRole("navigation", { name: "Pagination" });
-    expect(nav).toBeInTheDocument();
+    await expect(nav).toBeInTheDocument();
     const pageButton = canvas.getByRole("button", { name: "Page 1" });
-    expect(pageButton).toHaveAccessibleName("Page 1");
-    expect(pageButton).toHaveAttribute("aria-current", "page");
+    await expect(pageButton).toHaveAccessibleName("Page 1");
+    await expect(pageButton).toHaveAttribute("aria-current", "page");
   },
 };

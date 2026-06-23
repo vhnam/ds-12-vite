@@ -42,9 +42,7 @@ Components live in `packages/ui`. Stories live in `apps/storybook` and import vi
 
 Always add interaction + a11y coverage in `apps/storybook/src/stories/[name]/[name].stories.tsx` for every component.
 
-Follow `ds-storybook-testing` for story patterns. Keep existing visual stories (`Default`, variant stories, `AllVariants`) and add dedicated interaction stories with `play` functions.
-
-Story tests run through `@storybook/addon-vitest` (Vitest browser mode + Playwright), configured in `apps/storybook/vite.config.ts`.
+Follow `ds-storybook-testing` for story patterns. Keep existing visual stories (`Default`, variant stories, `AllVariants`) and add dedicated interaction stories with `play` functions. Run interaction tests from the Storybook UI; CI uses Chromatic for visual regression.
 
 ## When to write Vitest unit tests
 
@@ -131,9 +129,6 @@ This repo uses Vite+ (`vp`), not Turbo.
 # Unit tests for @ds-12/ui
 cd packages/ui && vp test
 
-# Story interaction tests (Vitest browser project)
-cd apps/storybook && pnpm exec vitest
-
 # Format, lint, typecheck, and test everything
 vp check && vp run -r test
 ```
@@ -143,7 +138,7 @@ Root `package.json` uses `vp run -r test` to run tests across workspace packages
 ## Output checklist
 
 - [ ] Story file exists at `apps/storybook/src/stories/[name]/[name].stories.tsx`
-- [ ] Vite alias added in `apps/storybook/vite.config.ts` for new components
+- [ ] Component lives under `packages/ui/src/components/` (resolved by Storybook's `@ds-12/ui` alias)
 - [ ] Interaction + a11y stories added per `ds-storybook-testing`
 - [ ] Vitest unit tests added only if hooks or utils exist
 - [ ] `vp check && vp test` pass in affected packages
