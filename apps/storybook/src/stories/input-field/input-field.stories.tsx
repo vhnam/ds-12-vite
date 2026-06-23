@@ -1,17 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, within } from "storybook/test";
 import { InputField } from "@ds-12/ui/fields/input-field";
-import { StoryCaption, StorySectionTitle } from "../../lib/story-presentation.tsx";
 import {
   createTextboxA11yPlay,
-  createTextboxDisabledPlay,
   createTextboxFocusVisiblePlay,
   createTextboxKeyboardFocusPlay,
   createTextboxMouseClickPlay,
-  testStoryParams,
 } from "../../lib/component-tests.ts";
-
-const sizes = ["sm", "lg"] as const;
-const variants = ["default", "suffix"] as const;
+import { InputFieldStatesShowcase, SIZES, VARIANTS } from "./input-field-story-fixtures.tsx";
 
 const meta = {
   title: "Fields/InputField",
@@ -20,11 +16,11 @@ const meta = {
   argTypes: {
     size: {
       control: "select",
-      options: sizes,
+      options: SIZES,
     },
     variant: {
       control: "select",
-      options: variants,
+      options: VARIANTS,
     },
     invalid: { control: "boolean" },
     disabled: { control: "boolean" },
@@ -46,8 +42,8 @@ const meta = {
     placeholder: "Input",
     showLabel: true,
     showHelperText: true,
-    showLeadingIcon: true,
-    showTrailingIcon: true,
+    showLeadingIcon: false,
+    showTrailingIcon: false,
     suffix: "Suffix",
     invalid: false,
     disabled: false,
@@ -65,113 +61,39 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
-
-export const WithSuffix: Story = {
-  args: {
-    variant: "suffix",
-    showTrailingIcon: false,
-    suffix: "Suffix",
+export const Default: Story = {
+  play: async (context) => {
+    await createTextboxA11yPlay("Label")(context);
+    await createTextboxKeyboardFocusPlay("Label")(context);
+    await createTextboxFocusVisiblePlay("Label")(context);
+    await createTextboxMouseClickPlay("Label")(context);
   },
 };
 
-export const Disabled: Story = {
-  args: {
-    disabled: true,
-    defaultValue: "Input",
-  },
-  play: createTextboxDisabledPlay("Label"),
-};
+export const DefaultStates: Story = {
+  render: () => <InputFieldStatesShowcase variant="default" />,
+  decorators: [(Story) => <Story />],
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const inputs = canvas.getAllByRole("textbox", { name: "Label" });
 
-export const Error: Story = {
-  args: {
-    invalid: true,
-    defaultValue: "Input",
-    helperText: "Helper text",
+    await expect(inputs).toHaveLength(4);
+    await expect(inputs[0]).toHaveAccessibleName("Label");
+    await expect(inputs[2]).toBeDisabled();
+    await expect(inputs[3]).toHaveAttribute("aria-invalid", "true");
   },
 };
 
-export const Large: Story = {
-  args: {
-    size: "lg",
+export const SuffixStates: Story = {
+  render: () => <InputFieldStatesShowcase variant="suffix" />,
+  decorators: [(Story) => <Story />],
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const inputs = canvas.getAllByRole("textbox", { name: "Label" });
+
+    await expect(inputs).toHaveLength(4);
+    await expect(inputs[0]).toHaveAccessibleName("Label");
+    await expect(inputs[2]).toBeDisabled();
+    await expect(inputs[3]).toHaveAttribute("aria-invalid", "true");
   },
-};
-
-export const WithoutLabel: Story = {
-  args: {
-    showLabel: false,
-    "aria-label": "Label",
-  },
-};
-
-export const WithoutHelperText: Story = {
-  args: {
-    showHelperText: false,
-  },
-};
-
-export const AllVariants: Story = {
-  render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: 48, width: 343 }}>
-      {variants.map((variant) => (
-        <div key={variant}>
-          <StorySectionTitle>{variant}</StorySectionTitle>
-          <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-            <div>
-              <StoryCaption>enabled</StoryCaption>
-              <InputField
-                variant={variant}
-                showLeadingIcon
-                showTrailingIcon={variant === "default"}
-                suffix="Suffix"
-                placeholder="Input"
-              />
-            </div>
-            <div>
-              <StoryCaption>disabled</StoryCaption>
-              <InputField
-                variant={variant}
-                showLeadingIcon
-                showTrailingIcon={variant === "default"}
-                suffix="Suffix"
-                defaultValue="Input"
-                disabled
-              />
-            </div>
-            <div>
-              <StoryCaption>error</StoryCaption>
-              <InputField
-                variant={variant}
-                showLeadingIcon
-                showTrailingIcon={variant === "default"}
-                suffix="Suffix"
-                defaultValue="Input"
-                invalid
-              />
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  ),
-};
-
-export const KeyboardFocus: Story = {
-  ...testStoryParams(),
-  play: createTextboxKeyboardFocusPlay("Label"),
-};
-
-export const FocusVisible: Story = {
-  ...testStoryParams(),
-  play: createTextboxFocusVisiblePlay("Label"),
-};
-
-export const MouseClick: Story = {
-  ...testStoryParams(),
-  play: createTextboxMouseClickPlay("Label"),
-};
-
-export const A11y: Story = {
-  ...testStoryParams(),
-  play: createTextboxA11yPlay("Label"),
 };

@@ -20,7 +20,9 @@ import { Button } from "@ds-12/ui/button";
 import { StoryCaption, StorySectionTitle } from "../../lib/story-presentation.tsx";
 ```
 
-Use `@ds-12/ui/[name]` subpath imports. Storybook resolves these via the `@ds-12/ui` alias in `apps/storybook/vite.config.ts` (no per-component alias needed).
+Use `@ds-12/ui/[name]` subpath imports. Storybook resolves these via the `@ds-12/ui` alias in `apps/storybook/.storybook/main.ts` (no per-component alias needed).
+
+Extract large showcase renders (variant/size matrices, icon grids) into `[name]-story-fixtures.tsx` beside the story file. Keep stories focused on meta, args, and `play` functions.
 
 ## Setup (already configured)
 
@@ -44,10 +46,23 @@ A11y is enabled globally in `apps/storybook/.storybook/preview.tsx` with `a11y.t
 
 Every component story file should include:
 
-1. **Visual stories** — `Default`, per-variant/per-size stories, and an `AllVariants` showcase (existing convention)
-2. **Interaction stories** — dedicated stories with `play` functions for behavior and a11y
+1. **Default** — single-instance story with a `play` function covering core interaction + a11y
+2. **Showcase stories** — variant/size matrices imported from `[name]-story-fixtures.tsx`; add a `play` function when the showcase needs interaction or a11y coverage
 
 Use `tags: ["autodocs"]` and `satisfies Meta<typeof Component>` on the meta object.
+
+Bundle repeated single-instance plays via helpers in `apps/storybook/src/lib/component-tests.ts`:
+
+```ts
+export const Default: Story = {
+  play: async (context) => {
+    await createButtonA11yPlay("Button")(context);
+    await createButtonKeyboardFocusPlay("Button")(context);
+    await createButtonFocusVisiblePlay("Button")(context);
+    await createButtonMouseClickPlay("Button")(context);
+  },
+};
+```
 
 For stateful components, wrap in a local helper (see `pagination.stories.tsx`):
 
@@ -58,9 +73,55 @@ function InteractivePagination({ page: initialPage = 1, ...props }: PaginationPr
 }
 ```
 
-## Required interaction stories
+## Querying elements in play functions
 
-Apply the stories below based on component type. Skip stories that do not apply (e.g. skip `Disabled` for non-interactive components like Divider or Skeleton).
+Choose the query based on how many matching elements the story renders:
+
+| Story type | Query | When |
+|---|---|---|
+| `Default` (args only) | `getByRole` | Exactly one instance |
+| Matrix / showcase fixture | `getAllByRole` | Same label repeated per size row or column |
+
+`getByRole` throws when multiple elements match. Matrix fixtures (e.g. `IconButtonMatrixTable`) render one control per size row, so the same accessible name appears multiple times.
+
+**Single instance** — use `getByRole`:
+
+```ts
+const button = canvas.getByRole("button", { name: /button/i });
+```
+
+**Matrix / showcase** — use `getAllByRole`, assert the expected count, then spot-check one element:
+
+```ts
+export const ButtonWithIcon: Story = {
+  render: () => <IconButtonMatrixTable buttons={leadingIconButtons} iconPosition="left" />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const leadingButtons = canvas.getAllByRole("button", { name: "Download" });
+    const trailingButtons = canvas.getAllByRole("button", { name: "Continue" });
+
+    await expect(leadingButtons).toHaveLength(3); // lg, md, sm
+    await expect(trailingButtons).toHaveLength(3);
+    await expect(leadingButtons[0]).toHaveAccessibleName("Download");
+    await expect(trailingButtons[0]).toHaveAccessibleName("Continue");
+  },
+};
+```
+
+When a matrix mixes states (e.g. one disabled icon button among several enabled), use `getAllByRole` then narrow with `.find()`:
+
+```ts
+const buttons = canvas.getAllByRole("button", { name: /add/i });
+const disabledButton = buttons.find(
+  (button) => button.getAttribute("aria-disabled") === "true",
+);
+```
+
+For presentational showcase stories without a semantic role, use `getAllByText` (see `badge.stories.tsx` `TypesAndVariants`).
+
+## Required interaction coverage
+
+Apply the behaviors below on `Default` (bundled via `component-tests.ts` helpers) or on dedicated showcase stories. Skip behaviors that do not apply (e.g. skip disabled focus for non-interactive components like Divider or Skeleton).
 
 ### Interactive controls (Button, Chip, Input, Pagination, …)
 
@@ -137,7 +198,7 @@ Use a distinct story name (`DisabledInteraction`) when a visual-only `Disabled` 
 
 #### 5. AccessibleName
 
-Component must have an accessible name resolvable by `getByRole`:
+Component must have an accessible name resolvable by `getByRole` (single instance) or `getAllByRole` (matrix):
 
 ```ts
 export const AccessibleName: Story = {
@@ -148,6 +209,22 @@ export const AccessibleName: Story = {
     await expect(
       canvas.getByRole("button", { name: /button/i }),
     ).toBeInTheDocument();
+  },
+};
+```
+
+Matrix showcase — pick a representative label and assert count + name:
+
+```ts
+export const LoadingState: Story = {
+  render: () => <VariantSizeMatrixTable loading />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getAllByRole("button", { name: /loading/i })[0];
+
+    await expect(button).toHaveAccessibleName("Loading");
+    await expect(button).toHaveAttribute("aria-busy", "true");
+    await expect(button).toHaveAttribute("aria-disabled", "true");
   },
 };
 ```
@@ -225,9 +302,9 @@ export const KeyboardFocus: Story = {
 
 ## Rules
 
-- Use `getByRole` with `name` option — never query by class or test-id unless no semantic role exists
+- Use `getByRole` with `name` option for single-instance stories; use `getAllByRole` when matrix fixtures render duplicate names — never query by class or test-id unless no semantic role exists
 - Do NOT assert CSS class names — assert behavior and ARIA attributes
 - Do NOT assert visual styles (color, spacing) — that belongs to visual regression (Chromatic)
-- Always confirm the component's rendered role before writing `getByRole` queries
-- Keep visual stories and interaction stories in the same file; interaction stories use `play`, visual stories do not
+- Always confirm the component's rendered role and instance count before choosing `getByRole` vs `getAllByRole`
+- Keep showcase renders in `[name]-story-fixtures.tsx`; attach `play` functions to showcase stories that need interaction or a11y checks
 - Run interaction tests from the Storybook UI (Interactions panel)

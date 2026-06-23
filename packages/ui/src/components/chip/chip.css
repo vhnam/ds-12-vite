@@ -42,7 +42,6 @@
 .ds-chip--active {
   --chip-fill: var(--chip-active-fill);
   --chip-border-color: transparent;
-  border-width: 0;
 }
 
 .ds-chip--inactive:hover:not(:disabled):not([data-disabled]) {
@@ -50,14 +49,12 @@
 }
 
 .ds-chip--active:hover:not(:disabled):not([data-disabled]) {
-  border-width: var(--chip-border-width);
   --chip-border-color: var(--chip-hover-border-color);
 }
 
 .ds-chip--inactive:active:not(:disabled):not([data-disabled]),
 .ds-chip--active:active:not(:disabled):not([data-disabled]) {
   --chip-fill: var(--chip-pressed-fill);
-  border-width: var(--chip-border-width);
   --chip-border-color: var(--chip-pressed-border-color);
 }
 

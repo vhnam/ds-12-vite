@@ -1,15 +1,23 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, within } from "storybook/test";
 import { Button } from "@ds-12/ui/button";
-import { Icon as IconComponent } from "@ds-12/ui/icon";
 import { StoryCaption } from "../../lib/story-presentation.tsx";
 import {
   createButtonA11yPlay,
-  createButtonDisabledPlay,
   createButtonFocusVisiblePlay,
   createButtonKeyboardFocusPlay,
   createButtonMouseClickPlay,
-  testStoryParams,
 } from "../../lib/component-tests.ts";
+import {
+  IconButtonMatrixTable,
+  IconOnlyMatrixTable,
+  SIZES,
+  VARIANTS,
+  VariantSizeMatrixTable,
+  VariantsTable,
+  leadingIconButtons,
+  trailingIconButtons,
+} from "./button-story-fixtures.tsx";
 
 const meta = {
   title: "Components/Button",
@@ -18,11 +26,11 @@ const meta = {
   argTypes: {
     variant: {
       control: "select",
-      options: ["primary", "secondary", "danger", "icon"],
+      options: VARIANTS,
     },
     size: {
       control: "select",
-      options: ["sm", "md", "lg"],
+      options: SIZES,
     },
     iconPosition: {
       control: "select",
@@ -43,179 +51,83 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
-  args: { variant: "primary" },
-};
-
-export const Secondary: Story = {
-  args: { variant: "secondary" },
-};
-
-export const Danger: Story = {
-  args: { variant: "danger" },
-};
-
-export const Icon: Story = {
-  args: {
-    variant: "icon",
-    children: "Add",
-    icon: <IconComponent name="add" variant="outlined" />,
+export const Default: Story = {
+  play: async (context) => {
+    await createButtonA11yPlay("Button")(context);
+    await createButtonKeyboardFocusPlay("Button")(context);
+    await createButtonFocusVisiblePlay("Button")(context);
+    await createButtonMouseClickPlay("Button")(context);
   },
 };
 
-export const Small: Story = {
-  args: { size: "sm" },
+export const Variants: Story = {
+  render: () => <VariantsTable />,
 };
 
-export const Large: Story = {
-  args: { size: "lg" },
+export const Sizes: Story = {
+  render: () => <VariantSizeMatrixTable />,
 };
 
-export const Disabled: Story = {
-  args: { disabled: true },
-  play: createButtonDisabledPlay("Button"),
-};
-
-export const Loading: Story = {
-  args: { loading: true },
-};
-
-export const WithIconLeft: Story = {
-  args: {
-    icon: <IconComponent name="add" variant="outlined" />,
-    iconPosition: "left",
-    children: "Button",
-  },
-};
-
-export const WithIconRight: Story = {
-  args: {
-    icon: <IconComponent name="add" variant="outlined" />,
-    iconPosition: "right",
-    children: "Button",
-  },
-};
-
-export const AllVariants: Story = {
+export const ButtonWithIcon: Story = {
   render: () => (
-    <div style={{ display: "flex", gap: "16px", alignItems: "center", flexWrap: "wrap" }}>
-      <div
-        style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: "flex-start" }}
-      >
-        <StoryCaption>Primary</StoryCaption>
-        <Button variant="primary">Button</Button>
+    <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
+      <div>
+        <StoryCaption>Leading Icon</StoryCaption>
+        <div style={{ marginTop: 12 }}>
+          <IconButtonMatrixTable buttons={leadingIconButtons} iconPosition="left" />
+        </div>
       </div>
-      <div
-        style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: "flex-start" }}
-      >
-        <StoryCaption>Secondary</StoryCaption>
-        <Button variant="secondary">Button</Button>
-      </div>
-      <div
-        style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: "flex-start" }}
-      >
-        <StoryCaption>Danger</StoryCaption>
-        <Button variant="danger">Button</Button>
-      </div>
-      <div
-        style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: "flex-start" }}
-      >
-        <StoryCaption>Icon</StoryCaption>
-        <Button variant="icon" aria-label="Add">
-          <IconComponent name="add" variant="outlined" />
-        </Button>
+
+      <div>
+        <StoryCaption>Trailing Icon</StoryCaption>
+        <div style={{ marginTop: 12 }}>
+          <IconButtonMatrixTable buttons={trailingIconButtons} iconPosition="right" />
+        </div>
       </div>
     </div>
   ),
-};
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const leadingButtons = canvas.getAllByRole("button", { name: "Download" });
+    const trailingButtons = canvas.getAllByRole("button", { name: "Continue" });
 
-export const AllSizes: Story = {
-  render: (args) => (
-    <div style={{ display: "flex", gap: "16px", alignItems: "flex-end" }}>
-      <div
-        style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: "flex-start" }}
-      >
-        <StoryCaption>Small</StoryCaption>
-        <Button {...args} size="sm" />
-      </div>
-      <div
-        style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: "flex-start" }}
-      >
-        <StoryCaption>Medium</StoryCaption>
-        <Button {...args} size="md" />
-      </div>
-      <div
-        style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: "flex-start" }}
-      >
-        <StoryCaption>Large</StoryCaption>
-        <Button {...args} size="lg" />
-      </div>
-    </div>
-  ),
-  args: { variant: "primary", children: "Button" },
-};
-
-export const SecondaryWithIcon: Story = {
-  args: {
-    variant: "secondary",
-    icon: <IconComponent name="add" variant="outlined" />,
-    iconPosition: "left",
-    children: "Button",
+    await expect(leadingButtons).toHaveLength(3);
+    await expect(trailingButtons).toHaveLength(3);
+    await expect(leadingButtons[0]).toHaveAccessibleName("Download");
+    await expect(trailingButtons[0]).toHaveAccessibleName("Continue");
   },
 };
 
-export const DangerLoading: Story = {
-  args: {
-    variant: "danger",
-    loading: true,
+export const LoadingState: Story = {
+  render: () => <VariantSizeMatrixTable loading />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getAllByRole("button", { name: /loading/i })[0];
+
+    await expect(button).toHaveAccessibleName("Loading");
+    await expect(button).toHaveAttribute("aria-busy", "true");
+    await expect(button).toHaveAttribute("aria-disabled", "true");
   },
 };
 
-export const IconSizes: Story = {
-  render: () => (
-    <div style={{ display: "flex", gap: "16px", alignItems: "flex-end" }}>
-      <div style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: "center" }}>
-        <StoryCaption>Small</StoryCaption>
-        <Button variant="icon" size="sm" aria-label="Add small">
-          <IconComponent name="add" variant="outlined" />
-        </Button>
-      </div>
-      <div style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: "center" }}>
-        <StoryCaption>Medium</StoryCaption>
-        <Button variant="icon" size="md" aria-label="Add medium">
-          <IconComponent name="add" variant="outlined" />
-        </Button>
-      </div>
-      <div style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: "center" }}>
-        <StoryCaption>Large</StoryCaption>
-        <Button variant="icon" size="lg" aria-label="Add large">
-          <IconComponent name="add" variant="outlined" />
-        </Button>
-      </div>
-    </div>
-  ),
-};
+export const IconOnly: Story = {
+  render: () => <IconOnlyMatrixTable />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const buttons = canvas.getAllByRole("button", { name: /add/i });
+    const disabledButton = buttons.find(
+      (button) => button.getAttribute("aria-disabled") === "true",
+    );
 
-export const KeyboardFocus: Story = {
-  ...testStoryParams(),
-  args: { children: "Button", variant: "primary" },
-  play: createButtonKeyboardFocusPlay("Button"),
-};
+    await expect(buttons[0]).toHaveAccessibleName("Add");
+    await expect(disabledButton).toBeDefined();
+    await expect(disabledButton).not.toHaveAttribute("disabled");
 
-export const FocusVisible: Story = {
-  ...testStoryParams(),
-  args: { children: "Button", variant: "primary" },
-  play: createButtonFocusVisiblePlay("Button"),
-};
+    if (!disabledButton) {
+      throw new Error("Expected a disabled icon button");
+    }
 
-export const MouseClick: Story = {
-  ...testStoryParams(),
-  args: { children: "Button", variant: "primary" },
-  play: createButtonMouseClickPlay("Button"),
-};
-
-export const A11y: Story = {
-  ...testStoryParams(),
-  args: { children: "Button", variant: "primary" },
-  play: createButtonA11yPlay("Button"),
+    disabledButton.focus();
+    await expect(disabledButton).toHaveFocus();
+  },
 };

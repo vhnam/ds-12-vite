@@ -21,12 +21,6 @@
 
 .ds-input:focus-within:not(.ds-input--disabled):not(.ds-input--error) {
   background-color: var(--input-focus-fill);
-  border-bottom-color: var(--input-focus-border-color);
-}
-
-.ds-input:focus-within:not(.ds-input--disabled) {
-  outline: var(--input-focus-ring-width) var(--input-focus-ring-style) var(--input-focus-ring-color);
-  outline-offset: var(--input-focus-ring-offset);
 }
 
 .ds-input__control {
@@ -98,9 +92,8 @@
   --input-gap: var(--text-field-small-box-properties-enabled-item-spacing);
   --input-border-width: var(--text-field-small-box-properties-enabled-border-bottom);
   --input-fill: var(--text-field-small-box-properties-enabled-fill);
-  --input-border-color: var(--text-field-small-box-properties-enabled-border-color);
+  --input-border-color: var(--input-border-color-default);
   --input-focus-fill: var(--text-field-small-box-properties-focused-fill);
-  --input-focus-border-color: var(--text-field-small-box-properties-focused-border-color);
   --input-text-fill: var(--text-field-small-box-hint-enabled-fill);
   --input-text-font-family: var(--text-field-small-box-hint-enabled-font-family);
   --input-text-font-size: var(--text-field-small-box-hint-enabled-font-size);
@@ -118,7 +111,10 @@
 }
 
 .ds-input--sm.ds-input--default:focus-within:not(.ds-input--disabled):not(.ds-input--error) {
+  --input-border-color: var(--input-border-color-focus);
   --input-text-fill: var(--text-field-small-box-hint-focused-fill);
+  --input-placeholder-fill: var(--text-field-small-box-hint-focused-fill);
+  --input-icon-fill: var(--text-field-small-box-icon-focused-fill);
 }
 
 .ds-input--sm.ds-input--default.ds-input--disabled {
@@ -144,9 +140,8 @@
   --input-gap: var(--text-field-suffix-small-box-properties-enabled-item-spacing);
   --input-border-width: var(--text-field-suffix-small-box-properties-enabled-border-bottom);
   --input-fill: var(--text-field-suffix-small-box-properties-enabled-fill);
-  --input-border-color: var(--text-field-suffix-small-box-properties-enabled-border-color);
+  --input-border-color: var(--input-border-color-default);
   --input-focus-fill: var(--text-field-suffix-small-box-properties-focused-fill);
-  --input-focus-border-color: var(--text-field-suffix-small-box-properties-focused-border-color);
   --input-text-fill: var(--text-field-suffix-small-box-typography-enabled-fill);
   --input-text-font-family: var(--text-field-suffix-small-box-typography-enabled-font-family);
   --input-text-font-size: var(--text-field-suffix-small-box-typography-enabled-font-size);
@@ -171,6 +166,7 @@
 
 .ds-input--sm.ds-input--suffix:focus-within:not(.ds-input--disabled):not(.ds-input--error) {
   --input-text-fill: var(--text-field-suffix-small-box-typography-focused-fill);
+  --input-placeholder-fill: var(--text-field-small-box-hint-focused-fill);
   --input-icon-fill: var(--text-field-suffix-small-box-icon-focused-fill);
 }
 
@@ -218,6 +214,8 @@
 
 .ds-input--lg.ds-input--default:focus-within:not(.ds-input--disabled):not(.ds-input--error) {
   --input-text-fill: var(--text-field-large-box-hint-focused-fill);
+  --input-placeholder-fill: var(--text-field-large-box-hint-focused-fill);
+  --input-icon-fill: var(--text-field-large-box-icon-focused-fill);
 }
 
 .ds-input--lg.ds-input--default.ds-input--disabled {
@@ -270,6 +268,7 @@
 
 .ds-input--lg.ds-input--suffix:focus-within:not(.ds-input--disabled):not(.ds-input--error) {
   --input-text-fill: var(--text-field-suffix-large-box-typography-focused-fill);
+  --input-placeholder-fill: var(--text-field-large-box-hint-focused-fill);
   --input-icon-fill: var(--text-field-suffix-large-box-icon-focused-fill);
 }
 

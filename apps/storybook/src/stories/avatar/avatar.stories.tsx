@@ -1,15 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, within } from "storybook/test";
 import { Avatar } from "@ds-12/ui/avatar";
-import { StoryCaption, StorySectionTitle } from "../../lib/story-presentation.tsx";
-import { testStoryParams } from "../../lib/component-tests.ts";
-
-const sizes = ["sm", "md", "lg"] as const;
-const shapes = ["user", "organisation"] as const;
-const variants = ["initial", "image", "icon"] as const;
-
-const PLACEHOLDER_IMAGE =
-  "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face";
+import {
+  PLACEHOLDER_IMAGE,
+  SHAPES,
+  SIZES,
+  SizesShowcase,
+  VARIANTS,
+  VariantsShowcase,
+} from "./avatar-story-fixtures.tsx";
 
 const meta = {
   title: "Components/Avatar",
@@ -18,15 +17,15 @@ const meta = {
   argTypes: {
     size: {
       control: "select",
-      options: sizes,
+      options: SIZES,
     },
     shape: {
       control: "select",
-      options: shapes,
+      options: SHAPES,
     },
     variant: {
       control: "select",
-      options: variants,
+      options: VARIANTS,
     },
     icon: { control: false },
   },
@@ -44,82 +43,33 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
-
-export const UserInitial: Story = {
-  args: { shape: "user", variant: "initial", initials: "BL" },
-};
-
-export const UserImage: Story = {
-  args: { shape: "user", variant: "image", src: PLACEHOLDER_IMAGE },
-};
-
-export const UserIcon: Story = {
-  args: { shape: "user", variant: "icon" },
-};
-
-export const OrganisationInitial: Story = {
-  args: { shape: "organisation", variant: "initial", initials: "BL" },
-};
-
-export const OrganisationImage: Story = {
-  args: { shape: "organisation", variant: "image", src: PLACEHOLDER_IMAGE },
-};
-
-export const OrganisationIcon: Story = {
-  args: { shape: "organisation", variant: "icon" },
-};
-
-export const Small: Story = {
-  args: { size: "sm" },
-};
-
-export const Medium: Story = {
-  args: { size: "md" },
-};
-
-export const Large: Story = {
-  args: { size: "lg" },
-};
-
-export const AllVariants: Story = {
-  render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-      {shapes.map((shape) => (
-        <div key={shape}>
-          <StorySectionTitle>{shape}</StorySectionTitle>
-          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-            {variants.map((variant) => (
-              <div key={variant}>
-                <StoryCaption>{variant}</StoryCaption>
-                <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-                  {sizes.map((size) => (
-                    <Avatar
-                      key={size}
-                      shape={shape}
-                      size={size}
-                      variant={variant}
-                      initials="BL"
-                      src={PLACEHOLDER_IMAGE}
-                      alt="Avatar"
-                    />
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      ))}
-    </div>
-  ),
-};
-
-export const A11y: Story = {
-  ...testStoryParams(),
-  args: { shape: "user", variant: "initial", initials: "BL" },
+export const Default: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await expect(canvas.getByText("BL")).toBeInTheDocument();
-    await expect(canvas.getByText("BL")).toHaveTextContent("BL");
+    const initials = canvas.getByText("BL");
+
+    await expect(initials).toBeInTheDocument();
+    await expect(initials).toHaveTextContent("BL");
+  },
+};
+
+export const Variants: Story = {
+  render: () => <VariantsShowcase />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await expect(canvas.getAllByText("BL")).toHaveLength(SHAPES.length);
+    await expect(canvas.getAllByRole("img", { name: "Avatar" })).toHaveLength(SHAPES.length);
+  },
+};
+
+export const Sizes: Story = {
+  render: () => <SizesShowcase />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const initials = canvas.getAllByText("BL");
+
+    await expect(initials).toHaveLength(SIZES.length);
+    await expect(initials[0]).toBeVisible();
   },
 };

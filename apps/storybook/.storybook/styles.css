@@ -9,3 +9,95 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+[data-story-chip-state="hover"].ds-chip--inactive:not(:disabled):not([data-disabled]) {
+  --chip-border-color: var(--chip-hover-border-color);
+}
+
+[data-story-chip-state="hover"].ds-chip--active:not(:disabled):not([data-disabled]) {
+  --chip-border-color: var(--chip-hover-border-color);
+}
+
+[data-story-chip-state="pressed"].ds-chip--inactive:not(:disabled):not([data-disabled]),
+[data-story-chip-state="pressed"].ds-chip--active:not(:disabled):not([data-disabled]) {
+  --chip-fill: var(--chip-pressed-fill);
+  --chip-border-color: var(--chip-pressed-border-color);
+}
+
+[data-story-chip-state="focus"].ds-chip--inactive {
+  outline: var(--chip-focus-ring-width) var(--chip-focus-ring-style) var(--chip-focus-ring-color);
+  outline-offset: var(--chip-focus-ring-offset-inactive);
+}
+
+[data-story-chip-state="focus"].ds-chip--active {
+  outline: var(--chip-focus-ring-width) var(--chip-focus-ring-style) var(--chip-focus-ring-color);
+  outline-offset: var(--chip-focus-ring-offset-active);
+}
+
+[data-story-input-state="focus"] .ds-input:not(.ds-input--disabled):not(.ds-input--error) {
+  background-color: var(--input-focus-fill);
+  border-bottom-color: var(--input-focus-border-color);
+}
+
+[data-story-input-state="focus"]
+  .ds-input--sm.ds-input--default:not(.ds-input--disabled):not(.ds-input--error) {
+  --input-text-fill: var(--text-field-small-box-hint-focused-fill);
+  --input-placeholder-fill: var(--text-field-small-box-hint-focused-fill);
+  --input-icon-fill: var(--text-field-small-box-icon-focused-fill);
+}
+
+[data-story-input-state="focus"]
+  .ds-input--sm.ds-input--suffix:not(.ds-input--disabled):not(.ds-input--error) {
+  --input-text-fill: var(--text-field-suffix-small-box-typography-focused-fill);
+  --input-placeholder-fill: var(--text-field-small-box-hint-focused-fill);
+  --input-icon-fill: var(--text-field-suffix-small-box-icon-focused-fill);
+}
+
+[data-story-input-state="focus"]
+  .ds-input--lg.ds-input--default:not(.ds-input--disabled):not(.ds-input--error) {
+  --input-text-fill: var(--text-field-large-box-hint-focused-fill);
+  --input-placeholder-fill: var(--text-field-large-box-hint-focused-fill);
+  --input-icon-fill: var(--text-field-large-box-icon-focused-fill);
+}
+
+[data-story-input-state="focus"]
+  .ds-input--lg.ds-input--suffix:not(.ds-input--disabled):not(.ds-input--error) {
+  --input-text-fill: var(--text-field-suffix-large-box-typography-focused-fill);
+  --input-placeholder-fill: var(--text-field-large-box-hint-focused-fill);
+  --input-icon-fill: var(--text-field-suffix-large-box-icon-focused-fill);
+}
+
+[data-story-input-state="focus"] .ds-textarea:not(.ds-textarea--disabled):not(.ds-textarea--error) {
+  background-color: var(--textarea-focus-fill);
+  border-bottom-color: var(--textarea-focus-border-color);
+}
+
+[data-story-input-state="focus"] .ds-textarea:not(.ds-textarea--disabled) {
+  outline: var(--textarea-focus-ring-width) var(--textarea-focus-ring-style)
+    var(--textarea-focus-ring-color);
+  outline-offset: var(--textarea-focus-ring-offset);
+}
+
+[data-story-input-state="focus"]
+  .ds-textarea--sm.ds-textarea--default:not(.ds-textarea--disabled):not(.ds-textarea--error) {
+  --textarea-text-fill: var(--text-area-small-box-hint-focused-fill);
+  --textarea-icon-fill: var(--text-area-small-box-icon-focused-fill);
+}
+
+[data-story-input-state="focus"]
+  .ds-textarea--sm.ds-textarea--suffix:not(.ds-textarea--disabled):not(.ds-textarea--error) {
+  --textarea-text-fill: var(--text-area-small-box-hint-focused-fill);
+  --textarea-icon-fill: var(--text-area-small-box-icon-focused-fill);
+}
+
+[data-story-input-state="focus"]
+  .ds-textarea--lg.ds-textarea--default:not(.ds-textarea--disabled):not(.ds-textarea--error) {
+  --textarea-text-fill: var(--text-area-large-box-hint-focused-fill);
+  --textarea-icon-fill: var(--text-area-large-box-icon-focused-fill);
+}
+
+[data-story-input-state="focus"]
+  .ds-textarea--lg.ds-textarea--suffix:not(.ds-textarea--disabled):not(.ds-textarea--error) {
+  --textarea-text-fill: var(--text-area-large-box-hint-focused-fill);
+  --textarea-icon-fill: var(--text-area-large-box-icon-focused-fill);
+}

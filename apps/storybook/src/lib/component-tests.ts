@@ -114,3 +114,14 @@ export const textboxTestArgs = {
   "aria-label": "Input",
   placeholder: "Input",
 };
+
+export function createSkeletonA11yPlay(name: string | RegExp): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const status = canvas.getByRole("status", { name });
+
+    await expect(status).toBeInTheDocument();
+    await expect(status).toHaveAccessibleName(name);
+    await expect(status).toHaveAttribute("aria-busy", "true");
+  };
+}
