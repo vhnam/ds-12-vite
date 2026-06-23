@@ -3,22 +3,20 @@ packages:
   - packages/*
   - tools/*
 
+allowBuilds:
+  esbuild: true
+
 catalog:
   "@fontsource/nunito-sans": ^5.2.7
   "@storybook/addon-a11y": ^10.4.6
   "@types/node": ^24
+  chromatic: ^17.5.0
   typescript: ^5
   vite: npm:@voidzero-dev/vite-plus-core@latest
   vite-plus: latest
   vitest: 4.1.9
 
 catalogMode: prefer
-
-# pnpm 11 re-verifies lockfile entries against minimumReleaseAge (24h default).
-trustLockfile: true
-
-allowBuilds:
-  esbuild: true
 
 overrides:
   vite: "catalog:"
@@ -31,3 +29,5 @@ peerDependencyRules:
   allowedVersions:
     vite: "*"
     vitest: "*"
+
+trustLockfile: true

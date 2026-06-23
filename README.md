@@ -122,6 +122,25 @@ On every push to `main`, the Storybook workflow deploys `apps/storybook/storyboo
 
 The site is published at `https://<user>.github.io/<repo>/` (for this repo: `https://vhnam.github.io/ds-12-vite/`). Production builds set `STORYBOOK_BASE_PATH` so assets resolve under that subpath.
 
+### Chromatic visual tests
+
+CI uses the official [`chromaui/action`](https://www.chromatic.com/docs/github-actions/) with TurboSnap (`onlyChanged: true`) from `apps/storybook`. Changes under `packages/**` still trigger a full run via `externals` in `apps/storybook/chromatic.config.json`.
+
+**One-time setup:**
+
+1. [Sign in to Chromatic](https://www.chromatic.com/start) with GitHub and add this repository.
+2. Copy the project token from **Manage → Configure** and add `CHROMATIC_PROJECT_TOKEN` under **GitHub → Settings → Secrets and variables → Actions**.
+3. Copy the **Project ID** from the same page into `apps/storybook/chromatic.config.json` as `projectId` (e.g. `"Project:64cbcde96f99841e8b007d75"`). The Visual Tests addon reads this file from the Storybook package directory — without `projectId`, the addon cannot link your project and the “Verify your account → Go to Chromatic” step fails.
+4. Restart Storybook (`pnpm storybook` in `apps/storybook`), open the **Visual Tests** panel, sign in to Chromatic, and run your first build. See [Storybook visual testing](https://storybook.js.org/docs/writing-tests/visual-testing).
+
+Run Chromatic from the CLI after copying `.env.example` to `.env` and setting your token:
+
+```bash
+vp run storybook#chromatic
+```
+
+CI uses the `CHROMATIC_PROJECT_TOKEN` repository secret. On `main`, `autoAcceptChanges` keeps the Chromatic baseline in sync after merges.
+
 ## Project structure
 
 ```

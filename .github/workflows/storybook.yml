@@ -4,12 +4,15 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "packages/ui/**"
+      - "packages/design-tokens/**"
+      - "apps/storybook/**"
   pull_request:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+    paths:
+      - "packages/ui/**"
+      - "packages/design-tokens/**"
+      - "apps/storybook/**"
 
 concurrency:
   group: storybook-${{ github.workflow }}-${{ github.ref }}
@@ -17,13 +20,15 @@ concurrency:
 
 jobs:
   storybook:
-    name: Build and test
+    name: Test and visual review
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Vite+
         uses: voidzero-dev/setup-vp@v1
@@ -40,27 +45,14 @@ jobs:
       - name: Run Storybook tests
         run: vp run storybook#test:storybook
 
-      - name: Build Storybook
-        run: vp run storybook#build-storybook
-        env:
-          STORYBOOK_BASE_PATH: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && format('/{0}/', github.event.repository.name) || '' }}
-
-      - name: Upload Pages artifact
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: actions/upload-pages-artifact@v3
+      - name: Run Chromatic
+        uses: chromaui/action@latest
         with:
-          path: apps/storybook/storybook-static
-
-  deploy:
-    name: Deploy to GitHub Pages
-    needs: storybook
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          workingDir: apps/storybook
+          onlyChanged: true
+          autoAcceptChanges: main
+        env:
+          CHROMATIC_BRANCH: ${{ github.event.pull_request.head.ref || github.ref_name }}
+          CHROMATIC_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          CHROMATIC_SLUG: ${{ github.repository }}

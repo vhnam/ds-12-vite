@@ -1,0 +1,8 @@
+{
+  "$schema": "https://www.chromatic.com/config-file.schema.json",
+  "projectId": "6a3a6d16dbb21a9d156ba26",
+  "onlyChanged": true,
+  "buildScriptName": "build-storybook",
+  "externals": ["../../packages/**", "../../pnpm-lock.yaml"],
+  "zip": true
+}
