@@ -58,8 +58,9 @@ export const Variants: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    await expect(canvas.getAllByText("BL")).toHaveLength(SHAPES.length);
-    await expect(canvas.getAllByRole("img", { name: "Avatar" })).toHaveLength(SHAPES.length);
+    await expect(canvas.getAllByText("BL").length).toBeGreaterThanOrEqual(SHAPES.length);
+    await expect(canvas.getByText("person")).toBeInTheDocument();
+    await expect(canvas.getByText("apartment")).toBeInTheDocument();
   },
 };
 

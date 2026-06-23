@@ -1,7 +1,6 @@
 import { cva } from "class-variance-authority";
 import { createContext, type ComponentProps, type ReactNode } from "react";
 
-import "@ds-12/design-tokens/tokens.css";
 import { cn } from "../../lib/utils.ts";
 import { Icon } from "../icon/index.tsx";
 import "./textarea.css";

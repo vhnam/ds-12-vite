@@ -1,7 +1,6 @@
 import { cva } from "class-variance-authority";
 import type { ComponentProps, CSSProperties } from "react";
 
-import "@ds-12/design-tokens/tokens.css";
 import { cn } from "../../lib/utils.ts";
 import "./skeleton.css";
 

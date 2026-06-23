@@ -1,7 +1,6 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import { createContext, type ComponentProps, type ReactNode } from "react";
 
-import "@ds-12/design-tokens/tokens.css";
 import "./badge.css";
 
 const BADGE_ICON_SIZES = {

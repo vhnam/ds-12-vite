@@ -2,7 +2,6 @@ import { Field } from "@base-ui/react/field";
 import { cva } from "class-variance-authority";
 import { useId } from "react";
 
-import "@ds-12/design-tokens/tokens.css";
 import { cn } from "../../../lib/utils.ts";
 import { Textarea, type TextareaProps } from "../../textarea/index.tsx";
 import "./textarea-field.css";

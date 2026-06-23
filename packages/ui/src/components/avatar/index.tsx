@@ -2,7 +2,6 @@ import { Avatar as BaseAvatar } from "@base-ui/react/avatar";
 import { cva, type VariantProps } from "class-variance-authority";
 import type { ComponentProps, ReactNode } from "react";
 
-import "@ds-12/design-tokens/tokens.css";
 import { cn } from "../../lib/utils.ts";
 import { Icon } from "../icon/index.tsx";
 import "./avatar.css";

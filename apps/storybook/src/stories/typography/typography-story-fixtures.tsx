@@ -1,5 +1,4 @@
 import { Typography } from "@ds-12/ui/typography";
-import { StoryCaption } from "../../lib/story-presentation.tsx";
 
 export const HEADING_VARIANTS = ["display", "h1", "h2", "h3", "h4"] as const;
 export const PARAGRAPH_VARIANTS = [
@@ -40,7 +39,6 @@ export function HeadingShowcase() {
     <div style={showcaseStyle}>
       {HEADING_VARIANTS.map((variant) => (
         <div key={variant}>
-          <StoryCaption>{VARIANT_LABELS[variant]}</StoryCaption>
           <Typography variant={variant} render={variant === "display" ? undefined : variant}>
             {VARIANT_LABELS[variant]}
           </Typography>
@@ -55,7 +53,6 @@ export function ParagraphShowcase() {
     <div style={showcaseStyle}>
       {PARAGRAPH_VARIANTS.map((variant) => (
         <div key={variant}>
-          <StoryCaption>{VARIANT_LABELS[variant]}</StoryCaption>
           <Typography variant={variant} render="p">
             {sampleText}
           </Typography>
@@ -70,7 +67,6 @@ export function LabelShowcase() {
     <div style={showcaseStyle}>
       {LABEL_VARIANTS.map((variant) => (
         <div key={variant}>
-          <StoryCaption>{VARIANT_LABELS[variant]}</StoryCaption>
           <Typography variant={variant} render="label">
             {VARIANT_LABELS[variant]}
           </Typography>

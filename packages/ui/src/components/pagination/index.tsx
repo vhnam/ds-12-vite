@@ -2,7 +2,6 @@ import { Button as BaseButton } from "@base-ui/react/button";
 import { cva } from "class-variance-authority";
 import type { ComponentProps } from "react";
 
-import "@ds-12/design-tokens/tokens.css";
 import { cn } from "../../lib/utils.ts";
 import { getPaginationItems } from "./get-pagination-items.ts";
 import "./pagination.css";

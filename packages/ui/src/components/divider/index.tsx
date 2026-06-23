@@ -2,7 +2,6 @@ import { Separator } from "@base-ui/react/separator";
 import { cva, type VariantProps } from "class-variance-authority";
 import type { ComponentProps } from "react";
 
-import "@ds-12/design-tokens/tokens.css";
 import { cn } from "../../lib/utils.ts";
 import "./divider.css";
 

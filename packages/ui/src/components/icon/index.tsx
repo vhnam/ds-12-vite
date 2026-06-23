@@ -1,4 +1,3 @@
-import "@material-symbols/font-400/outlined.css";
 import type { ComponentProps, CSSProperties } from "react";
 import { useContext } from "react";
 

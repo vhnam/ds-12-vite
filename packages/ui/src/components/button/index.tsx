@@ -2,7 +2,6 @@ import { Button as BaseButton } from "@base-ui/react/button";
 import { cva, type VariantProps } from "class-variance-authority";
 import type { ComponentProps, ReactNode } from "react";
 
-import "@ds-12/design-tokens/tokens.css";
 import "./button.css";
 
 const buttonVariants = cva("ds-button", {

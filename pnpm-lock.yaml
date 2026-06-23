@@ -241,6 +241,9 @@ importers:
       '@fontsource/nunito-sans':
         specifier: 'catalog:'
         version: 5.2.7
+      '@material-symbols/font-400':
+        specifier: ^0.40.2
+        version: 0.40.2
       react:
         specifier: ^19.2.6
         version: 19.2.7
