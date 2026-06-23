@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "ready": "vp check && vp run -r test && vp run -r build",
+    "ci:storybook": "act pull_request -W .github/workflows/storybook.yml -j storybook --env CI=true",
     "dev": "vp run website#dev",
     "prepare": "vp config"
   },

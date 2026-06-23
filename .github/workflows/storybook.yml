@@ -30,8 +30,7 @@ jobs:
         run: vp install
 
       - name: Install Playwright browsers
-        working-directory: apps/storybook
-        run: pnpm exec playwright install --with-deps chromium
+        run: vp run storybook#install-playwright
 
       - name: Run Storybook tests
         run: vp run storybook#test:storybook

@@ -1,7 +1,7 @@
 {
   "name": "storybook",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,6 +10,7 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "install-playwright": "playwright install --with-deps chromium",
     "test:storybook": "vitest --project=storybook --run"
   },
   "dependencies": {

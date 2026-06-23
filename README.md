@@ -4,16 +4,16 @@ A React design system monorepo built with [Vite+](https://viteplus.dev/guide/). 
 
 ## Packages
 
-| Package | Description |
-| --- | --- |
+| Package                | Description                                                                     |
+| ---------------------- | ------------------------------------------------------------------------------- |
 | `@ds-12/design-tokens` | CSS design tokens (`tokens.generated.css` + web extensions in `tokens.web.css`) |
-| `@ds-12/ui` | React components styled with scoped CSS and design tokens |
-| `@ds-12/utils` | Shared utilities |
+| `@ds-12/ui`            | React components styled with scoped CSS and design tokens                       |
+| `@ds-12/utils`         | Shared utilities                                                                |
 
 ## Apps
 
-| App | Description |
-| --- | --- |
+| App              | Description                                                             |
+| ---------------- | ----------------------------------------------------------------------- |
 | `apps/storybook` | Storybook for browsing components, docs, a11y checks, and browser tests |
 
 ## Components
@@ -92,6 +92,26 @@ Run Storybook tests (browser-based Vitest):
 
 ```bash
 cd apps/storybook && npm run test:storybook
+```
+
+## CI
+
+GitHub Actions workflows live in `.github/workflows/`. Run them locally with [act](https://github.com/nektos/act) before pushing to catch CI failures early.
+
+**Prerequisites:** [Docker](https://docs.docker.com/get-docker/) and [act](https://github.com/nektos/act#installation) (`brew install act` on macOS).
+
+The repo includes a `.actrc` that maps `ubuntu-latest` to the medium `catthehacker/ubuntu:act-latest` image. On Apple Silicon Macs, use native arm64 containers (the default). Forcing `linux/amd64` can break Playwright's system dependency install step.
+
+Run the Storybook workflow (install, Playwright, browser tests, and static build):
+
+```bash
+vp run ci:storybook
+```
+
+Or invoke act directly:
+
+```bash
+act pull_request -W .github/workflows/storybook.yml -j storybook --env CI=true
 ```
 
 ## Project structure
