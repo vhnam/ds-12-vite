@@ -102,17 +102,13 @@ GitHub Actions workflows live in `.github/workflows/`. Run them locally with [ac
 
 The repo includes a `.actrc` that maps `ubuntu-latest` to the medium `catthehacker/ubuntu:act-latest` image. On Apple Silicon Macs, use native arm64 containers (the default).
 
-Run the Storybook workflow (Chromatic visual tests):
-
-```bash
-vp run ci:storybook
-```
-
-Or invoke act directly:
+Run the Storybook workflow locally:
 
 ```bash
 act pull_request -W .github/workflows/storybook.yml -j storybook --env CI=true
 ```
+
+The Chromatic step needs a project token and full GitHub event metadata, so it may not complete under `act`. Use GitHub Actions for full Chromatic runs.
 
 ### GitHub Pages
 
