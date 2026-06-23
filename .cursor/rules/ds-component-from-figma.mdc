@@ -1,0 +1,224 @@
+---
+description: Building a new Design System component from Figma spec using Base UI + CVA + design tokens
+globs:
+  - packages/ui/src/components/**
+  - packages/design-tokens/src/**
+  - apps/storybook/src/stories/**
+---
+
+# DS Component from Figma
+
+Use this rule when building a new Design System component from a Figma spec.
+
+## Project structure
+
+```
+packages/
+  design-tokens/          → @ds-12/design-tokens
+    src/
+      tokens.generated.css  ← Style Dictionary output, do NOT edit
+      tokens.web.css        ← web-specific layer, exported as tokens.css
+  ui/                     → @ds-12/ui
+    src/
+      components/           ← DS components (lowercase folder names)
+      lib/
+        utils.ts            ← cn() helper (clsx + tailwind-merge)
+  utils/                  → @ds-12/utils
+apps/
+  storybook/              ← component stories + Vite aliases for local dev
+```
+
+## Package names & imports
+
+| Package | Import examples |
+|---|---|
+| `@ds-12/design-tokens` | `@ds-12/design-tokens/tokens.css` |
+| `@ds-12/ui` | `@ds-12/ui/button`, `@ds-12/ui/badge`, `@ds-12/ui` (barrel) |
+
+Components import tokens via:
+
+```ts
+import "@ds-12/design-tokens/tokens.css";
+import "./button.css";
+```
+
+## Step 1 — Setup tokens.web.css
+
+Update `packages/design-tokens/src/tokens.web.css` (create if missing):
+
+```css
+@import "./tokens.generated.css";
+
+:root {
+  /* --- Web platform extensions --- */
+  /* Focus ring, cursor, border-style, transition */
+
+  /* --- Component tokens: [component] --- */
+  /* Map to tokens.generated.css; add TODOs for unmapped Figma values */
+}
+```
+
+Rules:
+- Only add web-specific tokens or tokens missing from `tokens.generated.css`
+- Do NOT duplicate or override values already in `tokens.generated.css`
+- Prefer aliasing generated/semantic tokens: `--badge-radius: var(--radius-xsmall);`
+- If a design token is wrong or missing, add a TODO and flag it as a Design System issue — do not silently fix it here
+
+```css
+/* TODO: needs token — current value: 20px */
+```
+
+## Step 2 — Fetch component from Figma
+
+Use Figma MCP (`get_design_context`) to fetch the target component by node ID.
+
+Extract:
+- Variants and visual differences between them
+- Spacing, sizing, typography values
+- Border, radius, shadow, color per variant and state (hover, focus, disabled)
+
+Cross-reference each raw value against `tokens.generated.css`:
+- Match found → use `var(--token-name)`
+- No match → TODO comment with raw value in `tokens.web.css` or component CSS
+
+## Step 3 — Build the component
+
+Create files under `packages/ui/src/components/[name]/` (lowercase, e.g. `button`, `badge`):
+
+```
+[name]/
+  index.tsx
+  [name].css          ← scoped styles (required for visual components)
+```
+
+### Stack
+
+- **Base UI** (`@base-ui/react`) — interactive primitives (e.g. `Button`, `useRender`)
+- **CVA** (`class-variance-authority`) — variant class names
+- **Scoped CSS** — `ds-[name]` / `ds-[name]--[variant]` classes backed by CSS custom properties
+- **Design tokens** — all visual values via `var(--token)` from `@ds-12/design-tokens/tokens.css`
+- **`cn()`** — from `../../lib/utils.ts` when merging optional `className` props
+
+Do **not** use Tailwind utility classes for component styling. The repo uses token-driven scoped CSS, not Tailwind v4 in components.
+
+### Naming conventions
+
+| Layer | Pattern | Example |
+|---|---|---|
+| Folder | lowercase | `packages/ui/src/components/badge/` |
+| CSS block | `ds-[name]` | `.ds-badge` |
+| CSS modifier | `ds-[name]--[variant]` | `.ds-badge--bold` |
+| CSS element | `ds-[name]__[part]` | `.ds-badge__icon` |
+| CVA base class | `ds-[name]` | `cva("ds-badge", …)` |
+
+### Component token pattern
+
+Define component tokens in `tokens.web.css`:
+
+```css
+/* --- Component tokens: badge --- */
+--badge-radius: var(--radius-xsmall);
+--badge-sm-gap: var(--spacing-xxsmall);
+/* TODO: needs token — current value: 20px */
+--badge-lg-icon-size: 20px;
+```
+
+Use them in `[name].css`. For variant-specific values, set local custom properties on modifier classes:
+
+```css
+.ds-badge--subtle.ds-badge--neutral {
+  --badge-fill: var(--badge-neutral-subtle-fill);
+  --badge-label-fill: var(--badge-neutral-subtle-label-fill);
+}
+
+.ds-badge {
+  background-color: var(--badge-fill);
+  color: var(--badge-label-fill);
+}
+```
+
+### CVA pattern
+
+Map variants to scoped CSS classes (not Tailwind strings):
+
+```ts
+import { cva, type VariantProps } from "class-variance-authority";
+
+const buttonVariants = cva("ds-button", {
+  variants: {
+    variant: {
+      primary: "ds-button--primary",
+      secondary: "ds-button--secondary",
+    },
+    size: {
+      sm: "ds-button--sm",
+      md: "ds-button--md",
+    },
+  },
+  defaultVariants: {
+    variant: "primary",
+    size: "md",
+  },
+});
+```
+
+### Icons
+
+Use the shared `Icon` component with `@material-symbols/font-400`:
+
+```tsx
+import { Icon } from "../icon/index.tsx";
+
+<Icon name="check_circle" variant="filled" />
+```
+
+`Icon` reads size from `BadgeIconSizeContext` when nested inside `Badge`.
+
+### Rules
+
+- No hardcoded visual values — use a token or leave a TODO comment
+- Variants and states must map to the Figma spec
+- Do not add visual opinions outside of what Figma specifies
+- Export the component from `packages/ui/src/index.ts`
+
+## Step 4 — Storybook
+
+Add `apps/storybook/src/stories/[name]/[name].stories.tsx`:
+
+```ts
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { Button } from "@ds-12/ui/button";
+```
+
+Register a Vite alias in `apps/storybook/vite.config.ts` pointing to the source file:
+
+```ts
+"@ds-12/ui/button": path.resolve(monorepoRoot, "packages/ui/src/components/button/index.tsx"),
+```
+
+Add a subpath export in `packages/ui/package.json`:
+
+```json
+"./button": "./src/components/button/index.tsx"
+```
+
+Follow existing story patterns: `tags: ["autodocs"]`, variant/size controls, `AllVariants` showcase story.
+
+## Step 5 — Validate
+
+```bash
+cd packages/ui && vp check
+cd apps/storybook && npm run build-storybook
+```
+
+## Output checklist
+
+- [ ] `packages/design-tokens/src/tokens.web.css` updated with component token aliases
+- [ ] `packages/ui/src/components/[name]/index.tsx` created
+- [ ] `packages/ui/src/components/[name]/[name].css` created with `ds-[name]` classes
+- [ ] `packages/ui/src/index.ts` exports the component and types
+- [ ] `packages/ui/package.json` has a `./[name]` subpath export
+- [ ] `apps/storybook/vite.config.ts` alias added
+- [ ] `apps/storybook/src/stories/[name]/[name].stories.tsx` created
+- [ ] All unmapped values have `/* TODO: needs token — current value: … */` comments
+- [ ] List of TODOs that require Design System decisions (token missing, token wrong, design ambiguous)

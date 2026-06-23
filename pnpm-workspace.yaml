@@ -1,0 +1,27 @@
+packages:
+  - apps/*
+  - packages/*
+  - tools/*
+
+catalog:
+  '@fontsource/nunito-sans': ^5.2.7
+  '@storybook/addon-a11y': ^10.4.6
+  '@types/node': ^24
+  typescript: ^5
+  vite: npm:@voidzero-dev/vite-plus-core@latest
+  vite-plus: latest
+  vitest: 4.1.9
+
+catalogMode: prefer
+
+overrides:
+  vite: 'catalog:'
+  vitest: 'catalog:'
+
+peerDependencyRules:
+  allowAny:
+    - vite
+    - vitest
+  allowedVersions:
+    vite: '*'
+    vitest: '*'

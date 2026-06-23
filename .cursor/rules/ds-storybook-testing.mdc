@@ -1,0 +1,234 @@
+---
+description: Storybook interaction testing and accessibility testing patterns for Design System components
+globs:
+  - apps/storybook/src/stories/**/*.stories.ts
+  - apps/storybook/src/stories/**/*.stories.tsx
+---
+
+# DS Storybook Testing
+
+Use this rule when writing Storybook stories with interaction and a11y tests for Design System components.
+
+## Location & imports
+
+Stories live in `apps/storybook/src/stories/[name]/[name].stories.tsx`, separate from component source in `packages/ui`.
+
+```ts
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, userEvent, within } from "storybook/test";
+import { Button } from "@ds-12/ui/button";
+import { StoryCaption, StorySectionTitle } from "../../lib/story-presentation.tsx";
+```
+
+Use `@ds-12/ui/[name]` subpath imports. Add a matching Vite alias in `apps/storybook/vite.config.ts` when introducing a new component.
+
+## Setup (already configured)
+
+Storybook 10 is configured in `apps/storybook/.storybook/main.ts`:
+
+```ts
+addons: [
+  "@chromatic-com/storybook",
+  "@storybook/addon-vitest",   // runs play functions via Vitest browser mode
+  "@storybook/addon-a11y",
+  "@storybook/addon-docs",
+  "@storybook/addon-mcp",
+],
+framework: "@storybook/react-vite",
+```
+
+Interaction tests use `play` functions executed by `@storybook/addon-vitest` (not `@storybook/addon-interactions`). Test utilities come from `storybook/test` (Storybook 10), not `@storybook/test`.
+
+A11y is enabled globally in `apps/storybook/.storybook/preview.tsx` with `a11y.test: "todo"`.
+
+## Story file structure
+
+Every component story file should include:
+
+1. **Visual stories** — `Default`, per-variant/per-size stories, and an `AllVariants` showcase (existing convention)
+2. **Interaction stories** — dedicated stories with `play` functions for behavior and a11y
+
+Use `tags: ["autodocs"]` and `satisfies Meta<typeof Component>` on the meta object.
+
+For stateful components, wrap in a local helper (see `pagination.stories.tsx`):
+
+```ts
+function InteractivePagination({ page: initialPage = 1, ...props }: PaginationProps) {
+  const [page, setPage] = useState(initialPage);
+  return <Pagination {...props} page={page} onPageChange={setPage} />;
+}
+```
+
+## Required interaction stories
+
+Apply the stories below based on component type. Skip stories that do not apply (e.g. skip `Disabled` for non-interactive components like Divider or Skeleton).
+
+### Interactive controls (Button, Chip, Input, Pagination, …)
+
+#### 1. KeyboardFocus
+
+Tab into the component and assert focus is received:
+
+```ts
+export const KeyboardFocus: Story = {
+  args: { children: "Button" },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const el = canvas.getByRole("button", { name: /button/i });
+
+    await userEvent.tab();
+    await expect(el).toHaveFocus();
+  },
+};
+```
+
+#### 2. FocusVisible
+
+Keyboard focus triggers `data-focus-visible` (Base UI convention):
+
+```ts
+export const FocusVisible: Story = {
+  args: { children: "Button" },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const el = canvas.getByRole("button", { name: /button/i });
+
+    await userEvent.tab();
+    await expect(el).toHaveAttribute("data-focus-visible");
+  },
+};
+```
+
+#### 3. MouseClickNoFocusVisible
+
+Mouse click does NOT trigger focus-visible:
+
+```ts
+export const MouseClickNoFocusVisible: Story = {
+  args: { children: "Button" },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const el = canvas.getByRole("button", { name: /button/i });
+
+    await userEvent.click(el);
+    await expect(el).not.toHaveAttribute("data-focus-visible");
+  },
+};
+```
+
+#### 4. Disabled
+
+Base UI interactive components use `disabled` prop; assert the rendered disabled state. Disabled controls must remain keyboard-focusable:
+
+```ts
+export const DisabledInteraction: Story = {
+  args: { disabled: true, children: "Button" },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const el = canvas.getByRole("button", { name: /button/i });
+
+    await expect(el).toHaveAttribute("aria-disabled", "true");
+    await userEvent.tab();
+    await expect(el).toHaveFocus();
+  },
+};
+```
+
+Use a distinct story name (`DisabledInteraction`) when a visual-only `Disabled` story already exists.
+
+#### 5. AccessibleName
+
+Component must have an accessible name resolvable by `getByRole`:
+
+```ts
+export const AccessibleName: Story = {
+  args: { children: "Button" },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await expect(
+      canvas.getByRole("button", { name: /button/i }),
+    ).toBeInTheDocument();
+  },
+};
+```
+
+Icon-only buttons need an explicit `aria-label` in args:
+
+```ts
+export const AccessibleName: Story = {
+  args: { variant: "icon", "aria-label": "Add" },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole("button", { name: /add/i })).toBeInTheDocument();
+  },
+};
+```
+
+### Toggle components (Chip)
+
+Chip uses Base UI `Button` with `aria-pressed`. Confirm the role before writing queries:
+
+```ts
+export const Toggle: Story = {
+  args: { children: "Label", active: false },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const chip = canvas.getByRole("button", { name: /label/i });
+
+    await expect(chip).toHaveAttribute("aria-pressed", "false");
+    await userEvent.click(chip);
+    await expect(chip).toHaveAttribute("aria-pressed", "true");
+  },
+};
+```
+
+For checkbox-pattern toggles, use `getByRole("checkbox")` and `toBeChecked()` instead.
+
+### Non-interactive / presentational components (Divider, Skeleton, Typography, Badge)
+
+Skip focus/disabled stories. Assert semantic structure instead:
+
+```ts
+// Skeleton — status role + accessible name
+export const AccessibleName: Story = {
+  args: { "aria-label": "Loading" },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole("status", { name: /loading/i })).toBeInTheDocument();
+  },
+};
+
+// Divider — separator role
+export const AccessibleStructure: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole("separator")).toBeInTheDocument();
+  },
+};
+```
+
+### Composite components (InputField, TextareaField)
+
+Test the primary interactive element inside the field wrapper:
+
+```ts
+export const KeyboardFocus: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByRole("textbox", { name: /label/i });
+
+    await userEvent.tab();
+    await expect(input).toHaveFocus();
+  },
+};
+```
+
+## Rules
+
+- Use `getByRole` with `name` option — never query by class or test-id unless no semantic role exists
+- Do NOT assert CSS class names — assert behavior and ARIA attributes
+- Do NOT assert visual styles (color, spacing) — that belongs to visual regression (Chromatic)
+- Always confirm the component's rendered role before writing `getByRole` queries
+- Keep visual stories and interaction stories in the same file; interaction stories use `play`, visual stories do not
+- Run story tests with `pnpm exec vitest` from `apps/storybook`

@@ -1,0 +1,265 @@
+@import "./tokens.generated.css";
+
+:root {
+  /* --- Web platform extensions --- */
+  --focus-ring-width: var(--border-width-medium);
+  --focus-ring-color: var(--color-blue-500);
+  --focus-ring-offset: 1px;
+  --focus-ring-style: solid;
+
+  --cursor-interactive: pointer;
+  --cursor-disabled: not-allowed;
+
+  --border-style-default: solid;
+
+  --transition-duration-fast: 150ms;
+  --transition-timing-default: ease;
+  --transition-interactive:
+    background-color var(--transition-duration-fast) var(--transition-timing-default),
+    border-color var(--transition-duration-fast) var(--transition-timing-default),
+    color var(--transition-duration-fast) var(--transition-timing-default);
+
+  /* --- Component tokens: button (shared) --- */
+  --button-radius: var(--radius-xsmall);
+  --button-cursor: var(--cursor-interactive);
+  --button-transition: var(--transition-interactive);
+
+  --button-focus-ring-width: var(--focus-ring-width);
+  --button-focus-ring-color: var(--focus-ring-color);
+  --button-focus-ring-offset: var(--focus-ring-offset);
+  --button-focus-ring-style: var(--focus-ring-style);
+
+  --button-label-font-family: var(--font-family-text);
+  --button-label-font-size: var(--font-size-14);
+  --button-label-font-weight: var(--font-weight-semi-bold);
+  --button-label-line-height: var(--line-height-20);
+  --button-label-letter-spacing: var(--letter-spacing-loose);
+
+  --button-sm-icon-gap: var(--spacing-xxxsmall);
+  --button-md-icon-gap: var(--spacing-xxsmall);
+  --button-lg-icon-gap: var(--spacing-xxsmall);
+
+  /* --- Component tokens: button primary (aliases) --- */
+  --button-primary-radius: var(--button-radius);
+  --button-primary-cursor: var(--button-cursor);
+  --button-primary-transition: var(--button-transition);
+  --button-primary-focus-ring-width: var(--button-focus-ring-width);
+  --button-primary-focus-ring-color: var(--button-focus-ring-color);
+  --button-primary-focus-ring-offset: var(--button-focus-ring-offset);
+  --button-primary-focus-ring-style: var(--button-focus-ring-style);
+  --button-primary-label-font-family: var(--button-label-font-family);
+  --button-primary-label-font-size: var(--button-label-font-size);
+  --button-primary-label-font-weight: var(--button-label-font-weight);
+  --button-primary-label-line-height: var(--button-label-line-height);
+  --button-primary-label-letter-spacing: var(--button-label-letter-spacing);
+  --button-primary-sm-icon-gap: var(--button-sm-icon-gap);
+  --button-primary-md-icon-gap: var(--button-md-icon-gap);
+  --button-primary-lg-icon-gap: var(--button-lg-icon-gap);
+
+  /* --- Component tokens: badge --- */
+  --badge-radius: var(--radius-xsmall);
+
+  --badge-sm-gap: var(--spacing-xxsmall);
+  --badge-sm-padding: var(--spacing-xxsmall);
+  --badge-lg-gap: var(--spacing-xxsmall);
+  --badge-lg-padding-x: var(--spacing-xsmall);
+  --badge-lg-padding-y: var(--spacing-xxsmall);
+
+  --badge-sm-icon-size: var(--tag-icon-small-width);
+  /* TODO: needs token — current value: 20px (Figma large badge icon; tag-icon-large is 22px) */
+  --badge-lg-icon-size: 20px;
+
+  --badge-sm-label-font-family: var(--label-default-font-family);
+  --badge-sm-label-font-size: var(--label-default-font-size);
+  --badge-sm-label-font-weight: var(--label-default-font-weight);
+  --badge-sm-label-letter-spacing: var(--label-default-letter-spacing);
+  /* TODO: needs token — current value: 16px (label-default uses line-height-14 / 14px) */
+  --badge-sm-label-line-height: var(--line-height-16);
+
+  --badge-lg-label-font-family: var(--paragraph-default-strong-font-family);
+  --badge-lg-label-font-size: var(--paragraph-default-strong-font-size);
+  --badge-lg-label-font-weight: var(--paragraph-default-strong-font-weight);
+  --badge-lg-label-line-height: var(--paragraph-default-strong-line-height);
+  --badge-lg-label-letter-spacing: var(--paragraph-default-strong-letter-spacing);
+
+  --badge-neutral-subtle-fill: var(--color-semantic-neutral-subtle);
+  --badge-negative-subtle-fill: var(--color-semantic-negative-subtle);
+  --badge-attention-subtle-fill: var(--color-semantic-attention-subtle);
+  --badge-positive-subtle-fill: var(--color-semantic-positive-subtle);
+  --badge-information-subtle-fill: var(--color-semantic-information-subtle);
+
+  --badge-neutral-bold-fill: var(--color-semantic-neutral-bold);
+  --badge-negative-bold-fill: var(--color-semantic-negative-bold);
+  --badge-attention-bold-fill: var(--color-semantic-attention-bold);
+  --badge-positive-bold-fill: var(--color-semantic-positive-bold);
+  --badge-information-bold-fill: var(--color-semantic-information-bold);
+
+  --badge-neutral-subtle-label-fill: var(--color-semantic-text-neutral-bold);
+  --badge-negative-subtle-label-fill: var(--color-semantic-text-negative-bold);
+  --badge-attention-subtle-label-fill: var(--color-semantic-text-attention-bold);
+  --badge-positive-subtle-label-fill: var(--color-semantic-text-positive-bold);
+  --badge-information-subtle-label-fill: var(--color-semantic-text-information-bold);
+
+  --badge-neutral-subtle-icon-fill: var(--color-semantic-text-neutral-bold);
+  --badge-negative-subtle-icon-fill: var(--color-semantic-text-negative-bold);
+  --badge-attention-subtle-icon-fill: var(--color-semantic-text-attention-bold);
+  --badge-positive-subtle-icon-fill: var(--color-semantic-text-positive-bold);
+  --badge-information-subtle-icon-fill: var(--color-semantic-text-information-bold);
+
+  --badge-bold-label-fill: var(--color-semantic-text-neutral-subtler);
+  --badge-bold-icon-fill: var(--color-semantic-text-neutral-subtler);
+
+  /* --- Component tokens: avatar --- */
+  --avatar-sm-size: 24px;
+  --avatar-md-size: 32px;
+  --avatar-lg-size: 40px;
+
+  --avatar-user-radius: var(--radius-xlarge);
+  --avatar-organisation-radius: var(--radius-small);
+
+  --avatar-border-width: var(--border-width-small);
+  --avatar-user-border-color: var(--color-semantic-border-subtle);
+
+  --avatar-user-fill: var(--color-semantic-neutral-subtle);
+  --avatar-organisation-fill: var(--color-semantic-brand-bold);
+
+  --avatar-user-content-fill: var(--color-semantic-text-neutral-bold);
+  --avatar-organisation-content-fill: var(--color-semantic-text-neutral-subtler);
+
+  --avatar-sm-icon-size: 14px;
+  --avatar-md-icon-size: 16px;
+  --avatar-lg-icon-size: 20px;
+
+  --avatar-sm-initial-font-family: var(--label-small-font-family);
+  --avatar-sm-initial-font-size: var(--label-small-font-size);
+  --avatar-sm-initial-font-weight: var(--label-small-font-weight);
+  --avatar-sm-initial-letter-spacing: var(--label-small-letter-spacing);
+  /* TODO: needs token — current value: 14px (label-small uses line-height-12 / 12px) */
+  --avatar-sm-initial-line-height: var(--line-height-14);
+
+  --avatar-md-initial-font-family: var(--label-default-font-family);
+  --avatar-md-initial-font-size: var(--label-default-font-size);
+  --avatar-md-initial-font-weight: var(--label-default-font-weight);
+  --avatar-md-initial-letter-spacing: var(--label-default-letter-spacing);
+  /* TODO: needs token — current value: 16px (label-default uses line-height-14 / 14px) */
+  --avatar-md-initial-line-height: var(--line-height-16);
+
+  --avatar-lg-initial-font-family: var(--paragraph-default-strong-font-family);
+  --avatar-lg-initial-font-size: var(--paragraph-default-strong-font-size);
+  --avatar-lg-initial-font-weight: var(--paragraph-default-strong-font-weight);
+  --avatar-lg-initial-letter-spacing: var(--paragraph-default-strong-letter-spacing);
+  --avatar-lg-initial-line-height: var(--paragraph-default-strong-line-height);
+
+  /* --- Component tokens: divider --- */
+  --divider-border-width: var(--border-width-small);
+  --divider-border-style: var(--border-style-default);
+  --divider-color: var(--color-semantic-border-subtle);
+
+  /* --- Component tokens: chip --- */
+  --chip-gap: var(--spacing-xxxsmall);
+  --chip-padding-y: var(--spacing-xxsmall);
+  --chip-padding-x-icons: var(--chip-inactive-container-horizontal-padding);
+  --chip-padding-x-label: var(--spacing-medium);
+  --chip-radius: var(--chip-inactive-container-border-radius);
+  --chip-border-width: var(--border-width-small);
+  --chip-border-style: var(--border-style-default);
+
+  /* TODO: generated --chip-inactive-container-fill is canvas-moderate; Figma uses canvas-subtle */
+  --chip-inactive-fill: var(--color-semantic-canvas-subtle);
+  --chip-inactive-border-color: var(--color-semantic-border-subtle);
+
+  /* TODO: generated --chip-active-container-fill is neutral-700; Figma uses neutral-subtle */
+  --chip-active-fill: var(--color-semantic-neutral-subtle);
+
+  --chip-label-font-family: var(--paragraph-default-strong-font-family);
+  --chip-label-font-size: var(--paragraph-default-strong-font-size);
+  --chip-label-font-weight: var(--paragraph-default-strong-font-weight);
+  --chip-label-line-height: var(--paragraph-default-strong-line-height);
+  --chip-label-letter-spacing: var(--paragraph-default-strong-letter-spacing);
+  --chip-label-fill: var(--color-semantic-text-neutral-bold);
+  --chip-icon-fill: var(--color-semantic-text-neutral-bold);
+
+  --chip-hover-border-color: var(--color-semantic-border-brand-bold);
+  --chip-pressed-fill: var(--color-semantic-brand-subtle);
+  --chip-pressed-border-color: var(--color-semantic-border-brand-bold);
+
+  --chip-focus-ring-width: var(--border-width-medium);
+  /* TODO: needs token — Figma uses border-information-bold (#0099ff) */
+  --chip-focus-ring-color: var(--color-blue-500);
+  --chip-focus-ring-style: var(--focus-ring-style);
+  --chip-focus-ring-offset-inactive: var(--focus-ring-offset);
+  --chip-focus-ring-offset-active: var(--focus-ring-offset);
+
+  /* TODO: needs token — current value: 16px */
+  --chip-icon-size: 16px;
+
+  /* --- Component tokens: skeleton --- */
+  --skeleton-text-radius: var(--radius-large);
+  /* Matches Tailwind animate-pulse */
+  --skeleton-pulse-duration: 2s;
+  --skeleton-pulse-timing: cubic-bezier(0.4, 0, 0.6, 1);
+
+  /* --- Component tokens: pagination --- */
+  --pagination-button-border-width: var(--border-width-small);
+  --pagination-button-focus-ring-width: var(--focus-ring-width);
+  --pagination-button-focus-ring-color: var(--focus-ring-color);
+  --pagination-button-focus-ring-offset: var(--focus-ring-offset);
+  --pagination-button-focus-ring-style: var(--focus-ring-style);
+
+  /* Small size — no generated tokens; values from Figma mobile pagination */
+  --pagination-sm-button-min-size: 28px;
+  --pagination-sm-button-max-height: 28px;
+  --pagination-sm-button-padding: var(--spacing-xxsmall);
+  --pagination-sm-button-radius: var(--radius-xsmall);
+  --pagination-sm-button-default-fill: var(--color-semantic-canvas-subtle);
+  --pagination-sm-button-default-border-color: var(--color-semantic-border-subtle);
+  --pagination-sm-button-default-label-fill: var(--color-semantic-text-neutral-moderate);
+  --pagination-sm-button-pressed-fill: var(--pagination-button-container-pressed-fill);
+  --pagination-sm-button-pressed-border-color: var(--pagination-button-container-pressed-border-color);
+  --pagination-sm-button-pressed-label-fill: var(--color-semantic-brand-bold);
+  --pagination-sm-button-label-font-family: var(--paragraph-default-strong-font-family);
+  --pagination-sm-button-label-font-size: var(--paragraph-default-strong-font-size);
+  --pagination-sm-button-label-font-weight: var(--paragraph-default-strong-font-weight);
+  --pagination-sm-button-label-line-height: var(--paragraph-default-strong-line-height);
+  --pagination-sm-button-label-letter-spacing: var(--paragraph-default-strong-letter-spacing);
+
+  /* --- Component tokens: input --- */
+  --input-border-radius: var(--radius-xsmall) var(--radius-xsmall) 0 0;
+  --input-border-style: var(--border-style-default);
+  --input-transition: var(--transition-interactive);
+  --input-focus-ring-width: var(--focus-ring-width);
+  --input-focus-ring-color: var(--focus-ring-color);
+  --input-focus-ring-offset: var(--focus-ring-offset);
+  --input-focus-ring-style: var(--focus-ring-style);
+
+  /* --- Component tokens: textarea --- */
+  --textarea-border-radius: var(--radius-xsmall) var(--radius-xsmall) 0 0;
+  --textarea-border-style: var(--border-style-default);
+  --textarea-transition: var(--transition-interactive);
+  --textarea-focus-ring-width: var(--focus-ring-width);
+  --textarea-focus-ring-color: var(--focus-ring-color);
+  --textarea-focus-ring-offset: var(--focus-ring-offset);
+  --textarea-focus-ring-style: var(--focus-ring-style);
+
+  /* TODO: needs token — no text-area-suffix tokens in tokens.generated.css */
+  --textarea-suffix-sm-fill: var(--color-semantic-text-neutral-disabled);
+  --textarea-suffix-sm-font-family: var(--paragraph-small-font-family);
+  --textarea-suffix-sm-font-size: var(--paragraph-small-font-size);
+  --textarea-suffix-sm-font-weight: var(--paragraph-small-font-weight);
+  --textarea-suffix-sm-letter-spacing: var(--paragraph-small-letter-spacing);
+  /* TODO: needs token — Figma body/small uses line-height/16; paragraph-small is line-height-18 */
+  --textarea-suffix-sm-line-height: var(--line-height-16);
+
+  --textarea-suffix-lg-fill: var(--color-semantic-text-neutral-disabled);
+  --textarea-suffix-lg-font-family: var(--paragraph-small-font-family);
+  --textarea-suffix-lg-font-size: var(--paragraph-small-font-size);
+  --textarea-suffix-lg-font-weight: var(--paragraph-small-font-weight);
+  --textarea-suffix-lg-letter-spacing: var(--paragraph-small-letter-spacing);
+  --textarea-suffix-lg-line-height: var(--line-height-16);
+
+  /* --- Web a11y contrast overrides (WCAG AA 4.5:1) --- */
+  /* TODO: needs design token review — generated values fail axe color-contrast */
+  --color-semantic-text-neutral-disabled: var(--color-neutral-700);
+  --color-semantic-negative-bold-hovered: var(--color-red-600);
+  --color-semantic-attention-bold: var(--color-yellow-700);
+}

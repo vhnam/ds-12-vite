@@ -1,0 +1,149 @@
+---
+description: Test strategy for Design System components in packages/ui — decides when to use Storybook vs Vitest
+globs:
+  - packages/ui/src/components/**
+  - packages/ui/tests/**
+  - apps/storybook/src/stories/**
+---
+
+# DS Component Test Strategy
+
+Use this rule when adding tests to a Design System component in `packages/ui`.
+
+## Project structure
+
+```
+packages/
+  ui/                     → @ds-12/ui
+    src/components/[name]/  ← component source
+    tests/                ← package-level unit tests (optional)
+apps/
+  storybook/
+    src/stories/[name]/[name].stories.tsx  ← visual + interaction tests
+    .storybook/           ← Storybook config
+    vite.config.ts        ← Vitest browser project for story tests
+```
+
+Components live in `packages/ui`. Stories live in `apps/storybook` and import via subpath exports (`@ds-12/ui/button`, etc.).
+
+## Responsibility split
+
+| Concern | Storybook (`apps/storybook`) | Vitest (`packages/ui`) |
+|---|---|---|
+| Visual render | ✓ | ✗ |
+| User interaction flow | ✓ | ✗ |
+| Accessibility (a11y) | ✓ | ✗ |
+| Custom hooks logic | ✗ | ✓ |
+| Utility functions | ✗ | ✓ |
+| CVA conditional logic | ✗ | ✓ (only when non-trivial) |
+| Edge cases non-visual | ✗ | ✓ |
+
+## When to write Storybook tests
+
+Always add interaction + a11y coverage in `apps/storybook/src/stories/[name]/[name].stories.tsx` for every component.
+
+Follow `ds-storybook-testing` for story patterns. Keep existing visual stories (`Default`, variant stories, `AllVariants`) and add dedicated interaction stories with `play` functions.
+
+Story tests run through `@storybook/addon-vitest` (Vitest browser mode + Playwright), configured in `apps/storybook/vite.config.ts`.
+
+## When to write Vitest unit tests
+
+Only when the component has:
+
+- **Custom hooks** — test logic in isolation via `renderHook`
+- **Utility functions** — test pure functions directly (e.g. `get-pagination-items.ts`)
+- **CVA variant logic** — only if it contains conditionals beyond simple class mapping
+
+Do NOT write Vitest tests for:
+
+- Pure render output
+- DOM interactions
+- A11y attributes
+- Visual states
+
+### File location
+
+Place unit tests next to the source file or under `packages/ui/tests/`:
+
+```
+packages/ui/src/components/pagination/get-pagination-items.test.ts   ← preferred for utils
+packages/ui/tests/index.test.ts                                      ← package smoke tests
+```
+
+### Vitest patterns
+
+Use Vite+ test imports:
+
+```ts
+import { expect, test } from "vite-plus/test";
+```
+
+**Utility function** (real example from this repo):
+
+```ts
+// get-pagination-items.test.ts
+import { expect, test } from "vite-plus/test";
+import { getPaginationItems } from "./get-pagination-items.ts";
+
+test("returns all pages when totalPages <= 5", () => {
+  expect(getPaginationItems(1, 3)).toEqual([
+    { type: "page", page: 1 },
+    { type: "page", page: 2 },
+    { type: "page", page: 3 },
+  ]);
+});
+
+test("returns empty array when totalPages <= 0", () => {
+  expect(getPaginationItems(1, 0)).toEqual([]);
+});
+```
+
+**Custom hook** (when a component exposes one):
+
+```ts
+import { expect, test } from "vite-plus/test";
+import { renderHook, act } from "@testing-library/react";
+import { useChipGroup } from "./useChipGroup.ts";
+
+test("should toggle chip selection", () => {
+  const { result } = renderHook(() => useChipGroup());
+  act(() => result.current.toggle("active"));
+  expect(result.current.selected).toContain("active");
+});
+```
+
+**CVA conditional logic** (only when needed):
+
+```ts
+import { expect, test } from "vite-plus/test";
+import { buttonVariants } from "./index.tsx";
+
+test("should include loading modifier when loading", () => {
+  expect(buttonVariants({ loading: true })).toContain("ds-button--loading");
+});
+```
+
+## Running tests
+
+This repo uses Vite+ (`vp`), not Turbo.
+
+```bash
+# Unit tests for @ds-12/ui
+cd packages/ui && vp test
+
+# Story interaction tests (Vitest browser project)
+cd apps/storybook && pnpm exec vitest
+
+# Format, lint, typecheck, and test everything
+vp check && vp run -r test
+```
+
+Root `package.json` uses `vp run -r test` to run tests across workspace packages.
+
+## Output checklist
+
+- [ ] Story file exists at `apps/storybook/src/stories/[name]/[name].stories.tsx`
+- [ ] Vite alias added in `apps/storybook/vite.config.ts` for new components
+- [ ] Interaction + a11y stories added per `ds-storybook-testing`
+- [ ] Vitest unit tests added only if hooks or utils exist
+- [ ] `vp check && vp test` pass in affected packages

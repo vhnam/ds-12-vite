@@ -1,0 +1,316 @@
+.ds-textarea {
+  display: flex;
+  align-items: flex-start;
+  box-sizing: border-box;
+  width: 100%;
+  border: none;
+  border-bottom-style: var(--textarea-border-style);
+  border-radius: var(--textarea-border-radius);
+  background-color: var(--textarea-fill);
+  border-bottom-color: var(--textarea-border-color);
+  border-bottom-width: var(--textarea-border-width);
+  gap: var(--textarea-gap);
+  padding: var(--textarea-padding-y) var(--textarea-padding-x);
+  min-height: var(--textarea-min-height);
+  transition: var(--textarea-transition);
+}
+
+.ds-textarea:focus-within {
+  outline: none;
+}
+
+.ds-textarea:focus-within:not(.ds-textarea--disabled):not(.ds-textarea--error) {
+  background-color: var(--textarea-focus-fill);
+  border-bottom-color: var(--textarea-focus-border-color);
+}
+
+.ds-textarea:focus-within:not(.ds-textarea--disabled) {
+  outline: var(--textarea-focus-ring-width) var(--textarea-focus-ring-style)
+    var(--textarea-focus-ring-color);
+  outline-offset: var(--textarea-focus-ring-offset);
+}
+
+.ds-textarea__content {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--textarea-content-gap);
+  min-width: 0;
+  height: 100%;
+  min-height: inherit;
+}
+
+.ds-textarea__control {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 100%;
+  min-height: 0;
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  resize: vertical;
+  color: var(--textarea-text-fill);
+  font-family: var(--textarea-text-font-family);
+  font-size: var(--textarea-text-font-size);
+  font-weight: var(--textarea-text-font-weight);
+  line-height: var(--textarea-text-line-height);
+  letter-spacing: var(--textarea-text-letter-spacing);
+}
+
+.ds-textarea__control:focus {
+  outline: none;
+}
+
+.ds-textarea__control:disabled {
+  cursor: var(--cursor-disabled);
+  resize: none;
+}
+
+.ds-textarea__control::placeholder {
+  color: var(--textarea-placeholder-fill);
+  font-family: var(--textarea-placeholder-font-family);
+  font-size: var(--textarea-placeholder-font-size);
+  font-weight: var(--textarea-placeholder-font-weight);
+  line-height: var(--textarea-placeholder-line-height);
+  letter-spacing: var(--textarea-placeholder-letter-spacing);
+}
+
+.ds-textarea__leading {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: flex-start;
+  justify-content: center;
+  width: var(--textarea-icon-size);
+  height: var(--textarea-icon-size);
+  color: var(--textarea-icon-fill);
+}
+
+.ds-textarea__suffix {
+  flex-shrink: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: right;
+  color: var(--textarea-suffix-fill);
+  font-family: var(--textarea-suffix-font-family);
+  font-size: var(--textarea-suffix-font-size);
+  font-weight: var(--textarea-suffix-font-weight);
+  line-height: var(--textarea-suffix-line-height);
+  letter-spacing: var(--textarea-suffix-letter-spacing);
+}
+
+/* Small — default variant */
+.ds-textarea--sm.ds-textarea--default {
+  --textarea-min-height: var(--text-area-small-box-properties-enabled-height);
+  --textarea-padding-x: var(--text-area-small-box-properties-enabled-horizontal-padding);
+  --textarea-padding-y: var(--text-area-small-box-properties-enabled-vertical-padding);
+  --textarea-gap: var(--text-area-small-box-properties-enabled-item-spacing);
+  --textarea-border-width: var(--text-area-small-box-properties-enabled-border-bottom);
+  --textarea-fill: var(--text-area-small-box-properties-enabled-fill);
+  --textarea-border-color: var(--text-area-small-box-properties-enabled-border-color);
+  --textarea-focus-fill: var(--text-area-small-box-properties-focused-fill);
+  --textarea-focus-border-color: var(--text-area-small-box-properties-focused-border-color);
+  --textarea-text-fill: var(--text-area-small-box-hint-enabled-fill);
+  --textarea-text-font-family: var(--text-area-small-box-hint-enabled-font-family);
+  --textarea-text-font-size: var(--text-area-small-box-hint-enabled-font-size);
+  --textarea-text-font-weight: var(--text-area-small-box-hint-enabled-font-weight);
+  --textarea-text-line-height: var(--text-area-small-box-hint-enabled-line-height);
+  --textarea-text-letter-spacing: var(--text-area-small-box-hint-enabled-letter-spacing);
+  --textarea-placeholder-fill: var(--text-area-small-box-hint-enabled-fill);
+  --textarea-placeholder-font-family: var(--text-area-small-box-hint-enabled-font-family);
+  --textarea-placeholder-font-size: var(--text-area-small-box-hint-enabled-font-size);
+  --textarea-placeholder-font-weight: var(--text-area-small-box-hint-enabled-font-weight);
+  --textarea-placeholder-line-height: var(--text-area-small-box-hint-enabled-line-height);
+  --textarea-placeholder-letter-spacing: var(--text-area-small-box-hint-enabled-letter-spacing);
+  --textarea-icon-size: var(--text-area-small-box-icon-enabled-width);
+  --textarea-icon-fill: var(--text-area-small-box-icon-enabled-fill);
+}
+
+.ds-textarea--sm.ds-textarea--default:focus-within:not(.ds-textarea--disabled):not(
+    .ds-textarea--error
+  ) {
+  --textarea-text-fill: var(--text-area-small-box-hint-focused-fill);
+  --textarea-icon-fill: var(--text-area-small-box-icon-focused-fill);
+}
+
+.ds-textarea--sm.ds-textarea--default.ds-textarea--disabled {
+  --textarea-fill: var(--text-area-small-box-properties-disabled-fill);
+  --textarea-border-color: var(--text-area-small-box-properties-disabled-border-color);
+  --textarea-text-fill: var(--text-area-small-box-hint-disabled-fill);
+  --textarea-placeholder-fill: var(--text-area-small-box-hint-disabled-fill);
+  --textarea-icon-fill: var(--text-area-small-box-icon-disabled-fill);
+}
+
+.ds-textarea--sm.ds-textarea--default.ds-textarea--error {
+  --textarea-fill: var(--text-area-small-box-properties-error-fill);
+  --textarea-border-color: var(--text-area-small-box-properties-error-border-color);
+  --textarea-text-fill: var(--text-area-small-box-hint-error-fill);
+  --textarea-icon-fill: var(--text-area-small-box-icon-error-fill);
+}
+
+/* Small — suffix variant */
+.ds-textarea--sm.ds-textarea--suffix {
+  --textarea-min-height: var(--text-area-small-box-properties-enabled-height);
+  --textarea-padding-x: var(--text-area-small-box-properties-enabled-horizontal-padding);
+  --textarea-padding-y: var(--text-area-small-box-properties-enabled-vertical-padding);
+  --textarea-gap: var(--text-area-small-box-properties-enabled-item-spacing);
+  --textarea-content-gap: var(--text-area-small-box-properties-enabled-item-spacing);
+  --textarea-border-width: var(--text-area-small-box-properties-enabled-border-bottom);
+  --textarea-fill: var(--text-area-small-box-properties-enabled-fill);
+  --textarea-border-color: var(--text-area-small-box-properties-enabled-border-color);
+  --textarea-focus-fill: var(--text-area-small-box-properties-focused-fill);
+  --textarea-focus-border-color: var(--text-area-small-box-properties-focused-border-color);
+  --textarea-text-fill: var(--text-area-small-box-hint-enabled-fill);
+  --textarea-text-font-family: var(--text-area-small-box-hint-enabled-font-family);
+  --textarea-text-font-size: var(--text-area-small-box-hint-enabled-font-size);
+  --textarea-text-font-weight: var(--text-area-small-box-hint-enabled-font-weight);
+  --textarea-text-line-height: var(--text-area-small-box-hint-enabled-line-height);
+  --textarea-text-letter-spacing: var(--text-area-small-box-hint-enabled-letter-spacing);
+  --textarea-placeholder-fill: var(--text-area-small-box-hint-enabled-fill);
+  --textarea-placeholder-font-family: var(--text-area-small-box-hint-enabled-font-family);
+  --textarea-placeholder-font-size: var(--text-area-small-box-hint-enabled-font-size);
+  --textarea-placeholder-font-weight: var(--text-area-small-box-hint-enabled-font-weight);
+  --textarea-placeholder-line-height: var(--text-area-small-box-hint-enabled-line-height);
+  --textarea-placeholder-letter-spacing: var(--text-area-small-box-hint-enabled-letter-spacing);
+  --textarea-suffix-fill: var(--textarea-suffix-sm-fill);
+  --textarea-suffix-font-family: var(--textarea-suffix-sm-font-family);
+  --textarea-suffix-font-size: var(--textarea-suffix-sm-font-size);
+  --textarea-suffix-font-weight: var(--textarea-suffix-sm-font-weight);
+  --textarea-suffix-line-height: var(--textarea-suffix-sm-line-height);
+  --textarea-suffix-letter-spacing: var(--textarea-suffix-sm-letter-spacing);
+  --textarea-icon-size: var(--text-area-small-box-icon-enabled-width);
+  --textarea-icon-fill: var(--text-area-small-box-icon-enabled-fill);
+}
+
+.ds-textarea--sm.ds-textarea--suffix:focus-within:not(.ds-textarea--disabled):not(
+    .ds-textarea--error
+  ) {
+  --textarea-text-fill: var(--text-area-small-box-hint-focused-fill);
+  --textarea-icon-fill: var(--text-area-small-box-icon-focused-fill);
+}
+
+.ds-textarea--sm.ds-textarea--suffix.ds-textarea--disabled {
+  --textarea-fill: var(--text-area-small-box-properties-disabled-fill);
+  --textarea-border-color: var(--text-area-small-box-properties-disabled-border-color);
+  --textarea-text-fill: var(--text-area-small-box-hint-disabled-fill);
+  --textarea-suffix-fill: var(--text-area-small-box-hint-disabled-fill);
+  --textarea-icon-fill: var(--text-area-small-box-icon-disabled-fill);
+}
+
+.ds-textarea--sm.ds-textarea--suffix.ds-textarea--error {
+  --textarea-fill: var(--text-area-small-box-properties-error-fill);
+  --textarea-border-color: var(--text-area-small-box-properties-error-border-color);
+  --textarea-text-fill: var(--text-area-small-box-hint-error-fill);
+  --textarea-icon-fill: var(--text-area-small-box-icon-error-fill);
+}
+
+/* Large — default variant */
+.ds-textarea--lg.ds-textarea--default {
+  --textarea-min-height: var(--text-area-large-box-properties-enabled-height);
+  --textarea-padding-x: var(--text-area-large-box-properties-enabled-horizontal-padding);
+  --textarea-padding-y: var(--text-area-large-box-properties-enabled-vertical-padding);
+  --textarea-gap: var(--text-area-large-box-properties-enabled-item-spacing);
+  --textarea-border-width: var(--text-area-large-box-properties-enabled-border-bottom);
+  --textarea-fill: var(--text-area-large-box-properties-enabled-fill);
+  --textarea-border-color: var(--text-area-large-box-properties-enabled-border-color);
+  --textarea-focus-fill: var(--text-area-large-box-properties-focused-fill);
+  --textarea-focus-border-color: var(--text-area-large-box-properties-focused-border-color);
+  --textarea-text-fill: var(--text-area-large-box-hint-enabled-fill);
+  --textarea-text-font-family: var(--text-area-large-box-hint-enabled-font-family);
+  --textarea-text-font-size: var(--text-area-large-box-hint-enabled-font-size);
+  --textarea-text-font-weight: var(--text-area-large-box-hint-enabled-font-weight);
+  --textarea-text-line-height: var(--text-area-large-box-hint-enabled-line-height);
+  --textarea-text-letter-spacing: var(--text-area-large-box-hint-enabled-letter-spacing);
+  --textarea-placeholder-fill: var(--text-area-large-box-hint-enabled-fill);
+  --textarea-placeholder-font-family: var(--text-area-large-box-hint-enabled-font-family);
+  --textarea-placeholder-font-size: var(--text-area-large-box-hint-enabled-font-size);
+  --textarea-placeholder-font-weight: var(--text-area-large-box-hint-enabled-font-weight);
+  --textarea-placeholder-line-height: var(--text-area-large-box-hint-enabled-line-height);
+  --textarea-placeholder-letter-spacing: var(--text-area-large-box-hint-enabled-letter-spacing);
+  --textarea-icon-size: var(--text-area-large-box-icon-enabled-width);
+  --textarea-icon-fill: var(--text-area-large-box-icon-enabled-fill);
+}
+
+.ds-textarea--lg.ds-textarea--default:focus-within:not(.ds-textarea--disabled):not(
+    .ds-textarea--error
+  ) {
+  --textarea-text-fill: var(--text-area-large-box-hint-focused-fill);
+  --textarea-icon-fill: var(--text-area-large-box-icon-focused-fill);
+}
+
+.ds-textarea--lg.ds-textarea--default.ds-textarea--disabled {
+  --textarea-fill: var(--text-area-large-box-properties-disabled-fill);
+  --textarea-border-color: var(--text-area-large-box-properties-disabled-border-color);
+  --textarea-text-fill: var(--text-area-large-box-hint-disabled-fill);
+  --textarea-placeholder-fill: var(--text-area-large-box-hint-disabled-fill);
+  --textarea-icon-fill: var(--text-area-large-box-icon-disabled-fill);
+}
+
+.ds-textarea--lg.ds-textarea--default.ds-textarea--error {
+  --textarea-fill: var(--text-area-large-box-properties-error-fill);
+  --textarea-border-color: var(--text-area-large-box-properties-error-border-color);
+  --textarea-text-fill: var(--text-area-large-box-hint-error-fill);
+  --textarea-icon-fill: var(--text-area-large-box-icon-error-fill);
+}
+
+/* Large — suffix variant */
+.ds-textarea--lg.ds-textarea--suffix {
+  --textarea-min-height: var(--text-area-large-box-properties-enabled-height);
+  --textarea-padding-x: var(--text-area-large-box-properties-enabled-horizontal-padding);
+  --textarea-padding-y: var(--text-area-large-box-properties-enabled-vertical-padding);
+  --textarea-gap: var(--text-area-large-box-properties-enabled-item-spacing);
+  --textarea-content-gap: var(--text-area-large-box-properties-enabled-item-spacing);
+  --textarea-border-width: var(--text-area-large-box-properties-enabled-border-bottom);
+  --textarea-fill: var(--text-area-large-box-properties-enabled-fill);
+  --textarea-border-color: var(--text-area-large-box-properties-enabled-border-color);
+  --textarea-focus-fill: var(--text-area-large-box-properties-focused-fill);
+  --textarea-focus-border-color: var(--text-area-large-box-properties-focused-border-color);
+  --textarea-text-fill: var(--text-area-large-box-hint-enabled-fill);
+  --textarea-text-font-family: var(--text-area-large-box-hint-enabled-font-family);
+  --textarea-text-font-size: var(--text-area-large-box-hint-enabled-font-size);
+  --textarea-text-font-weight: var(--text-area-large-box-hint-enabled-font-weight);
+  --textarea-text-line-height: var(--text-area-large-box-hint-enabled-line-height);
+  --textarea-text-letter-spacing: var(--text-area-large-box-hint-enabled-letter-spacing);
+  --textarea-placeholder-fill: var(--text-area-large-box-hint-enabled-fill);
+  --textarea-placeholder-font-family: var(--text-area-large-box-hint-enabled-font-family);
+  --textarea-placeholder-font-size: var(--text-area-large-box-hint-enabled-font-size);
+  --textarea-placeholder-font-weight: var(--text-area-large-box-hint-enabled-font-weight);
+  --textarea-placeholder-line-height: var(--text-area-large-box-hint-enabled-line-height);
+  --textarea-placeholder-letter-spacing: var(--text-area-large-box-hint-enabled-letter-spacing);
+  --textarea-suffix-fill: var(--textarea-suffix-lg-fill);
+  --textarea-suffix-font-family: var(--textarea-suffix-lg-font-family);
+  --textarea-suffix-font-size: var(--textarea-suffix-lg-font-size);
+  --textarea-suffix-font-weight: var(--textarea-suffix-lg-font-weight);
+  --textarea-suffix-line-height: var(--textarea-suffix-lg-line-height);
+  --textarea-suffix-letter-spacing: var(--textarea-suffix-lg-letter-spacing);
+  --textarea-icon-size: var(--text-area-large-box-icon-enabled-width);
+  --textarea-icon-fill: var(--text-area-large-box-icon-enabled-fill);
+}
+
+.ds-textarea--lg.ds-textarea--suffix:focus-within:not(.ds-textarea--disabled):not(
+    .ds-textarea--error
+  ) {
+  --textarea-text-fill: var(--text-area-large-box-hint-focused-fill);
+  --textarea-icon-fill: var(--text-area-large-box-icon-focused-fill);
+}
+
+.ds-textarea--lg.ds-textarea--suffix.ds-textarea--disabled {
+  --textarea-fill: var(--text-area-large-box-properties-disabled-fill);
+  --textarea-border-color: var(--text-area-large-box-properties-disabled-border-color);
+  --textarea-text-fill: var(--text-area-large-box-hint-disabled-fill);
+  --textarea-suffix-fill: var(--text-area-large-box-hint-disabled-fill);
+  --textarea-icon-fill: var(--text-area-large-box-icon-disabled-fill);
+}
+
+.ds-textarea--lg.ds-textarea--suffix.ds-textarea--error {
+  --textarea-fill: var(--text-area-large-box-properties-error-fill);
+  --textarea-border-color: var(--text-area-large-box-properties-error-border-color);
+  --textarea-text-fill: var(--text-area-large-box-hint-error-fill);
+  --textarea-icon-fill: var(--text-area-large-box-icon-error-fill);
+}
+
+.ds-textarea--disabled {
+  cursor: var(--cursor-disabled);
+}
