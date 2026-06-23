@@ -114,6 +114,14 @@ Or invoke act directly:
 act pull_request -W .github/workflows/storybook.yml -j storybook --env CI=true
 ```
 
+### GitHub Pages
+
+On every push to `main`, the Storybook workflow deploys `apps/storybook/storybook-static` to GitHub Pages after tests pass.
+
+**One-time setup:** In the repo on GitHub, open **Settings → Pages** and set **Build and deployment → Source** to **GitHub Actions**.
+
+The site is published at `https://<user>.github.io/<repo>/` (for this repo: `https://vhnam.github.io/ds-12-vite/`). Production builds set `STORYBOOK_BASE_PATH` so assets resolve under that subpath.
+
 ## Project structure
 
 ```
