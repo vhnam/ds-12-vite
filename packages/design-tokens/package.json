@@ -15,20 +15,23 @@
   "files": [
     "dist",
     "src/tokens.generated.css",
-    "src/tokens.web.css"
+    "src/tokens.web.css",
+    "src/tokens.theme.css"
   ],
   "type": "module",
   "exports": {
     ".": "./dist/index.mjs",
     "./package.json": "./package.json",
-    "./tokens.css": "./src/tokens.web.css"
+    "./tokens.css": "./src/tokens.web.css",
+    "./theme.css": "./src/tokens.theme.css"
   },
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
-    "build": "vp pack",
-    "dev": "vp pack --watch",
+    "build": "node scripts/generate-theme.mjs && vp pack",
+    "dev": "node scripts/generate-theme.mjs && vp pack --watch",
+    "generate:theme": "node scripts/generate-theme.mjs",
     "test": "vp test",
     "check": "vp check",
     "prepublishOnly": "vp run build"

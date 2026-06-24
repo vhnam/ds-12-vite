@@ -1,4 +1,5 @@
 import type { StorybookConfig } from "@storybook/react-vite";
+import tailwindcss from "@tailwindcss/vite";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -23,7 +24,7 @@ function storybookGlobalStyles() {
 }
 
 const config: StorybookConfig = {
-  stories: ["../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
+  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
   addons: [
     "@chromatic-com/storybook",
     "@storybook/addon-a11y",
@@ -33,17 +34,24 @@ const config: StorybookConfig = {
   framework: "@storybook/react-vite",
   async viteFinal(config, { configType }) {
     config.plugins ??= [];
-    config.plugins.push(storybookGlobalStyles());
+    config.plugins.push(tailwindcss(), storybookGlobalStyles());
 
     const designTokensAlias = path.resolve(
       monorepoRoot,
       "packages/design-tokens/src/tokens.web.css",
     );
+    const designTokensThemeAlias = path.resolve(
+      monorepoRoot,
+      "packages/design-tokens/src/tokens.theme.css",
+    );
+    const uiTailwindAlias = path.resolve(monorepoRoot, "packages/ui/src/tailwind.css");
     const uiAlias = path.resolve(monorepoRoot, "packages/ui/src/components");
     const existingAlias = config.resolve?.alias;
 
     const aliasEntries = [
       { find: "@ds-12/design-tokens/tokens.css", replacement: designTokensAlias },
+      { find: "@ds-12/design-tokens/theme.css", replacement: designTokensThemeAlias },
+      { find: "@ds-12/ui/tailwind.css", replacement: uiTailwindAlias },
       { find: "@ds-12/ui", replacement: uiAlias },
     ];
 

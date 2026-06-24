@@ -1,116 +1,118 @@
-.ds-typography {
-  color: var(--color-semantic-text-neutral-bolder);
-  margin: 0;
-}
+@layer components {
+  .ds-typography {
+    color: var(--color-semantic-text-neutral-bolder);
+    margin: 0;
+  }
 
-.ds-typography--display {
-  font-family: var(--display-default-font-family);
-  font-size: var(--display-default-font-size);
-  font-weight: var(--display-default-font-weight);
-  letter-spacing: var(--display-default-letter-spacing);
-  line-height: var(--display-default-line-height);
-}
+  .ds-typography--display {
+    font-family: var(--display-default-font-family);
+    font-size: var(--display-default-font-size);
+    font-weight: var(--display-default-font-weight);
+    letter-spacing: var(--display-default-letter-spacing);
+    line-height: var(--display-default-line-height);
+  }
 
-.ds-typography--h1 {
-  font-family: var(--heading-h1-bold-font-family);
-  font-size: var(--heading-h1-bold-font-size);
-  font-weight: var(--heading-h1-bold-font-weight);
-  letter-spacing: var(--heading-h1-bold-letter-spacing);
-  line-height: var(--heading-h1-bold-line-height);
-}
+  .ds-typography--h1 {
+    font-family: var(--heading-h1-bold-font-family);
+    font-size: var(--heading-h1-bold-font-size);
+    font-weight: var(--heading-h1-bold-font-weight);
+    letter-spacing: var(--heading-h1-bold-letter-spacing);
+    line-height: var(--heading-h1-bold-line-height);
+  }
 
-.ds-typography--h2 {
-  font-family: var(--heading-h2-bold-font-family);
-  font-size: var(--heading-h2-bold-font-size);
-  font-weight: var(--heading-h2-bold-font-weight);
-  letter-spacing: var(--heading-h2-bold-letter-spacing);
-  line-height: var(--heading-h2-bold-line-height);
-}
+  .ds-typography--h2 {
+    font-family: var(--heading-h2-bold-font-family);
+    font-size: var(--heading-h2-bold-font-size);
+    font-weight: var(--heading-h2-bold-font-weight);
+    letter-spacing: var(--heading-h2-bold-letter-spacing);
+    line-height: var(--heading-h2-bold-line-height);
+  }
 
-.ds-typography--h3 {
-  font-family: var(--heading-h3-bold-font-family);
-  font-size: var(--heading-h3-bold-font-size);
-  font-weight: var(--heading-h3-bold-font-weight);
-  letter-spacing: var(--heading-h3-bold-letter-spacing);
-  line-height: var(--heading-h3-bold-line-height);
-}
+  .ds-typography--h3 {
+    font-family: var(--heading-h3-bold-font-family);
+    font-size: var(--heading-h3-bold-font-size);
+    font-weight: var(--heading-h3-bold-font-weight);
+    letter-spacing: var(--heading-h3-bold-letter-spacing);
+    line-height: var(--heading-h3-bold-line-height);
+  }
 
-.ds-typography--h4 {
-  font-family: var(--heading-h4-bold-font-family);
-  font-size: var(--heading-h4-bold-font-size);
-  font-weight: var(--heading-h4-bold-font-weight);
-  letter-spacing: var(--heading-h4-bold-letter-spacing);
-  line-height: var(--heading-h4-bold-line-height);
-}
+  .ds-typography--h4 {
+    font-family: var(--heading-h4-bold-font-family);
+    font-size: var(--heading-h4-bold-font-size);
+    font-weight: var(--heading-h4-bold-font-weight);
+    letter-spacing: var(--heading-h4-bold-letter-spacing);
+    line-height: var(--heading-h4-bold-line-height);
+  }
 
-.ds-typography--paragraph-xlarge {
-  font-family: var(--paragraph-xlarge-strong-font-family);
-  font-size: var(--paragraph-xlarge-strong-font-size);
-  font-weight: var(--paragraph-xlarge-strong-font-weight);
-  letter-spacing: var(--paragraph-xlarge-strong-letter-spacing);
-  line-height: var(--paragraph-xlarge-strong-line-height);
-}
+  .ds-typography--paragraph-xlarge {
+    font-family: var(--paragraph-xlarge-strong-font-family);
+    font-size: var(--paragraph-xlarge-strong-font-size);
+    font-weight: var(--paragraph-xlarge-strong-font-weight);
+    letter-spacing: var(--paragraph-xlarge-strong-letter-spacing);
+    line-height: var(--paragraph-xlarge-strong-line-height);
+  }
 
-.ds-typography--paragraph-large {
-  font-family: var(--paragraph-large-font-family);
-  font-size: var(--paragraph-large-font-size);
-  font-weight: var(--paragraph-large-font-weight);
-  letter-spacing: var(--paragraph-large-letter-spacing);
-  line-height: var(--paragraph-large-line-height);
-}
+  .ds-typography--paragraph-large {
+    font-family: var(--paragraph-large-font-family);
+    font-size: var(--paragraph-large-font-size);
+    font-weight: var(--paragraph-large-font-weight);
+    letter-spacing: var(--paragraph-large-letter-spacing);
+    line-height: var(--paragraph-large-line-height);
+  }
 
-.ds-typography--paragraph {
-  font-family: var(--paragraph-default-font-family);
-  font-size: var(--paragraph-default-font-size);
-  font-weight: var(--paragraph-default-font-weight);
-  letter-spacing: var(--paragraph-default-letter-spacing);
-  line-height: var(--paragraph-default-line-height);
-}
+  .ds-typography--paragraph {
+    font-family: var(--paragraph-default-font-family);
+    font-size: var(--paragraph-default-font-size);
+    font-weight: var(--paragraph-default-font-weight);
+    letter-spacing: var(--paragraph-default-letter-spacing);
+    line-height: var(--paragraph-default-line-height);
+  }
 
-.ds-typography--paragraph-small {
-  font-family: var(--paragraph-small-font-family);
-  font-size: var(--paragraph-small-font-size);
-  font-weight: var(--paragraph-small-font-weight);
-  letter-spacing: var(--paragraph-small-letter-spacing);
-  line-height: var(--paragraph-small-line-height);
-}
+  .ds-typography--paragraph-small {
+    font-family: var(--paragraph-small-font-family);
+    font-size: var(--paragraph-small-font-size);
+    font-weight: var(--paragraph-small-font-weight);
+    letter-spacing: var(--paragraph-small-letter-spacing);
+    line-height: var(--paragraph-small-line-height);
+  }
 
-.ds-typography--label-large {
-  font-family: var(--label-large-font-family);
-  font-size: var(--label-large-font-size);
-  font-weight: var(--label-large-font-weight);
-  letter-spacing: var(--label-large-letter-spacing);
-  line-height: var(--label-large-line-height);
-}
+  .ds-typography--label-large {
+    font-family: var(--label-large-font-family);
+    font-size: var(--label-large-font-size);
+    font-weight: var(--label-large-font-weight);
+    letter-spacing: var(--label-large-letter-spacing);
+    line-height: var(--label-large-line-height);
+  }
 
-.ds-typography--label {
-  font-family: var(--label-default-font-family);
-  font-size: var(--label-default-font-size);
-  font-weight: var(--label-default-font-weight);
-  letter-spacing: var(--label-default-letter-spacing);
-  line-height: var(--label-default-line-height);
-}
+  .ds-typography--label {
+    font-family: var(--label-default-font-family);
+    font-size: var(--label-default-font-size);
+    font-weight: var(--label-default-font-weight);
+    letter-spacing: var(--label-default-letter-spacing);
+    line-height: var(--label-default-line-height);
+  }
 
-.ds-typography--label-small {
-  font-family: var(--label-small-font-family);
-  font-size: var(--label-small-font-size);
-  font-weight: var(--label-small-font-weight);
-  letter-spacing: var(--label-small-letter-spacing);
-  line-height: var(--label-small-line-height);
-}
+  .ds-typography--label-small {
+    font-family: var(--label-small-font-family);
+    font-size: var(--label-small-font-size);
+    font-weight: var(--label-small-font-weight);
+    letter-spacing: var(--label-small-letter-spacing);
+    line-height: var(--label-small-line-height);
+  }
 
-.ds-typography--weight-regular {
-  font-weight: var(--font-weight-regular);
-}
+  .ds-typography--weight-regular {
+    font-weight: var(--font-weight-regular);
+  }
 
-.ds-typography--weight-medium {
-  font-weight: var(--font-weight-medium);
-}
+  .ds-typography--weight-medium {
+    font-weight: var(--font-weight-medium);
+  }
 
-.ds-typography--weight-semibold {
-  font-weight: var(--font-weight-semi-bold);
-}
+  .ds-typography--weight-semibold {
+    font-weight: var(--font-weight-semi-bold);
+  }
 
-.ds-typography--weight-bold {
-  font-weight: var(--font-weight-bold);
+  .ds-typography--weight-bold {
+    font-weight: var(--font-weight-bold);
+  }
 }

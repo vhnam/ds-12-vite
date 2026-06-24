@@ -3,7 +3,7 @@
 :root {
   /* --- Web platform extensions --- */
   --focus-ring-width: var(--border-width-medium);
-  --focus-ring-color: var(--color-blue-500);
+  --focus-ring-color: var(--color-semantic-border-information-bold);
   --focus-ring-offset: 1px;
   --focus-ring-style: solid;
 
@@ -258,10 +258,4 @@
   --textarea-suffix-lg-font-weight: var(--paragraph-small-font-weight);
   --textarea-suffix-lg-letter-spacing: var(--paragraph-small-letter-spacing);
   --textarea-suffix-lg-line-height: var(--line-height-16);
-
-  /* --- Web a11y contrast overrides (WCAG AA 4.5:1) --- */
-  /* TODO: needs design token review — generated values fail axe color-contrast */
-  --color-semantic-text-neutral-disabled: var(--color-neutral-700);
-  --color-semantic-negative-bold-hovered: var(--color-red-600);
-  --color-semantic-attention-bold: var(--color-yellow-700);
 }

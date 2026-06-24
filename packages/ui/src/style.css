@@ -1,3 +1,14 @@
+/**
+ * Bundled DS-12 component styles (Tailwind v4 `@layer components`).
+ *
+ * Import design tokens first — via tailwind.css or tokens.css directly:
+ *   @import "@ds-12/ui/tailwind.css";
+ *   @import "@ds-12/ui/style.css";
+ *
+ * Or without Tailwind utilities:
+ *   @import "@ds-12/design-tokens/tokens.css";
+ *   @import "@ds-12/ui/style.css";
+ */
 @import "./components/avatar/avatar.css";
 @import "./components/badge/badge.css";
 @import "./components/button/button.css";

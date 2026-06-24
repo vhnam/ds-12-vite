@@ -9,10 +9,16 @@ allowBuilds:
 catalog:
   "@fontsource/nunito-sans": ^5.2.7
   "@storybook/addon-a11y": ^10.4.6
+  "@types/react": ^19.2.14
+  "@types/react-dom": ^19.2.3
   "@storybook/addon-vitest": ^10.4.6
+  "@tailwindcss/vite": ^4.3.1
   "@types/node": ^24
   chromatic: ^17.5.0
-  typescript: ^5
+  react: ^19.2.6
+  react-dom: ^19.2.6
+  tailwindcss: ^4.3.1
+  typescript: ^6.0.3
   vite: npm:@voidzero-dev/vite-plus-core@latest
   vite-plus: latest
   vitest: 4.1.9

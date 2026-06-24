@@ -85,7 +85,13 @@ export function Input({
 
   const defaultTrailingIcon = isInvalid ? ERROR_TRAILING_ICON : DEFAULT_TRAILING_ICON;
   const resolvedTrailing = hasTrailing
-    ? (trailingIcon ?? <Icon name={defaultTrailingIcon} size={iconSize} />)
+    ? (trailingIcon ?? (
+        <Icon
+          name={defaultTrailingIcon}
+          size={iconSize}
+          variant={isInvalid ? "filled" : "outlined"}
+        />
+      ))
     : null;
 
   return (

@@ -36,9 +36,65 @@ Import components via subpath exports:
 
 ```ts
 import { Button } from "@ds-12/ui/button";
-import "@ds-12/design-tokens/tokens.css";
 import "@ds-12/ui/style.css";
 ```
+
+### Tailwind v4 setup
+
+Apps that use `@ds-12/ui` should configure **Tailwind CSS v4** and import the DS-12 theme entry so token-backed utilities resolve to the same CSS variables as the components.
+
+**1. Install Tailwind v4** (Vite example):
+
+```bash
+pnpm add tailwindcss @tailwindcss/vite
+```
+
+**2. Enable the Vite plugin** in your app config:
+
+```ts
+import tailwindcss from "@tailwindcss/vite";
+
+export default defineConfig({
+  plugins: [tailwindcss()],
+});
+```
+
+**3. Import the DS-12 Tailwind entry** in your global CSS (before or alongside component styles):
+
+```css
+@import "@ds-12/ui/tailwind.css";
+@import "@ds-12/ui/style.css";
+```
+
+`@ds-12/ui/tailwind.css` includes:
+
+- `@import "tailwindcss"` — Tailwind v4 base
+- `@ds-12/design-tokens/tokens.css` — all `:root` CSS variables
+- `@ds-12/design-tokens/theme.css` — `@theme inline` bridge so utilities like `bg-blue-500`, `p-xxsmall`, and `rounded-xsmall` map to design tokens
+
+**Granular imports** (when you manage Tailwind yourself):
+
+```css
+@import "tailwindcss";
+@import "@ds-12/design-tokens/tokens.css";
+@import "@ds-12/design-tokens/theme.css";
+@import "@ds-12/ui/style.css";
+```
+
+**CSS variables only** (no Tailwind utilities):
+
+```css
+@import "@ds-12/design-tokens/tokens.css";
+@import "@ds-12/ui/style.css";
+```
+
+### Where `@ds-12/ui` is used today
+
+| Location         | Tailwind v4 setup                                                                                          |
+| ---------------- | ---------------------------------------------------------------------------------------------------------- |
+| `apps/storybook` | `@tailwindcss/vite` in `.storybook/main.ts`; `@import "@ds-12/ui/tailwind.css"` in `.storybook/styles.css` |
+
+Any new app or package that imports `@ds-12/ui` must follow the same pattern: install Tailwind v4, add the Vite (or PostCSS) plugin, and import `@ds-12/ui/tailwind.css` in global CSS.
 
 ## Prerequisites
 
@@ -158,8 +214,9 @@ apps/
 
 - **React 19** with **Base UI** primitives for interactive behavior
 - **CVA** (`class-variance-authority`) for variant class names
-- **Scoped CSS** (`ds-[component]` classes) backed by CSS custom properties — not Tailwind utilities in components
-- **Design tokens** as the single source of visual values (`var(--token)`)
+- **Scoped CSS** (`ds-[component]` classes) backed by CSS custom properties — component styling stays in scoped CSS, not Tailwind utilities
+- **Tailwind v4** optional for app-level layout and stories; import `@ds-12/ui/tailwind.css` to bridge design tokens to Tailwind utilities via `@theme inline`
+- **Design tokens** as the single source of visual values (`var(--token)`), exported as CSS variables from `@ds-12/design-tokens/tokens.css`
 - **Storybook 10** with Chromatic for visual regression; interaction `play` functions run in the Storybook UI
 
 ## Tooling

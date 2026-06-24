@@ -13,7 +13,8 @@
     "url": "git+https://github.com/author/library.git"
   },
   "files": [
-    "dist"
+    "dist",
+    "src/tailwind.css"
   ],
   "type": "module",
   "sideEffects": [
@@ -39,6 +40,9 @@
     "./textarea": "./dist/textarea.mjs",
     "./typography": "./dist/typography.mjs",
     "./style.css": "./dist/style.css",
+    "./tailwind.css": "./src/tailwind.css",
+    "./tokens.css": "@ds-12/design-tokens/tokens.css",
+    "./theme.css": "@ds-12/design-tokens/theme.css",
     "./material-symbols.css": "@material-symbols/font-400/outlined.css",
     "./package.json": "./package.json"
   },
@@ -58,22 +62,22 @@
     "@material-symbols/font-400": "^0.40.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "tailwind-merge": "^3.3.1"
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss": "catalog:"
   },
   "devDependencies": {
     "@tsdown/css": "^0.22.3",
-    "@types/node": "^25.6.2",
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
-    "@typescript/native-preview": "7.0.0-dev.20260509.2",
-    "bumpp": "^11.1.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "typescript": "^6.0.3",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "typescript": "catalog:",
     "vite-plus": "catalog:"
   },
   "peerDependencies": {
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "tailwindcss": "^4.0.0"
   }
 }

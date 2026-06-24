@@ -18,8 +18,12 @@ packages/
     src/
       tokens.generated.css  ← Style Dictionary output, do NOT edit
       tokens.web.css        ← web-specific layer, exported as tokens.css
+      tokens.theme.css      ← generated @theme inline bridge for Tailwind v4
+    scripts/
+      generate-theme.mjs    ← regenerates tokens.theme.css
   ui/                     → @ds-12/ui
     src/
+      tailwind.css          ← Tailwind v4 entry (tokens + theme bridge)
       components/           ← DS components (lowercase folder names)
       lib/
         utils.ts            ← cn() helper (clsx + tailwind-merge)
@@ -32,13 +36,14 @@ apps/
 
 | Package | Import examples |
 |---|---|
-| `@ds-12/design-tokens` | `@ds-12/design-tokens/tokens.css` |
-| `@ds-12/ui` | `@ds-12/ui/button`, `@ds-12/ui/badge`, `@ds-12/ui` (barrel) |
+| `@ds-12/design-tokens` | `@ds-12/design-tokens/tokens.css`, `@ds-12/design-tokens/theme.css` |
+| `@ds-12/ui` | `@ds-12/ui/button`, `@ds-12/ui/tailwind.css`, `@ds-12/ui/style.css` |
 
-Components import tokens via:
+Apps using `@ds-12/ui` must configure Tailwind v4 and import `@ds-12/ui/tailwind.css` in global CSS. Storybook does this in `.storybook/styles.css` with `@tailwindcss/vite` in `.storybook/main.ts`.
+
+Components side-effect-import their own CSS only (tokens arrive via the app-level Tailwind entry):
 
 ```ts
-import "@ds-12/design-tokens/tokens.css";
 import "./button.css";
 ```
 
@@ -99,7 +104,13 @@ Create files under `packages/ui/src/components/[name]/` (lowercase, e.g. `button
 - **Design tokens** — all visual values via `var(--token)` from `@ds-12/design-tokens/tokens.css`
 - **`cn()`** — from `../../lib/utils.ts` when merging optional `className` props
 
-Do **not** use Tailwind utility classes for component styling. The repo uses token-driven scoped CSS, not Tailwind v4 in components.
+Do **not** use Tailwind utility classes for component styling. The repo uses token-driven scoped CSS in components. Tailwind v4 is for app-level layout and Storybook wrappers only.
+
+After editing `tokens.generated.css` or `tokens.web.css`, regenerate the Tailwind bridge:
+
+```bash
+vp run @ds-12/design-tokens#generate:theme
+```
 
 ### Naming conventions
 

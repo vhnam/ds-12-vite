@@ -1,0 +1,14 @@
+/**
+ * Tailwind v4 entry point for @ds-12/ui consumers.
+ *
+ * Brings in Tailwind, DS-12 CSS variables, and the @theme inline bridge
+ * so token-backed utilities (bg-blue-500, p-xxsmall, rounded-xsmall, etc.)
+ * resolve to the same values as component scoped CSS.
+ *
+ * Also import component styles separately:
+ *   @import "@ds-12/ui/style.css";
+ */
+@import "tailwindcss";
+@source "./components";
+@import "@ds-12/design-tokens/tokens.css";
+@import "@ds-12/design-tokens/theme.css";
