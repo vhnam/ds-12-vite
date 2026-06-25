@@ -9,6 +9,7 @@ const componentEntries = {
   icon: "src/components/icon/index.tsx",
   input: "src/components/input/index.tsx",
   pagination: "src/components/pagination/index.tsx",
+  table: "src/components/table/index.tsx",
   skeleton: "src/components/skeleton/index.tsx",
   textarea: "src/components/textarea/index.tsx",
   typography: "src/components/typography/index.tsx",

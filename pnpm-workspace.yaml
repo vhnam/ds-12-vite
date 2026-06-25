@@ -27,6 +27,7 @@ catalog:
   vite: npm:@voidzero-dev/vite-plus-core@latest
   vite-plus: latest
   vitest: 4.1.9
+  "@tanstack/react-table": ^8.21.3
 
 catalogMode: prefer
 

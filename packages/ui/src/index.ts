@@ -37,6 +37,24 @@ export {
   paginationVariants,
   type PaginationProps,
 } from "./components/pagination/index.tsx";
+export {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+  tableCellVariants,
+  tableHeadVariants,
+  tableRowVariants,
+  type TableBodyProps,
+  type TableCellProps,
+  type TableHeadProps,
+  type TableHeaderProps,
+  type TableProps,
+  type TableRowProps,
+  type TableSortDirection,
+} from "./components/table/index.tsx";
 export { Skeleton, skeletonVariants, type SkeletonProps } from "./components/skeleton/index.tsx";
 export {
   DEFAULT_ICON_SIZE,

@@ -24,6 +24,10 @@ const config: StorybookConfig = {
       monorepoRoot,
       "packages/design-tokens/src/tokens.web.css",
     );
+    const designTokensGeneratedAlias = path.resolve(
+      monorepoRoot,
+      "packages/design-tokens/src/tokens.generated.css",
+    );
     const designTokensThemeAlias = path.resolve(
       monorepoRoot,
       "packages/design-tokens/src/tokens.theme.css",
@@ -34,6 +38,10 @@ const config: StorybookConfig = {
 
     const aliasEntries = [
       { find: "@ds-12/design-tokens/tokens.css", replacement: designTokensAlias },
+      {
+        find: "@ds-12/design-tokens/tokens.generated.css",
+        replacement: designTokensGeneratedAlias,
+      },
       { find: "@ds-12/design-tokens/theme.css", replacement: designTokensThemeAlias },
       { find: "@ds-12/ui/tailwind.css", replacement: uiTailwindAlias },
       { find: "@ds-12/ui", replacement: uiAlias },

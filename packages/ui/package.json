@@ -36,6 +36,7 @@
     "./icon": "./dist/icon.mjs",
     "./input": "./dist/input.mjs",
     "./pagination": "./dist/pagination.mjs",
+    "./table": "./dist/table.mjs",
     "./skeleton": "./dist/skeleton.mjs",
     "./textarea": "./dist/textarea.mjs",
     "./typography": "./dist/typography.mjs",

@@ -258,4 +258,66 @@
   --textarea-suffix-lg-font-weight: var(--paragraph-small-font-weight);
   --textarea-suffix-lg-letter-spacing: var(--paragraph-small-letter-spacing);
   --textarea-suffix-lg-line-height: var(--line-height-16);
+
+  /* --- Component tokens: table --- */
+  --table-radius: var(--radius-small);
+  --table-border-width: var(--border-width-small);
+  --table-border-color: var(--color-semantic-border-subtle);
+  --table-fill: var(--color-semantic-canvas-subtle);
+
+  --table-head-fill: var(--color-semantic-canvas-moderate);
+  --table-head-height: 56px;
+  --table-head-padding: var(--spacing-medium);
+  --table-head-gap: var(--spacing-xxsmall);
+
+  --table-cell-height: 56px;
+  --table-cell-padding: var(--spacing-medium);
+  --table-cell-padding-y-stacked: var(--spacing-xsmall);
+  --table-cell-gap: var(--spacing-xxsmall);
+  --table-cell-gap-avatar: var(--spacing-xsmall);
+  --table-cell-border-color: var(--color-semantic-border-subtle);
+
+  --table-cell-default-fill: var(--color-semantic-canvas-subtle);
+  --table-cell-hover-fill: var(--color-semantic-canvas-moderate);
+  /* TODO: needs semantic token — Figma positive-subtle-hovered uses #ecf9ec (green-50) */
+  --table-cell-highlighted-fill: var(--color-green-50);
+  --table-cell-disabled-fill: var(--color-semantic-canvas-disabled);
+
+  --table-head-label-font-family: var(--paragraph-default-strong-font-family);
+  --table-head-label-font-size: var(--paragraph-default-strong-font-size);
+  --table-head-label-font-weight: var(--paragraph-default-strong-font-weight);
+  --table-head-label-line-height: var(--paragraph-default-strong-line-height);
+  --table-head-label-letter-spacing: var(--paragraph-default-strong-letter-spacing);
+  --table-head-label-fill: var(--color-semantic-text-neutral-bold);
+
+  --table-cell-text-font-family: var(--paragraph-default-font-family);
+  --table-cell-text-font-size: var(--paragraph-default-font-size);
+  --table-cell-text-font-weight: var(--paragraph-default-font-weight);
+  --table-cell-text-line-height: var(--paragraph-default-line-height);
+  --table-cell-text-letter-spacing: var(--paragraph-default-letter-spacing);
+  --table-cell-text-fill: var(--color-semantic-text-neutral-bold);
+  --table-cell-text-disabled-fill: var(--color-semantic-text-neutral-disabled);
+
+  --table-cell-primary-font-family: var(--paragraph-default-strong-font-family);
+  --table-cell-primary-font-size: var(--paragraph-default-strong-font-size);
+  --table-cell-primary-font-weight: var(--paragraph-default-strong-font-weight);
+  --table-cell-primary-line-height: var(--paragraph-default-strong-line-height);
+  --table-cell-primary-letter-spacing: var(--paragraph-default-strong-letter-spacing);
+
+  --table-cell-subtext-font-family: var(--paragraph-small-font-family);
+  --table-cell-subtext-font-size: var(--paragraph-small-font-size);
+  --table-cell-subtext-font-weight: var(--paragraph-small-font-weight);
+  --table-cell-subtext-letter-spacing: var(--paragraph-small-letter-spacing);
+  /* TODO: needs token — Figma body/small line-height 16px; paragraph-small is line-height-18 */
+  --table-cell-subtext-line-height: var(--line-height-16);
+  --table-cell-subtext-fill: var(--color-semantic-text-neutral-moderate);
+  --table-cell-subtext-disabled-fill: var(--color-semantic-text-neutral-disabled);
+
+  --table-focus-ring-width: var(--border-width-medium);
+  --table-focus-ring-color: var(--focus-ring-color);
+  --table-focus-ring-radius: var(--radius-xsmall);
+
+  --table-sort-icon-size: 20px;
+  --table-chevron-icon-size: 20px;
+  --table-action-icon-size: 24px;
 }

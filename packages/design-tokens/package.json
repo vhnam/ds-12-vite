@@ -23,6 +23,7 @@
     ".": "./dist/index.mjs",
     "./package.json": "./package.json",
     "./tokens.css": "./src/tokens.web.css",
+    "./tokens.generated.css": "./src/tokens.generated.css",
     "./theme.css": "./src/tokens.theme.css"
   },
   "publishConfig": {
