@@ -51,6 +51,7 @@ export type TextareaProps = Omit<ComponentProps<"textarea">, "className" | "size
   suffix?: string;
 };
 
+/** Multi-line text field with optional leading icon, character suffix, and error and disabled states. */
 export function Textarea({
   className,
   size = "sm",

@@ -41,6 +41,7 @@ export type TextareaFieldProps = TextareaProps & {
   fieldClassName?: string;
 };
 
+/** Labelled textarea field composed of a label, helper text, and a Textarea control with shared validation styling. */
 export function TextareaField({
   className,
   fieldClassName,

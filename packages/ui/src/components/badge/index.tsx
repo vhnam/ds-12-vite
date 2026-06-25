@@ -41,6 +41,7 @@ export type BadgeProps = ComponentProps<"span"> &
     icon?: ReactNode;
   };
 
+/** Compact status or count indicator with semantic color variants, subtle or bold emphasis, and an optional leading icon. */
 export function Badge({
   children,
   className,

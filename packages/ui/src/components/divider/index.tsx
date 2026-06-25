@@ -22,6 +22,7 @@ export type DividerProps = ComponentProps<typeof Separator> &
     className?: string;
   };
 
+/** Visual separator between content sections, rendered horizontally or vertically. */
 export function Divider({ className, orientation = "horizontal", ...props }: DividerProps) {
   return (
     <Separator

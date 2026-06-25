@@ -9,6 +9,7 @@ import {
 } from "../../lib/component-tests.ts";
 import { InputFieldStatesShowcase, SIZES, VARIANTS } from "./input-field-story-fixtures.tsx";
 
+/** Labelled input field composed of a label, helper text, and an Input control with shared validation styling. */
 const meta = {
   title: "Fields/InputField",
   component: InputField,
@@ -61,6 +62,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+/** Use InputField (not a bare Input) whenever the field needs a visible label and helper text — the wrapper ensures they are correctly associated for accessibility. */
 export const Default: Story = {
   play: async (context) => {
     await createTextboxA11yPlay("Label")(context);
@@ -70,7 +72,37 @@ export const Default: Story = {
   },
 };
 
+/** Use the disabled state when the field is not yet available due to a prerequisite step — pair with helper text explaining when it will become active. */
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await expect(canvas.getByRole("textbox", { name: "Label" })).toBeDisabled();
+  },
+};
+
+/** Use the invalid state after failed validation — always update the helper text to describe the specific error so the user knows how to fix it. */
+export const Invalid: Story = {
+  args: {
+    invalid: true,
+    helperText: "This field is required",
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await expect(canvas.getByRole("textbox", { name: "Label" })).toHaveAttribute(
+      "aria-invalid",
+      "true",
+    );
+  },
+};
+
+/** Showcase of all interactive states for the default variant — for human reference only. */
 export const DefaultStates: Story = {
+  tags: ["!manifest"],
   render: () => <InputFieldStatesShowcase variant="default" />,
   decorators: [(Story) => <Story />],
   play: async ({ canvasElement }) => {
@@ -84,7 +116,9 @@ export const DefaultStates: Story = {
   },
 };
 
+/** Showcase of all interactive states for the suffix variant — for human reference only. */
 export const SuffixStates: Story = {
+  tags: ["!manifest"],
   render: () => <InputFieldStatesShowcase variant="suffix" />,
   decorators: [(Story) => <Story />],
   play: async ({ canvasElement }) => {

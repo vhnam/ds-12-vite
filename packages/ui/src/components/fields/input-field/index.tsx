@@ -41,6 +41,7 @@ export type InputFieldProps = InputProps & {
   fieldClassName?: string;
 };
 
+/** Labelled input field composed of a label, helper text, and an Input control with shared validation styling. */
 export function InputField({
   className,
   fieldClassName,

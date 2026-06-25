@@ -50,6 +50,7 @@ type TypographyProps = Omit<useRender.ComponentProps<"div">, "render"> &
     render?: TypographyRender;
   };
 
+/** Semantic text styles for display copy, headings, paragraphs, and labels with optional font weight overrides. */
 function Typography({
   className,
   variant = "paragraph",

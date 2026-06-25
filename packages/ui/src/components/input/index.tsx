@@ -56,6 +56,7 @@ export type InputProps = Omit<ComponentProps<typeof BaseInput>, "className" | "s
   suffix?: string;
 };
 
+/** Single-line text field with size and suffix variants, optional leading and trailing icons, and error and disabled states. */
 export function Input({
   className,
   size = "sm",

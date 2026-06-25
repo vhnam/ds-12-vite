@@ -61,6 +61,7 @@ function isTextVariant(variant: SkeletonVariant): variant is TextVariant {
   return (TEXT_VARIANTS as readonly string[]).includes(variant);
 }
 
+/** Loading placeholder with shimmer animation for text lines and circular, square, or rectangular thumbnails. */
 export function Skeleton({
   className,
   variant = "paragraph",

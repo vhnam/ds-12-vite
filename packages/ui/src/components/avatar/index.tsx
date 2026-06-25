@@ -72,6 +72,7 @@ function AvatarIconContent({
   );
 }
 
+/** Displays a user or organisation profile image with initials, photo, or fallback icon. Available in user and organisation shapes with small, medium, and large sizes. */
 export function Avatar({
   className,
   size = "md",

@@ -6,22 +6,6 @@ import { fileURLToPath } from "node:url";
 const dirname =
   typeof __dirname !== "undefined" ? __dirname : path.dirname(fileURLToPath(import.meta.url));
 const monorepoRoot = path.resolve(dirname, "../../..");
-const stylesPath = path.join(dirname, "styles.css");
-
-function storybookGlobalStyles() {
-  return {
-    name: "storybook-global-styles",
-    enforce: "pre" as const,
-    transform(code: string, id: string) {
-      const normalizedId = id.replace(/\\/g, "/");
-      if (!normalizedId.endsWith("/.storybook/preview.tsx")) {
-        return;
-      }
-
-      return `import ${JSON.stringify(stylesPath)};\n${code}`;
-    },
-  };
-}
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
@@ -34,7 +18,7 @@ const config: StorybookConfig = {
   framework: "@storybook/react-vite",
   async viteFinal(config, { configType }) {
     config.plugins ??= [];
-    config.plugins.push(tailwindcss(), storybookGlobalStyles());
+    config.plugins.push(tailwindcss());
 
     const designTokensAlias = path.resolve(
       monorepoRoot,
@@ -77,6 +61,10 @@ const config: StorybookConfig = {
     reactDocgen: "react-docgen-typescript",
     reactDocgenTypescriptOptions: {
       tsconfigPath: path.resolve(dirname, "../tsconfig.docgen.json"),
+      include: [
+        path.resolve(dirname, "../src/**/*.tsx"),
+        path.resolve(monorepoRoot, "packages/ui/src/**/*.tsx"),
+      ],
     },
   },
 };

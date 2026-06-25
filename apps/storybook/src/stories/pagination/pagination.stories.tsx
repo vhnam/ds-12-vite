@@ -16,6 +16,7 @@ import {
   ActivePagePositionsShowcase,
 } from "./pagination-story-fixtures.tsx";
 
+/** Page navigation control with numbered pages, ellipsis for long ranges, and optional previous and next actions. */
 const meta = {
   title: "Components/Pagination",
   component: Pagination,
@@ -42,6 +43,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+/** Use the default (numbers-only) pagination for short page ranges where all pages fit without truncation — it keeps the UI minimal and scannable. */
 export const Default: Story = {
   play: async (context) => {
     const canvas = within(context.canvasElement);
@@ -56,7 +58,28 @@ export const Default: Story = {
   },
 };
 
+/** Enable navigation buttons when users benefit from a "Back / Next" affordance — useful for sequential flows like multi-step wizards or reading articles in series. */
+export const WithNavigation: Story = {
+  args: {
+    showNavigation: true,
+    totalPages: 10,
+    page: 5,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await expect(canvas.getByRole("button", { name: "Back" })).toBeInTheDocument();
+    await expect(canvas.getByRole("button", { name: "Next" })).toBeInTheDocument();
+    await expect(canvas.getByRole("button", { name: "Page 5" })).toHaveAttribute(
+      "aria-current",
+      "page",
+    );
+  },
+};
+
+/** Showcase of Back/Next navigation across page scenarios and sizes — for human reference only. */
 export const WithBackNext: Story = {
+  tags: ["!manifest"],
   render: () => <WithBackNextShowcase />,
   decorators: [(Story) => <Story />],
   play: async ({ canvasElement }) => {
@@ -73,7 +96,9 @@ export const WithBackNext: Story = {
   },
 };
 
+/** Showcase of numbers-only pagination across page scenarios and sizes — for human reference only. */
 export const NumbersOnly: Story = {
+  tags: ["!manifest"],
   render: () => <NumbersOnlyShowcase />,
   decorators: [(Story) => <Story />],
   play: async ({ canvasElement }) => {
@@ -90,7 +115,9 @@ export const NumbersOnly: Story = {
   },
 };
 
+/** Showcase of ellipsis behaviour as the active page moves through a long range — for human reference only. */
 export const ActivePagePositions: Story = {
+  tags: ["!manifest"],
   render: () => <ActivePagePositionsShowcase />,
   decorators: [(Story) => <Story />],
   play: async ({ canvasElement }) => {

@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "paths": {
+      "@ds-12/ui/fields/*": ["../../packages/ui/src/components/fields/*"],
+      "@ds-12/ui/*": ["../../packages/ui/src/components/*"]
+    },
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "es2023",
     "lib": ["ES2023", "DOM"],
@@ -18,7 +22,8 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "allowArbitraryExtensions": true
   },
   "include": ["src", ".storybook"]
 }

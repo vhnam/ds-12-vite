@@ -43,6 +43,7 @@ export type ChipProps = Omit<ComponentProps<typeof BaseButton>, "className"> &
     trailingIcon?: ReactNode;
   };
 
+/** Toggleable filter or selection control with optional leading and trailing icons and a pressed state. */
 export function Chip({
   children,
   className,

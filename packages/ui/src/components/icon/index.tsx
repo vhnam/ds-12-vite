@@ -25,6 +25,7 @@ type IconProps = ComponentProps<"span"> & {
   size?: number;
 };
 
+/** Material Symbols icon with outlined or filled style and a configurable pixel size. */
 function Icon({ name, variant = "outlined", align, size, className, style, ...props }: IconProps) {
   const badgeIconSize = useContext(BadgeIconSizeContext);
   const resolvedSize = size ?? badgeIconSize ?? DEFAULT_ICON_SIZE;

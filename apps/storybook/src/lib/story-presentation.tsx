@@ -3,11 +3,7 @@ import { Typography } from "@ds-12/ui/typography";
 
 function StorySectionTitle({ children }: { children: ReactNode }) {
   return (
-    <Typography
-      variant="h3"
-      render="h3"
-      style={{ margin: "0 0 12px", textTransform: "capitalize" }}
-    >
+    <Typography variant="h3" render="h3" className="m-0 mb-small capitalize">
       {children}
     </Typography>
   );
@@ -15,10 +11,7 @@ function StorySectionTitle({ children }: { children: ReactNode }) {
 
 function StoryCaption({ children }: { children: ReactNode }) {
   return (
-    <Typography
-      variant="label-small"
-      style={{ margin: "0 0 8px", color: "var(--color-semantic-text-neutral-moderate)" }}
-    >
+    <Typography variant="label-small" className="m-0 mb-xsmall text-semantic-text-neutral-moderate">
       {children}
     </Typography>
   );

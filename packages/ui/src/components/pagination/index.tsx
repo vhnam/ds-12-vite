@@ -98,6 +98,7 @@ function PaginationButton({
   );
 }
 
+/** Page navigation control with numbered pages, ellipsis for long ranges, and optional previous and next actions. */
 export function Pagination({
   className,
   page,

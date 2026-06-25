@@ -11,6 +11,7 @@ import {
   VARIANTS,
 } from "./typography-story-fixtures.tsx";
 
+/** Semantic text styles for display copy, headings, paragraphs, and labels with optional font weight overrides. */
 const meta = {
   title: "Components/Typography",
   component: Typography,
@@ -36,6 +37,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+/** Use the paragraph variant for standard body copy — it sets the base reading size and line height for comfortable long-form text. */
 export const Default: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -46,7 +48,9 @@ export const Default: Story = {
   },
 };
 
+/** Showcase of display and heading hierarchy (h1–h4) — for human reference only. */
 export const Heading: Story = {
+  tags: ["!manifest"],
   render: () => <HeadingShowcase />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -59,7 +63,9 @@ export const Heading: Story = {
   },
 };
 
+/** Showcase of all paragraph size variants — for human reference only. */
 export const Paragraph: Story = {
+  tags: ["!manifest"],
   render: () => <ParagraphShowcase />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -70,7 +76,9 @@ export const Paragraph: Story = {
   },
 };
 
+/** Showcase of all label variants — for human reference only. */
 export const Label: Story = {
+  tags: ["!manifest"],
   render: () => <LabelShowcase />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -81,7 +89,9 @@ export const Label: Story = {
   },
 };
 
+/** Showcase demonstrating how Typography maps to semantic HTML elements (h1, h2, p, label) — for human reference only. */
 export const SemanticElements: Story = {
+  tags: ["!manifest"],
   render: () => <SemanticElementsShowcase />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

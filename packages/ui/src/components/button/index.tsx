@@ -61,6 +61,7 @@ export type ButtonProps = Omit<ComponentProps<typeof BaseButton>, "className"> &
     loading?: boolean;
   };
 
+/** Primary action control with visual variants, sizes, loading state, and optional leading or trailing icons. */
 export function Button({
   children,
   className,

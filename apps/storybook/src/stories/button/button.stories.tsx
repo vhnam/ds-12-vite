@@ -19,6 +19,7 @@ import {
   trailingIconButtons,
 } from "./button-story-fixtures.tsx";
 
+/** Primary action control with visual variants, sizes, loading state, and optional leading or trailing icons. */
 const meta = {
   title: "Components/Button",
   component: Button,
@@ -51,6 +52,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+/** Use the primary variant for the single most important action on a page or in a section — there should only be one primary button per context. */
 export const Default: Story = {
   play: async (context) => {
     await createButtonA11yPlay("Button")(context);
@@ -60,14 +62,7 @@ export const Default: Story = {
   },
 };
 
-export const Variants: Story = {
-  render: () => <VariantsTable />,
-};
-
-export const Sizes: Story = {
-  render: () => <VariantSizeMatrixTable />,
-};
-
+/** Use a leading icon to reinforce the action (e.g. a download arrow before "Export") and a trailing icon to indicate navigation or progression (e.g. a chevron after "Continue"). */
 export const ButtonWithIcon: Story = {
   render: () => (
     <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
@@ -98,6 +93,7 @@ export const ButtonWithIcon: Story = {
   },
 };
 
+/** Use the loading state to block repeated submission and communicate that an async operation (e.g. a form save) is in progress. */
 export const LoadingState: Story = {
   render: () => <VariantSizeMatrixTable loading />,
   play: async ({ canvasElement }) => {
@@ -110,6 +106,7 @@ export const LoadingState: Story = {
   },
 };
 
+/** Use icon-only buttons in compact spaces such as toolbars or table row actions where a label would take too much space — always pair with a tooltip so the intent is clear to screen reader users. */
 export const IconOnly: Story = {
   render: () => <IconOnlyMatrixTable />,
   play: async ({ canvasElement }) => {
@@ -130,4 +127,16 @@ export const IconOnly: Story = {
     disabledButton.focus();
     await expect(disabledButton).toHaveFocus();
   },
+};
+
+/** Showcase of all visual variants — for human reference only. */
+export const Variants: Story = {
+  tags: ["!manifest"],
+  render: () => <VariantsTable />,
+};
+
+/** Showcase of all variant and size combinations — for human reference only. */
+export const Sizes: Story = {
+  tags: ["!manifest"],
+  render: () => <VariantSizeMatrixTable />,
 };
