@@ -1,0 +1,55 @@
+import { Meta, Canvas, Controls, Source } from "@storybook/addon-docs/blocks";
+import * as InputFieldStories from "./input-field.stories";
+
+<Meta of={InputFieldStories} />
+
+# InputField
+
+Labelled input field composed of a label, helper text, and an `Input` control with shared validation styling.
+
+## When to use InputField vs Input
+
+Use **InputField** for standard form fields that need a visible label and helper or error text. The wrapper wires `htmlFor`, `aria-describedby`, and validation state automatically.
+
+Use a bare **Input** only in custom layouts where you manage label association yourself — for example, a search bar embedded in a toolbar or a composite field with external labelling.
+
+<Canvas of={InputFieldStories.Default} />
+
+<Source
+  language="tsx"
+  code={`import { InputField } from "@ds-12/ui/fields/input-field";
+
+<InputField
+  label="Email"
+  helperText="We'll never share your email."
+  placeholder="you@example.com"
+/>`}
+/>
+
+## Suffix variant
+
+Use the suffix variant when a unit or format hint should appear inline after the value.
+
+<Canvas of={InputFieldStories.Suffix} />
+
+## Validation
+
+Set `invalid` and update `helperText` to describe the error so screen reader users know how to fix it.
+
+<Canvas of={InputFieldStories.Invalid} />
+
+## Props
+
+<Controls of={InputFieldStories.Default} />
+
+## Accessibility
+
+- Label is associated with the input via `htmlFor` / `id`
+- Helper text is linked through `aria-describedby`
+- Invalid state sets `aria-invalid` on the control
+- Disabled fields use the native `disabled` attribute
+
+## Related
+
+- [Input](../?path=/docs/components-input--docs) — bare control without label wrapper
+- [TextareaField](../?path=/docs/fields-textareafield--docs) — multi-line equivalent

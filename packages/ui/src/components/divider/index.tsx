@@ -19,6 +19,7 @@ const dividerVariants = cva("ds-divider", {
 
 export type DividerProps = ComponentProps<typeof Separator> &
   VariantProps<typeof dividerVariants> & {
+    /** Additional CSS class names applied to the separator element. */
     className?: string;
   };
 

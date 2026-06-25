@@ -45,14 +45,38 @@ const paginationButtonVariants = cva("ds-pagination__button", {
 type PaginationSize = "sm" | "lg";
 
 type PaginationBaseProps = {
+  /** Additional CSS class names applied to the navigation element. */
   className?: string;
+  /** Currently active page (1-based). */
   page: number;
+  /** Total number of pages available. */
   totalPages: number;
+  /** Called when the user selects a different page. */
   onPageChange?: (page: number) => void;
+  /**
+   * Visual size of the pagination controls.
+   * @default "lg"
+   */
   size?: PaginationSize;
+  /**
+   * Shows Back and Next buttons alongside page numbers.
+   * Defaults to `true` when `size` is `"lg"`.
+   */
   showNavigation?: boolean;
+  /**
+   * Accessible label for the previous-page button.
+   * @default "Back"
+   */
   previousLabel?: string;
+  /**
+   * Accessible label for the next-page button.
+   * @default "Next"
+   */
   nextLabel?: string;
+  /**
+   * Accessible name for the pagination landmark.
+   * @default "Pagination"
+   */
   "aria-label"?: string;
 };
 

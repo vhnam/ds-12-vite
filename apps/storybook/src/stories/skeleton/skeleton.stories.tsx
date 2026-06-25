@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, within } from "storybook/test";
 import { Skeleton } from "@ds-12/ui/skeleton";
 import { createSkeletonA11yPlay } from "../../lib/component-tests.ts";
+import { showcaseParameters } from "../../lib/story-test-config.ts";
+import { selectArgType, textArgType } from "../../lib/story-arg-types.ts";
 import {
   TEXT_VARIANTS,
   TextSkeletonsShowcase,
@@ -16,17 +17,15 @@ const meta = {
   component: Skeleton,
   tags: ["autodocs"],
   argTypes: {
-    variant: {
-      control: "select",
-      options: [...TEXT_VARIANTS, ...THUMBNAIL_VARIANTS],
-    },
-    size: {
-      control: "select",
-      options: THUMBNAIL_SIZES,
-    },
-    width: {
-      control: "text",
-    },
+    variant: selectArgType(
+      [...TEXT_VARIANTS, ...THUMBNAIL_VARIANTS],
+      "Placeholder shape — text variants match typography, thumbnail variants for image areas.",
+    ),
+    size: selectArgType(
+      THUMBNAIL_SIZES,
+      "Thumbnail dimensions in pixels (thumbnail variants only).",
+    ),
+    width: textArgType("Custom width for text skeleton variants (e.g. 240px, 100%)."),
   },
   args: {
     variant: "paragraph",
@@ -44,6 +43,15 @@ export const Default: Story = {
   play: createSkeletonA11yPlay("Loading"),
 };
 
+/** Use the heading skeleton while page titles or section headers are loading. */
+export const Heading: Story = {
+  args: {
+    variant: "h1",
+    width: "240px",
+  },
+  play: createSkeletonA11yPlay("Loading"),
+};
+
 /** Use the circular thumbnail skeleton as an avatar placeholder while user profile data is loading. */
 export const CircularThumbnail: Story = {
   args: {
@@ -51,38 +59,39 @@ export const CircularThumbnail: Story = {
     size: "48",
     width: undefined,
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const skeleton = canvas.getByRole("status", { name: "Loading" });
+  play: createSkeletonA11yPlay("Loading"),
+};
 
-    await expect(skeleton).toHaveAttribute("aria-busy", "true");
+/** Use the rectangular thumbnail skeleton for image or card placeholders. */
+export const RectangularThumbnail: Story = {
+  args: {
+    variant: "rectangle",
+    size: "128",
+    width: undefined,
   },
+  play: createSkeletonA11yPlay("Loading"),
+};
+
+/** Use the square thumbnail skeleton for compact image or icon placeholders. */
+export const SquareThumbnail: Story = {
+  args: {
+    variant: "square",
+    size: "72",
+    width: undefined,
+  },
+  play: createSkeletonA11yPlay("Loading"),
 };
 
 /** Showcase of all text skeleton variants — for human reference only. */
 export const TextSkeletons: Story = {
   tags: ["!manifest"],
+  parameters: showcaseParameters,
   render: () => <TextSkeletonsShowcase />,
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const skeletons = canvas.getAllByRole("status", { name: "Loading" });
-
-    await expect(skeletons).toHaveLength(TEXT_VARIANTS.length);
-    await expect(skeletons[0]).toHaveAccessibleName("Loading");
-    await expect(skeletons[0]).toHaveAttribute("aria-busy", "true");
-  },
 };
 
 /** Showcase of all thumbnail skeleton shapes and sizes — for human reference only. */
 export const ThumbnailSkeletons: Story = {
   tags: ["!manifest"],
+  parameters: showcaseParameters,
   render: () => <ThumbnailSkeletonsShowcase />,
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const skeletons = canvas.getAllByRole("status", { name: "Loading" });
-
-    await expect(skeletons).toHaveLength(THUMBNAIL_VARIANTS.length * THUMBNAIL_SIZES.length);
-    await expect(skeletons[0]).toHaveAccessibleName("Loading");
-    await expect(skeletons[0]).toHaveAttribute("aria-busy", "true");
-  },
 };

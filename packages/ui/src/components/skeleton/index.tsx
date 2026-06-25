@@ -39,18 +39,33 @@ const skeletonVariants = cva("ds-skeleton", {
 });
 
 type SkeletonBaseProps = {
+  /** Additional CSS class names applied to the skeleton element. */
   className?: string;
+  /**
+   * Accessible name announced by screen readers while content is loading.
+   * @default "Loading"
+   */
   "aria-label"?: string;
+  /** Custom width for text skeleton variants (e.g. `"240px"`, `"100%"`). */
   width?: CSSProperties["width"];
 };
 
 type TextSkeletonProps = SkeletonBaseProps & {
+  /**
+   * Text placeholder shape matching typography styles.
+   * @default "paragraph"
+   */
   variant?: TextVariant;
   size?: never;
 };
 
 type ThumbnailSkeletonProps = SkeletonBaseProps & {
+  /** Thumbnail placeholder shape — circle, square, or rectangle. */
   variant: ThumbnailVariant;
+  /**
+   * Thumbnail dimensions in pixels.
+   * @default "48"
+   */
   size?: ThumbnailSize;
 };
 

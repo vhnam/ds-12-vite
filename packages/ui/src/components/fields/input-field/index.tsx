@@ -34,10 +34,21 @@ const inputFieldVariants = cva("ds-input-field", {
 });
 
 export type InputFieldProps = InputProps & {
+  /** Visible label text associated with the input. */
   label?: string;
+  /** Helper or error text displayed below the input. */
   helperText?: string;
+  /**
+   * Whether to render the label element.
+   * @default true
+   */
   showLabel?: boolean;
+  /**
+   * Whether to render the helper text element.
+   * @default true
+   */
   showHelperText?: boolean;
+  /** Additional CSS class names applied to the field wrapper. */
   fieldClassName?: string;
 };
 

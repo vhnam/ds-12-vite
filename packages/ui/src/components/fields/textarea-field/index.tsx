@@ -34,10 +34,21 @@ const textareaFieldVariants = cva("ds-textarea-field", {
 });
 
 export type TextareaFieldProps = TextareaProps & {
+  /** Visible label text associated with the textarea. */
   label?: string;
+  /** Helper or error text displayed below the textarea. */
   helperText?: string;
+  /**
+   * Whether to render the label element.
+   * @default true
+   */
   showLabel?: boolean;
+  /**
+   * Whether to render the helper text element.
+   * @default true
+   */
   showHelperText?: boolean;
+  /** Additional CSS class names applied to the field wrapper. */
   fieldClassName?: string;
 };
 

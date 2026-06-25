@@ -43,10 +43,15 @@ const avatarVariants = cva("ds-avatar", {
 
 export type AvatarProps = Omit<ComponentProps<typeof BaseAvatar.Root>, "className"> &
   VariantProps<typeof avatarVariants> & {
+    /** Additional CSS class names applied to the root element. */
     className?: string;
+    /** One or two characters displayed when `variant` is `"initial"` or as an image fallback. */
     initials?: string;
+    /** Image URL used when `variant` is `"image"`. */
     src?: string;
+    /** Accessible alternative text for the profile image. */
     alt?: string;
+    /** Custom icon element used when `variant` is `"icon"` or as an image fallback. */
     icon?: ReactNode;
   };
 

@@ -42,12 +42,31 @@ const textareaVariants = cva("ds-textarea", {
 });
 
 export type TextareaProps = Omit<ComponentProps<"textarea">, "className" | "size"> & {
+  /** Additional CSS class names applied to the textarea wrapper. */
   className?: string;
+  /**
+   * Visual size of the textarea control.
+   * @default "sm"
+   */
   size?: "sm" | "lg";
+  /**
+   * Layout variant — use `"suffix"` to show inline text after the value (e.g. character count).
+   * @default "default"
+   */
   variant?: "default" | "suffix";
+  /**
+   * Marks the field as invalid and sets `aria-invalid`.
+   * @default false
+   */
   invalid?: boolean;
+  /** Custom leading icon element. */
   leadingIcon?: ReactNode;
+  /**
+   * Renders a leading icon inside the textarea.
+   * @default false
+   */
   showLeadingIcon?: boolean;
+  /** Inline suffix text displayed after the textarea value (requires `variant="suffix"`). */
   suffix?: string;
 };
 

@@ -18,10 +18,22 @@ function iconVariationSettings(
   return `"FILL" ${fill}, "wght" 400, "GRAD" 0, "opsz" ${size}`;
 }
 
-type IconProps = ComponentProps<"span"> & {
+export type IconProps = ComponentProps<"span"> & {
+  /** Material Symbols icon name (e.g. `"check_circle"`, `"download"`). */
   name: string;
+  /**
+   * Visual style — use `"filled"` for active or selected states.
+   * @default "outlined"
+   */
   variant?: IconVariant;
+  /**
+   * Nudges the icon flush with adjacent inline text.
+   */
   align?: IconAlign;
+  /**
+   * Icon size in pixels. Inherits from parent Badge when nested inside one.
+   * @default 20
+   */
   size?: number;
 };
 

@@ -45,14 +45,38 @@ const inputVariants = cva("ds-input", {
 });
 
 export type InputProps = Omit<ComponentProps<typeof BaseInput>, "className" | "size"> & {
+  /** Additional CSS class names applied to the input wrapper. */
   className?: string;
+  /**
+   * Visual size of the input control.
+   * @default "sm"
+   */
   size?: "sm" | "lg";
+  /**
+   * Layout variant — use `"suffix"` to show inline text after the value (e.g. units).
+   * @default "default"
+   */
   variant?: "default" | "suffix";
+  /**
+   * Marks the field as invalid and sets `aria-invalid`.
+   * @default false
+   */
   invalid?: boolean;
+  /** Custom leading icon element. */
   leadingIcon?: ReactNode;
+  /** Custom trailing icon element. Shown only on the `"default"` variant. */
   trailingIcon?: ReactNode;
+  /**
+   * Renders a leading icon inside the input.
+   * @default false
+   */
   showLeadingIcon?: boolean;
+  /**
+   * Renders a trailing icon inside the input.
+   * @default false
+   */
   showTrailingIcon?: boolean;
+  /** Inline suffix text displayed after the input value (requires `variant="suffix"`). */
   suffix?: string;
 };
 

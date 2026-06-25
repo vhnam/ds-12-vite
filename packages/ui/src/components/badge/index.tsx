@@ -37,7 +37,9 @@ const badgeVariants = cva("ds-badge", {
 
 export type BadgeProps = ComponentProps<"span"> &
   VariantProps<typeof badgeVariants> & {
+    /** Additional CSS class names applied to the root element. */
     className?: string;
+    /** Optional leading icon element rendered before the label text. */
     icon?: ReactNode;
   };
 

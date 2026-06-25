@@ -47,6 +47,10 @@ type TypographyRender = keyof JSX.IntrinsicElements | useRender.RenderProp<Typog
 
 type TypographyProps = Omit<useRender.ComponentProps<"div">, "render"> &
   VariantProps<typeof typographyVariants> & {
+    /**
+     * Semantic HTML element or render prop. Use a tag name (e.g. `"h1"`, `"p"`, `"label"`)
+     * to output the correct element for the chosen variant.
+     */
     render?: TypographyRender;
   };
 
@@ -84,6 +88,7 @@ function Typography({
 export {
   Typography,
   type TypographyFontWeight,
+  type TypographyProps,
   type TypographyRender,
   type TypographyVariant,
   typographyVariants,

@@ -55,9 +55,21 @@ function ButtonLoader() {
 
 export type ButtonProps = Omit<ComponentProps<typeof BaseButton>, "className"> &
   VariantProps<typeof buttonVariants> & {
+    /** Additional CSS class names applied to the root element. */
     className?: string;
+    /**
+     * Icon element rendered alongside the label, or as the sole content when `variant` is `"icon"`.
+     */
     icon?: ReactNode;
+    /**
+     * Position of the icon relative to the label text.
+     * @default "left"
+     */
     iconPosition?: "left" | "right";
+    /**
+     * Shows a loading spinner, sets `aria-busy`, and disables interaction.
+     * @default false
+     */
     loading?: boolean;
   };
 

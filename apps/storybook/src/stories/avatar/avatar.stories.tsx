@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, within } from "storybook/test";
 import { Avatar } from "@ds-12/ui/avatar";
+import { createAvatarInitialsA11yPlay } from "../../lib/component-tests.ts";
+import { showcaseParameters } from "../../lib/story-test-config.ts";
+import { hiddenArgType, selectArgType } from "../../lib/story-arg-types.ts";
 import {
   PLACEHOLDER_IMAGE,
   SHAPES,
@@ -16,19 +19,19 @@ const meta = {
   component: Avatar,
   tags: ["autodocs"],
   argTypes: {
-    size: {
-      control: "select",
-      options: SIZES,
-    },
-    shape: {
-      control: "select",
-      options: SHAPES,
-    },
-    variant: {
-      control: "select",
-      options: VARIANTS,
-    },
-    icon: { control: false },
+    size: selectArgType(
+      SIZES,
+      "Avatar dimensions — sm for compact layouts, lg for profile headers.",
+    ),
+    shape: selectArgType(
+      SHAPES,
+      "User renders as a circle; organisation renders as a rounded square.",
+    ),
+    variant: selectArgType(
+      VARIANTS,
+      "Content type — initials, profile image (with fallback), or generic icon placeholder.",
+    ),
+    icon: hiddenArgType,
   },
   args: {
     size: "md",
@@ -46,13 +49,7 @@ type Story = StoryObj<typeof meta>;
 
 /** Use the initial variant as the default when a user has provided their name but no profile photo. */
 export const Default: Story = {
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const initials = canvas.getByText("BL");
-
-    await expect(initials).toBeInTheDocument();
-    await expect(initials).toHaveTextContent("BL");
-  },
+  play: createAvatarInitialsA11yPlay("BL"),
 };
 
 /** Use the image variant when a profile photo URL is available; it automatically falls back to initials if the image fails to load. */
@@ -64,9 +61,12 @@ export const WithImage: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const img = canvas.queryByRole("img");
+    const img = canvas.queryByRole("img", { name: "User avatar" });
 
     await expect(img ?? canvas.getByText("BL")).toBeInTheDocument();
+    if (img) {
+      await expect(img).toHaveAccessibleName("User avatar");
+    }
   },
 };
 
@@ -102,11 +102,7 @@ export const Small: Story = {
   args: {
     size: "sm",
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    await expect(canvas.getByText("BL")).toBeInTheDocument();
-  },
+  play: createAvatarInitialsA11yPlay("BL"),
 };
 
 /** Use the large size in profile headers, spotlight cards, or anywhere the avatar is the primary visual element. */
@@ -114,35 +110,19 @@ export const Large: Story = {
   args: {
     size: "lg",
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    await expect(canvas.getByText("BL")).toBeInTheDocument();
-  },
+  play: createAvatarInitialsA11yPlay("BL"),
 };
 
 /** Showcase of all variants across both shapes — for human reference only. */
 export const Variants: Story = {
   tags: ["!manifest"],
+  parameters: showcaseParameters,
   render: () => <VariantsShowcase />,
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    await expect(canvas.getAllByText("BL").length).toBeGreaterThanOrEqual(SHAPES.length);
-    await expect(canvas.getByText("person")).toBeInTheDocument();
-    await expect(canvas.getByText("apartment")).toBeInTheDocument();
-  },
 };
 
 /** Showcase of all available sizes side by side — for human reference only. */
 export const Sizes: Story = {
   tags: ["!manifest"],
+  parameters: showcaseParameters,
   render: () => <SizesShowcase />,
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const initials = canvas.getAllByText("BL");
-
-    await expect(initials).toHaveLength(SIZES.length);
-    await expect(initials[0]).toBeVisible();
-  },
 };
