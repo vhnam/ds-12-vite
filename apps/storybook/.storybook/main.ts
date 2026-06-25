@@ -26,10 +26,10 @@ function storybookGlobalStyles() {
 const config: StorybookConfig = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
   addons: [
-    "@chromatic-com/storybook",
     "@storybook/addon-a11y",
     "@storybook/addon-docs",
     "@storybook/addon-mcp",
+    "@storybook/addon-vitest",
   ],
   framework: "@storybook/react-vite",
   async viteFinal(config, { configType }) {
@@ -72,6 +72,12 @@ const config: StorybookConfig = {
     }
 
     return config;
+  },
+  typescript: {
+    reactDocgen: "react-docgen-typescript",
+    reactDocgenTypescriptOptions: {
+      tsconfigPath: path.resolve(dirname, "../tsconfig.docgen.json"),
+    },
   },
 };
 export default config;

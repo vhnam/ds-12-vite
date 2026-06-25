@@ -6,7 +6,9 @@
   "scripts": {
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "chromatic": "dotenv -e ../../.env -- chromatic --only-changed"
+    "test-storybook": "playwright test",
+    "test-storybook:update": "playwright test --update-snapshots",
+    "test-interactions": "vp test"
   },
   "dependencies": {
     "@ds-12/design-tokens": "workspace:*",
@@ -17,19 +19,23 @@
     "react-dom": "catalog:"
   },
   "devDependencies": {
-    "@chromatic-com/storybook": "^5.2.1",
+    "@axe-core/playwright": "catalog:",
+    "@playwright/test": "catalog:",
     "@storybook/addon-a11y": "catalog:",
     "@storybook/addon-docs": "^10.4.6",
     "@storybook/addon-mcp": "^0.6.0",
+    "@storybook/addon-vitest": "catalog:",
     "@storybook/react-vite": "^10.4.6",
+    "@storybook/test": "catalog:",
     "@tailwindcss/vite": "catalog:",
     "@types/node": "^24.12.3",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "chromatic": "catalog:",
-    "dotenv-cli": "^10.0.0",
+    "@vitest/browser": "catalog:",
+    "@vitest/browser-playwright": "catalog:",
     "storybook": "^10.4.6",
     "tailwindcss": "catalog:",
-    "typescript": "~6.0.2"
+    "typescript": "~6.0.2",
+    "vitest": "catalog:"
   }
 }

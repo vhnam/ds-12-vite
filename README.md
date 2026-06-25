@@ -12,9 +12,9 @@ A React design system monorepo built with [Vite+](https://viteplus.dev/guide/). 
 
 ## Apps
 
-| App              | Description                                                             |
-| ---------------- | ----------------------------------------------------------------------- |
-| `apps/storybook` | Storybook for browsing components, docs, a11y checks, and browser tests |
+| App              | Description                                                                                       |
+| ---------------- | ------------------------------------------------------------------------------------------------- |
+| `apps/storybook` | Storybook for browsing components, docs, interaction tests, and Playwright a11y/visual regression |
 
 ## Components
 
@@ -144,10 +144,24 @@ vp run -r test
 vp run -r build
 ```
 
-Run Storybook tests (browser-based Vitest):
+Run Storybook tests (Playwright a11y + visual snapshots):
 
 ```bash
-cd apps/storybook && npm run test:storybook
+pnpm --filter storybook run test-storybook
+```
+
+Update visual baselines after intentional UI changes:
+
+```bash
+pnpm --filter storybook run test-storybook:update
+```
+
+Interaction `play` functions in story files run in the Storybook UI (Interactions panel). CI runs the Playwright suite in `apps/storybook/playwright/`, which discovers every story from `/index.json`, runs axe on `#storybook-root`, and compares screenshots against committed baselines in `apps/storybook/__snapshots__/`.
+
+**First-time setup:** install Playwright browsers once:
+
+```bash
+pnpm --filter storybook exec playwright install chromium
 ```
 
 ## CI
@@ -164,34 +178,32 @@ Run the Storybook workflow locally:
 act pull_request -W .github/workflows/storybook.yml -j storybook --env CI=true
 ```
 
-The Chromatic step needs a project token and full GitHub event metadata, so it may not complete under `act`. Use GitHub Actions for full Chromatic runs.
+The Playwright step installs Chromium in the container; allow extra time on the first run.
 
 ### GitHub Pages
 
-On every push to `main`, the Storybook workflow deploys `apps/storybook/storybook-static` to GitHub Pages after Chromatic passes.
+On every push to `main`, the Storybook workflow builds Storybook, runs Playwright tests, then deploys `apps/storybook/storybook-static` to GitHub Pages.
 
 **One-time setup:** In the repo on GitHub, open **Settings → Pages** and set **Build and deployment → Source** to **GitHub Actions**.
 
 The site is published at `https://<user>.github.io/<repo>/` (for this repo: `https://vhnam.github.io/ds-12-vite/`). Production builds set `STORYBOOK_BASE_PATH` so assets resolve under that subpath.
 
-### Chromatic visual tests
+### Playwright visual and a11y tests
 
-CI uses the official [`chromaui/action`](https://www.chromatic.com/docs/github-actions/) with TurboSnap (`onlyChanged: true`) from `apps/storybook`. Changes under `packages/**` still trigger a full run via `externals` in `apps/storybook/chromatic.config.json`.
+CI builds Storybook static output, serves it locally, and runs `pnpm --filter storybook run test-storybook`. The test suite in `apps/storybook/playwright/storybook.spec.ts`:
 
-**One-time setup:**
+1. Fetches all stories from Storybook's `index.json`
+2. Runs [axe](https://github.com/dequelabs/axe-core) accessibility checks on each story iframe
+3. Compares full-page screenshots against baselines in `apps/storybook/__snapshots__/`
 
-1. [Sign in to Chromatic](https://www.chromatic.com/start) with GitHub and add this repository.
-2. Copy the project token from **Manage → Configure** and add `CHROMATIC_PROJECT_TOKEN` under **GitHub → Settings → Secrets and variables → Actions**.
-3. Copy the **Project ID** from the same page into `apps/storybook/chromatic.config.json` as `projectId` (e.g. `"Project:64cbcde96f99841e8b007d75"`). The Visual Tests addon reads this file from the Storybook package directory — without `projectId`, the addon cannot link your project and the “Verify your account → Go to Chromatic” step fails.
-4. Restart Storybook (`pnpm storybook` in `apps/storybook`), open the **Visual Tests** panel, sign in to Chromatic, and run your first build. See [Storybook visual testing](https://storybook.js.org/docs/writing-tests/visual-testing).
-
-Run Chromatic from the CLI after copying `.env.example` to `.env` and setting your token:
+Commit updated snapshots when visual changes are intentional:
 
 ```bash
-vp run storybook#chromatic
+pnpm --filter storybook run test-storybook:update
+git add apps/storybook/__snapshots__
 ```
 
-CI uses the `CHROMATIC_PROJECT_TOKEN` repository secret. On `main`, `autoAcceptChanges` keeps the Chromatic baseline in sync after merges.
+Local runs start the Storybook dev server automatically (`playwright.config.ts`). In CI, tests run against the built `storybook-static` bundle.
 
 ## Project structure
 
@@ -207,7 +219,9 @@ packages/
       lib/                   # Shared helpers (e.g. cn())
   utils/             @ds-12/utils
 apps/
-  storybook/         Component stories and visual tests
+  storybook/         Component stories, Playwright tests, and visual snapshots
+    playwright/      A11y + screenshot test suite
+    __snapshots__/   Committed Playwright screenshot baselines
 ```
 
 ## Architecture
@@ -217,7 +231,7 @@ apps/
 - **Scoped CSS** (`ds-[component]` classes) backed by CSS custom properties — component styling stays in scoped CSS, not Tailwind utilities
 - **Tailwind v4** optional for app-level layout and stories; import `@ds-12/ui/tailwind.css` to bridge design tokens to Tailwind utilities via `@theme inline`
 - **Design tokens** as the single source of visual values (`var(--token)`), exported as CSS variables from `@ds-12/design-tokens/tokens.css`
-- **Storybook 10** with Chromatic for visual regression; interaction `play` functions run in the Storybook UI
+- **Storybook 10** with Playwright for visual regression and axe a11y checks in CI; interaction `play` functions run in the Storybook UI
 
 ## Tooling
 

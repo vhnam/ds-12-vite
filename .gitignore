@@ -26,6 +26,9 @@ dist-ssr
 *.sln
 *.sw?
 
+# AI agent local settings
+.claude/settings.local.json
+
 # AI agent worktrees
 .claude/worktrees/
 !.vscode/

@@ -4,17 +4,22 @@ packages:
   - tools/*
 
 allowBuilds:
+  "@swc/core": true
   esbuild: true
 
 catalog:
+  "@axe-core/playwright": ^4.10.2
   "@fontsource/nunito-sans": ^5.2.7
+  "@playwright/test": ^1.52.0
   "@storybook/addon-a11y": ^10.4.6
   "@types/react": ^19.2.14
   "@types/react-dom": ^19.2.3
   "@storybook/addon-vitest": ^10.4.6
+  "@storybook/test": ^8.6.15
   "@tailwindcss/vite": ^4.3.1
+  "@vitest/browser": 4.1.9
+  "@vitest/browser-playwright": 4.1.9
   "@types/node": ^24
-  chromatic: ^17.5.0
   react: ^19.2.6
   react-dom: ^19.2.6
   tailwindcss: ^4.3.1
