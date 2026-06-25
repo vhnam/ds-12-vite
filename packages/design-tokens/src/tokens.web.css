@@ -320,4 +320,120 @@
   --table-sort-icon-size: 20px;
   --table-chevron-icon-size: 20px;
   --table-action-icon-size: 24px;
+
+  /* --- Component tokens: checkbox --- */
+  --checkbox-padding: var(--selection-check-box-default-false-vertical-padding);
+  --checkbox-radius: var(--selection-check-box-default-false-border-radius);
+  --checkbox-border-width: var(--selection-check-box-default-false-border-width);
+  --checkbox-transition: var(--transition-interactive);
+  --checkbox-focus-ring-width: var(--focus-ring-width);
+  --checkbox-focus-ring-color: var(--focus-ring-color);
+  --checkbox-focus-ring-offset: var(--focus-ring-offset);
+  --checkbox-focus-ring-style: var(--focus-ring-style);
+  --checkbox-checked-icon-fill: var(--color-semantic-canvas-subtle);
+  /* TODO: needs token — Figma small desktop control is 16px; generated selection tokens use 20px */
+  --checkbox-sm-control-size: 16px;
+  --checkbox-sm-icon-size: 12px;
+  --checkbox-lg-control-size: var(--selection-check-box-default-false-width);
+  --checkbox-lg-icon-size: 16px;
+  --checkbox-default-false-border-color: var(--selection-check-box-default-false-border-color);
+  --checkbox-default-false-fill: var(--selection-check-box-default-false-fill);
+  --checkbox-default-true-fill: var(--selection-check-box-default-true-fill);
+  --checkbox-disabled-false-border-color: var(--selection-check-box-disabled-false-border-color);
+  --checkbox-disabled-false-fill: var(--selection-check-box-disabled-false-fill);
+  --checkbox-disabled-true-fill: var(--selection-check-box-disabled-true-fill);
+  --checkbox-error-false-border-color: var(--selection-check-box-error-false-border-color);
+  --checkbox-error-false-fill: var(--selection-check-box-error-false-fill);
+
+  /* --- Component tokens: radio --- */
+  --radio-padding: var(--selection-radio-default-false-vertical-padding);
+  --radio-border-width: var(--selection-radio-default-false-border-width);
+  --radio-radius: 50%;
+  --radio-transition: var(--transition-interactive);
+  --radio-focus-ring-width: var(--focus-ring-width);
+  --radio-focus-ring-color: var(--focus-ring-color);
+  --radio-focus-ring-offset: var(--focus-ring-offset);
+  --radio-focus-ring-style: var(--focus-ring-style);
+  /* TODO: needs token — Figma small desktop control is 16px; generated selection tokens use 20px */
+  --radio-sm-control-size: 16px;
+  --radio-sm-indicator-size: 8px;
+  --radio-lg-control-size: var(--selection-radio-default-false-width);
+  --radio-lg-indicator-size: 10px;
+  --radio-default-false-border-color: var(--selection-radio-default-false-border-color);
+  --radio-default-false-fill: var(--color-semantic-canvas-subtle);
+  --radio-default-true-fill: var(--selection-radio-default-true-fill);
+  --radio-disabled-false-border-color: var(--selection-radio-disabled-false-border-color);
+  --radio-disabled-false-fill: var(--selection-radio-disabled-false-fill);
+  --radio-disabled-true-fill: var(--selection-radio-disabled-true-fill);
+  --radio-error-false-border-color: var(--selection-radio-error-false-border-color);
+  --radio-error-false-fill: var(--selection-radio-error-false-fill);
+
+  /* --- Component tokens: switch --- */
+  --switch-padding: var(--selection-switch-default-false-vertical-padding);
+  --switch-track-height: var(--selection-switch-default-false-height);
+  --switch-track-width: var(--selection-switch-default-false-width);
+  --switch-radius: var(--selection-switch-default-false-border-radius);
+  --switch-transition: var(--transition-interactive);
+  --switch-focus-ring-width: var(--focus-ring-width);
+  --switch-focus-ring-color: var(--focus-ring-color);
+  --switch-focus-ring-offset: var(--focus-ring-offset);
+  --switch-focus-ring-style: var(--focus-ring-style);
+  /* TODO: needs token — Figma switch thumb is 16px; no dedicated selection thumb token */
+  --switch-thumb-size: 16px;
+  --switch-thumb-fill: var(--color-semantic-canvas-subtle);
+  --switch-default-false-fill: var(--selection-switch-default-false-fill);
+  --switch-default-true-fill: var(--selection-switch-default-true-fill);
+  --switch-disabled-false-fill: var(--selection-switch-disabled-false-fill);
+  --switch-disabled-true-fill: var(--selection-switch-disabled-true-fill);
+
+  /* --- Component tokens: selection-field --- */
+  --selection-field-gap: var(--spacing-xxsmall);
+  --selection-field-row-gap: var(--spacing-xxsmall);
+
+  --selection-field-label-font-family: var(--paragraph-default-strong-font-family);
+  --selection-field-label-font-size: var(--paragraph-default-strong-font-size);
+  --selection-field-label-font-weight: var(--paragraph-default-strong-font-weight);
+  --selection-field-label-line-height: var(--paragraph-default-strong-line-height);
+  --selection-field-label-letter-spacing: var(--paragraph-default-strong-letter-spacing);
+
+  --selection-field-supporting-font-family: var(--paragraph-default-font-family);
+  --selection-field-supporting-font-size: var(--paragraph-default-font-size);
+  --selection-field-supporting-font-weight: var(--paragraph-default-font-weight);
+  --selection-field-supporting-line-height: var(--paragraph-default-line-height);
+  --selection-field-supporting-letter-spacing: var(--paragraph-default-letter-spacing);
+
+  --selection-field-suffix-font-family: var(--paragraph-default-font-family);
+  --selection-field-suffix-font-size: var(--paragraph-default-font-size);
+  --selection-field-suffix-font-weight: var(--paragraph-default-font-weight);
+  --selection-field-suffix-line-height: var(--paragraph-default-line-height);
+  --selection-field-suffix-letter-spacing: var(--paragraph-default-letter-spacing);
+
+  --selection-field-helper-font-family: var(--paragraph-default-font-family);
+  --selection-field-helper-font-size: var(--paragraph-default-font-size);
+  --selection-field-helper-font-weight: var(--paragraph-default-font-weight);
+  --selection-field-helper-line-height: var(--paragraph-default-line-height);
+  --selection-field-helper-letter-spacing: var(--paragraph-default-letter-spacing);
+
+  --selection-field-sm-label-enabled-fill: var(--color-semantic-text-neutral-bold);
+  --selection-field-sm-supporting-enabled-fill: var(--color-semantic-text-neutral-moderate);
+  --selection-field-sm-suffix-enabled-fill: var(--color-semantic-text-neutral-bolder);
+  --selection-field-sm-label-disabled-fill: var(--color-semantic-text-neutral-disabled);
+  --selection-field-sm-supporting-disabled-fill: var(--color-semantic-text-neutral-disabled);
+  --selection-field-sm-suffix-disabled-fill: var(--color-semantic-text-neutral-disabled);
+  --selection-field-sm-label-error-fill: var(--color-semantic-text-neutral-bold);
+  --selection-field-sm-supporting-error-fill: var(--color-semantic-text-neutral-moderate);
+  --selection-field-sm-suffix-error-fill: var(--color-semantic-text-neutral-bolder);
+  /* TODO: needs token — Figma helper uses negative-bold-hovered (#e82f2f) */
+  --selection-field-sm-helper-error-fill: var(--color-semantic-text-negative-bold);
+
+  --selection-field-lg-label-enabled-fill: var(--selection-field-sm-label-enabled-fill);
+  --selection-field-lg-supporting-enabled-fill: var(--selection-field-sm-supporting-enabled-fill);
+  --selection-field-lg-suffix-enabled-fill: var(--selection-field-sm-suffix-enabled-fill);
+  --selection-field-lg-label-disabled-fill: var(--selection-field-sm-label-disabled-fill);
+  --selection-field-lg-supporting-disabled-fill: var(--selection-field-sm-supporting-disabled-fill);
+  --selection-field-lg-suffix-disabled-fill: var(--selection-field-sm-suffix-disabled-fill);
+  --selection-field-lg-label-error-fill: var(--selection-field-sm-label-error-fill);
+  --selection-field-lg-supporting-error-fill: var(--selection-field-sm-supporting-error-fill);
+  --selection-field-lg-suffix-error-fill: var(--selection-field-sm-suffix-error-fill);
+  --selection-field-lg-helper-error-fill: var(--selection-field-sm-helper-error-fill);
 }

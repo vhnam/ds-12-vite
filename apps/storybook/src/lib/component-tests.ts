@@ -272,6 +272,161 @@ export async function runPaginationInteractionTests(
   await createButtonMouseClickPlay(`Page ${activePage}`)(context);
 }
 
+export function createCheckboxA11yPlay(name: string | RegExp, checked = false): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const checkbox = canvas.getByRole("checkbox", { name });
+
+    await expect(checkbox).toBeInTheDocument();
+    await expect(checkbox).toHaveAccessibleName(name);
+    if (checked) {
+      await expect(checkbox).toBeChecked();
+    } else {
+      await expect(checkbox).not.toBeChecked();
+    }
+  };
+}
+
+export function createCheckboxKeyboardFocusPlay(name: string | RegExp): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const checkbox = canvas.getByRole("checkbox", { name });
+
+    await userEvent.click(canvasElement);
+    await userEvent.tab();
+    await expect(checkbox).toHaveFocus();
+    await expect(checkbox.matches(":focus-visible")).toBe(true);
+  };
+}
+
+export function createCheckboxTogglePlay(name: string | RegExp): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const checkbox = canvas.getByRole("checkbox", { name });
+
+    await userEvent.click(checkbox);
+    await expect(checkbox).toBeChecked();
+  };
+}
+
+export function createCheckboxDisabledPlay(name: string | RegExp): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const checkbox = canvas.getByRole("checkbox", { name });
+
+    await expect(checkbox).toHaveAttribute("aria-disabled", "true");
+  };
+}
+
+export async function runCheckboxInteractionTests(
+  context: PlayContext,
+  name: string | RegExp,
+): Promise<void> {
+  await createCheckboxA11yPlay(name, false)(context);
+  await createCheckboxKeyboardFocusPlay(name)(context);
+  await createCheckboxTogglePlay(name)(context);
+}
+
+export function createRadioA11yPlay(name: string | RegExp, checked = false): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const radio = canvas.getByRole("radio", { name });
+
+    await expect(radio).toBeInTheDocument();
+    await expect(radio).toHaveAccessibleName(name);
+    if (checked) {
+      await expect(radio).toBeChecked();
+    } else {
+      await expect(radio).not.toBeChecked();
+    }
+  };
+}
+
+export function createRadioKeyboardFocusPlay(name: string | RegExp): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const radio = canvas.getByRole("radio", { name });
+
+    await userEvent.click(canvasElement);
+    await userEvent.tab();
+    await expect(radio).toHaveFocus();
+    await expect(radio.matches(":focus-visible")).toBe(true);
+  };
+}
+
+export function createRadioDisabledPlay(name: string | RegExp): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const radio = canvas.getByRole("radio", { name });
+
+    await expect(radio).toHaveAttribute("aria-disabled", "true");
+  };
+}
+
+export async function runRadioInteractionTests(
+  context: PlayContext,
+  name: string | RegExp,
+  checked = false,
+): Promise<void> {
+  await createRadioA11yPlay(name, checked)(context);
+  await createRadioKeyboardFocusPlay(name)(context);
+}
+
+export function createSwitchA11yPlay(name: string | RegExp, checked = false): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const toggle = canvas.getByRole("switch", { name });
+
+    await expect(toggle).toBeInTheDocument();
+    await expect(toggle).toHaveAccessibleName(name);
+    if (checked) {
+      await expect(toggle).toBeChecked();
+    } else {
+      await expect(toggle).not.toBeChecked();
+    }
+  };
+}
+
+export function createSwitchKeyboardFocusPlay(name: string | RegExp): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const toggle = canvas.getByRole("switch", { name });
+
+    await userEvent.click(canvasElement);
+    await userEvent.tab();
+    await expect(toggle).toHaveFocus();
+    await expect(toggle.matches(":focus-visible")).toBe(true);
+  };
+}
+
+export function createSwitchTogglePlay(name: string | RegExp): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const toggle = canvas.getByRole("switch", { name });
+
+    await userEvent.click(toggle);
+    await expect(toggle).toBeChecked();
+  };
+}
+
+export function createSwitchDisabledPlay(name: string | RegExp): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const toggle = canvas.getByRole("switch", { name });
+
+    await expect(toggle).toHaveAttribute("aria-disabled", "true");
+  };
+}
+
+export async function runSwitchInteractionTests(
+  context: PlayContext,
+  name: string | RegExp,
+): Promise<void> {
+  await createSwitchA11yPlay(name, false)(context);
+  await createSwitchKeyboardFocusPlay(name)(context);
+  await createSwitchTogglePlay(name)(context);
+}
+
 export const textboxTestArgs = {
   "aria-label": "Input",
   placeholder: "Input",

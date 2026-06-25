@@ -1,0 +1,56 @@
+@layer components {
+  .ds-switch {
+    --switch-track-fill: var(--switch-default-false-fill);
+
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    width: var(--switch-track-width);
+    height: var(--switch-track-height);
+    padding: 2px;
+    border: none;
+    border-radius: var(--switch-radius);
+    background-color: var(--switch-track-fill);
+    cursor: var(--cursor-interactive);
+    vertical-align: middle;
+    transition: var(--switch-transition);
+  }
+
+  .ds-switch[data-checked] {
+    --switch-track-fill: var(--switch-default-true-fill);
+    justify-content: flex-end;
+  }
+
+  .ds-switch--disabled,
+  .ds-switch[data-disabled] {
+    cursor: var(--cursor-disabled);
+    --switch-track-fill: var(--switch-disabled-false-fill);
+  }
+
+  .ds-switch--disabled[data-checked],
+  .ds-switch[data-disabled][data-checked] {
+    --switch-track-fill: var(--switch-disabled-true-fill);
+  }
+
+  .ds-switch:focus {
+    outline: none;
+  }
+
+  .ds-switch:focus-visible {
+    outline: var(--switch-focus-ring-width) var(--switch-focus-ring-style)
+      var(--switch-focus-ring-color);
+    outline-offset: var(--switch-focus-ring-offset);
+  }
+
+  .ds-switch__thumb {
+    display: block;
+    flex-shrink: 0;
+    width: var(--switch-thumb-size);
+    height: var(--switch-thumb-size);
+    border-radius: 50%;
+    background-color: var(--switch-thumb-fill);
+    transition: transform var(--transition-duration-fast) var(--transition-timing-default);
+  }
+}
