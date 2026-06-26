@@ -2,6 +2,10 @@ import { defineConfig } from "vite-plus";
 
 export default defineConfig({
   staged: {
+    "apps/storybook/.storybook/*.{ts,tsx}": [
+      "vp check --fix",
+      "vp check --fix apps/storybook/.storybook/env.d.ts",
+    ],
     "*": "vp check --fix",
   },
   fmt: {

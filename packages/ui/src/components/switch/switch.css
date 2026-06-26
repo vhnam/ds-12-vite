@@ -5,11 +5,10 @@
     position: relative;
     display: inline-flex;
     align-items: center;
-    justify-content: flex-start;
     box-sizing: border-box;
     width: var(--switch-track-width);
     height: var(--switch-track-height);
-    padding: 2px;
+    padding: calc((var(--switch-track-height) - var(--switch-thumb-size)) / 2);
     border: none;
     border-radius: var(--switch-radius);
     background-color: var(--switch-track-fill);
@@ -20,7 +19,6 @@
 
   .ds-switch[data-checked] {
     --switch-track-fill: var(--switch-default-true-fill);
-    justify-content: flex-end;
   }
 
   .ds-switch--disabled,
@@ -51,6 +49,10 @@
     height: var(--switch-thumb-size);
     border-radius: 50%;
     background-color: var(--switch-thumb-fill);
-    transition: transform var(--transition-duration-fast) var(--transition-timing-default);
+    transition: var(--switch-thumb-transition);
+  }
+
+  .ds-switch__thumb[data-checked] {
+    translate: var(--switch-thumb-offset) 0;
   }
 }

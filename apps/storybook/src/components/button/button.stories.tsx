@@ -1,9 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, userEvent, within } from "storybook/test";
 import { Button } from "@ds-12/ui/button";
 import { Icon } from "@ds-12/ui/icon";
 import {
-  createButtonA11yPlay,
   createButtonDisabledPlay,
   createButtonLoadingA11yPlay,
   runButtonInteractionTests,
@@ -52,6 +50,38 @@ export const Default: Story = {
   play: (context) => runButtonInteractionTests(context, "Button"),
 };
 
+/** Use the secondary variant for supporting actions that should not compete with the primary CTA. */
+export const Secondary: Story = {
+  args: {
+    variant: "secondary",
+  },
+  play: (context) => runButtonInteractionTests(context, "Button"),
+};
+
+/** Use the danger variant for irreversible or destructive actions such as delete or remove. */
+export const Danger: Story = {
+  args: {
+    variant: "danger",
+  },
+  play: (context) => runButtonInteractionTests(context, "Button"),
+};
+
+/** Use the small size in dense layouts such as toolbars, tables, or inline form rows. */
+export const Small: Story = {
+  args: {
+    size: "sm",
+  },
+  play: (context) => runButtonInteractionTests(context, "Button"),
+};
+
+/** Use the large size when the button is the dominant action on a screen, such as a sign-up CTA. */
+export const Large: Story = {
+  args: {
+    size: "lg",
+  },
+  play: (context) => runButtonInteractionTests(context, "Button"),
+};
+
 /** Use a leading icon to reinforce the action (e.g. a download arrow before "Export"). */
 export const WithLeadingIcon: Story = {
   args: {
@@ -59,7 +89,7 @@ export const WithLeadingIcon: Story = {
     icon: <Icon name="download" variant="outlined" />,
     iconPosition: "left",
   },
-  play: createButtonA11yPlay("Download"),
+  play: (context) => runButtonInteractionTests(context, "Download"),
 };
 
 /** Use a trailing icon to indicate navigation or progression (e.g. a chevron after "Continue"). */
@@ -69,7 +99,7 @@ export const WithTrailingIcon: Story = {
     icon: <Icon name="arrow_forward" variant="outlined" />,
     iconPosition: "right",
   },
-  play: createButtonA11yPlay("Continue"),
+  play: (context) => runButtonInteractionTests(context, "Continue"),
 };
 
 /** Use the loading state to block repeated submission and communicate that an async operation is in progress. */
@@ -96,15 +126,18 @@ export const IconOnly: Story = {
     "aria-label": "Add",
     children: <Icon name="add" variant="outlined" />,
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const button = canvas.getByRole("button", { name: /add/i });
+  play: (context) => runButtonInteractionTests(context, /add/i),
+};
 
-    await expect(button).toHaveAccessibleName("Add");
-    await userEvent.click(canvasElement);
-    await userEvent.tab();
-    await expect(button).toHaveFocus();
+/** Disabled icon-only buttons remain keyboard-focusable so assistive technology users can discover the unavailable action. */
+export const IconOnlyDisabled: Story = {
+  args: {
+    variant: "icon",
+    disabled: true,
+    "aria-label": "Add",
+    children: <Icon name="add" variant="outlined" />,
   },
+  play: createButtonDisabledPlay(/add/i),
 };
 
 /** Showcase of all visual variants — for human reference only. */

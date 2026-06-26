@@ -1,6 +1,9 @@
 /** Shared parameters for visual-only matrix/gallery stories. */
 export const showcaseParameters = {
-  a11y: { disable: true },
+  a11y: {
+    disable: true,
+    test: "off" as const,
+  },
 };
 
 /** Defer axe scans on stories with known design-token contrast gaps. */

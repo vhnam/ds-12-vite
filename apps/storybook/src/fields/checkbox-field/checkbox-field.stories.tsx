@@ -4,8 +4,10 @@ import { CheckboxField } from "@ds-12/ui/fields/checkbox-field";
 import {
   createCheckboxA11yPlay,
   createCheckboxDisabledPlay,
+  createCheckboxInvalidA11yPlay,
   createCheckboxKeyboardFocusPlay,
   createCheckboxTogglePlay,
+  createCheckboxWithInputA11yPlay,
 } from "../../lib/component-tests.ts";
 import { showcaseParameters } from "../../lib/story-test-config.ts";
 import { booleanArgType, selectArgType, textArgType } from "../../lib/story-arg-types.ts";
@@ -41,7 +43,7 @@ const meta = {
     helperText: "Helper Text",
     showLabel: true,
     showSupportingText: false,
-    showSuffix: true,
+    showSuffix: false,
     showHelperText: true,
     showInput: false,
     invalid: false,
@@ -71,16 +73,24 @@ export const WithSupportingText: Story = {
   play: createCheckboxA11yPlay(/selection label/i),
 };
 
+/** Use a suffix for right-aligned supplementary text on the label row, such as a unit or status. */
+export const WithSuffix: Story = {
+  args: {
+    showSuffix: true,
+  },
+  play: async (context) => {
+    await createCheckboxA11yPlay(/selection label/i)(context);
+    const canvas = within(context.canvasElement);
+    await expect(canvas.getByText("Suffix")).toBeInTheDocument();
+  },
+};
+
 /** Use the input layout when selecting this option reveals a related text field, such as "Other". */
 export const WithInput: Story = {
   args: {
     showInput: true,
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    await expect(canvas.getByRole("checkbox", { name: /selection label/i })).toBeInTheDocument();
-    await expect(canvas.getByRole("textbox")).toBeInTheDocument();
-  },
+  play: createCheckboxWithInputA11yPlay(/selection label/i),
 };
 
 /** Use the disabled state when the option is unavailable in the current form context. */
@@ -96,12 +106,7 @@ export const Invalid: Story = {
   args: {
     invalid: true,
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const checkbox = canvas.getByRole("checkbox", { name: /selection label/i });
-    await expect(checkbox).toHaveAttribute("aria-invalid", "true");
-    await expect(canvas.getByText("Helper Text")).toBeInTheDocument();
-  },
+  play: createCheckboxInvalidA11yPlay(/selection label/i),
 };
 
 /** Showcase of default layout states — for human reference only. */

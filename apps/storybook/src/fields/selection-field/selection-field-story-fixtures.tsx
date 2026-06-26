@@ -29,6 +29,7 @@ function StateCheckboxField({
       disabled={state === "disabled"}
       invalid={state === "error"}
       showSupportingText={layout === "supporting-text"}
+      showSuffix={false}
       showInput={layout === "input"}
     />
   );
@@ -47,6 +48,7 @@ function StateSwitchField({
       disabled={state === "disabled"}
       invalid={state === "error"}
       showSupportingText={layout === "supporting-text"}
+      showSuffix={false}
       showInput={layout === "input"}
     />
   );
@@ -67,6 +69,7 @@ function StateRadioField({
         disabled={state === "disabled"}
         invalid={state === "error"}
         showSupportingText={layout === "supporting-text"}
+        showSuffix={false}
         showInput={layout === "input"}
       />
     </RadioGroup>

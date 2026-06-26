@@ -374,6 +374,9 @@
   --switch-track-width: var(--selection-switch-default-false-width);
   --switch-radius: var(--selection-switch-default-false-border-radius);
   --switch-transition: var(--transition-interactive);
+  --switch-thumb-transition: translate var(--transition-duration-fast)
+    var(--transition-timing-default);
+  --switch-thumb-offset: calc(var(--switch-track-width) - var(--switch-track-height));
   --switch-focus-ring-width: var(--focus-ring-width);
   --switch-focus-ring-color: var(--focus-ring-color);
   --switch-focus-ring-offset: var(--focus-ring-offset);

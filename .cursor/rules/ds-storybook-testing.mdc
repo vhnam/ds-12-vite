@@ -1,8 +1,9 @@
 ---
 description: Storybook interaction testing and accessibility testing patterns for Design System components
 globs:
-  - apps/storybook/src/stories/**/*.stories.ts
-  - apps/storybook/src/stories/**/*.stories.tsx
+  - apps/storybook/src/**/*.stories.ts
+  - apps/storybook/src/**/*.stories.tsx
+  - apps/storybook/.storybook/**
 ---
 
 # DS Storybook Testing
@@ -23,6 +24,19 @@ import { StoryCaption, StorySectionTitle } from "../../lib/story-presentation.ts
 Use `@ds-12/ui/[name]` subpath imports. Storybook resolves these via the `@ds-12/ui` alias in `apps/storybook/.storybook/main.ts` (no per-component alias needed).
 
 Extract large showcase renders (variant/size matrices, icon grids) into `[name]-story-fixtures.tsx` beside the story file. Keep stories focused on meta, args, and `play` functions.
+
+## Global CSS in `.storybook`
+
+Import global styles in `.storybook/main.ts`, not `preview.tsx`:
+
+```ts
+/// <reference path="./env.d.ts" />
+
+import type { StorybookConfig } from "@storybook/react-vite";
+import "./styles.css";
+```
+
+`env.d.ts` declares `*.css` modules for TypeScript. The `/// <reference path="./env.d.ts" />` directive is required so `vp check` passes when only `main.ts` is staged during pre-commit (TS2882 otherwise). Do not import CSS in `preview.tsx` — add new `.storybook` CSS imports to `main.ts` with the same reference.
 
 ## Setup (already configured)
 

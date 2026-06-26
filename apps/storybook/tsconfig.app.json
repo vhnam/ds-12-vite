@@ -25,5 +25,6 @@
     "noFallthroughCasesInSwitch": true,
     "allowArbitraryExtensions": true
   },
-  "include": ["src", ".storybook"]
+  "include": ["src", ".storybook"],
+  "files": [".storybook/env.d.ts"]
 }

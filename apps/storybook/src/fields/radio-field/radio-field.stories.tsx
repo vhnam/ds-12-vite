@@ -5,7 +5,9 @@ import { RadioGroup } from "@ds-12/ui/radio";
 import {
   createRadioA11yPlay,
   createRadioDisabledPlay,
+  createRadioInvalidA11yPlay,
   createRadioKeyboardFocusPlay,
+  createRadioWithInputA11yPlay,
 } from "../../lib/component-tests.ts";
 import { showcaseParameters } from "../../lib/story-test-config.ts";
 import { booleanArgType, selectArgType, textArgType } from "../../lib/story-arg-types.ts";
@@ -42,7 +44,7 @@ const meta = {
     helperText: "Helper Text",
     showLabel: true,
     showSupportingText: false,
-    showSuffix: true,
+    showSuffix: false,
     showHelperText: true,
     showInput: false,
     invalid: false,
@@ -78,16 +80,24 @@ export const WithSupportingText: Story = {
   play: createRadioA11yPlay(/selection label/i),
 };
 
+/** Use a suffix for right-aligned supplementary text on the label row, such as a unit or status. */
+export const WithSuffix: Story = {
+  args: {
+    showSuffix: true,
+  },
+  play: async (context) => {
+    await createRadioA11yPlay(/selection label/i)(context);
+    const canvas = within(context.canvasElement);
+    await expect(canvas.getByText("Suffix")).toBeInTheDocument();
+  },
+};
+
 /** Use the input layout when selecting this option reveals a related text field, such as "Other". */
 export const WithInput: Story = {
   args: {
     showInput: true,
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    await expect(canvas.getByRole("radio", { name: /selection label/i })).toBeInTheDocument();
-    await expect(canvas.getByRole("textbox")).toBeInTheDocument();
-  },
+  play: createRadioWithInputA11yPlay(/selection label/i),
 };
 
 /** Use the disabled state when the option is unavailable in the current form context. */
@@ -103,12 +113,7 @@ export const Invalid: Story = {
   args: {
     invalid: true,
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const radio = canvas.getByRole("radio", { name: /selection label/i });
-    await expect(radio).toHaveAttribute("aria-invalid", "true");
-    await expect(canvas.getByText("Helper Text")).toBeInTheDocument();
-  },
+  play: createRadioInvalidA11yPlay(/selection label/i),
 };
 
 /** Showcase of default layout states — for human reference only. */

@@ -318,6 +318,28 @@ export function createCheckboxDisabledPlay(name: string | RegExp): PlayFunction 
   };
 }
 
+export function createCheckboxInvalidA11yPlay(
+  name: string | RegExp,
+  helperText: string | RegExp = /helper text/i,
+): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const checkbox = canvas.getByRole("checkbox", { name });
+
+    await expect(checkbox).toHaveAccessibleName(name);
+    await expect(checkbox).toHaveAttribute("aria-invalid", "true");
+    await expect(canvas.getByText(helperText)).toBeInTheDocument();
+  };
+}
+
+export function createCheckboxWithInputA11yPlay(name: string | RegExp): PlayFunction {
+  return async (context) => {
+    await createCheckboxA11yPlay(name)(context);
+    const canvas = within(context.canvasElement);
+    await expect(canvas.getByRole("textbox")).toBeInTheDocument();
+  };
+}
+
 export async function runCheckboxInteractionTests(
   context: PlayContext,
   name: string | RegExp,
@@ -360,6 +382,28 @@ export function createRadioDisabledPlay(name: string | RegExp): PlayFunction {
     const radio = canvas.getByRole("radio", { name });
 
     await expect(radio).toHaveAttribute("aria-disabled", "true");
+  };
+}
+
+export function createRadioInvalidA11yPlay(
+  name: string | RegExp,
+  helperText: string | RegExp = /helper text/i,
+): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const radio = canvas.getByRole("radio", { name });
+
+    await expect(radio).toHaveAccessibleName(name);
+    await expect(radio).toHaveAttribute("aria-invalid", "true");
+    await expect(canvas.getByText(helperText)).toBeInTheDocument();
+  };
+}
+
+export function createRadioWithInputA11yPlay(name: string | RegExp): PlayFunction {
+  return async (context) => {
+    await createRadioA11yPlay(name)(context);
+    const canvas = within(context.canvasElement);
+    await expect(canvas.getByRole("textbox")).toBeInTheDocument();
   };
 }
 
@@ -415,6 +459,27 @@ export function createSwitchDisabledPlay(name: string | RegExp): PlayFunction {
     const toggle = canvas.getByRole("switch", { name });
 
     await expect(toggle).toHaveAttribute("aria-disabled", "true");
+  };
+}
+
+export function createSwitchInvalidA11yPlay(
+  name: string | RegExp,
+  helperText: string | RegExp = /helper text/i,
+): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const toggle = canvas.getByRole("switch", { name });
+
+    await expect(toggle).toHaveAccessibleName(name);
+    await expect(canvas.getByText(helperText)).toBeInTheDocument();
+  };
+}
+
+export function createSwitchWithInputA11yPlay(name: string | RegExp): PlayFunction {
+  return async (context) => {
+    await createSwitchA11yPlay(name)(context);
+    const canvas = within(context.canvasElement);
+    await expect(canvas.getByRole("textbox")).toBeInTheDocument();
   };
 }
 

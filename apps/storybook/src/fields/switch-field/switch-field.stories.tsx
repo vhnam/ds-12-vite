@@ -4,8 +4,10 @@ import { SwitchField } from "@ds-12/ui/fields/switch-field";
 import {
   createSwitchA11yPlay,
   createSwitchDisabledPlay,
+  createSwitchInvalidA11yPlay,
   createSwitchKeyboardFocusPlay,
   createSwitchTogglePlay,
+  createSwitchWithInputA11yPlay,
 } from "../../lib/component-tests.ts";
 import { showcaseParameters } from "../../lib/story-test-config.ts";
 import { booleanArgType, selectArgType, textArgType } from "../../lib/story-arg-types.ts";
@@ -44,7 +46,7 @@ const meta = {
     helperText: "Helper Text",
     showLabel: true,
     showSupportingText: false,
-    showSuffix: true,
+    showSuffix: false,
     showHelperText: true,
     showInput: false,
     invalid: false,
@@ -74,16 +76,24 @@ export const WithSupportingText: Story = {
   play: createSwitchA11yPlay(/selection label/i),
 };
 
+/** Use a suffix for right-aligned supplementary text on the label row, such as a unit or status. */
+export const WithSuffix: Story = {
+  args: {
+    showSuffix: true,
+  },
+  play: async (context) => {
+    await createSwitchA11yPlay(/selection label/i)(context);
+    const canvas = within(context.canvasElement);
+    await expect(canvas.getByText("Suffix")).toBeInTheDocument();
+  },
+};
+
 /** Use the input layout when enabling the switch reveals a related text field. */
 export const WithInput: Story = {
   args: {
     showInput: true,
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    await expect(canvas.getByRole("switch", { name: /selection label/i })).toBeInTheDocument();
-    await expect(canvas.getByRole("textbox")).toBeInTheDocument();
-  },
+  play: createSwitchWithInputA11yPlay(/selection label/i),
 };
 
 /** Use the disabled state when the setting is unavailable in the current context. */
@@ -99,10 +109,7 @@ export const Invalid: Story = {
   args: {
     invalid: true,
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    await expect(canvas.getByText("Helper Text")).toBeInTheDocument();
-  },
+  play: createSwitchInvalidA11yPlay(/selection label/i),
 };
 
 /** Showcase of default layout states — for human reference only. */
