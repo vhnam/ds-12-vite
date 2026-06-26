@@ -183,6 +183,99 @@ export async function runTextboxInteractionTests(
   await createTextboxMouseClickPlay(name)(context);
 }
 
+function getCombobox(canvas: ReturnType<typeof within>, name?: string | RegExp) {
+  return name ? canvas.getByRole("combobox", { name }) : canvas.getByRole("combobox");
+}
+
+export function createComboboxA11yPlay(name?: string | RegExp): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const combobox = getCombobox(canvas, name);
+
+    await expect(combobox).toBeInTheDocument();
+    if (name) {
+      await expect(combobox).toHaveAccessibleName(name);
+    }
+  };
+}
+
+export function createComboboxKeyboardFocusPlay(name?: string | RegExp): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const combobox = getCombobox(canvas, name);
+
+    await userEvent.click(canvasElement);
+    await userEvent.tab();
+    await expect(combobox).toHaveFocus();
+  };
+}
+
+export function createComboboxFocusVisiblePlay(name?: string | RegExp): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const combobox = getCombobox(canvas, name);
+
+    await userEvent.click(canvasElement);
+    await userEvent.tab();
+    await expect(combobox).toHaveFocus();
+    await expect(combobox).toHaveAttribute("data-focus-visible");
+  };
+}
+
+export function createComboboxMouseClickPlay(name?: string | RegExp): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const combobox = getCombobox(canvas, name);
+
+    await userEvent.click(combobox);
+    await expect(canvas.getByRole("listbox")).toBeInTheDocument();
+    await expect(combobox).not.toHaveAttribute("data-focus-visible", "true");
+  };
+}
+
+export function createComboboxDisabledPlay(name?: string | RegExp): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const combobox = getCombobox(canvas, name);
+
+    await expect(combobox).toHaveAttribute("aria-disabled", "true");
+    await expect(combobox).toBeDisabled();
+    await userEvent.tab();
+    await expect(combobox).not.toHaveFocus();
+  };
+}
+
+export function createComboboxInvalidA11yPlay(name?: string | RegExp): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const combobox = getCombobox(canvas, name);
+
+    if (name) {
+      await expect(combobox).toHaveAccessibleName(name);
+    }
+    await expect(combobox).toHaveAttribute("aria-invalid", "true");
+  };
+}
+
+export async function runComboboxInteractionTests(
+  context: PlayContext,
+  name?: string | RegExp,
+): Promise<void> {
+  await createComboboxA11yPlay(name)(context);
+  await createComboboxKeyboardFocusPlay(name)(context);
+  await createComboboxFocusVisiblePlay(name)(context);
+  await createComboboxMouseClickPlay(name)(context);
+}
+
+export async function runComboboxA11yAndFocusTests(
+  context: PlayContext,
+  name?: string | RegExp,
+): Promise<void> {
+  await createComboboxA11yPlay(name)(context);
+  await createComboboxKeyboardFocusPlay(name)(context);
+  await createComboboxFocusVisiblePlay(name)(context);
+}
+
 export function createSkeletonA11yPlay(name: string | RegExp): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -495,4 +588,9 @@ export async function runSwitchInteractionTests(
 export const textboxTestArgs = {
   "aria-label": "Input",
   placeholder: "Input",
+};
+
+export const comboboxTestArgs = {
+  "aria-label": "Select",
+  placeholder: "Option",
 };

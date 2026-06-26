@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 
-// Ambient types for Storybook and app source. Referenced from `.storybook/types.d.ts`
-// so `vp check` on `.storybook/*` resolves CSS side-effect imports.
+// Ambient types for Storybook app source under `src/`.
+// `.storybook/*` uses `.storybook/types.d.ts` (referenced from preview.tsx).
 
 declare module "*.css" {}
 

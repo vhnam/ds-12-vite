@@ -1,3 +1,9 @@
-// Bridges ambient types from src/vite-env.d.ts into .storybook type checks.
-// oxlint-disable-next-line typescript/triple-slash-reference -- ambient .d.ts bridge
-/// <reference path="../src/vite-env.d.ts" />
+// Ambient module declarations for `.storybook` type checks.
+// Keep self-contained: staged `vp check` may typecheck only changed `.ts/.tsx`
+// files and will not load `src/vite-env.d.ts` unless referenced from here.
+declare module "*.css" {}
+
+declare module "*?raw" {
+  const content: string;
+  export default content;
+}

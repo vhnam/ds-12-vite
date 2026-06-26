@@ -3,7 +3,8 @@ import { defineConfig } from "vite-plus";
 export default defineConfig({
   staged: {
     "apps/storybook/.storybook/*.{ts,tsx}": "vp check --fix apps/storybook/.storybook",
-    "*": "vp check --fix",
+    // Exclude .storybook — those files need directory-scoped check so types.d.ts is loaded.
+    "!(apps/storybook/.storybook)/**/*": "vp check --fix",
   },
   fmt: {
     ignorePatterns: ["packages/design-tokens/src/tokens.generated.css"],

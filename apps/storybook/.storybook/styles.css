@@ -103,3 +103,35 @@ body {
   --textarea-text-fill: var(--text-area-large-box-hint-focused-fill);
   --textarea-icon-fill: var(--text-area-large-box-icon-focused-fill);
 }
+
+[data-story-select-state="focus"]
+  .ds-select--sm
+  .ds-select__trigger:not(:disabled):not(.ds-select--error) {
+  --select-fill: var(--drop-down-small-box-properties-focused-fill);
+  --select-border-color: var(--drop-down-small-box-properties-focused-border-color);
+  --select-value-fill: var(--drop-down-small-box-hint-focused-fill);
+  --select-placeholder-fill: var(--drop-down-small-box-hint-focused-fill);
+  --select-icon-fill: var(--drop-down-small-box-icon-focused-fill);
+}
+
+[data-story-select-state="focus"]
+  .ds-select--lg
+  .ds-select__trigger:not(:disabled):not(.ds-select--error) {
+  --select-fill: var(--drop-down-large-box-properties-focused-fill);
+  --select-border-color: var(--drop-down-large-box-properties-focused-border-color);
+  --select-value-fill: var(--drop-down-large-box-hint-focused-fill);
+  --select-placeholder-fill: var(--drop-down-large-box-hint-focused-fill);
+  --select-icon-fill: var(--drop-down-large-box-icon-focused-fill);
+}
+
+[data-story-select-state="focus"]
+  .ds-select-field--sm:not(.ds-select-field--disabled):not(.ds-select-field--error) {
+  --select-field-label-fill: var(--drop-down-small-label-focused-fill);
+  --select-field-helper-fill: var(--drop-down-small-helper-text-focused-fill);
+}
+
+[data-story-select-state="focus"]
+  .ds-select-field--lg:not(.ds-select-field--disabled):not(.ds-select-field--error) {
+  --select-field-label-fill: var(--drop-down-large-label-focused-fill);
+  --select-field-helper-fill: var(--drop-down-large-helper-text-focused-fill);
+}

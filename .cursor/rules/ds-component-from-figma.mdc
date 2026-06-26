@@ -73,6 +73,26 @@ Rules:
 /* TODO: needs token — current value: 20px */
 ```
 
+### Token resolution (colors)
+
+Resolve color values in this order:
+
+1. **Repo tokens** — search `packages/design-tokens/src/tokens.generated.css` and `tokens.web.css` for a matching `--token-name`.
+2. **Figma Variables** — if no repo token matches (or the generated name differs), call Figma MCP `get_variable_defs` with the component `fileKey` and `nodeId`. Variables return canonical names and resolved values, e.g. `color/semantic/canvas-moderate` → `#f7f8f8`.
+3. **Map variable → CSS custom property** — convert the Figma path to the repo naming convention: slash segments become hyphens, prefixed with `--`.
+
+   | Figma variable | Repo CSS custom property |
+   |---|---|
+   | `color/semantic/canvas-moderate` | `--color-semantic-canvas-moderate` |
+   | `color/semantic/text-brand-bold` | `--color-semantic-text-brand-bold` |
+   | `color/semantic/border-information-bold` | `--color-semantic-border-information-bold` |
+
+4. **Re-check repo tokens** — after mapping, grep `tokens.generated.css` again for that `--color-*` name. If it exists, use `var(--color-semantic-…)`.
+5. **Alias in `tokens.web.css`** — if the Figma variable resolves to a value that only exists under a different generated token (e.g. Figma `border-information-bold` → repo `--color-blue-500`), alias the component token to the generated one and leave a TODO noting the naming gap.
+6. **Last resort** — if the variable is not in Figma and not in repo tokens, add a TODO with the Figma variable path and resolved hex/rgba value. Do not hardcode colors in component CSS.
+
+For non-color tokens (spacing, radius, typography), prefer repo tokens first; use `get_variable_defs` only when the Figma spec references a variable name that does not appear in `tokens.generated.css`.
+
 ## Step 2 — Fetch component from Figma
 
 Use Figma MCP (`get_design_context`) to fetch the target component by node ID.
@@ -82,9 +102,10 @@ Extract:
 - Spacing, sizing, typography values
 - Border, radius, shadow, color per variant and state (hover, focus, disabled)
 
-Cross-reference each raw value against `tokens.generated.css`:
+Cross-reference each raw value against `tokens.generated.css` (see **Token resolution** above for colors):
 - Match found → use `var(--token-name)`
-- No match → TODO comment with raw value in `tokens.web.css` or component CSS
+- Color with no repo match → `get_variable_defs` → map to `--color-*` → alias in `tokens.web.css` or TODO
+- No match after both sources → TODO comment with Figma variable path and resolved value in `tokens.web.css`
 
 ## Step 3 — Build the component
 
@@ -227,5 +248,6 @@ cd apps/storybook && npm run build-storybook
 - [ ] `packages/ui/package.json` has a `./[name]` subpath export
 - [ ] `apps/storybook/vite.config.ts` alias added
 - [ ] `apps/storybook/src/stories/[name]/[name].stories.tsx` created
-- [ ] All unmapped values have `/* TODO: needs token — current value: … */` comments
-- [ ] List of TODOs that require Design System decisions (token missing, token wrong, design ambiguous)
+- [ ] Color tokens resolved via repo tokens or Figma Variables (`get_variable_defs`) before falling back to TODOs
+- [ ] All unmapped values have `/* TODO: needs token — current value: … */` comments (include Figma variable path when known)
+- [ ] List of TODOs that require Design System decisions (token missing, token wrong, design ambiguous, Figma/repo naming mismatch)

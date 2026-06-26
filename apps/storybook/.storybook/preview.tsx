@@ -18,8 +18,10 @@ const preview: Preview = {
       },
     },
 
+    // Playwright runs axe in CI (`playwright/storybook.spec.ts`). Keep the addon panel
+    // for manual checks without auto-running scans on every story render.
     a11y: {
-      test: "error",
+      test: "off",
     },
   },
 };

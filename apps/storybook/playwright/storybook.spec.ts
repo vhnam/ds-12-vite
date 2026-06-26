@@ -31,7 +31,11 @@ test("a11y and visual snapshots", async ({ page, baseURL }) => {
       await page.evaluate(() => document.fonts.ready);
 
       if (isA11yTestedStory(story)) {
-        const results = await new AxeBuilder({ page }).include("#storybook-root").analyze();
+        const results = await new AxeBuilder({ page })
+          .include("#storybook-root")
+          // Base UI focus guards are intentionally focusable while aria-hidden.
+          .exclude("[data-base-ui-focus-guard]")
+          .analyze();
         expect
           .soft(
             results.violations,

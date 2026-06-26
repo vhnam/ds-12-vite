@@ -3,9 +3,16 @@
 :root {
   /* --- Web platform extensions --- */
   --focus-ring-width: var(--border-width-medium);
-  --focus-ring-color: var(--color-semantic-border-information-bold);
   --focus-ring-offset: 1px;
   --focus-ring-style: solid;
+
+  /*
+   * Figma variable fallbacks missing from tokens.generated.css.
+   * Resolve via get_variable_defs when a repo --color-* token is not found.
+   */
+  /* color/semantic/borderInformationBold → #0099ff */
+  --color-semantic-border-information-bold: var(--color-blue-500);
+  --focus-ring-color: var(--color-semantic-border-information-bold);
 
   --cursor-interactive: pointer;
   --cursor-disabled: not-allowed;
@@ -184,8 +191,7 @@
   --chip-pressed-border-color: var(--color-semantic-border-brand-bold);
 
   --chip-focus-ring-width: var(--border-width-medium);
-  /* TODO: needs token — Figma uses border-information-bold (#0099ff) */
-  --chip-focus-ring-color: var(--color-blue-500);
+  --chip-focus-ring-color: var(--color-semantic-border-information-bold);
   --chip-focus-ring-style: var(--focus-ring-style);
   --chip-focus-ring-offset-inactive: var(--focus-ring-offset);
   --chip-focus-ring-offset-active: var(--focus-ring-offset);
@@ -439,4 +445,55 @@
   --selection-field-lg-supporting-error-fill: var(--selection-field-sm-supporting-error-fill);
   --selection-field-lg-suffix-error-fill: var(--selection-field-sm-suffix-error-fill);
   --selection-field-lg-helper-error-fill: var(--selection-field-sm-helper-error-fill);
+
+  /* --- Component tokens: select --- */
+  /* Figma: Drop-down box + Menu dropdown list (9689:4433 / 9416:2987 / 9416:4518) */
+  --select-border-style: var(--border-style-default);
+  --select-transition: var(--transition-interactive);
+  --select-focus-ring-width: var(--focus-ring-width);
+  --select-focus-ring-color: var(--focus-ring-color);
+  --select-focus-ring-offset: var(--focus-ring-offset);
+  --select-focus-ring-style: var(--focus-ring-style);
+
+  /* color/semantic/canvasSubtle, color/semantic/borderSubtle */
+  --select-popup-fill: var(--color-semantic-canvas-subtle);
+  --select-popup-border-color: var(--color-semantic-border-subtle);
+  --select-popup-border-width: var(--border-width-small);
+  --select-popup-radius: var(--radius-small);
+  --select-popup-padding: var(--spacing-xsmall);
+  --select-popup-shadow: var(--elevation-2);
+  --select-popup-offset: var(--spacing-xxsmall);
+
+  /* List item — Single Selection states */
+  /* TODO: needs token — Figma menu item height is 40px */
+  --select-item-height: 40px;
+  --select-item-padding: var(--spacing-xsmall);
+  --select-item-radius: var(--radius-xsmall);
+  /* color/semantic/canvasSubtle */
+  --select-item-fill: var(--color-semantic-canvas-subtle);
+  /* color/semantic/canvasModerate */
+  --select-item-hover-fill: var(--color-semantic-canvas-moderate);
+  --select-item-selected-fill: var(--color-semantic-canvas-moderate);
+  /* color/semantic/borderInformationBold */
+  --select-item-focus-ring-width: var(--border-width-medium);
+  --select-item-focus-ring-color: var(--color-semantic-border-information-bold);
+
+  /* color/semantic/textNeutralBold */
+  --select-item-text-fill: var(--color-semantic-text-neutral-bold);
+  --select-item-text-font-family: var(--paragraph-default-font-family);
+  --select-item-text-font-size: var(--paragraph-default-font-size);
+  --select-item-text-font-weight: var(--paragraph-default-font-weight);
+  --select-item-text-line-height: var(--paragraph-default-line-height);
+  --select-item-text-letter-spacing: var(--paragraph-default-letter-spacing);
+
+  /* color/semantic/textBrandBold + body/default semibold */
+  --select-item-selected-text-fill: var(--color-semantic-text-brand-bold);
+  --select-item-selected-text-font-family: var(--paragraph-default-strong-font-family);
+  --select-item-selected-text-font-size: var(--paragraph-default-strong-font-size);
+  --select-item-selected-text-font-weight: var(--paragraph-default-strong-font-weight);
+  --select-item-selected-text-line-height: var(--paragraph-default-strong-line-height);
+  --select-item-selected-text-letter-spacing: var(--paragraph-default-strong-letter-spacing);
+
+  /* color/semantic/textNeutralDisabled */
+  --select-item-disabled-text-fill: var(--color-semantic-text-neutral-disabled);
 }

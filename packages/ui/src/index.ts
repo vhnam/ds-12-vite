@@ -16,10 +16,22 @@ export {
   type InputProps,
 } from "./components/input/index.tsx";
 export {
+  Select,
+  SelectIconSizeContext,
+  selectVariants,
+  type SelectOption,
+  type SelectProps,
+} from "./components/select/index.tsx";
+export {
   InputField,
   inputFieldVariants,
   type InputFieldProps,
 } from "./components/fields/input-field/index.tsx";
+export {
+  SelectField,
+  selectFieldVariants,
+  type SelectFieldProps,
+} from "./components/fields/select-field/index.tsx";
 export {
   Textarea,
   TextareaIconSizeContext,
