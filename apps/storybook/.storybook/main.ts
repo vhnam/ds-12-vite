@@ -1,13 +1,7 @@
-// Ambient types for CSS imports must load during staged-only type checks (TS2882).
-// oxlint-disable-next-line typescript/triple-slash-reference -- see env.d.ts
-/// <reference path="./env.d.ts" />
-
 import type { StorybookConfig } from "@storybook/react-vite";
 import tailwindcss from "@tailwindcss/vite";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-
-import "./styles.css";
 
 const dirname =
   typeof __dirname !== "undefined" ? __dirname : path.dirname(fileURLToPath(import.meta.url));

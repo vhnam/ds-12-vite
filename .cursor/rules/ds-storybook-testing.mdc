@@ -27,16 +27,14 @@ Extract large showcase renders (variant/size matrices, icon grids) into `[name]-
 
 ## Global CSS in `.storybook`
 
-Import global styles in `.storybook/main.ts`, not `preview.tsx`:
+Import global styles in `.storybook/preview.tsx`, not `main.ts` — Node evaluates `main.ts` during `storybook build` and cannot load `.css` files:
 
 ```ts
-/// <reference path="./env.d.ts" />
-
-import type { StorybookConfig } from "@storybook/react-vite";
+import type { Preview } from "@storybook/react-vite";
 import "./styles.css";
 ```
 
-`env.d.ts` declares `*.css` modules for TypeScript. The `/// <reference path="./env.d.ts" />` directive is required so `vp check` passes when only `main.ts` is staged during pre-commit (TS2882 otherwise). Do not import CSS in `preview.tsx` — add new `.storybook` CSS imports to `main.ts` with the same reference.
+`src/vite-env.d.ts` declares `*.css` modules. `.storybook/types.d.ts` references it so `vp check` resolves CSS imports when type-checking `.storybook` files (including staged pre-commit runs).
 
 ## Setup (already configured)
 

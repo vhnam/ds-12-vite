@@ -26,5 +26,5 @@
     "allowArbitraryExtensions": true
   },
   "include": ["src", ".storybook"],
-  "files": [".storybook/env.d.ts"]
+  "files": ["src/vite-env.d.ts"]
 }
