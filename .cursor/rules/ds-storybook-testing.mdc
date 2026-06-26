@@ -3,6 +3,7 @@ description: Storybook interaction testing and accessibility testing patterns fo
 globs:
   - apps/storybook/src/**/*.stories.ts
   - apps/storybook/src/**/*.stories.tsx
+  - apps/storybook/src/foundations/**
   - apps/storybook/.storybook/**
 ---
 
@@ -53,6 +54,51 @@ framework: "@storybook/react-vite",
 Interaction tests use `play` functions with utilities from `storybook/test` (Storybook 10), not `@storybook/test`. Run them manually from the Storybook UI (Interactions panel); CI uses Chromatic for visual regression only.
 
 A11y is enabled globally in `apps/storybook/.storybook/preview.tsx` with `a11y.test: "todo"`.
+
+### React docgen (`react-docgen-typescript`)
+
+Prop docgen runs only on story fixtures and `@ds-12/ui` components. **Do not widen** `reactDocgenTypescriptOptions.include` to `src/**/*.tsx` — that causes Vite warnings when foundation MDX pages import helper components:
+
+```
+Skipping docgen for ".../foundations/.../*.tsx" because it is not included in the active TypeScript project.
+```
+
+Foundation docs under `src/foundations/**` are MDX + presentation helpers; they are intentionally outside docgen scope. Keep `main.ts` scoped like this:
+
+```ts
+typescript: {
+  reactDocgen: "react-docgen-typescript",
+  reactDocgenTypescriptOptions: {
+    tsconfigPath: path.resolve(dirname, "../tsconfig.docgen.json"),
+    include: [
+      path.resolve(dirname, "../src/stories/**/*.tsx"),
+      path.resolve(dirname, "../src/components/**/*.tsx"),
+      path.resolve(dirname, "../src/fields/**/*.tsx"),
+      path.resolve(monorepoRoot, "packages/ui/src/**/*.tsx"),
+    ],
+    exclude: ["**/*.stories.tsx"],
+  },
+},
+```
+
+Restart the Storybook dev server after changing this block.
+
+## Foundation MDX docs
+
+Foundation token pages live in `apps/storybook/src/foundations/[topic]/`:
+
+```
+foundations/spacing/
+  parse-theme-spacing.ts      # parse tokens from tokens.generated.css
+  spacing-tokens-doc.tsx      # table / preview UI
+  foundation-spacing-doc.tsx  # thin wrapper
+  foundation-spacing.mdx      # Storybook docs page (Meta title: Foundations/…)
+```
+
+- Import design tokens via `@ds-12/design-tokens/tokens.generated.css?raw`
+- Use `@ds-12/ui/typography` for labels; match existing colors/spacing/elevation/radius patterns
+- Do not add `tags: ["autodocs"]` or CSF stories for foundation helpers — MDX only
+- Never add `src/foundations/**` to docgen `include` (see above)
 
 ## Story file structure
 

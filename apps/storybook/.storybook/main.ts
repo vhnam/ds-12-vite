@@ -69,10 +69,14 @@ const config: StorybookConfig = {
     reactDocgen: "react-docgen-typescript",
     reactDocgenTypescriptOptions: {
       tsconfigPath: path.resolve(dirname, "../tsconfig.docgen.json"),
+      // Only run prop docgen on story fixtures and UI components — not foundation MDX helpers.
       include: [
-        path.resolve(dirname, "../src/**/*.tsx"),
+        path.resolve(dirname, "../src/stories/**/*.tsx"),
+        path.resolve(dirname, "../src/components/**/*.tsx"),
+        path.resolve(dirname, "../src/fields/**/*.tsx"),
         path.resolve(monorepoRoot, "packages/ui/src/**/*.tsx"),
       ],
+      exclude: ["**/*.stories.tsx"],
     },
   },
 };
