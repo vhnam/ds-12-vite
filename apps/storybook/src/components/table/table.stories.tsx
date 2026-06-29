@@ -123,6 +123,13 @@ export const StackedCell: Story = {
       </TableBody>
     </Table>
   ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const cell = canvas.getByRole("cell", { name: /text/i });
+
+    await expect(cell).toBeInTheDocument();
+    await expect(cell).toHaveTextContent("Sub text");
+  },
 };
 
 /** Use right-aligned header and body cells for numeric values such as currency or counts. */
@@ -150,21 +157,33 @@ export const RightAligned: Story = {
 
 /** Showcase of header cell variants — for human reference only. */
 export const HeadVariants: Story = {
-  tags: ["!manifest"],
+  tags: ["a11y-debt"],
   parameters: showcaseParameters,
   render: () => <HeadVariantsShowcase />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getAllByRole("columnheader", { name: /heading/i })).not.toHaveLength(0);
+  },
 };
 
 /** Showcase of body cell content types and states — for human reference only. */
 export const CellStates: Story = {
-  tags: ["!manifest"],
+  tags: ["a11y-debt"],
   parameters: showcaseParameters,
   render: () => <CellStatesShowcase />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getAllByRole("cell")).not.toHaveLength(0);
+  },
 };
 
 /** Showcase of the full multi-column table with avatars, badges, currency, and row actions — for human reference only. */
 export const FullExample: Story = {
-  tags: ["!manifest"],
+  tags: ["a11y-debt"],
   parameters: showcaseParameters,
   render: () => <FullTableShowcase />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole("table", { name: /sample data table/i })).toBeInTheDocument();
+  },
 };

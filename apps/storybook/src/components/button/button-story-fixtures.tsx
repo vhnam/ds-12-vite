@@ -6,7 +6,6 @@ export const VARIANTS = ["primary", "secondary", "danger", "icon"] as const;
 export const SIZES = ["sm", "md", "lg"] as const;
 
 const SIZE_ROWS = ["lg", "md", "sm"] as const;
-const TEXT_VARIANTS = ["primary", "secondary", "danger"] as const;
 
 type ButtonVariant = (typeof VARIANTS)[number];
 type ButtonSize = (typeof SIZES)[number];
@@ -23,24 +22,6 @@ const SIZE_LABELS: Record<ButtonSize, string> = {
   md: "Medium",
   lg: "Large",
 };
-
-export const leadingIconButtons = [
-  { variant: "primary", icon: "download", label: "Download" },
-  { variant: "secondary", icon: "search", label: "Search" },
-  { variant: "danger", icon: "delete", label: "Delete" },
-  { variant: "primary", icon: "add", label: "New item" },
-  { variant: "secondary", icon: "notifications", label: "Subscribe" },
-  { variant: "primary", icon: "check", label: "Confirm" },
-] as const;
-
-export const trailingIconButtons = [
-  { variant: "primary", icon: "arrow_forward", label: "Continue" },
-  { variant: "secondary", icon: "chevron_right", label: "View all" },
-  { variant: "danger", icon: "arrow_forward", label: "Proceed" },
-  { variant: "primary", icon: "arrow_forward", label: "Get started" },
-  { variant: "secondary", icon: "chevron_right", label: "More" },
-  { variant: "primary", icon: "arrow_forward", label: "Launch" },
-] as const;
 
 const tableStyle = {
   borderCollapse: "collapse",
@@ -136,117 +117,6 @@ export function VariantSizeMatrixTable({ loading = false }: { loading?: boolean 
             ))}
           </tr>
         ))}
-      </tbody>
-    </table>
-  );
-}
-
-function IconButton({
-  icon,
-  label,
-  variant,
-  iconPosition,
-  size = "md",
-}: {
-  icon: string;
-  label: string;
-  variant: (typeof TEXT_VARIANTS)[number];
-  iconPosition: "left" | "right";
-  size?: ButtonSize;
-}) {
-  return (
-    <Button
-      variant={variant}
-      size={size}
-      icon={<IconComponent name={icon} variant="outlined" />}
-      iconPosition={iconPosition}
-    >
-      {label}
-    </Button>
-  );
-}
-
-export function IconButtonMatrixTable({
-  buttons,
-  iconPosition,
-}: {
-  buttons: readonly {
-    variant: (typeof TEXT_VARIANTS)[number];
-    icon: string;
-    label: string;
-  }[];
-  iconPosition: "left" | "right";
-}) {
-  return (
-    <table style={tableStyle}>
-      <thead>
-        <tr>
-          <th scope="col" style={headerCellStyle} />
-          {buttons.map(({ icon, label }) => (
-            <th key={`${icon}-${label}`} scope="col" style={headerCellStyle}>
-              <Typography variant="label-small">{label}</Typography>
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {SIZE_ROWS.map((size) => (
-          <tr key={size}>
-            <th scope="row" style={headerCellStyle}>
-              <Typography variant="label-small">{SIZE_LABELS[size]}</Typography>
-            </th>
-            {buttons.map(({ variant, icon, label }) => (
-              <td key={`${variant}-${icon}-${label}`} style={bodyCellStyle}>
-                <IconButton
-                  variant={variant}
-                  icon={icon}
-                  label={label}
-                  iconPosition={iconPosition}
-                  size={size}
-                />
-              </td>
-            ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
-}
-
-export function IconOnlyMatrixTable() {
-  return (
-    <table style={tableStyle}>
-      <thead>
-        <tr>
-          <th scope="col" style={headerCellStyle} />
-          {SIZE_ROWS.map((size) => (
-            <th key={size} scope="col" style={headerCellStyle}>
-              <Typography variant="label-small">{SIZE_LABELS[size]}</Typography>
-            </th>
-          ))}
-          <th scope="col" style={headerCellStyle}>
-            <Typography variant="label-small">Disabled</Typography>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row" style={headerCellStyle}>
-            <Typography variant="label-small">Icon</Typography>
-          </th>
-          {SIZE_ROWS.map((size) => (
-            <td key={size} style={bodyCellStyle}>
-              <Button variant="icon" size={size} aria-label="Add">
-                <IconComponent name="add" variant="outlined" />
-              </Button>
-            </td>
-          ))}
-          <td style={bodyCellStyle}>
-            <Button variant="icon" size="md" disabled aria-label="Add">
-              <IconComponent name="add" variant="outlined" />
-            </Button>
-          </td>
-        </tr>
       </tbody>
     </table>
   );

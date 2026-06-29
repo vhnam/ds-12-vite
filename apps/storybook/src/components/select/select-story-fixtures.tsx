@@ -79,6 +79,10 @@ export function SelectStatesShowcase({ size }: { size: (typeof SIZES)[number] })
         <StoryCaption>error</StoryCaption>
         <StateSelect state="error" size={size} />
       </div>
+      <div>
+        <StoryCaption>opened</StoryCaption>
+        <StateSelect state="opened" size={size} />
+      </div>
     </div>
   );
 }

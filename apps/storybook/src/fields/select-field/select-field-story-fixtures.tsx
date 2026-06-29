@@ -80,6 +80,10 @@ export function SelectFieldStatesShowcase({ size }: { size: (typeof SIZES)[numbe
         <StoryCaption>error</StoryCaption>
         <StateSelectField state="error" size={size} />
       </div>
+      <div>
+        <StoryCaption>opened</StoryCaption>
+        <StateSelectField state="opened" size={size} />
+      </div>
     </div>
   );
 }

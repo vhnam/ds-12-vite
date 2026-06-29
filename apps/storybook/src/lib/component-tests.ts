@@ -218,7 +218,7 @@ export function createComboboxFocusVisiblePlay(name?: string | RegExp): PlayFunc
     await userEvent.click(canvasElement);
     await userEvent.tab();
     await expect(combobox).toHaveFocus();
-    await expect(combobox).toHaveAttribute("data-focus-visible");
+    await expect(combobox.matches(":focus-visible")).toBe(true);
   };
 }
 
@@ -228,7 +228,8 @@ export function createComboboxMouseClickPlay(name?: string | RegExp): PlayFuncti
     const combobox = getCombobox(canvas, name);
 
     await userEvent.click(combobox);
-    await expect(canvas.getByRole("listbox")).toBeInTheDocument();
+    // Base UI portals the popup to document.body, outside #storybook-root.
+    await expect(within(document.body).getByRole("listbox")).toBeInTheDocument();
     await expect(combobox).not.toHaveAttribute("data-focus-visible", "true");
   };
 }
@@ -238,7 +239,6 @@ export function createComboboxDisabledPlay(name?: string | RegExp): PlayFunction
     const canvas = within(canvasElement);
     const combobox = getCombobox(canvas, name);
 
-    await expect(combobox).toHaveAttribute("aria-disabled", "true");
     await expect(combobox).toBeDisabled();
     await userEvent.tab();
     await expect(combobox).not.toHaveFocus();

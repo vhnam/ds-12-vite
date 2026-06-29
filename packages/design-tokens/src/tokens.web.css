@@ -496,4 +496,104 @@
 
   /* color/semantic/textNeutralDisabled */
   --select-item-disabled-text-fill: var(--color-semantic-text-neutral-disabled);
+
+  /* --- Component tokens: menu --- */
+  /* Figma: Menu dropdown list (9416:2987) — Single select / Multi select variants */
+  --menu-transition: var(--transition-interactive);
+  /* TODO: needs token — Figma menu item height is 40px */
+  --menu-item-height: 40px;
+  --menu-item-radius: var(--radius-xsmall);
+
+  /* Single select — padding spacing/xsmall, gap 0 */
+  --menu-item-single-padding: var(--spacing-xsmall);
+  --menu-item-single-gap: 0;
+
+  /* Multi select — padding-x spacing/xsmall, padding-y spacing/xxsmall, gap spacing/xsmall */
+  --menu-item-multiple-padding-x: var(--spacing-xsmall);
+  --menu-item-multiple-padding-y: var(--spacing-xxsmall);
+  --menu-item-multiple-gap: var(--spacing-xsmall);
+
+  --menu-item-fill: var(--select-item-fill);
+  --menu-item-hover-fill: var(--select-item-hover-fill);
+  --menu-item-selected-fill: var(--select-item-selected-fill);
+  --menu-item-focus-ring-width: var(--select-item-focus-ring-width);
+  --menu-item-focus-ring-color: var(--select-item-focus-ring-color);
+  --menu-item-text-fill: var(--select-item-text-fill);
+  --menu-item-text-font-family: var(--select-item-text-font-family);
+  --menu-item-text-font-size: var(--select-item-text-font-size);
+  --menu-item-text-font-weight: var(--select-item-text-font-weight);
+  --menu-item-text-line-height: var(--select-item-text-line-height);
+  --menu-item-text-letter-spacing: var(--select-item-text-letter-spacing);
+  --menu-item-selected-text-fill: var(--select-item-selected-text-fill);
+  --menu-item-selected-text-font-family: var(--select-item-selected-text-font-family);
+  --menu-item-selected-text-font-size: var(--select-item-selected-text-font-size);
+  --menu-item-selected-text-font-weight: var(--select-item-selected-text-font-weight);
+  --menu-item-selected-text-line-height: var(--select-item-selected-text-line-height);
+  --menu-item-selected-text-letter-spacing: var(--select-item-selected-text-letter-spacing);
+  --menu-item-disabled-text-fill: var(--select-item-disabled-text-fill);
+
+  /* Selection/check box/small in multi-select menu items */
+  --menu-item-checkbox-size: var(--checkbox-sm-control-size);
+  --menu-item-checkbox-icon-size: var(--checkbox-sm-icon-size);
+  --menu-item-checkbox-padding: var(--spacing-xxsmall);
+  --menu-item-checkbox-border-width: var(--checkbox-border-width);
+  --menu-item-checkbox-radius: var(--checkbox-radius);
+  --menu-item-checkbox-border-color: var(--checkbox-default-false-border-color);
+  --menu-item-checkbox-fill: var(--checkbox-default-false-fill);
+  --menu-item-checkbox-checked-fill: var(--checkbox-default-true-fill);
+  --menu-item-checkbox-checked-icon-fill: var(--checkbox-checked-icon-fill);
+  --menu-item-checkbox-disabled-border-color: var(--checkbox-disabled-false-border-color);
+  --menu-item-checkbox-disabled-fill: var(--checkbox-disabled-false-fill);
+
+  /* --- Component tokens: combobox --- */
+  /* Figma: Combo Box (9689:4719) — shares menu dropdown list styling with select */
+  --combobox-border-style: var(--border-style-default);
+  --combobox-transition: var(--transition-interactive);
+
+  --combobox-popup-fill: var(--select-popup-fill);
+  --combobox-popup-border-color: var(--select-popup-border-color);
+  --combobox-popup-border-width: var(--select-popup-border-width);
+  --combobox-popup-radius: var(--select-popup-radius);
+  --combobox-popup-padding: var(--select-popup-padding);
+  --combobox-popup-shadow: var(--select-popup-shadow);
+
+  --combobox-item-height: var(--select-item-height);
+  --combobox-item-padding: var(--select-item-padding);
+  --combobox-item-radius: var(--select-item-radius);
+  --combobox-item-fill: var(--select-item-fill);
+  --combobox-item-hover-fill: var(--select-item-hover-fill);
+  --combobox-item-selected-fill: var(--select-item-selected-fill);
+  --combobox-item-focus-ring-width: var(--select-item-focus-ring-width);
+  --combobox-item-focus-ring-color: var(--select-item-focus-ring-color);
+  --combobox-item-text-fill: var(--select-item-text-fill);
+  --combobox-item-text-font-family: var(--select-item-text-font-family);
+  --combobox-item-text-font-size: var(--select-item-text-font-size);
+  --combobox-item-text-font-weight: var(--select-item-text-font-weight);
+  --combobox-item-text-line-height: var(--select-item-text-line-height);
+  --combobox-item-text-letter-spacing: var(--select-item-text-letter-spacing);
+  --combobox-item-selected-text-fill: var(--select-item-selected-text-fill);
+  --combobox-item-selected-text-font-family: var(--select-item-selected-text-font-family);
+  --combobox-item-selected-text-font-size: var(--select-item-selected-text-font-size);
+  --combobox-item-selected-text-font-weight: var(--select-item-selected-text-font-weight);
+  --combobox-item-selected-text-line-height: var(--select-item-selected-text-line-height);
+  --combobox-item-selected-text-letter-spacing: var(--select-item-selected-text-letter-spacing);
+  --combobox-item-disabled-text-fill: var(--select-item-disabled-text-fill);
+
+  /* Figma badge/large chip in Results state */
+  --combobox-chip-gap: var(--spacing-xxsmall);
+  --combobox-chip-padding-x-start: var(--spacing-xsmall);
+  --combobox-chip-padding-x-end: var(--spacing-xxsmall);
+  --combobox-chip-padding-y: var(--spacing-xxsmall);
+  --combobox-chip-radius: var(--radius-xsmall);
+  --combobox-chip-fill: var(--color-semantic-canvas-disabled);
+  --combobox-chip-label-fill: var(--color-semantic-text-neutral-bold);
+  --combobox-chip-label-font-family: var(--paragraph-default-font-family);
+  --combobox-chip-label-font-size: var(--paragraph-default-font-size);
+  --combobox-chip-label-font-weight: var(--paragraph-default-font-weight);
+  --combobox-chip-label-line-height: var(--paragraph-default-line-height);
+  --combobox-chip-label-letter-spacing: var(--paragraph-default-letter-spacing);
+  /* TODO: needs token — Figma chip remove icon is 16px */
+  --combobox-chip-remove-size: 16px;
+  --combobox-chip-remove-fill: var(--color-semantic-text-neutral-bold);
+  --combobox-chips-gap: var(--spacing-xxsmall);
 }

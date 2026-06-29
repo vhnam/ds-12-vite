@@ -1,0 +1,103 @@
+@layer components {
+  .ds-combobox-field {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: var(--combobox-field-gap);
+  }
+
+  .ds-combobox-field__label {
+    width: 100%;
+    color: var(--combobox-field-label-fill);
+    font-family: var(--combobox-field-label-font-family);
+    font-size: var(--combobox-field-label-font-size);
+    font-weight: var(--combobox-field-label-font-weight);
+    line-height: var(--combobox-field-label-line-height);
+    letter-spacing: var(--combobox-field-label-letter-spacing);
+  }
+
+  .ds-combobox-field__helper {
+    width: 100%;
+    color: var(--combobox-field-helper-fill);
+    font-family: var(--combobox-field-helper-font-family);
+    font-size: var(--combobox-field-helper-font-size);
+    font-weight: var(--combobox-field-helper-font-weight);
+    line-height: var(--combobox-field-helper-line-height);
+    letter-spacing: var(--combobox-field-helper-letter-spacing);
+  }
+
+  .ds-combobox-field--sm {
+    --combobox-field-gap: var(--combo-box-small-spacing-item-spacing);
+    --combobox-field-label-fill: var(--combo-box-small-label-enabled-fill);
+    --combobox-field-label-font-family: var(--combo-box-small-label-enabled-font-family);
+    --combobox-field-label-font-size: var(--combo-box-small-label-enabled-font-size);
+    --combobox-field-label-font-weight: var(--combo-box-small-label-enabled-font-weight);
+    --combobox-field-label-line-height: var(--combo-box-small-label-enabled-line-height);
+    --combobox-field-label-letter-spacing: var(--combo-box-small-label-enabled-letter-spacing);
+    --combobox-field-helper-fill: var(--combo-box-small-helper-text-enabled-fill);
+    --combobox-field-helper-font-family: var(--combo-box-small-helper-text-enabled-font-family);
+    --combobox-field-helper-font-size: var(--combo-box-small-helper-text-enabled-font-size);
+    --combobox-field-helper-font-weight: var(--combo-box-small-helper-text-enabled-font-weight);
+    --combobox-field-helper-line-height: var(--combo-box-small-helper-text-enabled-line-height);
+    --combobox-field-helper-letter-spacing: var(
+      --combo-box-small-helper-text-enabled-letter-spacing
+    );
+  }
+
+  .ds-combobox-field--sm:focus-within:not(.ds-combobox-field--disabled):not(
+      .ds-combobox-field--error
+    ) {
+    --combobox-field-label-fill: var(--combo-box-small-label-focused-fill);
+    --combobox-field-helper-fill: var(--combo-box-small-helper-text-focused-fill);
+  }
+
+  .ds-combobox-field--sm.ds-combobox-field--disabled {
+    --combobox-field-label-fill: var(--combo-box-small-label-disabled-fill);
+    --combobox-field-helper-fill: var(--combo-box-small-helper-text-disabled-fill);
+  }
+
+  .ds-combobox-field--sm.ds-combobox-field--error {
+    --combobox-field-label-fill: var(--combo-box-small-label-error-fill);
+    --combobox-field-helper-fill: var(--combo-box-small-helper-text-error-fill);
+  }
+
+  .ds-combobox-field--lg {
+    --combobox-field-gap: var(--combo-box-large-spacing-item-spacing);
+    --combobox-field-label-fill: var(--combo-box-large-label-enabled-fill);
+    --combobox-field-label-font-family: var(--combo-box-large-label-enabled-font-family);
+    --combobox-field-label-font-size: var(--combo-box-large-label-enabled-font-size);
+    --combobox-field-label-font-weight: var(--combo-box-large-label-enabled-font-weight);
+    --combobox-field-label-line-height: var(--combo-box-large-label-enabled-line-height);
+    --combobox-field-label-letter-spacing: var(--combo-box-large-label-enabled-letter-spacing);
+    --combobox-field-helper-fill: var(--combo-box-large-helper-text-enabled-fill);
+    --combobox-field-helper-font-family: var(--combo-box-large-helper-text-enabled-font-family);
+    --combobox-field-helper-font-size: var(--combo-box-large-helper-text-enabled-font-size);
+    --combobox-field-helper-font-weight: var(--combo-box-large-helper-text-enabled-font-weight);
+    --combobox-field-helper-line-height: var(--combo-box-large-helper-text-enabled-line-height);
+    --combobox-field-helper-letter-spacing: var(
+      --combo-box-large-helper-text-enabled-letter-spacing
+    );
+  }
+
+  .ds-combobox-field--lg:focus-within:not(.ds-combobox-field--disabled):not(
+      .ds-combobox-field--error
+    ) {
+    --combobox-field-label-fill: var(--combo-box-large-label-focused-fill);
+    --combobox-field-helper-fill: var(--combo-box-large-helper-text-focused-fill);
+  }
+
+  .ds-combobox-field--lg.ds-combobox-field--disabled {
+    --combobox-field-label-fill: var(--combo-box-large-label-disabled-fill);
+    --combobox-field-helper-fill: var(--combo-box-large-helper-text-disabled-fill);
+  }
+
+  .ds-combobox-field--lg.ds-combobox-field--error {
+    --combobox-field-label-fill: var(--combo-box-large-label-error-fill);
+    --combobox-field-helper-fill: var(--combo-box-large-helper-text-error-fill);
+  }
+
+  .ds-combobox-field--disabled {
+    cursor: var(--cursor-disabled);
+  }
+}

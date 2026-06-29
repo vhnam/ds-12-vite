@@ -23,6 +23,22 @@ export {
   type SelectProps,
 } from "./components/select/index.tsx";
 export {
+  MenuItemCheckbox,
+  MenuItemText,
+  menuItemVariants,
+  menuVariants,
+  type MenuItemCheckboxProps,
+  type MenuItemTextProps,
+  type MenuVariant,
+} from "./components/menu/index.tsx";
+export {
+  Combobox,
+  ComboboxIconSizeContext,
+  comboboxVariants,
+  type ComboboxOption,
+  type ComboboxProps,
+} from "./components/combobox/index.tsx";
+export {
   InputField,
   inputFieldVariants,
   type InputFieldProps,
@@ -32,6 +48,11 @@ export {
   selectFieldVariants,
   type SelectFieldProps,
 } from "./components/fields/select-field/index.tsx";
+export {
+  ComboboxField,
+  comboboxFieldVariants,
+  type ComboboxFieldProps,
+} from "./components/fields/combobox-field/index.tsx";
 export {
   Textarea,
   TextareaIconSizeContext,
