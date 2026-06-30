@@ -67,10 +67,11 @@
   },
   "scripts": {
     "vendor-tokens": "node scripts/vendor-tokens.mjs",
+    "vendor-fonts": "node scripts/vendor-fonts.mjs",
     "build:styles": "node scripts/build-styles.mjs",
-    "prebuild": "node scripts/vendor-tokens.mjs",
+    "prebuild": "node scripts/vendor-tokens.mjs && node scripts/vendor-fonts.mjs",
     "build": "vp pack && node scripts/build-styles.mjs",
-    "dev": "node scripts/vendor-tokens.mjs && vp pack --watch",
+    "dev": "node scripts/vendor-tokens.mjs && node scripts/vendor-fonts.mjs && vp pack --watch",
     "test": "vp test",
     "check": "vp check",
     "prepublishOnly": "vp run build"
@@ -85,6 +86,7 @@
   },
   "devDependencies": {
     "@ds-12/design-tokens": "workspace:*",
+    "@fontsource/nunito-sans": "^5.2.7",
     "@tailwindcss/node": "^4.3.1",
     "@tailwindcss/vite": "catalog:",
     "@tsdown/css": "^0.22.3",

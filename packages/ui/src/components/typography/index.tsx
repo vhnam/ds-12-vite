@@ -138,14 +138,14 @@ type TypographyWeight = 'regular' | 'semibold' | 'bold';
 
 type TypographyState = {
   slot: 'typography';
-  variant: TypographyVariant;
+  variant?: TypographyVariant;
   size?: TypographySize;
   weight?: TypographyWeight;
 };
 
 type TypographyRender = keyof JSX.IntrinsicElements | useRender.RenderProp<TypographyState>;
 
-type TypographyBaseProps = Omit<useRender.ComponentProps<'div'>, 'render'> & {
+type TypographyBaseProps = Omit<useRender.ComponentProps<'p'>, 'render'> & {
   /**
    * Semantic HTML element or render prop. Use a tag name (e.g. `"h1"`, `"p"`, `"label"`)
    * to output the correct element for the chosen variant.

@@ -13,7 +13,6 @@
   "dependencies": {
     "@ds-12/design-tokens": "workspace:*",
     "@ds-12/ui": "workspace:*",
-    "@fontsource/nunito-sans": "catalog:",
     "@material-symbols/font-400": "^0.40.2",
     "@tanstack/react-table": "catalog:",
     "react": "catalog:",

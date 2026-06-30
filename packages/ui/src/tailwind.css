@@ -9,6 +9,7 @@
  */
 @import "tailwindcss";
 @source "./components";
+
 @import "./components/avatar/avatar.css";
 @import "./components/badge/badge.css";
 @import "./components/button/button.css";
@@ -33,5 +34,11 @@
 @import "./components/table/table.css";
 @import "./components/textarea/textarea.css";
 @import "./components/typography/typography.css";
+
 @import "./vendor/tokens/tokens.css";
 @import "./vendor/tokens/theme.css";
+
+@import "./vendor/fonts/400.css";
+@import "./vendor/fonts/500.css";
+@import "./vendor/fonts/600.css";
+@import "./vendor/fonts/700.css";
