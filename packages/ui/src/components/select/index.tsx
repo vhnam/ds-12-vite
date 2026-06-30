@@ -1,37 +1,37 @@
-import { Select as BaseSelect } from "@base-ui/react/select";
-import { cva } from "class-variance-authority";
-import { createContext, type ReactNode } from "react";
+import { Select as BaseSelect } from '@base-ui/react/select';
+import { cva } from 'class-variance-authority';
+import { createContext, type ReactNode } from 'react';
 
-import { cn } from "../../lib/utils.ts";
-import { Icon } from "../icon/index.tsx";
-import "./select.css";
+import { cn } from '../../lib/utils.ts';
+import { Icon } from '../icon/index.tsx';
+import './select.css';
 
 const SELECT_ICON_SIZES = {
   sm: 20,
   lg: 24,
 } as const;
 
-const DEFAULT_LEADING_ICON = "person";
+const DEFAULT_LEADING_ICON = 'person';
 
 export const SelectIconSizeContext = createContext<number | undefined>(undefined);
 
-const selectVariants = cva("ds-select", {
+const selectVariants = cva('ds-select', {
   variants: {
     size: {
-      sm: "ds-select--sm",
-      lg: "ds-select--lg",
+      sm: 'ds-select--sm',
+      lg: 'ds-select--lg',
     },
     disabled: {
-      true: "ds-select--disabled",
+      true: 'ds-select--disabled',
       false: null,
     },
     invalid: {
-      true: "ds-select--error",
+      true: 'ds-select--error',
       false: null,
     },
   },
   defaultVariants: {
-    size: "sm",
+    size: 'sm',
     disabled: false,
     invalid: false,
   },
@@ -53,7 +53,7 @@ export type SelectProps = {
    * Visual size of the select control.
    * @default "sm"
    */
-  size?: "sm" | "lg";
+  size?: 'sm' | 'lg';
   /**
    * Marks the control as invalid and sets validation styling.
    * @default false
@@ -91,20 +91,20 @@ export type SelectProps = {
   /** Marks the field as required in forms. */
   required?: boolean;
   /** ID of the element that describes the select, typically helper text. */
-  "aria-describedby"?: string;
+  'aria-describedby'?: string;
   /**
    * Accessible name when no visible label is provided — use SelectField for labelled forms.
    */
-  "aria-label"?: string;
+  'aria-label'?: string;
 };
 
 /** Single-select dropdown with size variants, optional leading icon, and error and disabled states. */
 export function Select({
   className,
-  size = "sm",
+  size = 'sm',
   invalid = false,
   disabled,
-  placeholder = "Option",
+  placeholder = 'Option',
   options,
   leadingIcon,
   showLeadingIcon = false,
@@ -117,17 +117,15 @@ export function Select({
   id,
   name,
   required,
-  "aria-describedby": ariaDescribedBy,
-  "aria-label": ariaLabel,
+  'aria-describedby': ariaDescribedBy,
+  'aria-label': ariaLabel,
 }: SelectProps) {
-  const resolvedSize = size ?? "sm";
+  const resolvedSize = size ?? 'sm';
   const isDisabled = Boolean(disabled);
   const isInvalid = Boolean(invalid);
   const iconSize = SELECT_ICON_SIZES[resolvedSize];
   const hasLeading = showLeadingIcon;
-  const resolvedLeading = hasLeading
-    ? (leadingIcon ?? <Icon name={DEFAULT_LEADING_ICON} size={iconSize} />)
-    : null;
+  const resolvedLeading = hasLeading ? (leadingIcon ?? <Icon name={DEFAULT_LEADING_ICON} size={iconSize} />) : null;
 
   return (
     <SelectIconSizeContext.Provider value={iconSize}>
@@ -168,8 +166,8 @@ export function Select({
             <BaseSelect.Icon
               className="ds-select__trailing"
               render={(props, { open }) => (
-                <span {...props} className={cn("ds-select__trailing", props.className)}>
-                  <Icon name={open ? "arrow_drop_up" : "arrow_drop_down"} size={iconSize} />
+                <span {...props} className={cn('ds-select__trailing', props.className)}>
+                  <Icon name={open ? 'arrow_drop_up' : 'arrow_drop_down'} size={iconSize} />
                 </span>
               )}
             />
@@ -192,9 +190,7 @@ export function Select({
                     disabled={option.disabled}
                     className="ds-select__item"
                   >
-                    <BaseSelect.ItemText className="ds-select__item-text">
-                      {option.label}
-                    </BaseSelect.ItemText>
+                    <BaseSelect.ItemText className="ds-select__item-text">{option.label}</BaseSelect.ItemText>
                   </BaseSelect.Item>
                 ))}
               </BaseSelect.List>

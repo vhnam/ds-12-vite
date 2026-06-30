@@ -78,8 +78,7 @@
     width: 100%;
     overflow: auto;
     background-color: var(--select-popup-fill);
-    border: var(--select-popup-border-width) var(--select-border-style)
-      var(--select-popup-border-color);
+    border: var(--select-popup-border-width) var(--select-border-style) var(--select-popup-border-color);
     border-radius: var(--select-popup-radius);
     padding: var(--select-popup-padding);
     box-shadow: var(--select-popup-shadow);

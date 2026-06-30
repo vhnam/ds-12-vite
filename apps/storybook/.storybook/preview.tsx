@@ -1,13 +1,13 @@
-import type { Preview } from "@storybook/react-vite";
+import type { Preview } from '@storybook/react-vite';
 
-import "./styles.css";
+import './styles.css';
 
 const preview: Preview = {
   parameters: {
     options: {
       storySort: {
-        order: ["Foundations", "Components", "Fields"],
-        method: "alphabetical-by-kind",
+        order: ['Foundations', 'Components', 'Fields'],
+        method: 'alphabetical-by-kind',
       },
     },
 
@@ -21,7 +21,7 @@ const preview: Preview = {
     // Playwright runs axe in CI (`playwright/storybook.spec.ts`). Keep the addon panel
     // for manual checks without auto-running scans on every story render.
     a11y: {
-      test: "off",
+      test: 'off',
     },
   },
 };

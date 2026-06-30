@@ -106,8 +106,8 @@
     box-sizing: border-box;
     flex-shrink: 0;
     gap: var(--combobox-chip-gap);
-    padding: var(--combobox-chip-padding-y) var(--combobox-chip-padding-x-end)
-      var(--combobox-chip-padding-y) var(--combobox-chip-padding-x-start);
+    padding: var(--combobox-chip-padding-y) var(--combobox-chip-padding-x-end) var(--combobox-chip-padding-y)
+      var(--combobox-chip-padding-x-start);
     border-radius: var(--combobox-chip-radius);
     background-color: var(--combobox-chip-fill);
     color: var(--combobox-chip-label-fill);
@@ -153,8 +153,7 @@
     width: 100%;
     overflow: auto;
     background-color: var(--combobox-popup-fill);
-    border: var(--combobox-popup-border-width) var(--combobox-border-style)
-      var(--combobox-popup-border-color);
+    border: var(--combobox-popup-border-width) var(--combobox-border-style) var(--combobox-popup-border-color);
     border-radius: var(--combobox-popup-radius);
     padding: var(--combobox-popup-padding);
     box-shadow: var(--combobox-popup-shadow);

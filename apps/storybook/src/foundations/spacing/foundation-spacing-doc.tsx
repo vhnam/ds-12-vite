@@ -1,8 +1,5 @@
-import {
-  formatFoundationTokenDisplayName,
-  FOUNDATION_SPACING_TOKEN_GROUPS,
-} from "./parse-theme-spacing.ts";
-import { SpacingTokensDoc } from "./spacing-tokens-doc.tsx";
+import { formatFoundationTokenDisplayName, FOUNDATION_SPACING_TOKEN_GROUPS } from './parse-theme-spacing.ts';
+import { SpacingTokensDoc } from './spacing-tokens-doc.tsx';
 
 function FoundationSpacingDoc() {
   return (

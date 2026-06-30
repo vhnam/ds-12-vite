@@ -1,22 +1,24 @@
-import { SelectField } from "@ds-12/ui/fields/select-field";
-import type { SelectOption } from "@ds-12/ui/fields/select-field";
-import type { ReactNode } from "react";
-import { StoryCaption } from "../../lib/story-presentation.tsx";
+import type { ReactNode } from 'react';
 
-export const SIZES = ["sm", "lg"] as const;
+import { SelectField } from '@ds-12/ui/fields/select-field';
+import type { SelectOption } from '@ds-12/ui/fields/select-field';
+
+import { StoryCaption } from '../../lib/story-presentation.tsx';
+
+export const SIZES = ['sm', 'lg'] as const;
 
 export const DEFAULT_SELECT_OPTIONS: readonly SelectOption[] = [
-  { value: "option-1", label: "Item One" },
-  { value: "option-2", label: "Item Two" },
-  { value: "option-3", label: "Item Three" },
-  { value: "option-4", label: "Item Four" },
-  { value: "option-5", label: "Item Five" },
-  { value: "option-6", label: "Item Six" },
+  { value: 'option-1', label: 'Item One' },
+  { value: 'option-2', label: 'Item Two' },
+  { value: 'option-3', label: 'Item Three' },
+  { value: 'option-4', label: 'Item Four' },
+  { value: 'option-5', label: 'Item Five' },
+  { value: 'option-6', label: 'Item Six' },
 ] as const;
 
 const stateGroupStyle = {
-  display: "flex",
-  flexDirection: "column",
+  display: 'flex',
+  flexDirection: 'column',
   gap: 24,
   width: 343,
 } as const;
@@ -33,7 +35,7 @@ function StateSelectField({
   state,
   size,
 }: {
-  state: "enabled" | "focused" | "disabled" | "error" | "opened";
+  state: 'enabled' | 'focused' | 'disabled' | 'error' | 'opened';
   size: (typeof SIZES)[number];
 }) {
   const field = (
@@ -42,19 +44,19 @@ function StateSelectField({
       showLeadingIcon
       options={DEFAULT_SELECT_OPTIONS}
       placeholder="Option"
-      defaultValue={state === "disabled" || state === "error" ? "option-1" : undefined}
-      disabled={state === "disabled"}
-      invalid={state === "error"}
-      defaultOpen={state === "opened"}
-      helperText={state === "error" ? "This field is required" : "Helper text"}
+      defaultValue={state === 'disabled' || state === 'error' ? 'option-1' : undefined}
+      disabled={state === 'disabled'}
+      invalid={state === 'error'}
+      defaultOpen={state === 'opened'}
+      helperText={state === 'error' ? 'This field is required' : 'Helper text'}
     />
   );
 
-  if (state === "focused") {
+  if (state === 'focused') {
     return <FocusedSelectWrapper>{field}</FocusedSelectWrapper>;
   }
 
-  if (state === "opened") {
+  if (state === 'opened') {
     return <OpenSelectWrapper>{field}</OpenSelectWrapper>;
   }
 

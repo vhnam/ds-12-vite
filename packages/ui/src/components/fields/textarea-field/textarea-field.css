@@ -41,14 +41,12 @@
     --textarea-field-helper-font-size: var(--text-area-small-helper-text-enabled-font-size);
     --textarea-field-helper-font-weight: var(--text-area-small-helper-text-enabled-font-weight);
     --textarea-field-helper-line-height: var(--text-area-small-helper-text-enabled-line-height);
-    --textarea-field-helper-letter-spacing: var(
-      --text-area-small-helper-text-enabled-letter-spacing
-    );
+    --textarea-field-helper-letter-spacing: var(--text-area-small-helper-text-enabled-letter-spacing);
   }
 
-  .ds-textarea-field--sm.ds-textarea-field--default:focus-within:not(
-      .ds-textarea-field--disabled
-    ):not(.ds-textarea-field--error) {
+  .ds-textarea-field--sm.ds-textarea-field--default:focus-within:not(.ds-textarea-field--disabled):not(
+      .ds-textarea-field--error
+    ) {
     --textarea-field-label-fill: var(--text-area-small-label-focused-fill);
     --textarea-field-helper-fill: var(--text-area-small-helper-text-focused-fill);
   }
@@ -77,14 +75,12 @@
     --textarea-field-helper-font-size: var(--text-area-small-helper-text-enabled-font-size);
     --textarea-field-helper-font-weight: var(--text-area-small-helper-text-enabled-font-weight);
     --textarea-field-helper-line-height: var(--text-area-small-helper-text-enabled-line-height);
-    --textarea-field-helper-letter-spacing: var(
-      --text-area-small-helper-text-enabled-letter-spacing
-    );
+    --textarea-field-helper-letter-spacing: var(--text-area-small-helper-text-enabled-letter-spacing);
   }
 
-  .ds-textarea-field--sm.ds-textarea-field--suffix:focus-within:not(
-      .ds-textarea-field--disabled
-    ):not(.ds-textarea-field--error) {
+  .ds-textarea-field--sm.ds-textarea-field--suffix:focus-within:not(.ds-textarea-field--disabled):not(
+      .ds-textarea-field--error
+    ) {
     --textarea-field-label-fill: var(--text-area-small-label-focused-fill);
     --textarea-field-helper-fill: var(--text-area-small-helper-text-focused-fill);
   }
@@ -113,14 +109,12 @@
     --textarea-field-helper-font-size: var(--text-area-large-helper-text-enabled-font-size);
     --textarea-field-helper-font-weight: var(--text-area-large-helper-text-enabled-font-weight);
     --textarea-field-helper-line-height: var(--text-area-large-helper-text-enabled-line-height);
-    --textarea-field-helper-letter-spacing: var(
-      --text-area-large-helper-text-enabled-letter-spacing
-    );
+    --textarea-field-helper-letter-spacing: var(--text-area-large-helper-text-enabled-letter-spacing);
   }
 
-  .ds-textarea-field--lg.ds-textarea-field--default:focus-within:not(
-      .ds-textarea-field--disabled
-    ):not(.ds-textarea-field--error) {
+  .ds-textarea-field--lg.ds-textarea-field--default:focus-within:not(.ds-textarea-field--disabled):not(
+      .ds-textarea-field--error
+    ) {
     --textarea-field-label-fill: var(--text-area-large-label-focused-fill);
     --textarea-field-helper-fill: var(--text-area-large-helper-text-focused-fill);
   }
@@ -149,14 +143,12 @@
     --textarea-field-helper-font-size: var(--text-area-large-helper-text-enabled-font-size);
     --textarea-field-helper-font-weight: var(--text-area-large-helper-text-enabled-font-weight);
     --textarea-field-helper-line-height: var(--text-area-large-helper-text-enabled-line-height);
-    --textarea-field-helper-letter-spacing: var(
-      --text-area-large-helper-text-enabled-letter-spacing
-    );
+    --textarea-field-helper-letter-spacing: var(--text-area-large-helper-text-enabled-letter-spacing);
   }
 
-  .ds-textarea-field--lg.ds-textarea-field--suffix:focus-within:not(
-      .ds-textarea-field--disabled
-    ):not(.ds-textarea-field--error) {
+  .ds-textarea-field--lg.ds-textarea-field--suffix:focus-within:not(.ds-textarea-field--disabled):not(
+      .ds-textarea-field--error
+    ) {
     --textarea-field-label-fill: var(--text-area-large-label-focused-fill);
     --textarea-field-helper-fill: var(--text-area-large-helper-text-focused-fill);
   }

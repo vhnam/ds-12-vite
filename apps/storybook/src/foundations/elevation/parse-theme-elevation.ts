@@ -1,4 +1,4 @@
-import tokensCss from "@ds-12/design-tokens/tokens.generated.css?raw";
+import tokensCss from '@ds-12/design-tokens/tokens.generated.css?raw';
 
 const ELEVATION_TOKEN_PATTERN = /^\s*--(elevation-[0-9]+):/gm;
 
@@ -20,8 +20,8 @@ function parseElevationTokens(css: string): string[] {
 }
 
 function compareElevationTokens(left: string, right: string): number {
-  const levelLeft = Number(left.slice("elevation-".length));
-  const levelRight = Number(right.slice("elevation-".length));
+  const levelLeft = Number(left.slice('elevation-'.length));
+  const levelRight = Number(right.slice('elevation-'.length));
 
   if (!Number.isNaN(levelLeft) && !Number.isNaN(levelRight)) {
     return levelLeft - levelRight;
@@ -31,16 +31,16 @@ function compareElevationTokens(left: string, right: string): number {
 }
 
 export function formatFoundationTokenDisplayName(token: string): string {
-  return token.replace(/^elevation-/, "Level ");
+  return token.replace(/^elevation-/, 'Level ');
 }
 
 const parsedTokens = parseElevationTokens(tokensCss).sort(compareElevationTokens);
 
 export const FOUNDATION_ELEVATION_TOKEN_GROUPS: ElevationTokenGroup[] = [
   {
-    id: "elevation",
-    label: "elevation",
-    description: "Layered box-shadow values for surfaces, cards, popovers, and floating elements.",
+    id: 'elevation',
+    label: 'elevation',
+    description: 'Layered box-shadow values for surfaces, cards, popovers, and floating elements.',
     tokens: parsedTokens,
   },
 ];

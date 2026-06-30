@@ -44,9 +44,7 @@
     --input-field-helper-letter-spacing: var(--text-field-small-helper-text-enabled-letter-spacing);
   }
 
-  .ds-input-field--sm.ds-input-field--default:focus-within:not(.ds-input-field--disabled):not(
-      .ds-input-field--error
-    ) {
+  .ds-input-field--sm.ds-input-field--default:focus-within:not(.ds-input-field--disabled):not(.ds-input-field--error) {
     --input-field-label-fill: var(--text-field-small-label-focused-fill);
     --input-field-helper-fill: var(--text-field-small-helper-text-focused-fill);
   }
@@ -71,24 +69,14 @@
     --input-field-label-line-height: var(--text-field-suffix-small-label-enabled-line-height);
     --input-field-label-letter-spacing: var(--text-field-suffix-small-label-enabled-letter-spacing);
     --input-field-helper-fill: var(--text-field-suffix-small-helper-text-enabled-fill);
-    --input-field-helper-font-family: var(
-      --text-field-suffix-small-helper-text-enabled-font-family
-    );
+    --input-field-helper-font-family: var(--text-field-suffix-small-helper-text-enabled-font-family);
     --input-field-helper-font-size: var(--text-field-suffix-small-helper-text-enabled-font-size);
-    --input-field-helper-font-weight: var(
-      --text-field-suffix-small-helper-text-enabled-font-weight
-    );
-    --input-field-helper-line-height: var(
-      --text-field-suffix-small-helper-text-enabled-line-height
-    );
-    --input-field-helper-letter-spacing: var(
-      --text-field-suffix-small-helper-text-enabled-letter-spacing
-    );
+    --input-field-helper-font-weight: var(--text-field-suffix-small-helper-text-enabled-font-weight);
+    --input-field-helper-line-height: var(--text-field-suffix-small-helper-text-enabled-line-height);
+    --input-field-helper-letter-spacing: var(--text-field-suffix-small-helper-text-enabled-letter-spacing);
   }
 
-  .ds-input-field--sm.ds-input-field--suffix:focus-within:not(.ds-input-field--disabled):not(
-      .ds-input-field--error
-    ) {
+  .ds-input-field--sm.ds-input-field--suffix:focus-within:not(.ds-input-field--disabled):not(.ds-input-field--error) {
     --input-field-label-fill: var(--text-field-suffix-small-label-focused-fill);
     --input-field-helper-fill: var(--text-field-suffix-small-helper-text-focused-fill);
   }
@@ -120,9 +108,7 @@
     --input-field-helper-letter-spacing: var(--text-field-large-helper-text-enabled-letter-spacing);
   }
 
-  .ds-input-field--lg.ds-input-field--default:focus-within:not(.ds-input-field--disabled):not(
-      .ds-input-field--error
-    ) {
+  .ds-input-field--lg.ds-input-field--default:focus-within:not(.ds-input-field--disabled):not(.ds-input-field--error) {
     --input-field-label-fill: var(--text-field-large-label-focused-fill);
     --input-field-helper-fill: var(--text-field-large-helper-text-focused-fill);
   }
@@ -147,24 +133,14 @@
     --input-field-label-line-height: var(--text-field-suffix-large-label-enabled-line-height);
     --input-field-label-letter-spacing: var(--text-field-suffix-large-label-enabled-letter-spacing);
     --input-field-helper-fill: var(--text-field-suffix-large-helper-text-enabled-fill);
-    --input-field-helper-font-family: var(
-      --text-field-suffix-large-helper-text-enabled-font-family
-    );
+    --input-field-helper-font-family: var(--text-field-suffix-large-helper-text-enabled-font-family);
     --input-field-helper-font-size: var(--text-field-suffix-large-helper-text-enabled-font-size);
-    --input-field-helper-font-weight: var(
-      --text-field-suffix-large-helper-text-enabled-font-weight
-    );
-    --input-field-helper-line-height: var(
-      --text-field-suffix-large-helper-text-enabled-line-height
-    );
-    --input-field-helper-letter-spacing: var(
-      --text-field-suffix-large-helper-text-enabled-letter-spacing
-    );
+    --input-field-helper-font-weight: var(--text-field-suffix-large-helper-text-enabled-font-weight);
+    --input-field-helper-line-height: var(--text-field-suffix-large-helper-text-enabled-line-height);
+    --input-field-helper-letter-spacing: var(--text-field-suffix-large-helper-text-enabled-letter-spacing);
   }
 
-  .ds-input-field--lg.ds-input-field--suffix:focus-within:not(.ds-input-field--disabled):not(
-      .ds-input-field--error
-    ) {
+  .ds-input-field--lg.ds-input-field--suffix:focus-within:not(.ds-input-field--disabled):not(.ds-input-field--error) {
     --input-field-label-fill: var(--text-field-suffix-large-label-focused-fill);
     --input-field-helper-fill: var(--text-field-suffix-large-helper-text-focused-fill);
   }

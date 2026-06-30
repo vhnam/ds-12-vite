@@ -1,62 +1,62 @@
-import { Input as BaseInput } from "@base-ui/react/input";
-import { cva } from "class-variance-authority";
-import { createContext, type ComponentProps, type ReactNode } from "react";
+import { Input as BaseInput } from '@base-ui/react/input';
+import { cva } from 'class-variance-authority';
+import { createContext, type ComponentProps, type ReactNode } from 'react';
 
-import { cn } from "../../lib/utils.ts";
-import { Icon } from "../icon/index.tsx";
-import "./input.css";
+import { cn } from '../../lib/utils.ts';
+import { Icon } from '../icon/index.tsx';
+import './input.css';
 
 const INPUT_ICON_SIZES = {
   sm: 20,
   lg: 24,
 } as const;
 
-const DEFAULT_LEADING_ICON = "person";
-const DEFAULT_TRAILING_ICON = "visibility";
-const ERROR_TRAILING_ICON = "error";
+const DEFAULT_LEADING_ICON = 'person';
+const DEFAULT_TRAILING_ICON = 'visibility';
+const ERROR_TRAILING_ICON = 'error';
 
 export const InputIconSizeContext = createContext<number | undefined>(undefined);
 
-const inputVariants = cva("ds-input", {
+const inputVariants = cva('ds-input', {
   variants: {
     size: {
-      sm: "ds-input--sm",
-      lg: "ds-input--lg",
+      sm: 'ds-input--sm',
+      lg: 'ds-input--lg',
     },
     variant: {
-      default: "ds-input--default",
-      suffix: "ds-input--suffix",
+      default: 'ds-input--default',
+      suffix: 'ds-input--suffix',
     },
     disabled: {
-      true: "ds-input--disabled",
+      true: 'ds-input--disabled',
       false: null,
     },
     invalid: {
-      true: "ds-input--error",
+      true: 'ds-input--error',
       false: null,
     },
   },
   defaultVariants: {
-    size: "sm",
-    variant: "default",
+    size: 'sm',
+    variant: 'default',
     disabled: false,
     invalid: false,
   },
 });
 
-export type InputProps = Omit<ComponentProps<typeof BaseInput>, "className" | "size"> & {
+export type InputProps = Omit<ComponentProps<typeof BaseInput>, 'className' | 'size'> & {
   /** Additional CSS class names applied to the input wrapper. */
   className?: string;
   /**
    * Visual size of the input control.
    * @default "sm"
    */
-  size?: "sm" | "lg";
+  size?: 'sm' | 'lg';
   /**
    * Layout variant — use `"suffix"` to show inline text after the value (e.g. units).
    * @default "default"
    */
-  variant?: "default" | "suffix";
+  variant?: 'default' | 'suffix';
   /**
    * Marks the field as invalid and sets `aria-invalid`.
    * @default false
@@ -83,8 +83,8 @@ export type InputProps = Omit<ComponentProps<typeof BaseInput>, "className" | "s
 /** Single-line text field with size and suffix variants, optional leading and trailing icons, and error and disabled states. */
 export function Input({
   className,
-  size = "sm",
-  variant = "default",
+  size = 'sm',
+  variant = 'default',
   invalid = false,
   disabled,
   leadingIcon,
@@ -92,31 +92,23 @@ export function Input({
   showLeadingIcon = false,
   showTrailingIcon = false,
   suffix,
-  placeholder = "Input",
+  placeholder = 'Input',
   ...props
 }: InputProps) {
-  const resolvedSize = size ?? "sm";
-  const resolvedVariant = variant ?? "default";
+  const resolvedSize = size ?? 'sm';
+  const resolvedVariant = variant ?? 'default';
   const isDisabled = Boolean(disabled);
   const isInvalid = Boolean(invalid);
   const iconSize = INPUT_ICON_SIZES[resolvedSize];
   const hasLeading = showLeadingIcon;
-  const hasTrailing = showTrailingIcon && resolvedVariant === "default";
-  const hasSuffix = resolvedVariant === "suffix" && suffix !== undefined;
+  const hasTrailing = showTrailingIcon && resolvedVariant === 'default';
+  const hasSuffix = resolvedVariant === 'suffix' && suffix !== undefined;
 
-  const resolvedLeading = hasLeading
-    ? (leadingIcon ?? <Icon name={DEFAULT_LEADING_ICON} size={iconSize} />)
-    : null;
+  const resolvedLeading = hasLeading ? (leadingIcon ?? <Icon name={DEFAULT_LEADING_ICON} size={iconSize} />) : null;
 
   const defaultTrailingIcon = isInvalid ? ERROR_TRAILING_ICON : DEFAULT_TRAILING_ICON;
   const resolvedTrailing = hasTrailing
-    ? (trailingIcon ?? (
-        <Icon
-          name={defaultTrailingIcon}
-          size={iconSize}
-          variant={isInvalid ? "filled" : "outlined"}
-        />
-      ))
+    ? (trailingIcon ?? <Icon name={defaultTrailingIcon} size={iconSize} variant={isInvalid ? 'filled' : 'outlined'} />)
     : null;
 
   return (

@@ -41,8 +41,7 @@
   }
 
   .ds-checkbox:focus-visible {
-    outline: var(--checkbox-focus-ring-width) var(--checkbox-focus-ring-style)
-      var(--checkbox-focus-ring-color);
+    outline: var(--checkbox-focus-ring-width) var(--checkbox-focus-ring-style) var(--checkbox-focus-ring-color);
     outline-offset: var(--checkbox-focus-ring-offset);
     border-radius: var(--radius-xsmall);
   }

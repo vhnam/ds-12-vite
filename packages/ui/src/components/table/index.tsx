@@ -1,59 +1,59 @@
-import { Button as BaseButton } from "@base-ui/react/button";
-import { cva, type VariantProps } from "class-variance-authority";
-import type { ComponentProps, ReactNode } from "react";
+import { Button as BaseButton } from '@base-ui/react/button';
+import { cva, type VariantProps } from 'class-variance-authority';
+import type { ComponentProps, ReactNode } from 'react';
 
-import { cn } from "../../lib/utils.ts";
-import { Icon } from "../icon/index.tsx";
-import "./table.css";
+import { cn } from '../../lib/utils.ts';
+import { Icon } from '../icon/index.tsx';
+import './table.css';
 
-const tableHeadVariants = cva("ds-table__head-cell", {
+const tableHeadVariants = cva('ds-table__head-cell', {
   variants: {
     align: {
       start: null,
-      end: "ds-table__head-cell--end",
+      end: 'ds-table__head-cell--end',
     },
     variant: {
       default: null,
-      avatar: "ds-table__head-cell--avatar",
+      avatar: 'ds-table__head-cell--avatar',
     },
   },
   defaultVariants: {
-    align: "start",
-    variant: "default",
+    align: 'start',
+    variant: 'default',
   },
 });
 
-const tableCellVariants = cva("ds-table__cell", {
+const tableCellVariants = cva('ds-table__cell', {
   variants: {
     variant: {
       default: null,
-      stacked: "ds-table__cell--stacked",
-      avatar: "ds-table__cell--avatar",
-      custom: "ds-table__cell--custom",
+      stacked: 'ds-table__cell--stacked',
+      avatar: 'ds-table__cell--avatar',
+      custom: 'ds-table__cell--custom',
     },
     align: {
       start: null,
-      end: "ds-table__cell--end",
+      end: 'ds-table__cell--end',
     },
     state: {
-      default: "ds-table__cell--default",
-      hovered: "ds-table__cell--hovered",
-      focused: "ds-table__cell--focused",
-      highlighted: "ds-table__cell--highlighted",
-      disabled: "ds-table__cell--disabled",
+      default: 'ds-table__cell--default',
+      hovered: 'ds-table__cell--hovered',
+      focused: 'ds-table__cell--focused',
+      highlighted: 'ds-table__cell--highlighted',
+      disabled: 'ds-table__cell--disabled',
     },
   },
   defaultVariants: {
-    variant: "default",
-    align: "start",
-    state: "default",
+    variant: 'default',
+    align: 'start',
+    state: 'default',
   },
 });
 
-const tableRowVariants = cva("ds-table__row", {
+const tableRowVariants = cva('ds-table__row', {
   variants: {
     interactive: {
-      true: "ds-table__row--interactive",
+      true: 'ds-table__row--interactive',
       false: null,
     },
   },
@@ -62,53 +62,50 @@ const tableRowVariants = cva("ds-table__row", {
   },
 });
 
-type TableCellVariant = NonNullable<VariantProps<typeof tableCellVariants>["variant"]>;
-type TableCellState = NonNullable<VariantProps<typeof tableCellVariants>["state"]>;
+type TableCellVariant = NonNullable<VariantProps<typeof tableCellVariants>['variant']>;
+type TableCellState = NonNullable<VariantProps<typeof tableCellVariants>['state']>;
 
-export type TableSortDirection = "ascending" | "descending" | "none";
+export type TableSortDirection = 'ascending' | 'descending' | 'none';
 
-function resolveAriaSort(
-  sortable: boolean,
-  sortDirection?: TableSortDirection,
-): TableSortDirection | undefined {
+function resolveAriaSort(sortable: boolean, sortDirection?: TableSortDirection): TableSortDirection | undefined {
   if (!sortable) {
     return undefined;
   }
 
-  return sortDirection ?? "none";
+  return sortDirection ?? 'none';
 }
 
 function resolveSortLabel(heading: string, sortDirection?: TableSortDirection) {
-  if (sortDirection === "ascending") {
+  if (sortDirection === 'ascending') {
     return `${heading}, sorted ascending`;
   }
 
-  if (sortDirection === "descending") {
+  if (sortDirection === 'descending') {
     return `${heading}, sorted descending`;
   }
 
   return `Sort by ${heading}`;
 }
 
-export type TableProps = ComponentProps<"table"> & {
+export type TableProps = ComponentProps<'table'> & {
   /** Additional CSS class names applied to the table element. */
   className?: string;
 };
 
-export type TableHeaderProps = ComponentProps<"thead"> & {
+export type TableHeaderProps = ComponentProps<'thead'> & {
   className?: string;
 };
 
-export type TableBodyProps = ComponentProps<"tbody"> & {
+export type TableBodyProps = ComponentProps<'tbody'> & {
   className?: string;
 };
 
-export type TableRowProps = ComponentProps<"tr"> &
+export type TableRowProps = ComponentProps<'tr'> &
   VariantProps<typeof tableRowVariants> & {
     className?: string;
   };
 
-export type TableHeadProps = Omit<ComponentProps<"th">, "align"> &
+export type TableHeadProps = Omit<ComponentProps<'th'>, 'align'> &
   VariantProps<typeof tableHeadVariants> & {
     className?: string;
     /** Optional avatar rendered before the heading label when `variant` is `"avatar"`. */
@@ -120,10 +117,10 @@ export type TableHeadProps = Omit<ComponentProps<"th">, "align"> &
     /** Accessible label for the sort button. Defaults based on `children` and `sortDirection`. */
     sortLabel?: string;
     /** Called when the sort button is activated. Wire to TanStack's `column.getToggleSortingHandler()`. */
-    onSort?: ComponentProps<typeof BaseButton>["onClick"];
+    onSort?: ComponentProps<typeof BaseButton>['onClick'];
   };
 
-export type TableCellProps = Omit<ComponentProps<"td">, "align"> &
+export type TableCellProps = Omit<ComponentProps<'td'>, 'align'> &
   VariantProps<typeof tableCellVariants> & {
     className?: string;
     /** Primary text for default, stacked, and avatar variants. */
@@ -139,7 +136,7 @@ export type TableCellProps = Omit<ComponentProps<"td">, "align"> &
 /** Bordered data table container with token-driven row, header, and cell styling. */
 export function Table({ className, children, ...props }: TableProps) {
   return (
-    <table className={cn("ds-table", className)} {...props}>
+    <table className={cn('ds-table', className)} {...props}>
       {children}
     </table>
   );
@@ -148,7 +145,7 @@ export function Table({ className, children, ...props }: TableProps) {
 /** Table header section (`thead`). */
 export function TableHeader({ className, children, ...props }: TableHeaderProps) {
   return (
-    <thead className={cn("ds-table__head", className)} {...props}>
+    <thead className={cn('ds-table__head', className)} {...props}>
       {children}
     </thead>
   );
@@ -157,7 +154,7 @@ export function TableHeader({ className, children, ...props }: TableHeaderProps)
 /** Table body section (`tbody`). */
 export function TableBody({ className, children, ...props }: TableBodyProps) {
   return (
-    <tbody className={cn("ds-table__body", className)} {...props}>
+    <tbody className={cn('ds-table__body', className)} {...props}>
       {children}
     </tbody>
   );
@@ -173,15 +170,15 @@ export function TableRow({ className, interactive, children, ...props }: TableRo
 }
 
 function resolveSortIcon(sortDirection?: TableSortDirection) {
-  if (sortDirection === "ascending") {
-    return "keyboard_arrow_up";
+  if (sortDirection === 'ascending') {
+    return 'keyboard_arrow_up';
   }
 
-  if (sortDirection === "descending") {
-    return "keyboard_arrow_down";
+  if (sortDirection === 'descending') {
+    return 'keyboard_arrow_down';
   }
 
-  return "unfold_more";
+  return 'unfold_more';
 }
 
 function TableSortButton({
@@ -191,15 +188,10 @@ function TableSortButton({
 }: {
   label: string;
   sortDirection?: TableSortDirection;
-  onClick?: ComponentProps<typeof BaseButton>["onClick"];
+  onClick?: ComponentProps<typeof BaseButton>['onClick'];
 }) {
   return (
-    <BaseButton
-      type="button"
-      className="ds-table__sort-button"
-      aria-label={label}
-      onClick={onClick}
-    >
+    <BaseButton type="button" className="ds-table__sort-button" aria-label={label} onClick={onClick}>
       <Icon name={resolveSortIcon(sortDirection)} size={20} />
     </BaseButton>
   );
@@ -208,8 +200,8 @@ function TableSortButton({
 /** Column header cell with optional sort button and avatar. */
 export function TableHead({
   className,
-  align = "start",
-  variant = "default",
+  align = 'start',
+  variant = 'default',
   avatar,
   sortable = false,
   sortDirection,
@@ -218,33 +210,22 @@ export function TableHead({
   onSort,
   ...props
 }: TableHeadProps) {
-  const resolvedAlign = align ?? "start";
-  const resolvedVariant = variant ?? "default";
-  const heading =
-    typeof children === "string" || typeof children === "number" ? String(children) : "column";
+  const resolvedAlign = align ?? 'start';
+  const resolvedVariant = variant ?? 'default';
+  const heading = typeof children === 'string' || typeof children === 'number' ? String(children) : 'column';
   const resolvedSortLabel = sortLabel ?? resolveSortLabel(heading, sortDirection);
 
   return (
     <th
       scope="col"
-      className={cn(
-        tableHeadVariants({ align: resolvedAlign, variant: resolvedVariant, className }),
-      )}
+      className={cn(tableHeadVariants({ align: resolvedAlign, variant: resolvedVariant, className }))}
       aria-sort={resolveAriaSort(sortable, sortDirection)}
       {...props}
     >
       <div className="ds-table__head-inner">
-        {resolvedVariant === "avatar" && avatar ? (
-          <span className="ds-table__head-avatar">{avatar}</span>
-        ) : null}
+        {resolvedVariant === 'avatar' && avatar ? <span className="ds-table__head-avatar">{avatar}</span> : null}
         <span className="ds-table__head-label">{children}</span>
-        {sortable ? (
-          <TableSortButton
-            label={resolvedSortLabel}
-            sortDirection={sortDirection}
-            onClick={onSort}
-          />
-        ) : null}
+        {sortable ? <TableSortButton label={resolvedSortLabel} sortDirection={sortDirection} onClick={onSort} /> : null}
       </div>
     </th>
   );
@@ -267,16 +248,16 @@ function TableCellContent({
   showChevron?: boolean;
   children?: ReactNode;
 }) {
-  const isDisabled = state === "disabled";
+  const isDisabled = state === 'disabled';
 
-  if (variant === "custom") {
+  if (variant === 'custom') {
     return <div className="ds-table__cell-slot">{children}</div>;
   }
 
-  if (variant === "stacked" || variant === "avatar") {
+  if (variant === 'stacked' || variant === 'avatar') {
     return (
       <>
-        {variant === "avatar" && avatar ? avatar : null}
+        {variant === 'avatar' && avatar ? avatar : null}
         <div className="ds-table__cell-stack">
           {text ? <span className="ds-table__cell-primary">{text}</span> : null}
           {subText ? <span className="ds-table__cell-subtext">{subText}</span> : null}
@@ -291,9 +272,7 @@ function TableCellContent({
   return (
     <>
       {text || children ? <span className="ds-table__cell-text">{text ?? children}</span> : null}
-      {showChevron && !isDisabled ? (
-        <Icon name="chevron_forward" size={20} className="ds-table__cell-chevron" />
-      ) : null}
+      {showChevron && !isDisabled ? <Icon name="chevron_forward" size={20} className="ds-table__cell-chevron" /> : null}
     </>
   );
 }
@@ -301,9 +280,9 @@ function TableCellContent({
 /** Table body cell supporting text, stacked, avatar, and custom content layouts. */
 export function TableCell({
   className,
-  variant = "default",
-  align = "start",
-  state = "default",
+  variant = 'default',
+  align = 'start',
+  state = 'default',
   text,
   subText,
   avatar,
@@ -311,10 +290,10 @@ export function TableCell({
   children,
   ...props
 }: TableCellProps) {
-  const resolvedVariant = variant ?? "default";
-  const resolvedAlign = align ?? "start";
-  const resolvedState = state ?? "default";
-  const usesChildrenOnly = resolvedVariant === "custom" || (resolvedVariant === "default" && !text);
+  const resolvedVariant = variant ?? 'default';
+  const resolvedAlign = align ?? 'start';
+  const resolvedState = state ?? 'default';
+  const usesChildrenOnly = resolvedVariant === 'custom' || (resolvedVariant === 'default' && !text);
 
   return (
     <td
@@ -340,9 +319,7 @@ export function TableCell({
           {usesChildrenOnly ? children : undefined}
         </TableCellContent>
       </div>
-      {resolvedState === "focused" ? (
-        <span className="ds-table__cell-focus-ring" aria-hidden />
-      ) : null}
+      {resolvedState === 'focused' ? <span className="ds-table__cell-focus-ring" aria-hidden /> : null}
     </td>
   );
 }

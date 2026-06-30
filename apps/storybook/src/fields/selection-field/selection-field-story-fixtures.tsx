@@ -1,15 +1,17 @@
-import { CheckboxField } from "@ds-12/ui/fields/checkbox-field";
-import { RadioField } from "@ds-12/ui/fields/radio-field";
-import { SwitchField } from "@ds-12/ui/fields/switch-field";
-import { RadioGroup } from "@ds-12/ui/radio";
-import type { ReactNode } from "react";
-import { StoryCaption } from "../../lib/story-presentation.tsx";
+import type { ReactNode } from 'react';
 
-export const SIZES = ["sm", "lg"] as const;
+import { CheckboxField } from '@ds-12/ui/fields/checkbox-field';
+import { RadioField } from '@ds-12/ui/fields/radio-field';
+import { SwitchField } from '@ds-12/ui/fields/switch-field';
+import { RadioGroup } from '@ds-12/ui/radio';
+
+import { StoryCaption } from '../../lib/story-presentation.tsx';
+
+export const SIZES = ['sm', 'lg'] as const;
 
 const stateGroupStyle = {
-  display: "flex",
-  flexDirection: "column",
+  display: 'flex',
+  flexDirection: 'column',
   gap: 24,
   width: 327,
 } as const;
@@ -20,17 +22,17 @@ function StateCheckboxField({
   state,
   layout,
 }: {
-  state: "enabled" | "disabled" | "error";
-  layout: "default" | "supporting-text" | "input";
+  state: 'enabled' | 'disabled' | 'error';
+  layout: 'default' | 'supporting-text' | 'input';
 }) {
   return (
     <CheckboxField
       size="sm"
-      disabled={state === "disabled"}
-      invalid={state === "error"}
-      showSupportingText={layout === "supporting-text"}
+      disabled={state === 'disabled'}
+      invalid={state === 'error'}
+      showSupportingText={layout === 'supporting-text'}
       showSuffix={false}
-      showInput={layout === "input"}
+      showInput={layout === 'input'}
     />
   );
 }
@@ -39,17 +41,17 @@ function StateSwitchField({
   state,
   layout,
 }: {
-  state: "enabled" | "disabled" | "error";
-  layout: "default" | "supporting-text" | "input";
+  state: 'enabled' | 'disabled' | 'error';
+  layout: 'default' | 'supporting-text' | 'input';
 }) {
   return (
     <SwitchField
       size="sm"
-      disabled={state === "disabled"}
-      invalid={state === "error"}
-      showSupportingText={layout === "supporting-text"}
+      disabled={state === 'disabled'}
+      invalid={state === 'error'}
+      showSupportingText={layout === 'supporting-text'}
       showSuffix={false}
-      showInput={layout === "input"}
+      showInput={layout === 'input'}
     />
   );
 }
@@ -58,19 +60,19 @@ function StateRadioField({
   state,
   layout,
 }: {
-  state: "enabled" | "disabled" | "error";
-  layout: "default" | "supporting-text" | "input";
+  state: 'enabled' | 'disabled' | 'error';
+  layout: 'default' | 'supporting-text' | 'input';
 }) {
   return (
     <RadioGroup defaultValue="">
       <RadioField
         value="option"
         size="sm"
-        disabled={state === "disabled"}
-        invalid={state === "error"}
-        showSupportingText={layout === "supporting-text"}
+        disabled={state === 'disabled'}
+        invalid={state === 'error'}
+        showSupportingText={layout === 'supporting-text'}
         showSuffix={false}
-        showInput={layout === "input"}
+        showInput={layout === 'input'}
       />
     </RadioGroup>
   );
@@ -79,59 +81,41 @@ function StateRadioField({
 function SelectionFieldStatesShowcaseInner({
   renderField,
 }: {
-  renderField: (state: "enabled" | "disabled" | "error") => ReactNode;
+  renderField: (state: 'enabled' | 'disabled' | 'error') => ReactNode;
 }) {
   return (
     <div style={stateGroupStyle}>
       <div>
         <StoryCaption>enabled</StoryCaption>
-        {renderField("enabled")}
+        {renderField('enabled')}
       </div>
       <div>
         <StoryCaption>disabled</StoryCaption>
-        {renderField("disabled")}
+        {renderField('disabled')}
       </div>
       <div>
         <StoryCaption>error</StoryCaption>
-        {renderField("error")}
+        {renderField('error')}
       </div>
     </div>
   );
 }
 
-export function CheckboxFieldStatesShowcase({
-  layout,
-}: {
-  layout: "default" | "supporting-text" | "input";
-}) {
+export function CheckboxFieldStatesShowcase({ layout }: { layout: 'default' | 'supporting-text' | 'input' }) {
   return (
-    <SelectionFieldStatesShowcaseInner
-      renderField={(state) => <StateCheckboxField state={state} layout={layout} />}
-    />
+    <SelectionFieldStatesShowcaseInner renderField={(state) => <StateCheckboxField state={state} layout={layout} />} />
   );
 }
 
-export function RadioFieldStatesShowcase({
-  layout,
-}: {
-  layout: "default" | "supporting-text" | "input";
-}) {
+export function RadioFieldStatesShowcase({ layout }: { layout: 'default' | 'supporting-text' | 'input' }) {
   return (
-    <SelectionFieldStatesShowcaseInner
-      renderField={(state) => <StateRadioField state={state} layout={layout} />}
-    />
+    <SelectionFieldStatesShowcaseInner renderField={(state) => <StateRadioField state={state} layout={layout} />} />
   );
 }
 
-export function SwitchFieldStatesShowcase({
-  layout,
-}: {
-  layout: "default" | "supporting-text" | "input";
-}) {
+export function SwitchFieldStatesShowcase({ layout }: { layout: 'default' | 'supporting-text' | 'input' }) {
   return (
-    <SelectionFieldStatesShowcaseInner
-      renderField={(state) => <StateSwitchField state={state} layout={layout} />}
-    />
+    <SelectionFieldStatesShowcaseInner renderField={(state) => <StateSwitchField state={state} layout={layout} />} />
   );
 }
 

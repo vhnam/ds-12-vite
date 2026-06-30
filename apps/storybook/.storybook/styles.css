@@ -41,29 +41,25 @@ body {
   border-bottom-color: var(--input-focus-border-color);
 }
 
-[data-story-input-state="focus"]
-  .ds-input--sm.ds-input--default:not(.ds-input--disabled):not(.ds-input--error) {
+[data-story-input-state="focus"] .ds-input--sm.ds-input--default:not(.ds-input--disabled):not(.ds-input--error) {
   --input-text-fill: var(--text-field-small-box-hint-focused-fill);
   --input-placeholder-fill: var(--text-field-small-box-hint-focused-fill);
   --input-icon-fill: var(--text-field-small-box-icon-focused-fill);
 }
 
-[data-story-input-state="focus"]
-  .ds-input--sm.ds-input--suffix:not(.ds-input--disabled):not(.ds-input--error) {
+[data-story-input-state="focus"] .ds-input--sm.ds-input--suffix:not(.ds-input--disabled):not(.ds-input--error) {
   --input-text-fill: var(--text-field-suffix-small-box-typography-focused-fill);
   --input-placeholder-fill: var(--text-field-small-box-hint-focused-fill);
   --input-icon-fill: var(--text-field-suffix-small-box-icon-focused-fill);
 }
 
-[data-story-input-state="focus"]
-  .ds-input--lg.ds-input--default:not(.ds-input--disabled):not(.ds-input--error) {
+[data-story-input-state="focus"] .ds-input--lg.ds-input--default:not(.ds-input--disabled):not(.ds-input--error) {
   --input-text-fill: var(--text-field-large-box-hint-focused-fill);
   --input-placeholder-fill: var(--text-field-large-box-hint-focused-fill);
   --input-icon-fill: var(--text-field-large-box-icon-focused-fill);
 }
 
-[data-story-input-state="focus"]
-  .ds-input--lg.ds-input--suffix:not(.ds-input--disabled):not(.ds-input--error) {
+[data-story-input-state="focus"] .ds-input--lg.ds-input--suffix:not(.ds-input--disabled):not(.ds-input--error) {
   --input-text-fill: var(--text-field-suffix-large-box-typography-focused-fill);
   --input-placeholder-fill: var(--text-field-large-box-hint-focused-fill);
   --input-icon-fill: var(--text-field-suffix-large-box-icon-focused-fill);
@@ -75,8 +71,7 @@ body {
 }
 
 [data-story-input-state="focus"] .ds-textarea:not(.ds-textarea--disabled) {
-  outline: var(--textarea-focus-ring-width) var(--textarea-focus-ring-style)
-    var(--textarea-focus-ring-color);
+  outline: var(--textarea-focus-ring-width) var(--textarea-focus-ring-style) var(--textarea-focus-ring-color);
   outline-offset: var(--textarea-focus-ring-offset);
 }
 
@@ -104,9 +99,7 @@ body {
   --textarea-icon-fill: var(--text-area-large-box-icon-focused-fill);
 }
 
-[data-story-select-state="focus"]
-  .ds-select--sm
-  .ds-select__trigger:not(:disabled):not(.ds-select--error) {
+[data-story-select-state="focus"] .ds-select--sm .ds-select__trigger:not(:disabled):not(.ds-select--error) {
   --select-fill: var(--drop-down-small-box-properties-focused-fill);
   --select-border-color: var(--drop-down-small-box-properties-focused-border-color);
   --select-value-fill: var(--drop-down-small-box-hint-focused-fill);
@@ -114,9 +107,7 @@ body {
   --select-icon-fill: var(--drop-down-small-box-icon-focused-fill);
 }
 
-[data-story-select-state="focus"]
-  .ds-select--lg
-  .ds-select__trigger:not(:disabled):not(.ds-select--error) {
+[data-story-select-state="focus"] .ds-select--lg .ds-select__trigger:not(:disabled):not(.ds-select--error) {
   --select-fill: var(--drop-down-large-box-properties-focused-fill);
   --select-border-color: var(--drop-down-large-box-properties-focused-border-color);
   --select-value-fill: var(--drop-down-large-box-hint-focused-fill);
@@ -124,14 +115,12 @@ body {
   --select-icon-fill: var(--drop-down-large-box-icon-focused-fill);
 }
 
-[data-story-select-state="focus"]
-  .ds-select-field--sm:not(.ds-select-field--disabled):not(.ds-select-field--error) {
+[data-story-select-state="focus"] .ds-select-field--sm:not(.ds-select-field--disabled):not(.ds-select-field--error) {
   --select-field-label-fill: var(--drop-down-small-label-focused-fill);
   --select-field-helper-fill: var(--drop-down-small-helper-text-focused-fill);
 }
 
-[data-story-select-state="focus"]
-  .ds-select-field--lg:not(.ds-select-field--disabled):not(.ds-select-field--error) {
+[data-story-select-state="focus"] .ds-select-field--lg:not(.ds-select-field--disabled):not(.ds-select-field--error) {
   --select-field-label-fill: var(--drop-down-large-label-focused-fill);
   --select-field-helper-fill: var(--drop-down-large-helper-text-focused-fill);
 }

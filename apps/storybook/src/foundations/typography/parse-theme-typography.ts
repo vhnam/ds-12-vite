@@ -1,77 +1,71 @@
-import tokensCss from "@ds-12/design-tokens/tokens.generated.css?raw";
+import tokensCss from '@ds-12/design-tokens/tokens.generated.css?raw';
 
 const TOKEN_PATTERN = /^\s*--([a-z0-9-]+):/gm;
 
 const FOUNDATION_GROUPS = [
   {
-    id: "font-family",
-    prefix: "font-family-",
-    label: "font family",
-    description: "Typeface families for brand and body text.",
+    id: 'font-family',
+    prefix: 'font-family-',
+    label: 'font family',
+    description: 'Typeface families for brand and body text.',
   },
   {
-    id: "font-size",
-    prefix: "font-size-",
-    label: "font size",
-    description: "Scale of font sizes from compact labels to display copy.",
+    id: 'font-size',
+    prefix: 'font-size-',
+    label: 'font size',
+    description: 'Scale of font sizes from compact labels to display copy.',
   },
   {
-    id: "font-weight",
-    prefix: "font-weight-",
-    label: "font weight",
-    description: "Weight scale from regular body copy to bold emphasis.",
+    id: 'font-weight',
+    prefix: 'font-weight-',
+    label: 'font weight',
+    description: 'Weight scale from regular body copy to bold emphasis.',
   },
   {
-    id: "line-height",
-    prefix: "line-height-",
-    label: "line height",
-    description: "Vertical rhythm values paired with font sizes.",
+    id: 'line-height',
+    prefix: 'line-height-',
+    label: 'line height',
+    description: 'Vertical rhythm values paired with font sizes.',
   },
   {
-    id: "letter-spacing",
-    prefix: "letter-spacing-",
-    label: "letter spacing",
-    description: "Tracking adjustments for dense headings and loose labels.",
+    id: 'letter-spacing',
+    prefix: 'letter-spacing-',
+    label: 'letter spacing',
+    description: 'Tracking adjustments for dense headings and loose labels.',
   },
 ] as const;
 
-const SEMANTIC_CATEGORY_ORDER = ["display", "heading", "paragraph", "label"] as const;
+const SEMANTIC_CATEGORY_ORDER = ['display', 'heading', 'paragraph', 'label'] as const;
 
 const SEMANTIC_CATEGORY_DESCRIPTIONS: Record<string, string> = {
-  display: "Hero and high-impact marketing headlines.",
-  heading: "Heading levels for page and section hierarchy.",
-  paragraph: "Body copy sizes for long-form and supporting text.",
-  label: "Compact styles for form labels, captions, and metadata.",
+  display: 'Hero and high-impact marketing headlines.',
+  heading: 'Heading levels for page and section hierarchy.',
+  paragraph: 'Body copy sizes for long-form and supporting text.',
+  label: 'Compact styles for form labels, captions, and metadata.',
 };
 
 const SEMANTIC_STYLE_ORDER = [
-  "display-default",
-  "heading-h1-bold",
-  "heading-h1-regular",
-  "heading-h2-bold",
-  "heading-h2-regular",
-  "heading-h3-bold",
-  "heading-h3-regular",
-  "heading-h4-bold",
-  "heading-h4-regular",
-  "paragraph-xlarge-strong",
-  "paragraph-large",
-  "paragraph-large-strong",
-  "paragraph-default",
-  "paragraph-default-strong",
-  "paragraph-small",
-  "label-large",
-  "label-default",
-  "label-small",
+  'display-default',
+  'heading-h1-bold',
+  'heading-h1-regular',
+  'heading-h2-bold',
+  'heading-h2-regular',
+  'heading-h3-bold',
+  'heading-h3-regular',
+  'heading-h4-bold',
+  'heading-h4-regular',
+  'paragraph-xlarge-strong',
+  'paragraph-large',
+  'paragraph-large-strong',
+  'paragraph-default',
+  'paragraph-default-strong',
+  'paragraph-small',
+  'label-large',
+  'label-default',
+  'label-small',
 ] as const;
 
-const STYLE_PROPERTIES = [
-  "font-family",
-  "font-size",
-  "font-weight",
-  "letter-spacing",
-  "line-height",
-] as const;
+const STYLE_PROPERTIES = ['font-family', 'font-size', 'font-weight', 'letter-spacing', 'line-height'] as const;
 
 export type TypographyTokenGroup = {
   id: string;
@@ -116,17 +110,17 @@ function compareNumericSuffix(left: string, right: string, prefix: string): numb
 
 export function formatFoundationTokenDisplayName(token: string): string {
   return token
-    .replace(/^(font-family|font-size|font-weight|line-height|letter-spacing)-/, "")
-    .split("-")
+    .replace(/^(font-family|font-size|font-weight|line-height|letter-spacing)-/, '')
+    .split('-')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
+    .join(' ');
 }
 
 export function formatSemanticStyleDisplayName(styleId: string): string {
   return styleId
-    .split("-")
+    .split('-')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
+    .join(' ');
 }
 
 function groupFoundationTokens(tokens: readonly string[]): TypographyTokenGroup[] {
@@ -151,28 +145,28 @@ function groupFoundationTokens(tokens: readonly string[]): TypographyTokenGroup[
 }
 
 function getSemanticCategory(styleId: string): string {
-  if (styleId.startsWith("display-")) {
-    return "display";
+  if (styleId.startsWith('display-')) {
+    return 'display';
   }
 
-  if (styleId.startsWith("heading-")) {
-    return "heading";
+  if (styleId.startsWith('heading-')) {
+    return 'heading';
   }
 
-  if (styleId.startsWith("paragraph-")) {
-    return "paragraph";
+  if (styleId.startsWith('paragraph-')) {
+    return 'paragraph';
   }
 
-  if (styleId.startsWith("label-")) {
-    return "label";
+  if (styleId.startsWith('label-')) {
+    return 'label';
   }
 
-  return "other";
+  return 'other';
 }
 
 function getSemanticStyleDescription(styleId: string): string {
   const category = getSemanticCategory(styleId);
-  return SEMANTIC_CATEGORY_DESCRIPTIONS[category] ?? "Semantic typography style.";
+  return SEMANTIC_CATEGORY_DESCRIPTIONS[category] ?? 'Semantic typography style.';
 }
 
 function compareSemanticStyles(left: string, right: string): number {
@@ -227,7 +221,7 @@ export const SEMANTIC_TYPOGRAPHY_CATEGORIES = SEMANTIC_CATEGORY_ORDER.flatMap((c
     {
       id: category,
       label: category,
-      description: SEMANTIC_CATEGORY_DESCRIPTIONS[category] ?? "Semantic typography styles.",
+      description: SEMANTIC_CATEGORY_DESCRIPTIONS[category] ?? 'Semantic typography styles.',
       styles,
     },
   ];

@@ -41,8 +41,7 @@
   }
 
   .ds-radio:focus-visible {
-    outline: var(--radio-focus-ring-width) var(--radio-focus-ring-style)
-      var(--radio-focus-ring-color);
+    outline: var(--radio-focus-ring-width) var(--radio-focus-ring-style) var(--radio-focus-ring-color);
     outline-offset: var(--radio-focus-ring-offset);
     border-radius: var(--radius-large);
   }

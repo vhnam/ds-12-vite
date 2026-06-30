@@ -1,16 +1,13 @@
-import type { ComponentProps } from "react";
-import type { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, userEvent, within } from "storybook/test";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@ds-12/ui/table";
-import { showcaseParameters } from "../../lib/story-test-config.ts";
-import { selectArgType } from "../../lib/story-arg-types.ts";
-import {
-  CELL_STATES,
-  CellStatesShowcase,
-  FullTableShowcase,
-  HeadVariantsShowcase,
-} from "./table-story-fixtures.tsx";
-import { TanStackSortableTable } from "./table-tanstack-story-fixtures.tsx";
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { ComponentProps } from 'react';
+import { expect, userEvent, within } from 'storybook/test';
+
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@ds-12/ui/table';
+
+import { selectArgType } from '../../lib/story-arg-types.ts';
+import { showcaseParameters } from '../../lib/story-test-config.ts';
+import { CELL_STATES, CellStatesShowcase, FullTableShowcase, HeadVariantsShowcase } from './table-story-fixtures.tsx';
+import { TanStackSortableTable } from './table-tanstack-story-fixtures.tsx';
 
 type TableStoryArgs = ComponentProps<typeof Table> & {
   state: (typeof CELL_STATES)[number];
@@ -18,14 +15,14 @@ type TableStoryArgs = ComponentProps<typeof Table> & {
 
 /** Data table with header and body cell primitives for text, stacked, avatar, badge, and custom content. */
 const meta: Meta<TableStoryArgs> = {
-  title: "Components/Table",
+  title: 'Components/Table',
   component: Table,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
-    state: selectArgType(CELL_STATES, "Visual state applied to a single body cell."),
+    state: selectArgType(CELL_STATES, 'Visual state applied to a single body cell.'),
   },
   args: {
-    state: "default",
+    state: 'default',
   },
 };
 
@@ -66,9 +63,9 @@ export const Default: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    await expect(canvas.getByRole("table", { name: /data table/i })).toBeInTheDocument();
-    await expect(canvas.getAllByRole("columnheader")).toHaveLength(3);
-    await expect(canvas.getAllByRole("row")).toHaveLength(4);
+    await expect(canvas.getByRole('table', { name: /data table/i })).toBeInTheDocument();
+    await expect(canvas.getAllByRole('columnheader')).toHaveLength(3);
+    await expect(canvas.getAllByRole('row')).toHaveLength(4);
   },
 };
 
@@ -77,21 +74,21 @@ export const WithTanStackSorting: Story = {
   render: () => <TanStackSortableTable />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const nameSort = canvas.getByRole("button", { name: /sort by name/i });
+    const nameSort = canvas.getByRole('button', { name: /sort by name/i });
 
-    await expect(canvas.getByRole("table", { name: /invoices/i })).toBeInTheDocument();
+    await expect(canvas.getByRole('table', { name: /invoices/i })).toBeInTheDocument();
     await expect(nameSort).toBeInTheDocument();
-    await expect(canvas.queryByRole("button", { name: /sort by status/i })).not.toBeInTheDocument();
+    await expect(canvas.queryByRole('button', { name: /sort by status/i })).not.toBeInTheDocument();
 
-    const rowsBefore = canvas.getAllByRole("row");
-    await expect(rowsBefore[1]).toHaveTextContent("Acme Corp");
-
-    await userEvent.click(nameSort);
-    await expect(nameSort).toHaveAccessibleName("Name, sorted ascending");
+    const rowsBefore = canvas.getAllByRole('row');
+    await expect(rowsBefore[1]).toHaveTextContent('Acme Corp');
 
     await userEvent.click(nameSort);
-    await expect(nameSort).toHaveAccessibleName("Name, sorted descending");
-    await expect(canvas.getAllByRole("row")[1]).toHaveTextContent("Gamma Inc");
+    await expect(nameSort).toHaveAccessibleName('Name, sorted ascending');
+
+    await userEvent.click(nameSort);
+    await expect(nameSort).toHaveAccessibleName('Name, sorted descending');
+    await expect(canvas.getAllByRole('row')[1]).toHaveTextContent('Gamma Inc');
   },
 };
 
@@ -108,7 +105,7 @@ export const TextCell: Story = {
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await expect(canvas.getByRole("cell", { name: /text/i })).toBeInTheDocument();
+    await expect(canvas.getByRole('cell', { name: /text/i })).toBeInTheDocument();
   },
 };
 
@@ -125,10 +122,10 @@ export const StackedCell: Story = {
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const cell = canvas.getByRole("cell", { name: /text/i });
+    const cell = canvas.getByRole('cell', { name: /text/i });
 
     await expect(cell).toBeInTheDocument();
-    await expect(cell).toHaveTextContent("Sub text");
+    await expect(cell).toHaveTextContent('Sub text');
   },
 };
 
@@ -150,40 +147,40 @@ export const RightAligned: Story = {
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await expect(canvas.getByRole("columnheader", { name: /amount/i })).toBeInTheDocument();
-    await expect(canvas.getByRole("cell", { name: /s\$99,999/i })).toBeInTheDocument();
+    await expect(canvas.getByRole('columnheader', { name: /amount/i })).toBeInTheDocument();
+    await expect(canvas.getByRole('cell', { name: /s\$99,999/i })).toBeInTheDocument();
   },
 };
 
 /** Showcase of header cell variants — for human reference only. */
 export const HeadVariants: Story = {
-  tags: ["a11y-debt"],
+  tags: ['a11y-debt'],
   parameters: showcaseParameters,
   render: () => <HeadVariantsShowcase />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await expect(canvas.getAllByRole("columnheader", { name: /heading/i })).not.toHaveLength(0);
+    await expect(canvas.getAllByRole('columnheader', { name: /heading/i })).not.toHaveLength(0);
   },
 };
 
 /** Showcase of body cell content types and states — for human reference only. */
 export const CellStates: Story = {
-  tags: ["a11y-debt"],
+  tags: ['a11y-debt'],
   parameters: showcaseParameters,
   render: () => <CellStatesShowcase />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await expect(canvas.getAllByRole("cell")).not.toHaveLength(0);
+    await expect(canvas.getAllByRole('cell')).not.toHaveLength(0);
   },
 };
 
 /** Showcase of the full multi-column table with avatars, badges, currency, and row actions — for human reference only. */
 export const FullExample: Story = {
-  tags: ["a11y-debt"],
+  tags: ['a11y-debt'],
   parameters: showcaseParameters,
   render: () => <FullTableShowcase />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await expect(canvas.getByRole("table", { name: /sample data table/i })).toBeInTheDocument();
+    await expect(canvas.getByRole('table', { name: /sample data table/i })).toBeInTheDocument();
   },
 };

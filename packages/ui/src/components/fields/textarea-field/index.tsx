@@ -1,33 +1,33 @@
-import { Field } from "@base-ui/react/field";
-import { cva } from "class-variance-authority";
-import { useId } from "react";
+import { Field } from '@base-ui/react/field';
+import { cva } from 'class-variance-authority';
+import { useId } from 'react';
 
-import { cn } from "../../../lib/utils.ts";
-import { Textarea, type TextareaProps } from "../../textarea/index.tsx";
-import "./textarea-field.css";
+import { cn } from '../../../lib/utils.ts';
+import { Textarea, type TextareaProps } from '../../textarea/index.tsx';
+import './textarea-field.css';
 
-const textareaFieldVariants = cva("ds-textarea-field", {
+const textareaFieldVariants = cva('ds-textarea-field', {
   variants: {
     size: {
-      sm: "ds-textarea-field--sm",
-      lg: "ds-textarea-field--lg",
+      sm: 'ds-textarea-field--sm',
+      lg: 'ds-textarea-field--lg',
     },
     variant: {
-      default: "ds-textarea-field--default",
-      suffix: "ds-textarea-field--suffix",
+      default: 'ds-textarea-field--default',
+      suffix: 'ds-textarea-field--suffix',
     },
     disabled: {
-      true: "ds-textarea-field--disabled",
+      true: 'ds-textarea-field--disabled',
       false: null,
     },
     invalid: {
-      true: "ds-textarea-field--error",
+      true: 'ds-textarea-field--error',
       false: null,
     },
   },
   defaultVariants: {
-    size: "sm",
-    variant: "default",
+    size: 'sm',
+    variant: 'default',
     disabled: false,
     invalid: false,
   },
@@ -56,12 +56,12 @@ export type TextareaFieldProps = TextareaProps & {
 export function TextareaField({
   className,
   fieldClassName,
-  size = "sm",
-  variant = "default",
+  size = 'sm',
+  variant = 'default',
   invalid = false,
   disabled,
-  label = "Label",
-  helperText = "Helper text",
+  label = 'Label',
+  helperText = 'Helper text',
   showLabel = true,
   showHelperText = true,
   id: idProp,
@@ -72,8 +72,8 @@ export function TextareaField({
   const helperId = `${textareaId}-helper`;
   const isDisabled = Boolean(disabled);
   const isInvalid = Boolean(invalid);
-  const resolvedSize = size ?? "sm";
-  const resolvedVariant = variant ?? "default";
+  const resolvedSize = size ?? 'sm';
+  const resolvedVariant = variant ?? 'default';
 
   return (
     <Field.Root

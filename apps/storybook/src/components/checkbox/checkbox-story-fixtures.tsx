@@ -1,21 +1,23 @@
-import type { ReactNode } from "react";
-import { Checkbox } from "@ds-12/ui/checkbox";
-import { StoryCaption, StorySectionTitle } from "../../lib/story-presentation.tsx";
+import type { ReactNode } from 'react';
 
-export const CHECKBOX_SIZES = ["sm", "lg"] as const;
+import { Checkbox } from '@ds-12/ui/checkbox';
+
+import { StoryCaption, StorySectionTitle } from '../../lib/story-presentation.tsx';
+
+export const CHECKBOX_SIZES = ['sm', 'lg'] as const;
 
 const gridStyle = {
-  display: "flex",
+  display: 'flex',
   gap: 24,
-  flexWrap: "wrap",
-  alignItems: "center",
+  flexWrap: 'wrap',
+  alignItems: 'center',
 } as const;
 
 const columnStyle = {
-  display: "flex",
-  flexDirection: "column",
+  display: 'flex',
+  flexDirection: 'column',
   gap: 12,
-  alignItems: "flex-start",
+  alignItems: 'flex-start',
 } as const;
 
 function StateColumn({ title, children }: { title: string; children: ReactNode }) {
@@ -29,11 +31,11 @@ function StateColumn({ title, children }: { title: string; children: ReactNode }
 
 export function CheckboxStatesMatrix() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
       <StorySectionTitle>Checkbox states</StorySectionTitle>
       <div style={gridStyle}>
         {CHECKBOX_SIZES.map((size) => (
-          <StateColumn key={size} title={size === "sm" ? "Small" : "Large"}>
+          <StateColumn key={size} title={size === 'sm' ? 'Small' : 'Large'}>
             <Checkbox size={size} aria-label="Default unchecked" />
             <Checkbox size={size} defaultChecked aria-label="Default checked" />
             <Checkbox size={size} disabled aria-label="Disabled unchecked" />

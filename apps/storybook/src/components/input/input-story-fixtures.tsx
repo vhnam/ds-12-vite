@@ -1,13 +1,15 @@
-import { Input } from "@ds-12/ui/input";
-import type { ReactNode } from "react";
-import { StoryCaption } from "../../lib/story-presentation.tsx";
+import type { ReactNode } from 'react';
 
-export const VARIANTS = ["default", "suffix"] as const;
-export const SIZES = ["sm", "lg"] as const;
+import { Input } from '@ds-12/ui/input';
+
+import { StoryCaption } from '../../lib/story-presentation.tsx';
+
+export const VARIANTS = ['default', 'suffix'] as const;
+export const SIZES = ['sm', 'lg'] as const;
 
 const stateGroupStyle = {
-  display: "flex",
-  flexDirection: "column",
+  display: 'flex',
+  flexDirection: 'column',
   gap: 24,
   width: 343,
 } as const;
@@ -20,24 +22,24 @@ function StateInput({
   state,
   variant,
 }: {
-  state: "enabled" | "focused" | "disabled" | "error";
+  state: 'enabled' | 'focused' | 'disabled' | 'error';
   variant: (typeof VARIANTS)[number];
 }) {
   const input = (
     <Input
       variant={variant}
       showLeadingIcon
-      showTrailingIcon={variant === "default"}
-      suffix={variant === "suffix" ? "Suffix" : undefined}
+      showTrailingIcon={variant === 'default'}
+      suffix={variant === 'suffix' ? 'Suffix' : undefined}
       placeholder="Input"
       aria-label="Input"
-      defaultValue={state === "disabled" || state === "error" ? "Input" : undefined}
-      disabled={state === "disabled"}
-      invalid={state === "error"}
+      defaultValue={state === 'disabled' || state === 'error' ? 'Input' : undefined}
+      disabled={state === 'disabled'}
+      invalid={state === 'error'}
     />
   );
 
-  if (state === "focused") {
+  if (state === 'focused') {
     return <FocusedInputWrapper>{input}</FocusedInputWrapper>;
   }
 

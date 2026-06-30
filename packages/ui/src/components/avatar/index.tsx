@@ -1,10 +1,10 @@
-import { Avatar as BaseAvatar } from "@base-ui/react/avatar";
-import { cva, type VariantProps } from "class-variance-authority";
-import type { ComponentProps, ReactNode } from "react";
+import { Avatar as BaseAvatar } from '@base-ui/react/avatar';
+import { cva, type VariantProps } from 'class-variance-authority';
+import type { ComponentProps, ReactNode } from 'react';
 
-import { cn } from "../../lib/utils.ts";
-import { Icon } from "../icon/index.tsx";
-import "./avatar.css";
+import { cn } from '../../lib/utils.ts';
+import { Icon } from '../icon/index.tsx';
+import './avatar.css';
 
 const AVATAR_ICON_SIZES = {
   sm: 14,
@@ -13,35 +13,35 @@ const AVATAR_ICON_SIZES = {
 } as const;
 
 const DEFAULT_ICONS = {
-  user: "person",
-  organisation: "apartment",
+  user: 'person',
+  organisation: 'apartment',
 } as const;
 
-const avatarVariants = cva("ds-avatar", {
+const avatarVariants = cva('ds-avatar', {
   variants: {
     size: {
-      sm: "ds-avatar--sm",
-      md: "ds-avatar--md",
-      lg: "ds-avatar--lg",
+      sm: 'ds-avatar--sm',
+      md: 'ds-avatar--md',
+      lg: 'ds-avatar--lg',
     },
     shape: {
-      user: "ds-avatar--user",
-      organisation: "ds-avatar--organisation",
+      user: 'ds-avatar--user',
+      organisation: 'ds-avatar--organisation',
     },
     variant: {
-      initial: "ds-avatar--initial",
-      image: "ds-avatar--image",
-      icon: "ds-avatar--icon",
+      initial: 'ds-avatar--initial',
+      image: 'ds-avatar--image',
+      icon: 'ds-avatar--icon',
     },
   },
   defaultVariants: {
-    size: "md",
-    shape: "user",
-    variant: "initial",
+    size: 'md',
+    shape: 'user',
+    variant: 'initial',
   },
 });
 
-export type AvatarProps = Omit<ComponentProps<typeof BaseAvatar.Root>, "className"> &
+export type AvatarProps = Omit<ComponentProps<typeof BaseAvatar.Root>, 'className'> &
   VariantProps<typeof avatarVariants> & {
     /** Additional CSS class names applied to the root element. */
     className?: string;
@@ -64,37 +64,33 @@ function AvatarIconContent({
   size,
   icon,
 }: {
-  shape: NonNullable<AvatarProps["shape"]>;
-  size: NonNullable<AvatarProps["size"]>;
+  shape: NonNullable<AvatarProps['shape']>;
+  size: NonNullable<AvatarProps['size']>;
   icon?: ReactNode;
 }) {
   const iconSize = AVATAR_ICON_SIZES[size];
 
-  return (
-    <span className="ds-avatar__icon">
-      {icon ?? <Icon name={DEFAULT_ICONS[shape]} size={iconSize} />}
-    </span>
-  );
+  return <span className="ds-avatar__icon">{icon ?? <Icon name={DEFAULT_ICONS[shape]} size={iconSize} />}</span>;
 }
 
 /** Displays a user or organisation profile image with initials, photo, or fallback icon. Available in user and organisation shapes with small, medium, and large sizes. */
 export function Avatar({
   className,
-  size = "md",
-  shape = "user",
-  variant = "initial",
+  size = 'md',
+  shape = 'user',
+  variant = 'initial',
   initials,
   src,
-  alt = "",
+  alt = '',
   icon,
   ...props
 }: AvatarProps) {
-  const resolvedSize = size ?? "md";
-  const resolvedShape = shape ?? "user";
-  const resolvedVariant = variant ?? "initial";
+  const resolvedSize = size ?? 'md';
+  const resolvedShape = shape ?? 'user';
+  const resolvedVariant = variant ?? 'initial';
   const avatarClassName = cn(avatarVariants({ size, shape, variant, className }));
 
-  if (resolvedVariant === "image") {
+  if (resolvedVariant === 'image') {
     return (
       <BaseAvatar.Root className={avatarClassName} {...props}>
         {src ? <BaseAvatar.Image className="ds-avatar__image" src={src} alt={alt} /> : null}
@@ -111,8 +107,8 @@ export function Avatar({
 
   return (
     <BaseAvatar.Root className={avatarClassName} {...props}>
-      {resolvedVariant === "initial" ? (
-        <AvatarInitials>{initials ?? ""}</AvatarInitials>
+      {resolvedVariant === 'initial' ? (
+        <AvatarInitials>{initials ?? ''}</AvatarInitials>
       ) : (
         <AvatarIconContent shape={resolvedShape} size={resolvedSize} icon={icon} />
       )}

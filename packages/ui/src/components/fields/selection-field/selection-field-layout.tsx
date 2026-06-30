@@ -1,36 +1,36 @@
-import { Field } from "@base-ui/react/field";
-import { cva } from "class-variance-authority";
-import { useId, type ReactNode } from "react";
+import { Field } from '@base-ui/react/field';
+import { cva } from 'class-variance-authority';
+import { useId, type ReactNode } from 'react';
 
-import { cn } from "../../../lib/utils.ts";
-import { Input, type InputProps } from "../../input/index.tsx";
-import "./selection-field.css";
+import { cn } from '../../../lib/utils.ts';
+import { Input, type InputProps } from '../../input/index.tsx';
+import './selection-field.css';
 
-const selectionFieldVariants = cva("ds-selection-field", {
+const selectionFieldVariants = cva('ds-selection-field', {
   variants: {
     size: {
-      sm: "ds-selection-field--sm",
-      lg: "ds-selection-field--lg",
+      sm: 'ds-selection-field--sm',
+      lg: 'ds-selection-field--lg',
     },
     disabled: {
-      true: "ds-selection-field--disabled",
+      true: 'ds-selection-field--disabled',
       false: null,
     },
     invalid: {
-      true: "ds-selection-field--error",
+      true: 'ds-selection-field--error',
       false: null,
     },
     supportingText: {
-      true: "ds-selection-field--supporting-text",
+      true: 'ds-selection-field--supporting-text',
       false: null,
     },
     input: {
-      true: "ds-selection-field--input",
+      true: 'ds-selection-field--input',
       false: null,
     },
   },
   defaultVariants: {
-    size: "sm",
+    size: 'sm',
     disabled: false,
     invalid: false,
     supportingText: false,
@@ -85,11 +85,11 @@ export type SelectionFieldBaseProps = {
    * Visual size of the selection control.
    * @default "sm"
    */
-  size?: "sm" | "lg";
+  size?: 'sm' | 'lg';
   /** ID applied to the selection control. */
   id?: string;
   /** Props forwarded to the embedded input when `showInput` is true. */
-  inputProps?: Omit<InputProps, "size" | "invalid" | "disabled" | "id">;
+  inputProps?: Omit<InputProps, 'size' | 'invalid' | 'disabled' | 'id'>;
 };
 
 type SelectionFieldLayoutProps = SelectionFieldBaseProps & {
@@ -100,13 +100,13 @@ type SelectionFieldLayoutProps = SelectionFieldBaseProps & {
 export function SelectionFieldLayout({
   renderControl,
   fieldClassName,
-  size = "sm",
+  size = 'sm',
   invalid = false,
   disabled,
-  label = "Selection label",
-  supportingText = "Supporting text",
-  suffix = "Suffix",
-  helperText = "Helper Text",
+  label = 'Selection label',
+  supportingText = 'Supporting text',
+  suffix = 'Suffix',
+  helperText = 'Helper Text',
   showLabel = true,
   showSupportingText = false,
   showSuffix = true,
@@ -121,7 +121,7 @@ export function SelectionFieldLayout({
   const helperId = `${controlId}-helper`;
   const isDisabled = Boolean(disabled);
   const isInvalid = Boolean(invalid);
-  const resolvedSize = size ?? "sm";
+  const resolvedSize = size ?? 'sm';
 
   return (
     <Field.Root
@@ -147,9 +147,7 @@ export function SelectionFieldLayout({
                 {label}
               </Field.Label>
             ) : null}
-            {showSupportingText ? (
-              <span className="ds-selection-field__supporting">{supportingText}</span>
-            ) : null}
+            {showSupportingText ? <span className="ds-selection-field__supporting">{supportingText}</span> : null}
           </div>
         ) : null}
         {showSuffix ? <span className="ds-selection-field__suffix">{suffix}</span> : null}

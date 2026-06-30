@@ -1,16 +1,11 @@
-import { Combobox as BaseCombobox } from "@base-ui/react/combobox";
-import { cva } from "class-variance-authority";
-import { createContext, type ReactNode } from "react";
+import { Combobox as BaseCombobox } from '@base-ui/react/combobox';
+import { cva } from 'class-variance-authority';
+import { createContext, type ReactNode } from 'react';
 
-import { cn } from "../../lib/utils.ts";
-import { Icon } from "../icon/index.tsx";
-import {
-  MenuItemCheckbox,
-  MenuItemText,
-  menuItemVariants,
-  type MenuVariant,
-} from "../menu/index.tsx";
-import "./combobox.css";
+import { cn } from '../../lib/utils.ts';
+import { Icon } from '../icon/index.tsx';
+import { MenuItemCheckbox, MenuItemText, menuItemVariants, type MenuVariant } from '../menu/index.tsx';
+import './combobox.css';
 
 const COMBOBOX_ICON_SIZES = {
   sm: 20,
@@ -22,27 +17,27 @@ const COMBOBOX_CHIP_REMOVE_ICON_SIZES = {
   lg: 16,
 } as const;
 
-const DEFAULT_LEADING_ICON = "person";
+const DEFAULT_LEADING_ICON = 'person';
 
 export const ComboboxIconSizeContext = createContext<number | undefined>(undefined);
 
-const comboboxVariants = cva("ds-combobox", {
+const comboboxVariants = cva('ds-combobox', {
   variants: {
     size: {
-      sm: "ds-combobox--sm",
-      lg: "ds-combobox--lg",
+      sm: 'ds-combobox--sm',
+      lg: 'ds-combobox--lg',
     },
     disabled: {
-      true: "ds-combobox--disabled",
+      true: 'ds-combobox--disabled',
       false: null,
     },
     invalid: {
-      true: "ds-combobox--error",
+      true: 'ds-combobox--error',
       false: null,
     },
   },
   defaultVariants: {
-    size: "sm",
+    size: 'sm',
     disabled: false,
     invalid: false,
   },
@@ -59,7 +54,7 @@ export type ComboboxOption = {
 
 type ComboboxSharedProps = {
   className?: string;
-  size?: "sm" | "lg";
+  size?: 'sm' | 'lg';
   invalid?: boolean;
   disabled?: boolean;
   placeholder?: string;
@@ -72,8 +67,8 @@ type ComboboxSharedProps = {
   id?: string;
   name?: string;
   required?: boolean;
-  "aria-describedby"?: string;
-  "aria-label"?: string;
+  'aria-describedby'?: string;
+  'aria-label'?: string;
   inputValue?: string;
   defaultInputValue?: string;
   onInputValueChange?: (value: string) => void;
@@ -104,7 +99,7 @@ function ComboboxTrailingIcons({ iconSize }: { iconSize: number }) {
         className="ds-combobox__clear"
         aria-label="Clear search"
         render={(props) => (
-          <button {...props} type="button" className={cn("ds-combobox__clear", props.className)}>
+          <button {...props} type="button" className={cn('ds-combobox__clear', props.className)}>
             <Icon name="backspace" size={iconSize} />
           </button>
         )}
@@ -112,7 +107,7 @@ function ComboboxTrailingIcons({ iconSize }: { iconSize: number }) {
       <BaseCombobox.Icon
         className="ds-combobox__trailing"
         render={(props) => (
-          <span {...props} className={cn("ds-combobox__trailing", props.className)}>
+          <span {...props} className={cn('ds-combobox__trailing', props.className)}>
             <Icon name="search" size={iconSize} />
           </span>
         )}
@@ -121,26 +116,15 @@ function ComboboxTrailingIcons({ iconSize }: { iconSize: number }) {
   );
 }
 
-function ComboboxListItems({
-  options,
-  variant,
-}: {
-  options: readonly ComboboxOption[];
-  variant: MenuVariant;
-}) {
+function ComboboxListItems({ options, variant }: { options: readonly ComboboxOption[]; variant: MenuVariant }) {
   const itemClassName = menuItemVariants({ variant });
 
   return (
     <BaseCombobox.List className="ds-menu__list">
       {options.map((option) => (
-        <BaseCombobox.Item
-          key={option.value}
-          value={option.value}
-          disabled={option.disabled}
-          className={itemClassName}
-        >
+        <BaseCombobox.Item key={option.value} value={option.value} disabled={option.disabled} className={itemClassName}>
           <MenuItemText>{option.label}</MenuItemText>
-          {variant === "multiple" ? (
+          {variant === 'multiple' ? (
             <MenuItemCheckbox>
               <BaseCombobox.ItemIndicator className="ds-menu__item-checkbox-indicator">
                 <Icon name="check" size={12} />
@@ -153,13 +137,7 @@ function ComboboxListItems({
   );
 }
 
-function ComboboxPopup({
-  options,
-  variant,
-}: {
-  options: readonly ComboboxOption[];
-  variant: MenuVariant;
-}) {
+function ComboboxPopup({ options, variant }: { options: readonly ComboboxOption[]; variant: MenuVariant }) {
   return (
     <BaseCombobox.Portal>
       <BaseCombobox.Positioner className="ds-combobox__positioner" sideOffset={4} align="start">
@@ -173,7 +151,7 @@ function ComboboxPopup({
 
 type ResolvedComboboxProps = {
   className?: string;
-  size: "sm" | "lg";
+  size: 'sm' | 'lg';
   invalid: boolean;
   disabled: boolean;
   placeholder: string;
@@ -200,7 +178,7 @@ function useResolvedComboboxProps(
   chipRemoveIconSize: number;
   resolvedLeading: ReactNode;
 } {
-  const resolvedSize = props.size ?? "sm";
+  const resolvedSize = props.size ?? 'sm';
   const isDisabled = Boolean(props.disabled);
   const isInvalid = Boolean(props.invalid);
   const iconSize = COMBOBOX_ICON_SIZES[resolvedSize];
@@ -215,7 +193,7 @@ function useResolvedComboboxProps(
     size: resolvedSize,
     invalid: isInvalid,
     disabled: isDisabled,
-    placeholder: props.placeholder ?? "Type to search",
+    placeholder: props.placeholder ?? 'Type to search',
     options: props.options,
     leadingIcon: props.leadingIcon,
     showLeadingIcon: hasLeading,
@@ -225,8 +203,8 @@ function useResolvedComboboxProps(
     id: props.id,
     name: props.name,
     required: props.required,
-    ariaDescribedBy: props["aria-describedby"],
-    ariaLabel: props["aria-label"],
+    ariaDescribedBy: props['aria-describedby'],
+    ariaLabel: props['aria-label'],
     inputValue: props.inputValue,
     defaultInputValue: props.defaultInputValue,
     onInputValueChange: props.onInputValueChange,
@@ -276,9 +254,7 @@ function SingleCombobox({
       >
         <div className={wrapperClassName}>
           <BaseCombobox.InputGroup className="ds-combobox__input-group">
-            {resolved.resolvedLeading ? (
-              <span className="ds-combobox__leading">{resolved.resolvedLeading}</span>
-            ) : null}
+            {resolved.resolvedLeading ? <span className="ds-combobox__leading">{resolved.resolvedLeading}</span> : null}
             <BaseCombobox.Input
               id={resolved.id}
               className="ds-combobox__input"
@@ -338,18 +314,14 @@ function MultipleCombobox({
       >
         <div className={wrapperClassName}>
           <BaseCombobox.InputGroup className="ds-combobox__input-group">
-            {resolved.resolvedLeading ? (
-              <span className="ds-combobox__leading">{resolved.resolvedLeading}</span>
-            ) : null}
+            {resolved.resolvedLeading ? <span className="ds-combobox__leading">{resolved.resolvedLeading}</span> : null}
             <BaseCombobox.Chips className="ds-combobox__chips">
               <BaseCombobox.Value>
                 {(selectedValue: string[]) => (
                   <>
                     {selectedValue.map((selected) => (
                       <BaseCombobox.Chip key={selected} className="ds-combobox__chip">
-                        <span className="ds-combobox__chip-label">
-                          {getOptionLabel(resolved.options, selected)}
-                        </span>
+                        <span className="ds-combobox__chip-label">{getOptionLabel(resolved.options, selected)}</span>
                         <BaseCombobox.ChipRemove
                           className="ds-combobox__chip-remove"
                           aria-label={`Remove ${getOptionLabel(resolved.options, selected)}`}
@@ -381,20 +353,10 @@ function MultipleCombobox({
 }
 
 /** Filterable text input with a dropdown list, optional leading icon, multi-select chips, and error and disabled states. */
-export function Combobox({
-  multiple = false,
-  value,
-  defaultValue,
-  onValueChange,
-  ...sharedProps
-}: ComboboxProps) {
+export function Combobox({ multiple = false, value, defaultValue, onValueChange, ...sharedProps }: ComboboxProps) {
   if (multiple) {
     const multipleValue = Array.isArray(value) ? value : value ? [value] : undefined;
-    const multipleDefaultValue = Array.isArray(defaultValue)
-      ? defaultValue
-      : defaultValue
-        ? [defaultValue]
-        : undefined;
+    const multipleDefaultValue = Array.isArray(defaultValue) ? defaultValue : defaultValue ? [defaultValue] : undefined;
 
     return (
       <MultipleCombobox

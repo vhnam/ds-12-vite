@@ -1,34 +1,34 @@
-import { Field } from "@base-ui/react/field";
-import { cva } from "class-variance-authority";
-import { useId } from "react";
+import { Field } from '@base-ui/react/field';
+import { cva } from 'class-variance-authority';
+import { useId } from 'react';
 
-import { cn } from "../../../lib/utils.ts";
-import { Combobox, type ComboboxOption, type ComboboxProps } from "../../combobox/index.tsx";
-import "./combobox-field.css";
+import { cn } from '../../../lib/utils.ts';
+import { Combobox, type ComboboxOption, type ComboboxProps } from '../../combobox/index.tsx';
+import './combobox-field.css';
 
-const comboboxFieldVariants = cva("ds-combobox-field", {
+const comboboxFieldVariants = cva('ds-combobox-field', {
   variants: {
     size: {
-      sm: "ds-combobox-field--sm",
-      lg: "ds-combobox-field--lg",
+      sm: 'ds-combobox-field--sm',
+      lg: 'ds-combobox-field--lg',
     },
     disabled: {
-      true: "ds-combobox-field--disabled",
+      true: 'ds-combobox-field--disabled',
       false: null,
     },
     invalid: {
-      true: "ds-combobox-field--error",
+      true: 'ds-combobox-field--error',
       false: null,
     },
   },
   defaultVariants: {
-    size: "sm",
+    size: 'sm',
     disabled: false,
     invalid: false,
   },
 });
 
-export type ComboboxFieldProps = Omit<ComboboxProps, "id" | "invalid" | "disabled"> & {
+export type ComboboxFieldProps = Omit<ComboboxProps, 'id' | 'invalid' | 'disabled'> & {
   /** Visible label text associated with the combobox. */
   label?: string;
   /** Helper or error text displayed below the combobox. */
@@ -57,11 +57,11 @@ export type ComboboxFieldProps = Omit<ComboboxProps, "id" | "invalid" | "disable
 export function ComboboxField({
   className,
   fieldClassName,
-  size = "sm",
+  size = 'sm',
   invalid = false,
   disabled,
-  label = "Label",
-  helperText = "Helper text",
+  label = 'Label',
+  helperText = 'Helper text',
   showLabel = true,
   showHelperText = true,
   id: idProp,
@@ -73,7 +73,7 @@ export function ComboboxField({
   const helperId = `${comboboxId}-helper`;
   const isDisabled = Boolean(disabled);
   const isInvalid = Boolean(invalid);
-  const resolvedSize = size ?? "sm";
+  const resolvedSize = size ?? 'sm';
 
   return (
     <Field.Root

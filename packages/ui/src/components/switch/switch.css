@@ -37,8 +37,7 @@
   }
 
   .ds-switch:focus-visible {
-    outline: var(--switch-focus-ring-width) var(--switch-focus-ring-style)
-      var(--switch-focus-ring-color);
+    outline: var(--switch-focus-ring-width) var(--switch-focus-ring-style) var(--switch-focus-ring-color);
     outline-offset: var(--switch-focus-ring-offset);
   }
 

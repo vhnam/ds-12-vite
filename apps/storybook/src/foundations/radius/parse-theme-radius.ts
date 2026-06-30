@@ -1,8 +1,8 @@
-import tokensCss from "@ds-12/design-tokens/tokens.generated.css?raw";
+import tokensCss from '@ds-12/design-tokens/tokens.generated.css?raw';
 
 const RADIUS_TOKEN_PATTERN = /^\s*--(radius-[a-z]+):/gm;
 
-const RADIUS_ORDER = ["xxsmall", "xsmall", "small", "medium", "large", "xlarge"] as const;
+const RADIUS_ORDER = ['xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge'] as const;
 
 export type RadiusTokenGroup = {
   id: string;
@@ -22,8 +22,8 @@ function parseRadiusTokens(css: string): string[] {
 }
 
 function compareRadiusTokens(left: string, right: string): number {
-  const suffixLeft = left.slice("radius-".length);
-  const suffixRight = right.slice("radius-".length);
+  const suffixLeft = left.slice('radius-'.length);
+  const suffixRight = right.slice('radius-'.length);
   const indexLeft = RADIUS_ORDER.indexOf(suffixLeft as (typeof RADIUS_ORDER)[number]);
   const indexRight = RADIUS_ORDER.indexOf(suffixRight as (typeof RADIUS_ORDER)[number]);
 
@@ -36,19 +36,19 @@ function compareRadiusTokens(left: string, right: string): number {
 
 export function formatFoundationTokenDisplayName(token: string): string {
   return token
-    .replace(/^radius-/, "")
-    .split("-")
+    .replace(/^radius-/, '')
+    .split('-')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
+    .join(' ');
 }
 
 const parsedTokens = parseRadiusTokens(tokensCss).sort(compareRadiusTokens);
 
 export const FOUNDATION_RADIUS_TOKEN_GROUPS: RadiusTokenGroup[] = [
   {
-    id: "radius",
-    label: "radius",
-    description: "Consistent corner radius values for buttons, inputs, cards, and containers.",
+    id: 'radius',
+    label: 'radius',
+    description: 'Consistent corner radius values for buttons, inputs, cards, and containers.',
     tokens: parsedTokens,
   },
 ];

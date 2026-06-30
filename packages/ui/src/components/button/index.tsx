@@ -1,34 +1,34 @@
-import { Button as BaseButton } from "@base-ui/react/button";
-import { cva, type VariantProps } from "class-variance-authority";
-import type { ComponentProps, ReactNode } from "react";
+import { Button as BaseButton } from '@base-ui/react/button';
+import { cva, type VariantProps } from 'class-variance-authority';
+import type { ComponentProps, ReactNode } from 'react';
 
-import "./button.css";
+import './button.css';
 
-const buttonVariants = cva("ds-button", {
+const buttonVariants = cva('ds-button', {
   variants: {
     variant: {
-      primary: "ds-button--primary",
-      secondary: "ds-button--secondary",
-      danger: "ds-button--danger",
-      icon: "ds-button--icon",
+      primary: 'ds-button--primary',
+      secondary: 'ds-button--secondary',
+      danger: 'ds-button--danger',
+      icon: 'ds-button--icon',
     },
     size: {
-      sm: "ds-button--sm",
-      md: "ds-button--md",
-      lg: "ds-button--lg",
+      sm: 'ds-button--sm',
+      md: 'ds-button--md',
+      lg: 'ds-button--lg',
     },
     hasIcon: {
-      true: "ds-button--has-icon",
+      true: 'ds-button--has-icon',
       false: null,
     },
     loading: {
-      true: "ds-button--loading",
+      true: 'ds-button--loading',
       false: null,
     },
   },
   defaultVariants: {
-    variant: "primary",
-    size: "md",
+    variant: 'primary',
+    size: 'md',
     hasIcon: false,
     loading: false,
   },
@@ -53,7 +53,7 @@ function ButtonLoader() {
   );
 }
 
-export type ButtonProps = Omit<ComponentProps<typeof BaseButton>, "className"> &
+export type ButtonProps = Omit<ComponentProps<typeof BaseButton>, 'className'> &
   VariantProps<typeof buttonVariants> & {
     /** Additional CSS class names applied to the root element. */
     className?: string;
@@ -65,7 +65,7 @@ export type ButtonProps = Omit<ComponentProps<typeof BaseButton>, "className"> &
      * Position of the icon relative to the label text.
      * @default "left"
      */
-    iconPosition?: "left" | "right";
+    iconPosition?: 'left' | 'right';
     /**
      * Shows a loading spinner, sets `aria-busy`, and disables interaction.
      * @default false
@@ -77,25 +77,24 @@ export type ButtonProps = Omit<ComponentProps<typeof BaseButton>, "className"> &
 export function Button({
   children,
   className,
-  variant = "primary",
-  size = "md",
+  variant = 'primary',
+  size = 'md',
   icon,
-  iconPosition = "left",
+  iconPosition = 'left',
   loading = false,
   disabled,
-  "aria-label": ariaLabel,
+  'aria-label': ariaLabel,
   ...props
 }: ButtonProps) {
-  const isIconOnly = variant === "icon";
+  const isIconOnly = variant === 'icon';
   const isDisabled = Boolean(disabled || loading);
   const resolvedIcon = isIconOnly ? (icon ?? children) : icon;
   const hasIcon = Boolean(resolvedIcon) && !loading;
-  const showLeadingIcon = hasIcon && iconPosition === "left";
-  const showTrailingIcon = hasIcon && iconPosition === "right" && !isIconOnly;
-  const label = isIconOnly && typeof children === "string" ? undefined : children;
-  const textLabel = typeof children === "string" ? children : undefined;
-  const resolvedAriaLabel =
-    ariaLabel ?? (isIconOnly ? textLabel : undefined) ?? (loading ? textLabel : undefined);
+  const showLeadingIcon = hasIcon && iconPosition === 'left';
+  const showTrailingIcon = hasIcon && iconPosition === 'right' && !isIconOnly;
+  const label = isIconOnly && typeof children === 'string' ? undefined : children;
+  const textLabel = typeof children === 'string' ? children : undefined;
+  const resolvedAriaLabel = ariaLabel ?? (isIconOnly ? textLabel : undefined) ?? (loading ? textLabel : undefined);
 
   return (
     <BaseButton

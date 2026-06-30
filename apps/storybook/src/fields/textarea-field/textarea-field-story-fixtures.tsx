@@ -1,13 +1,15 @@
-import { TextareaField } from "@ds-12/ui/fields/textarea-field";
-import type { ReactNode } from "react";
-import { StoryCaption } from "../../lib/story-presentation.tsx";
+import type { ReactNode } from 'react';
 
-export const VARIANTS = ["default", "suffix"] as const;
-export const SIZES = ["sm", "lg"] as const;
+import { TextareaField } from '@ds-12/ui/fields/textarea-field';
+
+import { StoryCaption } from '../../lib/story-presentation.tsx';
+
+export const VARIANTS = ['default', 'suffix'] as const;
+export const SIZES = ['sm', 'lg'] as const;
 
 const stateGroupStyle = {
-  display: "flex",
-  flexDirection: "column",
+  display: 'flex',
+  flexDirection: 'column',
   gap: 24,
   width: 343,
 } as const;
@@ -20,22 +22,22 @@ function StateTextareaField({
   state,
   variant,
 }: {
-  state: "enabled" | "focused" | "disabled" | "error";
+  state: 'enabled' | 'focused' | 'disabled' | 'error';
   variant: (typeof VARIANTS)[number];
 }) {
   const field = (
     <TextareaField
       variant={variant}
       showLeadingIcon
-      suffix={variant === "suffix" ? "0/100" : undefined}
+      suffix={variant === 'suffix' ? '0/100' : undefined}
       placeholder="Input"
-      defaultValue={state === "disabled" || state === "error" ? "Input" : undefined}
-      disabled={state === "disabled"}
-      invalid={state === "error"}
+      defaultValue={state === 'disabled' || state === 'error' ? 'Input' : undefined}
+      disabled={state === 'disabled'}
+      invalid={state === 'error'}
     />
   );
 
-  if (state === "focused") {
+  if (state === 'focused') {
     return <FocusedInputWrapper>{field}</FocusedInputWrapper>;
   }
 

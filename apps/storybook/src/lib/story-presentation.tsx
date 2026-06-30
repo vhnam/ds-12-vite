@@ -1,5 +1,6 @@
-import type { ReactNode } from "react";
-import { Typography } from "@ds-12/ui/typography";
+import type { ReactNode } from 'react';
+
+import { Typography } from '@ds-12/ui/typography';
 
 function StorySectionTitle({ children }: { children: ReactNode }) {
   return (
@@ -11,7 +12,7 @@ function StorySectionTitle({ children }: { children: ReactNode }) {
 
 function StoryCaption({ children }: { children: ReactNode }) {
   return (
-    <Typography variant="label-small" className="m-0 mb-xsmall text-semantic-text-neutral-moderate">
+    <Typography variant="label" size="sm" className="m-0 mb-xsmall text-semantic-text-neutral-moderate">
       {children}
     </Typography>
   );

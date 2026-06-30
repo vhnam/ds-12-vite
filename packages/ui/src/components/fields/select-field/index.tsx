@@ -1,34 +1,34 @@
-import { Field } from "@base-ui/react/field";
-import { cva } from "class-variance-authority";
-import { useId } from "react";
+import { Field } from '@base-ui/react/field';
+import { cva } from 'class-variance-authority';
+import { useId } from 'react';
 
-import { cn } from "../../../lib/utils.ts";
-import { Select, type SelectOption, type SelectProps } from "../../select/index.tsx";
-import "./select-field.css";
+import { cn } from '../../../lib/utils.ts';
+import { Select, type SelectOption, type SelectProps } from '../../select/index.tsx';
+import './select-field.css';
 
-const selectFieldVariants = cva("ds-select-field", {
+const selectFieldVariants = cva('ds-select-field', {
   variants: {
     size: {
-      sm: "ds-select-field--sm",
-      lg: "ds-select-field--lg",
+      sm: 'ds-select-field--sm',
+      lg: 'ds-select-field--lg',
     },
     disabled: {
-      true: "ds-select-field--disabled",
+      true: 'ds-select-field--disabled',
       false: null,
     },
     invalid: {
-      true: "ds-select-field--error",
+      true: 'ds-select-field--error',
       false: null,
     },
   },
   defaultVariants: {
-    size: "sm",
+    size: 'sm',
     disabled: false,
     invalid: false,
   },
 });
 
-export type SelectFieldProps = Omit<SelectProps, "id" | "invalid" | "disabled"> & {
+export type SelectFieldProps = Omit<SelectProps, 'id' | 'invalid' | 'disabled'> & {
   /** Visible label text associated with the select. */
   label?: string;
   /** Helper or error text displayed below the select. */
@@ -57,11 +57,11 @@ export type SelectFieldProps = Omit<SelectProps, "id" | "invalid" | "disabled"> 
 export function SelectField({
   className,
   fieldClassName,
-  size = "sm",
+  size = 'sm',
   invalid = false,
   disabled,
-  label = "Label",
-  helperText = "Helper text",
+  label = 'Label',
+  helperText = 'Helper text',
   showLabel = true,
   showHelperText = true,
   id: idProp,
@@ -73,7 +73,7 @@ export function SelectField({
   const helperId = `${selectId}-helper`;
   const isDisabled = Boolean(disabled);
   const isInvalid = Boolean(invalid);
-  const resolvedSize = size ?? "sm";
+  const resolvedSize = size ?? 'sm';
 
   return (
     <Field.Root

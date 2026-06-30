@@ -28,8 +28,7 @@
   }
 
   .ds-button:focus-visible {
-    outline: var(--button-focus-ring-width) var(--button-focus-ring-style)
-      var(--button-focus-ring-color);
+    outline: var(--button-focus-ring-width) var(--button-focus-ring-style) var(--button-focus-ring-color);
     outline-offset: var(--button-focus-ring-offset);
   }
 

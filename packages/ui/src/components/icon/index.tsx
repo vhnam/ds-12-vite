@@ -1,24 +1,21 @@
-import type { ComponentProps, CSSProperties } from "react";
-import { useContext } from "react";
+import type { ComponentProps, CSSProperties } from 'react';
+import { useContext } from 'react';
 
-import { BadgeIconSizeContext } from "../badge/index.tsx";
-import { cn } from "../../lib/utils.ts";
-import "./icon.css";
+import { cn } from '../../lib/utils.ts';
+import { BadgeIconSizeContext } from '../badge/index.tsx';
+import './icon.css';
 
-type IconVariant = "outlined" | "filled";
-type IconAlign = "inline-start" | "inline-end";
+type IconVariant = 'outlined' | 'filled';
+type IconAlign = 'inline-start' | 'inline-end';
 
 const DEFAULT_ICON_SIZE = 20;
 
-function iconVariationSettings(
-  variant: IconVariant,
-  size: number,
-): CSSProperties["fontVariationSettings"] {
-  const fill = variant === "filled" ? 1 : 0;
+function iconVariationSettings(variant: IconVariant, size: number): CSSProperties['fontVariationSettings'] {
+  const fill = variant === 'filled' ? 1 : 0;
   return `"FILL" ${fill}, "wght" 400, "GRAD" 0, "opsz" ${size}`;
 }
 
-export type IconProps = ComponentProps<"span"> & {
+export type IconProps = ComponentProps<'span'> & {
   /** Material Symbols icon name (e.g. `"check_circle"`, `"download"`). */
   name: string;
   /**
@@ -38,13 +35,13 @@ export type IconProps = ComponentProps<"span"> & {
 };
 
 /** Material Symbols icon with outlined or filled style and a configurable pixel size. */
-function Icon({ name, variant = "outlined", align, size, className, style, ...props }: IconProps) {
+function Icon({ name, variant = 'outlined', align, size, className, style, ...props }: IconProps) {
   const badgeIconSize = useContext(BadgeIconSizeContext);
   const resolvedSize = size ?? badgeIconSize ?? DEFAULT_ICON_SIZE;
 
   return (
     <span
-      className={cn("material-symbols-outlined", "ds-icon", className)}
+      className={cn('material-symbols-outlined', 'ds-icon', className)}
       data-align={align}
       style={{
         fontSize: resolvedSize,

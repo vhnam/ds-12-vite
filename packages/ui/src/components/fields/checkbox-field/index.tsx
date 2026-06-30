@@ -1,14 +1,11 @@
-import { Checkbox, type CheckboxProps } from "../../checkbox/index.tsx";
+import { Checkbox, type CheckboxProps } from '../../checkbox/index.tsx';
 import {
   SelectionFieldLayout,
   selectionFieldVariants,
   type SelectionFieldBaseProps,
-} from "../selection-field/selection-field-layout.tsx";
+} from '../selection-field/selection-field-layout.tsx';
 
-export type CheckboxFieldProps = Omit<
-  CheckboxProps,
-  "size" | "invalid" | "disabled" | "id" | "className"
-> &
+export type CheckboxFieldProps = Omit<CheckboxProps, 'size' | 'invalid' | 'disabled' | 'id' | 'className'> &
   SelectionFieldBaseProps & {
     /** Additional CSS class names applied to the checkbox control. */
     className?: string;
@@ -18,7 +15,7 @@ export type CheckboxFieldProps = Omit<
 export function CheckboxField({
   className,
   fieldClassName,
-  size = "sm",
+  size = 'sm',
   invalid = false,
   disabled,
   label,

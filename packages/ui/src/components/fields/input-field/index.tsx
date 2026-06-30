@@ -1,33 +1,33 @@
-import { Field } from "@base-ui/react/field";
-import { cva } from "class-variance-authority";
-import { useId } from "react";
+import { Field } from '@base-ui/react/field';
+import { cva } from 'class-variance-authority';
+import { useId } from 'react';
 
-import { cn } from "../../../lib/utils.ts";
-import { Input, type InputProps } from "../../input/index.tsx";
-import "./input-field.css";
+import { cn } from '../../../lib/utils.ts';
+import { Input, type InputProps } from '../../input/index.tsx';
+import './input-field.css';
 
-const inputFieldVariants = cva("ds-input-field", {
+const inputFieldVariants = cva('ds-input-field', {
   variants: {
     size: {
-      sm: "ds-input-field--sm",
-      lg: "ds-input-field--lg",
+      sm: 'ds-input-field--sm',
+      lg: 'ds-input-field--lg',
     },
     variant: {
-      default: "ds-input-field--default",
-      suffix: "ds-input-field--suffix",
+      default: 'ds-input-field--default',
+      suffix: 'ds-input-field--suffix',
     },
     disabled: {
-      true: "ds-input-field--disabled",
+      true: 'ds-input-field--disabled',
       false: null,
     },
     invalid: {
-      true: "ds-input-field--error",
+      true: 'ds-input-field--error',
       false: null,
     },
   },
   defaultVariants: {
-    size: "sm",
-    variant: "default",
+    size: 'sm',
+    variant: 'default',
     disabled: false,
     invalid: false,
   },
@@ -56,12 +56,12 @@ export type InputFieldProps = InputProps & {
 export function InputField({
   className,
   fieldClassName,
-  size = "sm",
-  variant = "default",
+  size = 'sm',
+  variant = 'default',
   invalid = false,
   disabled,
-  label = "Label",
-  helperText = "Helper text",
+  label = 'Label',
+  helperText = 'Helper text',
   showLabel = true,
   showHelperText = true,
   id: idProp,
@@ -72,8 +72,8 @@ export function InputField({
   const helperId = `${inputId}-helper`;
   const isDisabled = Boolean(disabled);
   const isInvalid = Boolean(invalid);
-  const resolvedSize = size ?? "sm";
-  const resolvedVariant = variant ?? "default";
+  const resolvedSize = size ?? 'sm';
+  const resolvedVariant = variant ?? 'default';
 
   return (
     <Field.Root

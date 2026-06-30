@@ -1,28 +1,30 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, within } from "storybook/test";
-import { Radio, RadioGroup } from "@ds-12/ui/radio";
-import { createRadioDisabledPlay, runRadioInteractionTests } from "../../lib/component-tests.ts";
-import { showcaseParameters } from "../../lib/story-test-config.ts";
-import { booleanArgType, selectArgType } from "../../lib/story-arg-types.ts";
-import { RADIO_SIZES, RadioStatesMatrix } from "./radio-story-fixtures.tsx";
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, within } from 'storybook/test';
+
+import { Radio, RadioGroup } from '@ds-12/ui/radio';
+
+import { createRadioDisabledPlay, runRadioInteractionTests } from '../../lib/component-tests.ts';
+import { booleanArgType, selectArgType } from '../../lib/story-arg-types.ts';
+import { showcaseParameters } from '../../lib/story-test-config.ts';
+import { RADIO_SIZES, RadioStatesMatrix } from './radio-story-fixtures.tsx';
 
 /** Circular selection control for choosing one option from a mutually exclusive set. */
 const meta = {
-  title: "Components/Radio",
+  title: 'Components/Radio',
   component: Radio,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
-    size: selectArgType(RADIO_SIZES, "Visual size of the radio control."),
-    invalid: booleanArgType("Marks the control as invalid and sets aria-invalid."),
-    disabled: booleanArgType("Prevents interaction."),
+    size: selectArgType(RADIO_SIZES, 'Visual size of the radio control.'),
+    invalid: booleanArgType('Marks the control as invalid and sets aria-invalid.'),
+    disabled: booleanArgType('Prevents interaction.'),
     value: { control: false },
   },
   args: {
-    size: "lg",
+    size: 'lg',
     invalid: false,
     disabled: false,
-    value: "option-a",
-    "aria-label": "Option A",
+    value: 'option-a',
+    'aria-label': 'Option A',
   },
   decorators: [
     (Story, context) => (
@@ -45,7 +47,7 @@ export const Default: Story = {
 /** Use the small size in compact desktop layouts such as settings sidebars or comparison tables. */
 export const Small: Story = {
   args: {
-    size: "sm",
+    size: 'sm',
   },
   play: (context) => runRadioInteractionTests(context, /option a/i, true),
 };
@@ -54,8 +56,8 @@ export const Small: Story = {
 export const Invalid: Story = {
   args: {
     invalid: true,
-    value: "option-b",
-    "aria-label": "Option B",
+    value: 'option-b',
+    'aria-label': 'Option B',
   },
   decorators: [
     (Story) => (
@@ -66,9 +68,9 @@ export const Invalid: Story = {
   ],
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const radio = canvas.getByRole("radio", { name: /option b/i });
+    const radio = canvas.getByRole('radio', { name: /option b/i });
 
-    await expect(radio).toHaveAttribute("aria-invalid", "true");
+    await expect(radio).toHaveAttribute('aria-invalid', 'true');
   },
 };
 
@@ -82,7 +84,7 @@ export const Disabled: Story = {
 
 /** Showcase of radio sizes and states — for human reference only. */
 export const States: Story = {
-  tags: ["!manifest"],
+  tags: ['!manifest'],
   parameters: showcaseParameters,
   render: () => <RadioStatesMatrix />,
 };

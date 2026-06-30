@@ -1,8 +1,5 @@
-import {
-  formatFoundationTokenDisplayName,
-  FOUNDATION_RADIUS_TOKEN_GROUPS,
-} from "./parse-theme-radius.ts";
-import { RadiusTokensDoc } from "./radius-tokens-doc.tsx";
+import { formatFoundationTokenDisplayName, FOUNDATION_RADIUS_TOKEN_GROUPS } from './parse-theme-radius.ts';
+import { RadiusTokensDoc } from './radius-tokens-doc.tsx';
 
 function FoundationRadiusDoc() {
   return (

@@ -1,28 +1,30 @@
-import { Pagination, type PaginationProps } from "@ds-12/ui/pagination";
-import { useState } from "react";
-import { StoryCaption } from "../../lib/story-presentation.tsx";
+import { useState } from 'react';
 
-export const SIZES = ["sm", "lg"] as const;
+import { Pagination, type PaginationProps } from '@ds-12/ui/pagination';
+
+import { StoryCaption } from '../../lib/story-presentation.tsx';
+
+export const SIZES = ['sm', 'lg'] as const;
 
 export const PAGE_SCENARIOS = [
-  { key: "few", label: "<5 pages", totalPages: 3 },
-  { key: "five", label: "5 pages", totalPages: 5 },
-  { key: "many", label: ">5 pages", totalPages: 10 },
+  { key: 'few', label: '<5 pages', totalPages: 3 },
+  { key: 'five', label: '5 pages', totalPages: 5 },
+  { key: 'many', label: '>5 pages', totalPages: 10 },
 ] as const;
 
 export const ACTIVE_PAGE_POSITIONS = [1, 2, 5, 9, 10] as const;
 
 const showcaseStyle = {
-  display: "flex",
-  flexDirection: "column",
+  display: 'flex',
+  flexDirection: 'column',
   gap: 24,
 } as const;
 
 const sizeRowStyle = {
-  display: "flex",
+  display: 'flex',
   gap: 24,
-  alignItems: "center",
-  flexWrap: "wrap",
+  alignItems: 'center',
+  flexWrap: 'wrap',
 } as const;
 
 export function InteractivePagination({ page: initialPage, ...props }: PaginationProps) {

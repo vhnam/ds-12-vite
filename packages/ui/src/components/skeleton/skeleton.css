@@ -22,8 +22,7 @@
     flex-shrink: 0;
     border-radius: var(--skeleton-text-radius);
     background: var(--skeleton-fill);
-    animation: ds-skeleton-pulse var(--skeleton-pulse-duration) var(--skeleton-pulse-timing)
-      infinite;
+    animation: ds-skeleton-pulse var(--skeleton-pulse-duration) var(--skeleton-pulse-timing) infinite;
   }
 
   .ds-skeleton--h1 {
@@ -67,9 +66,7 @@
   }
 
   .ds-skeleton--paragraph .ds-skeleton__bar {
-    height: calc(
-      var(--skeleton-text-paragraph-height) - 2 * var(--skeleton-text-paragraph-vertical-padding)
-    );
+    height: calc(var(--skeleton-text-paragraph-height) - 2 * var(--skeleton-text-paragraph-vertical-padding));
     background: var(--skeleton-text-paragraph-fill);
   }
 
@@ -78,9 +75,7 @@
   }
 
   .ds-skeleton--label .ds-skeleton__bar {
-    height: calc(
-      var(--skeleton-text-label-height) - 2 * var(--skeleton-text-label-vertical-padding)
-    );
+    height: calc(var(--skeleton-text-label-height) - 2 * var(--skeleton-text-label-vertical-padding));
     background: var(--skeleton-text-label-fill);
   }
 
@@ -90,8 +85,7 @@
   .ds-skeleton--rectangle {
     flex-shrink: 0;
     overflow: hidden;
-    animation: ds-skeleton-pulse var(--skeleton-pulse-duration) var(--skeleton-pulse-timing)
-      infinite;
+    animation: ds-skeleton-pulse var(--skeleton-pulse-duration) var(--skeleton-pulse-timing) infinite;
   }
 
   .ds-skeleton--circle.ds-skeleton--32 {

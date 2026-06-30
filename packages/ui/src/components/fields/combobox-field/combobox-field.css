@@ -40,14 +40,10 @@
     --combobox-field-helper-font-size: var(--combo-box-small-helper-text-enabled-font-size);
     --combobox-field-helper-font-weight: var(--combo-box-small-helper-text-enabled-font-weight);
     --combobox-field-helper-line-height: var(--combo-box-small-helper-text-enabled-line-height);
-    --combobox-field-helper-letter-spacing: var(
-      --combo-box-small-helper-text-enabled-letter-spacing
-    );
+    --combobox-field-helper-letter-spacing: var(--combo-box-small-helper-text-enabled-letter-spacing);
   }
 
-  .ds-combobox-field--sm:focus-within:not(.ds-combobox-field--disabled):not(
-      .ds-combobox-field--error
-    ) {
+  .ds-combobox-field--sm:focus-within:not(.ds-combobox-field--disabled):not(.ds-combobox-field--error) {
     --combobox-field-label-fill: var(--combo-box-small-label-focused-fill);
     --combobox-field-helper-fill: var(--combo-box-small-helper-text-focused-fill);
   }
@@ -75,14 +71,10 @@
     --combobox-field-helper-font-size: var(--combo-box-large-helper-text-enabled-font-size);
     --combobox-field-helper-font-weight: var(--combo-box-large-helper-text-enabled-font-weight);
     --combobox-field-helper-line-height: var(--combo-box-large-helper-text-enabled-line-height);
-    --combobox-field-helper-letter-spacing: var(
-      --combo-box-large-helper-text-enabled-letter-spacing
-    );
+    --combobox-field-helper-letter-spacing: var(--combo-box-large-helper-text-enabled-letter-spacing);
   }
 
-  .ds-combobox-field--lg:focus-within:not(.ds-combobox-field--disabled):not(
-      .ds-combobox-field--error
-    ) {
+  .ds-combobox-field--lg:focus-within:not(.ds-combobox-field--disabled):not(.ds-combobox-field--error) {
     --combobox-field-label-fill: var(--combo-box-large-label-focused-fill);
     --combobox-field-helper-fill: var(--combo-box-large-helper-text-focused-fill);
   }

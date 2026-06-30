@@ -1,11 +1,11 @@
-import { Switch, type SwitchProps } from "../../switch/index.tsx";
+import { Switch, type SwitchProps } from '../../switch/index.tsx';
 import {
   SelectionFieldLayout,
   selectionFieldVariants,
   type SelectionFieldBaseProps,
-} from "../selection-field/selection-field-layout.tsx";
+} from '../selection-field/selection-field-layout.tsx';
 
-export type SwitchFieldProps = Omit<SwitchProps, "disabled" | "className"> &
+export type SwitchFieldProps = Omit<SwitchProps, 'disabled' | 'className'> &
   SelectionFieldBaseProps & {
     /** Additional CSS class names applied to the switch control. */
     className?: string;
@@ -15,7 +15,7 @@ export type SwitchFieldProps = Omit<SwitchProps, "disabled" | "className"> &
 export function SwitchField({
   className,
   fieldClassName,
-  size = "sm",
+  size = 'sm',
   invalid = false,
   disabled,
   label,

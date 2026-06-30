@@ -1,7 +1,7 @@
-import { cva, type VariantProps } from "class-variance-authority";
-import { createContext, type ComponentProps, type ReactNode } from "react";
+import { cva, type VariantProps } from 'class-variance-authority';
+import { createContext, type ComponentProps, type ReactNode } from 'react';
 
-import "./badge.css";
+import './badge.css';
 
 const BADGE_ICON_SIZES = {
   sm: 12,
@@ -10,32 +10,32 @@ const BADGE_ICON_SIZES = {
 
 export const BadgeIconSizeContext = createContext<number | undefined>(undefined);
 
-const badgeVariants = cva("ds-badge", {
+const badgeVariants = cva('ds-badge', {
   variants: {
     size: {
-      sm: "ds-badge--sm",
-      lg: "ds-badge--lg",
+      sm: 'ds-badge--sm',
+      lg: 'ds-badge--lg',
     },
     emphasis: {
-      subtle: "ds-badge--subtle",
-      bold: "ds-badge--bold",
+      subtle: 'ds-badge--subtle',
+      bold: 'ds-badge--bold',
     },
     variant: {
-      neutral: "ds-badge--neutral",
-      negative: "ds-badge--negative",
-      attention: "ds-badge--attention",
-      positive: "ds-badge--positive",
-      information: "ds-badge--information",
+      neutral: 'ds-badge--neutral',
+      negative: 'ds-badge--negative',
+      attention: 'ds-badge--attention',
+      positive: 'ds-badge--positive',
+      information: 'ds-badge--information',
     },
   },
   defaultVariants: {
-    size: "lg",
-    emphasis: "subtle",
-    variant: "neutral",
+    size: 'lg',
+    emphasis: 'subtle',
+    variant: 'neutral',
   },
 });
 
-export type BadgeProps = ComponentProps<"span"> &
+export type BadgeProps = ComponentProps<'span'> &
   VariantProps<typeof badgeVariants> & {
     /** Additional CSS class names applied to the root element. */
     className?: string;
@@ -47,13 +47,13 @@ export type BadgeProps = ComponentProps<"span"> &
 export function Badge({
   children,
   className,
-  size = "lg",
-  emphasis = "subtle",
-  variant = "neutral",
+  size = 'lg',
+  emphasis = 'subtle',
+  variant = 'neutral',
   icon,
   ...props
 }: BadgeProps) {
-  const resolvedSize = size ?? "lg";
+  const resolvedSize = size ?? 'lg';
   const iconSize = BADGE_ICON_SIZES[resolvedSize];
 
   return (

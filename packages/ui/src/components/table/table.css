@@ -247,9 +247,7 @@
 
   /* Interactive row hover */
   .ds-table__row--interactive:hover
-    .ds-table__cell:not(.ds-table__cell--disabled):not(.ds-table__cell--highlighted):not(
-      .ds-table__cell--focused
-    ) {
+    .ds-table__cell:not(.ds-table__cell--disabled):not(.ds-table__cell--highlighted):not(.ds-table__cell--focused) {
     --table-cell-fill: var(--table-cell-hover-fill);
     cursor: var(--cursor-interactive);
   }

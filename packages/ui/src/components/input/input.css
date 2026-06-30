@@ -148,9 +148,7 @@
     --input-text-font-size: var(--text-field-suffix-small-box-typography-enabled-font-size);
     --input-text-font-weight: var(--text-field-suffix-small-box-typography-enabled-font-weight);
     --input-text-line-height: var(--text-field-suffix-small-box-typography-enabled-line-height);
-    --input-text-letter-spacing: var(
-      --text-field-suffix-small-box-typography-enabled-letter-spacing
-    );
+    --input-text-letter-spacing: var(--text-field-suffix-small-box-typography-enabled-letter-spacing);
     --input-placeholder-fill: var(--text-field-small-box-hint-enabled-fill);
     --input-placeholder-font-family: var(--text-field-small-box-hint-enabled-font-family);
     --input-placeholder-font-size: var(--text-field-small-box-hint-enabled-font-size);
@@ -252,9 +250,7 @@
     --input-text-font-size: var(--text-field-suffix-large-box-typography-enabled-font-size);
     --input-text-font-weight: var(--text-field-suffix-large-box-typography-enabled-font-weight);
     --input-text-line-height: var(--text-field-suffix-large-box-typography-enabled-line-height);
-    --input-text-letter-spacing: var(
-      --text-field-suffix-large-box-typography-enabled-letter-spacing
-    );
+    --input-text-letter-spacing: var(--text-field-suffix-large-box-typography-enabled-letter-spacing);
     --input-placeholder-fill: var(--text-field-large-box-hint-enabled-fill);
     --input-placeholder-font-family: var(--text-field-large-box-hint-enabled-font-family);
     --input-placeholder-font-size: var(--text-field-large-box-hint-enabled-font-size);

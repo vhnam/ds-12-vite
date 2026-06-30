@@ -125,9 +125,7 @@
     --textarea-icon-fill: var(--text-area-small-box-icon-enabled-fill);
   }
 
-  .ds-textarea--sm.ds-textarea--default:focus-within:not(.ds-textarea--disabled):not(
-      .ds-textarea--error
-    ) {
+  .ds-textarea--sm.ds-textarea--default:focus-within:not(.ds-textarea--disabled):not(.ds-textarea--error) {
     --textarea-text-fill: var(--text-area-small-box-hint-focused-fill);
     --textarea-icon-fill: var(--text-area-small-box-icon-focused-fill);
   }
@@ -181,9 +179,7 @@
     --textarea-icon-fill: var(--text-area-small-box-icon-enabled-fill);
   }
 
-  .ds-textarea--sm.ds-textarea--suffix:focus-within:not(.ds-textarea--disabled):not(
-      .ds-textarea--error
-    ) {
+  .ds-textarea--sm.ds-textarea--suffix:focus-within:not(.ds-textarea--disabled):not(.ds-textarea--error) {
     --textarea-text-fill: var(--text-area-small-box-hint-focused-fill);
     --textarea-icon-fill: var(--text-area-small-box-icon-focused-fill);
   }
@@ -230,9 +226,7 @@
     --textarea-icon-fill: var(--text-area-large-box-icon-enabled-fill);
   }
 
-  .ds-textarea--lg.ds-textarea--default:focus-within:not(.ds-textarea--disabled):not(
-      .ds-textarea--error
-    ) {
+  .ds-textarea--lg.ds-textarea--default:focus-within:not(.ds-textarea--disabled):not(.ds-textarea--error) {
     --textarea-text-fill: var(--text-area-large-box-hint-focused-fill);
     --textarea-icon-fill: var(--text-area-large-box-icon-focused-fill);
   }
@@ -286,9 +280,7 @@
     --textarea-icon-fill: var(--text-area-large-box-icon-enabled-fill);
   }
 
-  .ds-textarea--lg.ds-textarea--suffix:focus-within:not(.ds-textarea--disabled):not(
-      .ds-textarea--error
-    ) {
+  .ds-textarea--lg.ds-textarea--suffix:focus-within:not(.ds-textarea--disabled):not(.ds-textarea--error) {
     --textarea-text-fill: var(--text-area-large-box-hint-focused-fill);
     --textarea-icon-fill: var(--text-area-large-box-icon-focused-fill);
   }

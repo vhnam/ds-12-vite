@@ -1,11 +1,11 @@
-import { Radio, type RadioProps } from "../../radio/index.tsx";
+import { Radio, type RadioProps } from '../../radio/index.tsx';
 import {
   SelectionFieldLayout,
   selectionFieldVariants,
   type SelectionFieldBaseProps,
-} from "../selection-field/selection-field-layout.tsx";
+} from '../selection-field/selection-field-layout.tsx';
 
-export type RadioFieldProps = Omit<RadioProps, "size" | "invalid" | "disabled" | "className"> &
+export type RadioFieldProps = Omit<RadioProps, 'size' | 'invalid' | 'disabled' | 'className'> &
   SelectionFieldBaseProps & {
     /** Additional CSS class names applied to the radio control. */
     className?: string;
@@ -15,7 +15,7 @@ export type RadioFieldProps = Omit<RadioProps, "size" | "invalid" | "disabled" |
 export function RadioField({
   className,
   fieldClassName,
-  size = "sm",
+  size = 'sm',
   invalid = false,
   disabled,
   label,

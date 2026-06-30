@@ -1,34 +1,34 @@
-import { Radio as BaseRadio } from "@base-ui/react/radio";
-import { RadioGroup as BaseRadioGroup } from "@base-ui/react/radio-group";
-import { cva, type VariantProps } from "class-variance-authority";
-import type { ComponentProps } from "react";
+import { Radio as BaseRadio } from '@base-ui/react/radio';
+import { RadioGroup as BaseRadioGroup } from '@base-ui/react/radio-group';
+import { cva, type VariantProps } from 'class-variance-authority';
+import type { ComponentProps } from 'react';
 
-import { cn } from "../../lib/utils.ts";
-import "./radio.css";
+import { cn } from '../../lib/utils.ts';
+import './radio.css';
 
-const radioVariants = cva("ds-radio", {
+const radioVariants = cva('ds-radio', {
   variants: {
     size: {
-      sm: "ds-radio--sm",
-      lg: "ds-radio--lg",
+      sm: 'ds-radio--sm',
+      lg: 'ds-radio--lg',
     },
     invalid: {
-      true: "ds-radio--invalid",
+      true: 'ds-radio--invalid',
       false: null,
     },
     disabled: {
-      true: "ds-radio--disabled",
+      true: 'ds-radio--disabled',
       false: null,
     },
   },
   defaultVariants: {
-    size: "lg",
+    size: 'lg',
     invalid: false,
     disabled: false,
   },
 });
 
-export type RadioProps = Omit<ComponentProps<typeof BaseRadio.Root>, "className"> &
+export type RadioProps = Omit<ComponentProps<typeof BaseRadio.Root>, 'className'> &
   VariantProps<typeof radioVariants> & {
     /** Additional CSS class names applied to the root element. */
     className?: string;
@@ -36,7 +36,7 @@ export type RadioProps = Omit<ComponentProps<typeof BaseRadio.Root>, "className"
      * Visual size of the radio control.
      * @default "lg"
      */
-    size?: "sm" | "lg";
+    size?: 'sm' | 'lg';
     /**
      * Marks the control as invalid and sets `aria-invalid`.
      * @default false
@@ -47,14 +47,7 @@ export type RadioProps = Omit<ComponentProps<typeof BaseRadio.Root>, "className"
 export type RadioGroupProps = ComponentProps<typeof BaseRadioGroup>;
 
 /** Circular selection control for choosing one option from a mutually exclusive set. */
-export function Radio({
-  className,
-  size = "lg",
-  invalid = false,
-  disabled = false,
-  value,
-  ...props
-}: RadioProps) {
+export function Radio({ className, size = 'lg', invalid = false, disabled = false, value, ...props }: RadioProps) {
   return (
     <BaseRadio.Root
       className={cn(

@@ -1,39 +1,40 @@
-import { Avatar } from "@ds-12/ui/avatar";
-import { Badge } from "@ds-12/ui/badge";
-import { Button } from "@ds-12/ui/button";
-import { Icon } from "@ds-12/ui/icon";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@ds-12/ui/table";
-import { StoryCaption, StorySectionTitle } from "../../lib/story-presentation.tsx";
+import { Avatar } from '@ds-12/ui/avatar';
+import { Badge } from '@ds-12/ui/badge';
+import { Button } from '@ds-12/ui/button';
+import { Icon } from '@ds-12/ui/icon';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@ds-12/ui/table';
 
-export const CELL_STATES = ["default", "hovered", "highlighted", "disabled", "focused"] as const;
+import { StoryCaption, StorySectionTitle } from '../../lib/story-presentation.tsx';
+
+export const CELL_STATES = ['default', 'hovered', 'highlighted', 'disabled', 'focused'] as const;
 
 export type TableCellStoryState = (typeof CELL_STATES)[number];
 
 export const CELL_VARIANTS = [
-  { key: "default", label: "Default" },
-  { key: "end", label: "Right aligned" },
-  { key: "stacked", label: "Stacked" },
-  { key: "avatar", label: "With avatar" },
-  { key: "badge", label: "With badge" },
-  { key: "custom", label: "Custom" },
+  { key: 'default', label: 'Default' },
+  { key: 'end', label: 'Right aligned' },
+  { key: 'stacked', label: 'Stacked' },
+  { key: 'avatar', label: 'With avatar' },
+  { key: 'badge', label: 'With badge' },
+  { key: 'custom', label: 'Custom' },
 ] as const;
 
 const showcaseColumnStyle = {
-  display: "flex",
-  flexDirection: "column",
+  display: 'flex',
+  flexDirection: 'column',
   gap: 0,
   minWidth: 150,
 } as const;
 
 const showcaseGridStyle = {
-  display: "flex",
+  display: 'flex',
   gap: 0,
-  overflowX: "auto",
+  overflowX: 'auto',
 } as const;
 
 const sectionStyle = {
-  display: "flex",
-  flexDirection: "column",
+  display: 'flex',
+  flexDirection: 'column',
   gap: 24,
 } as const;
 
@@ -50,19 +51,12 @@ function DemoAvatar({ disabled = false }: { disabled?: boolean }) {
   );
 }
 
-function renderCellVariant(
-  variantKey: (typeof CELL_VARIANTS)[number]["key"],
-  state: TableCellStoryState,
-) {
-  const align = variantKey === "end" ? "end" : "start";
+function renderCellVariant(variantKey: (typeof CELL_VARIANTS)[number]['key'], state: TableCellStoryState) {
+  const align = variantKey === 'end' ? 'end' : 'start';
   const variant =
-    variantKey === "end"
-      ? "default"
-      : variantKey === "badge" || variantKey === "custom"
-        ? "custom"
-        : variantKey;
+    variantKey === 'end' ? 'default' : variantKey === 'badge' || variantKey === 'custom' ? 'custom' : variantKey;
 
-  if (variantKey === "badge") {
+  if (variantKey === 'badge') {
     return (
       <TableCell variant="custom" state={state}>
         <Badge size="sm" variant="information" icon={<Icon name="check_circle" variant="filled" />}>
@@ -72,7 +66,7 @@ function renderCellVariant(
     );
   }
 
-  if (variantKey === "custom") {
+  if (variantKey === 'custom') {
     return (
       <TableCell variant="custom" state={state}>
         <span />
@@ -87,8 +81,8 @@ function renderCellVariant(
       state={state}
       text="Text"
       subText="Sub text"
-      avatar={variant === "avatar" ? <DemoAvatar disabled={state === "disabled"} /> : undefined}
-      showChevron={variant === "default" || variant === "stacked" || variant === "avatar"}
+      avatar={variant === 'avatar' ? <DemoAvatar disabled={state === 'disabled'} /> : undefined}
+      showChevron={variant === 'default' || variant === 'stacked' || variant === 'avatar'}
     />
   );
 }
@@ -124,9 +118,7 @@ export function CellStatesShowcase() {
     <div style={sectionStyle}>
       <div>
         <StorySectionTitle>Cell states</StorySectionTitle>
-        <StoryCaption>
-          Content variants across default, hovered, highlighted, disabled, and focused.
-        </StoryCaption>
+        <StoryCaption>Content variants across default, hovered, highlighted, disabled, and focused.</StoryCaption>
       </div>
       <div style={showcaseGridStyle}>
         {CELL_STATES.map((state) => (
@@ -168,11 +160,7 @@ export function FullTableShowcase() {
             <TableCell variant="avatar" text="Text" subText="Sub text" avatar={<DemoAvatar />} />
             <TableCell text="Text" />
             <TableCell variant="custom">
-              <Badge
-                size="sm"
-                variant="information"
-                icon={<Icon name="check_circle" variant="filled" />}
-              >
+              <Badge size="sm" variant="information" icon={<Icon name="check_circle" variant="filled" />}>
                 Badge
               </Badge>
             </TableCell>

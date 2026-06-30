@@ -1,28 +1,28 @@
-import { Button as BaseButton } from "@base-ui/react/button";
-import { cva, type VariantProps } from "class-variance-authority";
-import type { ComponentProps, ReactNode } from "react";
+import { Button as BaseButton } from '@base-ui/react/button';
+import { cva, type VariantProps } from 'class-variance-authority';
+import type { ComponentProps, ReactNode } from 'react';
 
-import { cn } from "../../lib/utils.ts";
-import { Icon } from "../icon/index.tsx";
-import "./chip.css";
+import { cn } from '../../lib/utils.ts';
+import { Icon } from '../icon/index.tsx';
+import './chip.css';
 
 const CHIP_ICON_SIZE = 16;
 
-const DEFAULT_LEADING_ICON = "filter_list";
-const DEFAULT_TRAILING_ICON = "keyboard_arrow_down";
+const DEFAULT_LEADING_ICON = 'filter_list';
+const DEFAULT_TRAILING_ICON = 'keyboard_arrow_down';
 
-const chipVariants = cva("ds-chip", {
+const chipVariants = cva('ds-chip', {
   variants: {
     active: {
-      false: "ds-chip--inactive",
-      true: "ds-chip--active",
+      false: 'ds-chip--inactive',
+      true: 'ds-chip--active',
     },
     hasLeading: {
-      true: "ds-chip--has-leading",
+      true: 'ds-chip--has-leading',
       false: null,
     },
     hasTrailing: {
-      true: "ds-chip--has-trailing",
+      true: 'ds-chip--has-trailing',
       false: null,
     },
   },
@@ -33,7 +33,7 @@ const chipVariants = cva("ds-chip", {
   },
 });
 
-export type ChipProps = Omit<ComponentProps<typeof BaseButton>, "className"> &
+export type ChipProps = Omit<ComponentProps<typeof BaseButton>, 'className'> &
   VariantProps<typeof chipVariants> & {
     /** Additional CSS class names applied to the root element. */
     className?: string;

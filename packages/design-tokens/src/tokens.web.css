@@ -221,9 +221,7 @@
   --pagination-sm-button-default-border-color: var(--color-semantic-border-subtle);
   --pagination-sm-button-default-label-fill: var(--color-semantic-text-neutral-moderate);
   --pagination-sm-button-pressed-fill: var(--pagination-button-container-pressed-fill);
-  --pagination-sm-button-pressed-border-color: var(
-    --pagination-button-container-pressed-border-color
-  );
+  --pagination-sm-button-pressed-border-color: var(--pagination-button-container-pressed-border-color);
   --pagination-sm-button-pressed-label-fill: var(--color-semantic-brand-bold);
   --pagination-sm-button-label-font-family: var(--paragraph-default-strong-font-family);
   --pagination-sm-button-label-font-size: var(--paragraph-default-strong-font-size);
@@ -380,8 +378,7 @@
   --switch-track-width: var(--selection-switch-default-false-width);
   --switch-radius: var(--selection-switch-default-false-border-radius);
   --switch-transition: var(--transition-interactive);
-  --switch-thumb-transition: translate var(--transition-duration-fast)
-    var(--transition-timing-default);
+  --switch-thumb-transition: translate var(--transition-duration-fast) var(--transition-timing-default);
   --switch-thumb-offset: calc(var(--switch-track-width) - var(--switch-track-height));
   --switch-focus-ring-width: var(--focus-ring-width);
   --switch-focus-ring-color: var(--focus-ring-color);

@@ -1,17 +1,17 @@
-import tokensCss from "@ds-12/design-tokens/tokens.generated.css?raw";
+import tokensCss from '@ds-12/design-tokens/tokens.generated.css?raw';
 
 const SPACING_TOKEN_PATTERN = /^\s*--(spacing-[a-z]+):/gm;
 
 const SPACING_ORDER = [
-  "xxxsmall",
-  "xxsmall",
-  "xsmall",
-  "small",
-  "medium",
-  "large",
-  "xlarge",
-  "xxlarge",
-  "xxxlarge",
+  'xxxsmall',
+  'xxsmall',
+  'xsmall',
+  'small',
+  'medium',
+  'large',
+  'xlarge',
+  'xxlarge',
+  'xxxlarge',
 ] as const;
 
 export type SpacingTokenGroup = {
@@ -32,8 +32,8 @@ function parseSpacingTokens(css: string): string[] {
 }
 
 function compareSpacingTokens(left: string, right: string): number {
-  const suffixLeft = left.slice("spacing-".length);
-  const suffixRight = right.slice("spacing-".length);
+  const suffixLeft = left.slice('spacing-'.length);
+  const suffixRight = right.slice('spacing-'.length);
   const indexLeft = SPACING_ORDER.indexOf(suffixLeft as (typeof SPACING_ORDER)[number]);
   const indexRight = SPACING_ORDER.indexOf(suffixRight as (typeof SPACING_ORDER)[number]);
 
@@ -46,19 +46,19 @@ function compareSpacingTokens(left: string, right: string): number {
 
 export function formatFoundationTokenDisplayName(token: string): string {
   return token
-    .replace(/^spacing-/, "")
-    .split("-")
+    .replace(/^spacing-/, '')
+    .split('-')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
+    .join(' ');
 }
 
 const parsedTokens = parseSpacingTokens(tokensCss).sort(compareSpacingTokens);
 
 export const FOUNDATION_SPACING_TOKEN_GROUPS: SpacingTokenGroup[] = [
   {
-    id: "spacing",
-    label: "spacing",
-    description: "Consistent scale of spacing values for padding, margin, gaps, and layout rhythm.",
+    id: 'spacing',
+    label: 'spacing',
+    description: 'Consistent scale of spacing values for padding, margin, gaps, and layout rhythm.',
     tokens: parsedTokens,
   },
 ];

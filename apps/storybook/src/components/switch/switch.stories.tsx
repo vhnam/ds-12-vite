@@ -1,26 +1,28 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Switch } from "@ds-12/ui/switch";
+import type { Meta, StoryObj } from '@storybook/react-vite';
+
+import { Switch } from '@ds-12/ui/switch';
+
 import {
   createSwitchA11yPlay,
   createSwitchDisabledPlay,
   createSwitchKeyboardFocusPlay,
   runSwitchInteractionTests,
-} from "../../lib/component-tests.ts";
-import { showcaseParameters } from "../../lib/story-test-config.ts";
-import { booleanArgType } from "../../lib/story-arg-types.ts";
-import { SwitchStatesMatrix } from "./switch-story-fixtures.tsx";
+} from '../../lib/component-tests.ts';
+import { booleanArgType } from '../../lib/story-arg-types.ts';
+import { showcaseParameters } from '../../lib/story-test-config.ts';
+import { SwitchStatesMatrix } from './switch-story-fixtures.tsx';
 
 /** Pill-shaped toggle for binary on/off settings such as feature flags or preferences. */
 const meta = {
-  title: "Components/Switch",
+  title: 'Components/Switch',
   component: Switch,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
-    disabled: booleanArgType("Prevents interaction."),
-    defaultChecked: booleanArgType("Initial on state for uncontrolled usage."),
+    disabled: booleanArgType('Prevents interaction.'),
+    defaultChecked: booleanArgType('Initial on state for uncontrolled usage.'),
   },
   args: {
-    "aria-label": "Enable notifications",
+    'aria-label': 'Enable notifications',
     disabled: false,
     defaultChecked: false,
   },
@@ -56,7 +58,7 @@ export const Disabled: Story = {
 
 /** Showcase of switch states — for human reference only. */
 export const States: Story = {
-  tags: ["!manifest"],
+  tags: ['!manifest'],
   parameters: showcaseParameters,
   render: () => <SwitchStatesMatrix />,
 };

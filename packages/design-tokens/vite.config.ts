@@ -1,4 +1,4 @@
-import { defineConfig } from "vite-plus";
+import { defineConfig } from 'vite-plus';
 
 export default defineConfig({
   pack: {
@@ -14,6 +14,6 @@ export default defineConfig({
     },
   },
   fmt: {
-    ignorePatterns: ["src/tokens.generated.css"],
+    ignorePatterns: ['src/tokens.generated.css'],
   },
 });

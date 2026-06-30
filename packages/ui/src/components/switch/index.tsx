@@ -1,14 +1,14 @@
-import { Switch as BaseSwitch } from "@base-ui/react/switch";
-import { cva, type VariantProps } from "class-variance-authority";
-import type { ComponentProps } from "react";
+import { Switch as BaseSwitch } from '@base-ui/react/switch';
+import { cva, type VariantProps } from 'class-variance-authority';
+import type { ComponentProps } from 'react';
 
-import { cn } from "../../lib/utils.ts";
-import "./switch.css";
+import { cn } from '../../lib/utils.ts';
+import './switch.css';
 
-const switchVariants = cva("ds-switch", {
+const switchVariants = cva('ds-switch', {
   variants: {
     disabled: {
-      true: "ds-switch--disabled",
+      true: 'ds-switch--disabled',
       false: null,
     },
   },
@@ -17,7 +17,7 @@ const switchVariants = cva("ds-switch", {
   },
 });
 
-export type SwitchProps = Omit<ComponentProps<typeof BaseSwitch.Root>, "className"> &
+export type SwitchProps = Omit<ComponentProps<typeof BaseSwitch.Root>, 'className'> &
   VariantProps<typeof switchVariants> & {
     /** Additional CSS class names applied to the root element. */
     className?: string;

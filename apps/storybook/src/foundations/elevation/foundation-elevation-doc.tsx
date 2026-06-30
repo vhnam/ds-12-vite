@@ -1,8 +1,5 @@
-import {
-  formatFoundationTokenDisplayName,
-  FOUNDATION_ELEVATION_TOKEN_GROUPS,
-} from "./parse-theme-elevation.ts";
-import { ElevationTokensDoc } from "./elevation-tokens-doc.tsx";
+import { ElevationTokensDoc } from './elevation-tokens-doc.tsx';
+import { formatFoundationTokenDisplayName, FOUNDATION_ELEVATION_TOKEN_GROUPS } from './parse-theme-elevation.ts';
 
 function FoundationElevationDoc() {
   return (

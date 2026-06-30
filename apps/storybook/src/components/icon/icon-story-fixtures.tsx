@@ -1,28 +1,29 @@
-import { Icon } from "@ds-12/ui/icon";
-import { StoryCaption } from "../../lib/story-presentation.tsx";
+import { Icon } from '@ds-12/ui/icon';
 
-export const VARIANTS = ["outlined", "filled"] as const;
+import { StoryCaption } from '../../lib/story-presentation.tsx';
+
+export const VARIANTS = ['outlined', 'filled'] as const;
 export const SIZES = [12, 16, 20, 24, 32] as const;
 
-const ICON_NAME = "check_circle";
+const ICON_NAME = 'check_circle';
 
 const rowStyle = {
-  display: "flex",
+  display: 'flex',
   gap: 24,
-  alignItems: "center",
+  alignItems: 'center',
 } as const;
 
 const sizesRowStyle = {
-  display: "flex",
+  display: 'flex',
   gap: 16,
-  alignItems: "flex-end",
+  alignItems: 'flex-end',
 } as const;
 
 const sizeItemStyle = {
-  display: "flex",
-  flexDirection: "column",
+  display: 'flex',
+  flexDirection: 'column',
   gap: 4,
-  alignItems: "center",
+  alignItems: 'center',
 } as const;
 
 export function VariantsShowcase() {

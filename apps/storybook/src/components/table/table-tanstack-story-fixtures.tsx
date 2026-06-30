@@ -5,8 +5,8 @@ import {
   getSortedRowModel,
   useReactTable,
   type SortingState,
-} from "@tanstack/react-table";
-import { useState } from "react";
+} from '@tanstack/react-table';
+import { useState } from 'react';
 
 import {
   Table,
@@ -16,7 +16,7 @@ import {
   TableHeader,
   TableRow,
   type TableSortDirection,
-} from "@ds-12/ui/table";
+} from '@ds-12/ui/table';
 
 type InvoiceRow = {
   name: string;
@@ -25,40 +25,40 @@ type InvoiceRow = {
 };
 
 const INVOICE_DATA: InvoiceRow[] = [
-  { name: "Acme Corp", status: "Active", amount: 1200 },
-  { name: "Beta Ltd", status: "Pending", amount: 450 },
-  { name: "Gamma Inc", status: "Active", amount: 9900 },
+  { name: 'Acme Corp', status: 'Active', amount: 1200 },
+  { name: 'Beta Ltd', status: 'Pending', amount: 450 },
+  { name: 'Gamma Inc', status: 'Active', amount: 9900 },
 ];
 
 const columnHelper = createColumnHelper<InvoiceRow>();
 
 const INVOICE_COLUMNS = [
-  columnHelper.accessor("name", {
-    header: "Name",
+  columnHelper.accessor('name', {
+    header: 'Name',
     cell: (info) => info.getValue(),
   }),
-  columnHelper.accessor("status", {
-    header: "Status",
+  columnHelper.accessor('status', {
+    header: 'Status',
     enableSorting: false,
     cell: (info) => info.getValue(),
   }),
-  columnHelper.accessor("amount", {
-    header: "Amount",
+  columnHelper.accessor('amount', {
+    header: 'Amount',
     cell: (info) => `S$${info.getValue().toLocaleString()}`,
-    sortingFn: "basic",
+    sortingFn: 'basic',
   }),
 ];
 
-function toSortDirection(sorted: false | "asc" | "desc"): TableSortDirection | undefined {
-  if (sorted === "asc") {
-    return "ascending";
+function toSortDirection(sorted: false | 'asc' | 'desc'): TableSortDirection | undefined {
+  if (sorted === 'asc') {
+    return 'ascending';
   }
 
-  if (sorted === "desc") {
-    return "descending";
+  if (sorted === 'desc') {
+    return 'descending';
   }
 
-  return "none";
+  return 'none';
 }
 
 /** TanStack Table example — sorting is driven by column accessors (`name`, `amount`), not the header UI alone. */
@@ -82,7 +82,7 @@ export function TanStackSortableTable() {
             {headerGroup.headers.map((header) => {
               const sorted = header.column.getIsSorted();
               const columnId = header.column.id;
-              const align = columnId === "amount" ? "end" : "start";
+              const align = columnId === 'amount' ? 'end' : 'start';
 
               return (
                 <TableHead
@@ -103,10 +103,10 @@ export function TanStackSortableTable() {
         {table.getRowModel().rows.map((row) => (
           <TableRow key={row.id} interactive>
             {row.getVisibleCells().map((cell) => {
-              const align = cell.column.id === "amount" ? "end" : "start";
+              const align = cell.column.id === 'amount' ? 'end' : 'start';
               const value = cell.getValue();
               const text =
-                cell.column.id === "amount" && typeof value === "number"
+                cell.column.id === 'amount' && typeof value === 'number'
                   ? `S$${value.toLocaleString()}`
                   : String(value);
 

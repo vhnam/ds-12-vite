@@ -1,7 +1,7 @@
-import { expect, userEvent, within } from "storybook/test";
-import type { StoryObj } from "@storybook/react-vite";
+import type { StoryObj } from '@storybook/react-vite';
+import { expect, userEvent, within } from 'storybook/test';
 
-type PlayFunction = NonNullable<StoryObj["play"]>;
+type PlayFunction = NonNullable<StoryObj['play']>;
 type PlayContext = Parameters<PlayFunction>[0];
 
 const testStoryParameters = {
@@ -15,7 +15,7 @@ export function testStoryParams() {
 export function createButtonA11yPlay(name: string | RegExp): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const button = canvas.getByRole("button", { name });
+    const button = canvas.getByRole('button', { name });
 
     await expect(button).toBeInTheDocument();
     await expect(button).toHaveAccessibleName(name);
@@ -25,7 +25,7 @@ export function createButtonA11yPlay(name: string | RegExp): PlayFunction {
 export function createButtonKeyboardFocusPlay(name: string | RegExp): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const button = canvas.getByRole("button", { name });
+    const button = canvas.getByRole('button', { name });
 
     await userEvent.click(canvasElement);
     await userEvent.tab();
@@ -36,32 +36,32 @@ export function createButtonKeyboardFocusPlay(name: string | RegExp): PlayFuncti
 export function createButtonFocusVisiblePlay(name: string | RegExp): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const button = canvas.getByRole("button", { name });
+    const button = canvas.getByRole('button', { name });
 
     await userEvent.click(canvasElement);
     await userEvent.tab();
     await expect(button).toHaveFocus();
-    await expect(button.matches(":focus-visible")).toBe(true);
+    await expect(button.matches(':focus-visible')).toBe(true);
   };
 }
 
 export function createButtonMouseClickPlay(name: string | RegExp): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const button = canvas.getByRole("button", { name });
+    const button = canvas.getByRole('button', { name });
 
     await userEvent.click(button);
-    await expect(button).not.toHaveAttribute("data-focus-visible", "true");
+    await expect(button).not.toHaveAttribute('data-focus-visible', 'true');
   };
 }
 
 export function createButtonDisabledPlay(name: string | RegExp): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const button = canvas.getByRole("button", { name });
+    const button = canvas.getByRole('button', { name });
 
-    await expect(button).toHaveAttribute("aria-disabled", "true");
-    await expect(button).not.toHaveAttribute("disabled");
+    await expect(button).toHaveAttribute('aria-disabled', 'true');
+    await expect(button).not.toHaveAttribute('disabled');
     await userEvent.click(canvasElement);
     await userEvent.tab();
     await expect(button).toHaveFocus();
@@ -71,18 +71,15 @@ export function createButtonDisabledPlay(name: string | RegExp): PlayFunction {
 export function createButtonLoadingA11yPlay(name: string | RegExp): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const button = canvas.getByRole("button", { name });
+    const button = canvas.getByRole('button', { name });
 
     await expect(button).toHaveAccessibleName(name);
-    await expect(button).toHaveAttribute("aria-busy", "true");
-    await expect(button).toHaveAttribute("aria-disabled", "true");
+    await expect(button).toHaveAttribute('aria-busy', 'true');
+    await expect(button).toHaveAttribute('aria-disabled', 'true');
   };
 }
 
-export async function runButtonInteractionTests(
-  context: PlayContext,
-  name: string | RegExp,
-): Promise<void> {
+export async function runButtonInteractionTests(context: PlayContext, name: string | RegExp): Promise<void> {
   await createButtonA11yPlay(name)(context);
   await createButtonKeyboardFocusPlay(name)(context);
   await createButtonFocusVisiblePlay(name)(context);
@@ -93,9 +90,9 @@ export function createChipA11yPlay(name: string | RegExp, active: boolean): Play
   return async (context) => {
     await createButtonA11yPlay(name)(context);
     const canvas = within(context.canvasElement);
-    const chip = canvas.getByRole("button", { name });
+    const chip = canvas.getByRole('button', { name });
 
-    await expect(chip).toHaveAttribute("aria-pressed", active ? "true" : "false");
+    await expect(chip).toHaveAttribute('aria-pressed', active ? 'true' : 'false');
   };
 }
 
@@ -113,7 +110,7 @@ export async function runChipInteractionTests(
 export function createTextboxA11yPlay(name: string | RegExp): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const input = canvas.getByRole("textbox", { name });
+    const input = canvas.getByRole('textbox', { name });
 
     await expect(input).toBeInTheDocument();
     await expect(input).toHaveAccessibleName(name);
@@ -123,7 +120,7 @@ export function createTextboxA11yPlay(name: string | RegExp): PlayFunction {
 export function createTextboxKeyboardFocusPlay(name: string | RegExp): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const input = canvas.getByRole("textbox", { name });
+    const input = canvas.getByRole('textbox', { name });
 
     await userEvent.click(canvasElement);
     await userEvent.tab();
@@ -134,19 +131,19 @@ export function createTextboxKeyboardFocusPlay(name: string | RegExp): PlayFunct
 export function createTextboxFocusVisiblePlay(name: string | RegExp): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const input = canvas.getByRole("textbox", { name });
+    const input = canvas.getByRole('textbox', { name });
 
     await userEvent.click(canvasElement);
     await userEvent.tab();
     await expect(input).toHaveFocus();
-    await expect(input.matches(":focus-visible")).toBe(true);
+    await expect(input.matches(':focus-visible')).toBe(true);
   };
 }
 
 export function createTextboxMouseClickPlay(name: string | RegExp): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const input = canvas.getByRole("textbox", { name });
+    const input = canvas.getByRole('textbox', { name });
 
     await userEvent.click(input);
     await expect(input).toHaveFocus();
@@ -156,27 +153,24 @@ export function createTextboxMouseClickPlay(name: string | RegExp): PlayFunction
 export function createTextboxDisabledPlay(name: string | RegExp): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const input = canvas.getByRole("textbox", { name });
+    const input = canvas.getByRole('textbox', { name });
 
     await expect(input).toBeDisabled();
-    await expect(input).not.toHaveAttribute("aria-disabled", "true");
+    await expect(input).not.toHaveAttribute('aria-disabled', 'true');
   };
 }
 
 export function createTextboxInvalidA11yPlay(name: string | RegExp): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const input = canvas.getByRole("textbox", { name });
+    const input = canvas.getByRole('textbox', { name });
 
     await expect(input).toHaveAccessibleName(name);
-    await expect(input).toHaveAttribute("aria-invalid", "true");
+    await expect(input).toHaveAttribute('aria-invalid', 'true');
   };
 }
 
-export async function runTextboxInteractionTests(
-  context: PlayContext,
-  name: string | RegExp,
-): Promise<void> {
+export async function runTextboxInteractionTests(context: PlayContext, name: string | RegExp): Promise<void> {
   await createTextboxA11yPlay(name)(context);
   await createTextboxKeyboardFocusPlay(name)(context);
   await createTextboxFocusVisiblePlay(name)(context);
@@ -184,7 +178,7 @@ export async function runTextboxInteractionTests(
 }
 
 function getCombobox(canvas: ReturnType<typeof within>, name?: string | RegExp) {
-  return name ? canvas.getByRole("combobox", { name }) : canvas.getByRole("combobox");
+  return name ? canvas.getByRole('combobox', { name }) : canvas.getByRole('combobox');
 }
 
 export function createComboboxA11yPlay(name?: string | RegExp): PlayFunction {
@@ -218,7 +212,7 @@ export function createComboboxFocusVisiblePlay(name?: string | RegExp): PlayFunc
     await userEvent.click(canvasElement);
     await userEvent.tab();
     await expect(combobox).toHaveFocus();
-    await expect(combobox.matches(":focus-visible")).toBe(true);
+    await expect(combobox.matches(':focus-visible')).toBe(true);
   };
 }
 
@@ -229,8 +223,8 @@ export function createComboboxMouseClickPlay(name?: string | RegExp): PlayFuncti
 
     await userEvent.click(combobox);
     // Base UI portals the popup to document.body, outside #storybook-root.
-    await expect(within(document.body).getByRole("listbox")).toBeInTheDocument();
-    await expect(combobox).not.toHaveAttribute("data-focus-visible", "true");
+    await expect(within(document.body).getByRole('listbox')).toBeInTheDocument();
+    await expect(combobox).not.toHaveAttribute('data-focus-visible', 'true');
   };
 }
 
@@ -253,24 +247,18 @@ export function createComboboxInvalidA11yPlay(name?: string | RegExp): PlayFunct
     if (name) {
       await expect(combobox).toHaveAccessibleName(name);
     }
-    await expect(combobox).toHaveAttribute("aria-invalid", "true");
+    await expect(combobox).toHaveAttribute('aria-invalid', 'true');
   };
 }
 
-export async function runComboboxInteractionTests(
-  context: PlayContext,
-  name?: string | RegExp,
-): Promise<void> {
+export async function runComboboxInteractionTests(context: PlayContext, name?: string | RegExp): Promise<void> {
   await createComboboxA11yPlay(name)(context);
   await createComboboxKeyboardFocusPlay(name)(context);
   await createComboboxFocusVisiblePlay(name)(context);
   await createComboboxMouseClickPlay(name)(context);
 }
 
-export async function runComboboxA11yAndFocusTests(
-  context: PlayContext,
-  name?: string | RegExp,
-): Promise<void> {
+export async function runComboboxA11yAndFocusTests(context: PlayContext, name?: string | RegExp): Promise<void> {
   await createComboboxA11yPlay(name)(context);
   await createComboboxKeyboardFocusPlay(name)(context);
   await createComboboxFocusVisiblePlay(name)(context);
@@ -279,11 +267,11 @@ export async function runComboboxA11yAndFocusTests(
 export function createSkeletonA11yPlay(name: string | RegExp): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const status = canvas.getByRole("status", { name });
+    const status = canvas.getByRole('status', { name });
 
     await expect(status).toBeInTheDocument();
     await expect(status).toHaveAccessibleName(name);
-    await expect(status).toHaveAttribute("aria-busy", "true");
+    await expect(status).toHaveAttribute('aria-busy', 'true');
   };
 }
 
@@ -291,7 +279,7 @@ export function createSeparatorA11yPlay(): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    await expect(canvas.getByRole("separator")).toBeInTheDocument();
+    await expect(canvas.getByRole('separator')).toBeInTheDocument();
   };
 }
 
@@ -310,8 +298,8 @@ export function createIconA11yPlay(iconName: string): PlayFunction {
     const canvas = within(canvasElement);
     const icon = canvas.getByText(iconName);
 
-    await expect(icon).toHaveAttribute("aria-hidden", "true");
-    await expect(canvas.queryByRole("img")).not.toBeInTheDocument();
+    await expect(icon).toHaveAttribute('aria-hidden', 'true');
+    await expect(canvas.queryByRole('img')).not.toBeInTheDocument();
   };
 }
 
@@ -329,7 +317,7 @@ export function createHeadingA11yPlay(level: number, name: string): PlayFunction
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    await expect(canvas.getByRole("heading", { level, name })).toBeInTheDocument();
+    await expect(canvas.getByRole('heading', { level, name })).toBeInTheDocument();
   };
 }
 
@@ -347,18 +335,12 @@ export function createPaginationA11yPlay(activePage: number): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    await expect(canvas.getByRole("navigation", { name: "Pagination" })).toBeInTheDocument();
-    await expect(canvas.getByRole("button", { name: `Page ${activePage}` })).toHaveAttribute(
-      "aria-current",
-      "page",
-    );
+    await expect(canvas.getByRole('navigation', { name: 'Pagination' })).toBeInTheDocument();
+    await expect(canvas.getByRole('button', { name: `Page ${activePage}` })).toHaveAttribute('aria-current', 'page');
   };
 }
 
-export async function runPaginationInteractionTests(
-  context: PlayContext,
-  activePage: number,
-): Promise<void> {
+export async function runPaginationInteractionTests(context: PlayContext, activePage: number): Promise<void> {
   await createPaginationA11yPlay(activePage)(context);
   await createButtonKeyboardFocusPlay(`Page ${activePage}`)(context);
   await createButtonFocusVisiblePlay(`Page ${activePage}`)(context);
@@ -368,7 +350,7 @@ export async function runPaginationInteractionTests(
 export function createCheckboxA11yPlay(name: string | RegExp, checked = false): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const checkbox = canvas.getByRole("checkbox", { name });
+    const checkbox = canvas.getByRole('checkbox', { name });
 
     await expect(checkbox).toBeInTheDocument();
     await expect(checkbox).toHaveAccessibleName(name);
@@ -383,19 +365,19 @@ export function createCheckboxA11yPlay(name: string | RegExp, checked = false): 
 export function createCheckboxKeyboardFocusPlay(name: string | RegExp): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const checkbox = canvas.getByRole("checkbox", { name });
+    const checkbox = canvas.getByRole('checkbox', { name });
 
     await userEvent.click(canvasElement);
     await userEvent.tab();
     await expect(checkbox).toHaveFocus();
-    await expect(checkbox.matches(":focus-visible")).toBe(true);
+    await expect(checkbox.matches(':focus-visible')).toBe(true);
   };
 }
 
 export function createCheckboxTogglePlay(name: string | RegExp): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const checkbox = canvas.getByRole("checkbox", { name });
+    const checkbox = canvas.getByRole('checkbox', { name });
 
     await userEvent.click(checkbox);
     await expect(checkbox).toBeChecked();
@@ -405,9 +387,9 @@ export function createCheckboxTogglePlay(name: string | RegExp): PlayFunction {
 export function createCheckboxDisabledPlay(name: string | RegExp): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const checkbox = canvas.getByRole("checkbox", { name });
+    const checkbox = canvas.getByRole('checkbox', { name });
 
-    await expect(checkbox).toHaveAttribute("aria-disabled", "true");
+    await expect(checkbox).toHaveAttribute('aria-disabled', 'true');
   };
 }
 
@@ -417,10 +399,10 @@ export function createCheckboxInvalidA11yPlay(
 ): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const checkbox = canvas.getByRole("checkbox", { name });
+    const checkbox = canvas.getByRole('checkbox', { name });
 
     await expect(checkbox).toHaveAccessibleName(name);
-    await expect(checkbox).toHaveAttribute("aria-invalid", "true");
+    await expect(checkbox).toHaveAttribute('aria-invalid', 'true');
     await expect(canvas.getByText(helperText)).toBeInTheDocument();
   };
 }
@@ -429,14 +411,11 @@ export function createCheckboxWithInputA11yPlay(name: string | RegExp): PlayFunc
   return async (context) => {
     await createCheckboxA11yPlay(name)(context);
     const canvas = within(context.canvasElement);
-    await expect(canvas.getByRole("textbox")).toBeInTheDocument();
+    await expect(canvas.getByRole('textbox')).toBeInTheDocument();
   };
 }
 
-export async function runCheckboxInteractionTests(
-  context: PlayContext,
-  name: string | RegExp,
-): Promise<void> {
+export async function runCheckboxInteractionTests(context: PlayContext, name: string | RegExp): Promise<void> {
   await createCheckboxA11yPlay(name, false)(context);
   await createCheckboxKeyboardFocusPlay(name)(context);
   await createCheckboxTogglePlay(name)(context);
@@ -445,7 +424,7 @@ export async function runCheckboxInteractionTests(
 export function createRadioA11yPlay(name: string | RegExp, checked = false): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const radio = canvas.getByRole("radio", { name });
+    const radio = canvas.getByRole('radio', { name });
 
     await expect(radio).toBeInTheDocument();
     await expect(radio).toHaveAccessibleName(name);
@@ -460,21 +439,21 @@ export function createRadioA11yPlay(name: string | RegExp, checked = false): Pla
 export function createRadioKeyboardFocusPlay(name: string | RegExp): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const radio = canvas.getByRole("radio", { name });
+    const radio = canvas.getByRole('radio', { name });
 
     await userEvent.click(canvasElement);
     await userEvent.tab();
     await expect(radio).toHaveFocus();
-    await expect(radio.matches(":focus-visible")).toBe(true);
+    await expect(radio.matches(':focus-visible')).toBe(true);
   };
 }
 
 export function createRadioDisabledPlay(name: string | RegExp): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const radio = canvas.getByRole("radio", { name });
+    const radio = canvas.getByRole('radio', { name });
 
-    await expect(radio).toHaveAttribute("aria-disabled", "true");
+    await expect(radio).toHaveAttribute('aria-disabled', 'true');
   };
 }
 
@@ -484,10 +463,10 @@ export function createRadioInvalidA11yPlay(
 ): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const radio = canvas.getByRole("radio", { name });
+    const radio = canvas.getByRole('radio', { name });
 
     await expect(radio).toHaveAccessibleName(name);
-    await expect(radio).toHaveAttribute("aria-invalid", "true");
+    await expect(radio).toHaveAttribute('aria-invalid', 'true');
     await expect(canvas.getByText(helperText)).toBeInTheDocument();
   };
 }
@@ -496,7 +475,7 @@ export function createRadioWithInputA11yPlay(name: string | RegExp): PlayFunctio
   return async (context) => {
     await createRadioA11yPlay(name)(context);
     const canvas = within(context.canvasElement);
-    await expect(canvas.getByRole("textbox")).toBeInTheDocument();
+    await expect(canvas.getByRole('textbox')).toBeInTheDocument();
   };
 }
 
@@ -512,7 +491,7 @@ export async function runRadioInteractionTests(
 export function createSwitchA11yPlay(name: string | RegExp, checked = false): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const toggle = canvas.getByRole("switch", { name });
+    const toggle = canvas.getByRole('switch', { name });
 
     await expect(toggle).toBeInTheDocument();
     await expect(toggle).toHaveAccessibleName(name);
@@ -527,19 +506,19 @@ export function createSwitchA11yPlay(name: string | RegExp, checked = false): Pl
 export function createSwitchKeyboardFocusPlay(name: string | RegExp): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const toggle = canvas.getByRole("switch", { name });
+    const toggle = canvas.getByRole('switch', { name });
 
     await userEvent.click(canvasElement);
     await userEvent.tab();
     await expect(toggle).toHaveFocus();
-    await expect(toggle.matches(":focus-visible")).toBe(true);
+    await expect(toggle.matches(':focus-visible')).toBe(true);
   };
 }
 
 export function createSwitchTogglePlay(name: string | RegExp): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const toggle = canvas.getByRole("switch", { name });
+    const toggle = canvas.getByRole('switch', { name });
 
     await userEvent.click(toggle);
     await expect(toggle).toBeChecked();
@@ -549,9 +528,9 @@ export function createSwitchTogglePlay(name: string | RegExp): PlayFunction {
 export function createSwitchDisabledPlay(name: string | RegExp): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const toggle = canvas.getByRole("switch", { name });
+    const toggle = canvas.getByRole('switch', { name });
 
-    await expect(toggle).toHaveAttribute("aria-disabled", "true");
+    await expect(toggle).toHaveAttribute('aria-disabled', 'true');
   };
 }
 
@@ -561,7 +540,7 @@ export function createSwitchInvalidA11yPlay(
 ): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const toggle = canvas.getByRole("switch", { name });
+    const toggle = canvas.getByRole('switch', { name });
 
     await expect(toggle).toHaveAccessibleName(name);
     await expect(canvas.getByText(helperText)).toBeInTheDocument();
@@ -572,25 +551,22 @@ export function createSwitchWithInputA11yPlay(name: string | RegExp): PlayFuncti
   return async (context) => {
     await createSwitchA11yPlay(name)(context);
     const canvas = within(context.canvasElement);
-    await expect(canvas.getByRole("textbox")).toBeInTheDocument();
+    await expect(canvas.getByRole('textbox')).toBeInTheDocument();
   };
 }
 
-export async function runSwitchInteractionTests(
-  context: PlayContext,
-  name: string | RegExp,
-): Promise<void> {
+export async function runSwitchInteractionTests(context: PlayContext, name: string | RegExp): Promise<void> {
   await createSwitchA11yPlay(name, false)(context);
   await createSwitchKeyboardFocusPlay(name)(context);
   await createSwitchTogglePlay(name)(context);
 }
 
 export const textboxTestArgs = {
-  "aria-label": "Input",
-  placeholder: "Input",
+  'aria-label': 'Input',
+  placeholder: 'Input',
 };
 
 export const comboboxTestArgs = {
-  "aria-label": "Select",
-  placeholder: "Option",
+  'aria-label': 'Select',
+  placeholder: 'Option',
 };

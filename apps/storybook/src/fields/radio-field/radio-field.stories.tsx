@@ -1,47 +1,49 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, within } from "storybook/test";
-import { RadioField } from "@ds-12/ui/fields/radio-field";
-import { RadioGroup } from "@ds-12/ui/radio";
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, within } from 'storybook/test';
+
+import { RadioField } from '@ds-12/ui/fields/radio-field';
+import { RadioGroup } from '@ds-12/ui/radio';
+
 import {
   createRadioA11yPlay,
   createRadioDisabledPlay,
   createRadioInvalidA11yPlay,
   createRadioKeyboardFocusPlay,
   createRadioWithInputA11yPlay,
-} from "../../lib/component-tests.ts";
-import { showcaseParameters } from "../../lib/story-test-config.ts";
-import { booleanArgType, selectArgType, textArgType } from "../../lib/story-arg-types.ts";
+} from '../../lib/component-tests.ts';
+import { booleanArgType, selectArgType, textArgType } from '../../lib/story-arg-types.ts';
+import { showcaseParameters } from '../../lib/story-test-config.ts';
 import {
   createSelectionFieldDecorator,
   RadioFieldStatesShowcase,
   SIZES,
-} from "../selection-field/selection-field-story-fixtures.tsx";
+} from '../selection-field/selection-field-story-fixtures.tsx';
 
 /** Labelled radio field with optional supporting text, suffix, and embedded input. */
 const meta = {
-  title: "Fields/RadioField",
+  title: 'Fields/RadioField',
   component: RadioField,
   argTypes: {
-    size: selectArgType(SIZES, "Visual size of the radio control."),
-    invalid: booleanArgType("Marks the field as invalid."),
-    disabled: booleanArgType("Prevents interaction."),
-    showLabel: booleanArgType("Whether to render the visible label element."),
-    showSupportingText: booleanArgType("Whether to render supporting text below the label."),
-    showSuffix: booleanArgType("Whether to render the suffix element."),
-    showHelperText: booleanArgType("Whether to render helper text when invalid."),
-    showInput: booleanArgType("Whether to render an input below the selection row."),
-    label: textArgType("Visible label text associated with the radio."),
-    supportingText: textArgType("Secondary descriptive text below the label."),
-    suffix: textArgType("Right-aligned supplementary text on the label row."),
-    helperText: textArgType("Error message displayed when invalid."),
+    size: selectArgType(SIZES, 'Visual size of the radio control.'),
+    invalid: booleanArgType('Marks the field as invalid.'),
+    disabled: booleanArgType('Prevents interaction.'),
+    showLabel: booleanArgType('Whether to render the visible label element.'),
+    showSupportingText: booleanArgType('Whether to render supporting text below the label.'),
+    showSuffix: booleanArgType('Whether to render the suffix element.'),
+    showHelperText: booleanArgType('Whether to render helper text when invalid.'),
+    showInput: booleanArgType('Whether to render an input below the selection row.'),
+    label: textArgType('Visible label text associated with the radio.'),
+    supportingText: textArgType('Secondary descriptive text below the label.'),
+    suffix: textArgType('Right-aligned supplementary text on the label row.'),
+    helperText: textArgType('Error message displayed when invalid.'),
   },
   args: {
-    size: "sm",
-    value: "option",
-    label: "Selection label",
-    supportingText: "Supporting text",
-    suffix: "Suffix",
-    helperText: "Helper Text",
+    size: 'sm',
+    value: 'option',
+    label: 'Selection label',
+    supportingText: 'Supporting text',
+    suffix: 'Suffix',
+    helperText: 'Helper Text',
     showLabel: true,
     showSupportingText: false,
     showSuffix: false,
@@ -88,7 +90,7 @@ export const WithSuffix: Story = {
   play: async (context) => {
     await createRadioA11yPlay(/selection label/i)(context);
     const canvas = within(context.canvasElement);
-    await expect(canvas.getByText("Suffix")).toBeInTheDocument();
+    await expect(canvas.getByText('Suffix')).toBeInTheDocument();
   },
 };
 
@@ -118,21 +120,21 @@ export const Invalid: Story = {
 
 /** Showcase of default layout states — for human reference only. */
 export const DefaultStates: Story = {
-  tags: ["!manifest"],
+  tags: ['!manifest'],
   parameters: showcaseParameters,
   render: () => <RadioFieldStatesShowcase layout="default" />,
 };
 
 /** Showcase of supporting-text layout states — for human reference only. */
 export const SupportingTextStates: Story = {
-  tags: ["!manifest"],
+  tags: ['!manifest'],
   parameters: showcaseParameters,
   render: () => <RadioFieldStatesShowcase layout="supporting-text" />,
 };
 
 /** Showcase of input layout states — for human reference only. */
 export const InputStates: Story = {
-  tags: ["!manifest"],
+  tags: ['!manifest'],
   parameters: showcaseParameters,
   render: () => <RadioFieldStatesShowcase layout="input" />,
 };

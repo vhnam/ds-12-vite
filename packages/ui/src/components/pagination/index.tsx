@@ -1,48 +1,48 @@
-import { Button as BaseButton } from "@base-ui/react/button";
-import { cva } from "class-variance-authority";
-import type { ComponentProps } from "react";
+import { Button as BaseButton } from '@base-ui/react/button';
+import { cva } from 'class-variance-authority';
+import type { ComponentProps } from 'react';
 
-import { cn } from "../../lib/utils.ts";
-import { getPaginationItems } from "./get-pagination-items.ts";
-import "./pagination.css";
+import { cn } from '../../lib/utils.ts';
+import { getPaginationItems } from './get-pagination-items.ts';
+import './pagination.css';
 
-const paginationVariants = cva("ds-pagination", {
+const paginationVariants = cva('ds-pagination', {
   variants: {
     size: {
-      sm: "ds-pagination--sm",
-      lg: "ds-pagination--lg",
+      sm: 'ds-pagination--sm',
+      lg: 'ds-pagination--lg',
     },
     layout: {
-      centered: "ds-pagination--centered",
-      spread: "ds-pagination--spread",
+      centered: 'ds-pagination--centered',
+      spread: 'ds-pagination--spread',
       end: null,
     },
   },
   defaultVariants: {
-    size: "lg",
-    layout: "centered",
+    size: 'lg',
+    layout: 'centered',
   },
 });
 
-const paginationButtonVariants = cva("ds-pagination__button", {
+const paginationButtonVariants = cva('ds-pagination__button', {
   variants: {
     size: {
-      sm: "ds-pagination__button--sm",
-      lg: "ds-pagination__button--lg",
+      sm: 'ds-pagination__button--sm',
+      lg: 'ds-pagination__button--lg',
     },
     state: {
-      default: "ds-pagination__button--default",
-      active: "ds-pagination__button--active",
-      disabled: "ds-pagination__button--disabled",
+      default: 'ds-pagination__button--default',
+      active: 'ds-pagination__button--active',
+      disabled: 'ds-pagination__button--disabled',
     },
   },
   defaultVariants: {
-    size: "lg",
-    state: "default",
+    size: 'lg',
+    state: 'default',
   },
 });
 
-type PaginationSize = "sm" | "lg";
+type PaginationSize = 'sm' | 'lg';
 
 type PaginationBaseProps = {
   /** Additional CSS class names applied to the navigation element. */
@@ -77,21 +77,20 @@ type PaginationBaseProps = {
    * Accessible name for the pagination landmark.
    * @default "Pagination"
    */
-  "aria-label"?: string;
+  'aria-label'?: string;
 };
 
-export type PaginationProps = PaginationBaseProps &
-  Omit<ComponentProps<"nav">, "className" | "aria-label">;
+export type PaginationProps = PaginationBaseProps & Omit<ComponentProps<'nav'>, 'className' | 'aria-label'>;
 
 type PaginationButtonProps = {
   className?: string;
   size: PaginationSize;
-  state: "default" | "active" | "disabled";
+  state: 'default' | 'active' | 'disabled';
   label: string;
   onClick?: () => void;
   disabled?: boolean;
-  "aria-label"?: string;
-  "aria-current"?: "page" | undefined;
+  'aria-label'?: string;
+  'aria-current'?: 'page' | undefined;
 };
 
 function PaginationButton({
@@ -101,10 +100,10 @@ function PaginationButton({
   label,
   onClick,
   disabled,
-  "aria-label": ariaLabel,
-  "aria-current": ariaCurrent,
+  'aria-label': ariaLabel,
+  'aria-current': ariaCurrent,
 }: PaginationButtonProps) {
-  const isDisabled = disabled || state === "disabled";
+  const isDisabled = disabled || state === 'disabled';
 
   return (
     <BaseButton
@@ -115,7 +114,7 @@ function PaginationButton({
       onClick={onClick}
       aria-label={ariaLabel}
       aria-current={ariaCurrent}
-      tabIndex={state === "disabled" && label === "..." ? -1 : undefined}
+      tabIndex={state === 'disabled' && label === '...' ? -1 : undefined}
     >
       <span className="ds-pagination__label">{label}</span>
     </BaseButton>
@@ -128,19 +127,18 @@ export function Pagination({
   page,
   totalPages,
   onPageChange,
-  size = "lg",
+  size = 'lg',
   showNavigation,
-  previousLabel = "Back",
-  nextLabel = "Next",
-  "aria-label": ariaLabel = "Pagination",
+  previousLabel = 'Back',
+  nextLabel = 'Next',
+  'aria-label': ariaLabel = 'Pagination',
   ...props
 }: PaginationProps) {
-  const resolvedSize = size ?? "lg";
-  const resolvedShowNavigation = showNavigation ?? resolvedSize === "lg";
+  const resolvedSize = size ?? 'lg';
+  const resolvedShowNavigation = showNavigation ?? resolvedSize === 'lg';
   const safePage = Math.min(Math.max(page, 1), Math.max(totalPages, 1));
   const items = getPaginationItems(safePage, totalPages);
-  const layout =
-    resolvedSize === "lg" && resolvedShowNavigation && totalPages >= 5 ? "spread" : "centered";
+  const layout = resolvedSize === 'lg' && resolvedShowNavigation && totalPages >= 5 ? 'spread' : 'centered';
 
   const handlePageChange = (nextPage: number) => {
     if (nextPage < 1 || nextPage > totalPages || nextPage === safePage) {
@@ -150,7 +148,7 @@ export function Pagination({
   };
 
   const pageButtons = items.map((item, index) => {
-    if (item.type === "ellipsis") {
+    if (item.type === 'ellipsis') {
       return (
         <PaginationButton
           key={`ellipsis-${index}`}
@@ -169,11 +167,11 @@ export function Pagination({
       <PaginationButton
         key={item.page}
         size={resolvedSize}
-        state={isActive ? "active" : "default"}
+        state={isActive ? 'active' : 'default'}
         label={String(item.page)}
         onClick={() => handlePageChange(item.page)}
         aria-label={`Page ${item.page}`}
-        aria-current={isActive ? "page" : undefined}
+        aria-current={isActive ? 'page' : undefined}
       />
     );
   });
@@ -187,7 +185,7 @@ export function Pagination({
       >
         <PaginationButton
           size={resolvedSize}
-          state={safePage <= 1 ? "disabled" : "default"}
+          state={safePage <= 1 ? 'disabled' : 'default'}
           label={previousLabel}
           disabled={safePage <= 1}
           onClick={() => handlePageChange(safePage - 1)}
@@ -196,7 +194,7 @@ export function Pagination({
         <div className="ds-pagination__pages">{pageButtons}</div>
         <PaginationButton
           size={resolvedSize}
-          state={safePage >= totalPages ? "disabled" : "default"}
+          state={safePage >= totalPages ? 'disabled' : 'default'}
           label={nextLabel}
           disabled={safePage >= totalPages}
           onClick={() => handlePageChange(safePage + 1)}
@@ -208,7 +206,7 @@ export function Pagination({
 
   return (
     <nav
-      className={cn(paginationVariants({ size: resolvedSize, layout: "end", className }))}
+      className={cn(paginationVariants({ size: resolvedSize, layout: 'end', className }))}
       aria-label={ariaLabel}
       {...props}
     >
