@@ -20,28 +20,32 @@ A React design system monorepo built with [Vite+](https://viteplus.dev/guide/). 
 
 `@ds-12/ui` currently includes:
 
-- Avatar
-- Badge
-- Button
-- Chip
-- Divider
-- Icon
-- Input / InputField
-- Pagination
-- Skeleton
-- Textarea / TextareaField
-- Typography
+- Avatar, Badge, Button, Calendar, Chip, Checkbox, Divider, Icon
+- Input, Select, Menu, Combobox, Textarea, Radio, Switch, Skeleton, Table, Pagination, Typography
+- Field wrappers: InputField, SelectField, ComboboxField, TextareaField, CheckboxField, RadioField, SwitchField
 
-Import components via subpath exports:
+Import from the package root (barrel) or a subpath for tree-shaking:
 
 ```ts
+import { Button, Badge } from "@ds-12/ui";
+// or
 import { Button } from "@ds-12/ui/button";
-import "@ds-12/ui/style.css";
 ```
 
-### Tailwind v4 setup
+### Styles (recommended)
 
-Apps that use `@ds-12/ui` should configure **Tailwind CSS v4** and import the DS-12 theme entry so token-backed utilities resolve to the same CSS variables as the components.
+`@ds-12/ui` ships a pre-built CSS bundle with design tokens, Nunito Sans (400–700), and all component styles. No Tailwind setup required.
+
+```ts
+import "@ds-12/ui/styles.css";
+import "@ds-12/ui/material-symbols.css"; // when using Icon
+```
+
+If you use `Icon`, the Material Symbols font is a separate import (not bundled in `styles.css`).
+
+### Tailwind v4 setup (advanced)
+
+Use this when you want Tailwind utilities in your app and control over the build pipeline.
 
 **1. Install Tailwind v4** (Vite example):
 
@@ -59,46 +63,66 @@ export default defineConfig({
 });
 ```
 
-**3. Import the DS-12 Tailwind entry** in your global CSS (before or alongside component styles):
+**3. Import the DS-12 Tailwind entry** in your global CSS:
 
 ```css
 @import "@ds-12/ui/tailwind.css";
-@import "@ds-12/ui/style.css";
+@import "@material-symbols/font-400/outlined.css";
 ```
 
-`@ds-12/ui/tailwind.css` includes:
-
-- `@import "tailwindcss"` — Tailwind v4 base
-- `@ds-12/design-tokens/tokens.css` — all `:root` CSS variables
-- `@ds-12/design-tokens/theme.css` — `@theme inline` bridge so utilities like `bg-blue-500`, `p-xxsmall`, and `rounded-xsmall` map to design tokens
-
-**Granular imports** (when you manage Tailwind yourself):
-
-```css
-@import "tailwindcss";
-@import "@ds-12/design-tokens/tokens.css";
-@import "@ds-12/design-tokens/theme.css";
-@import "@ds-12/ui/style.css";
-```
-
-**CSS variables only** (no Tailwind utilities):
-
-```css
-@import "@ds-12/design-tokens/tokens.css";
-@import "@ds-12/ui/style.css";
-```
+`@ds-12/ui/tailwind.css` includes Tailwind v4, vendored design tokens, Nunito Sans, and all component `@utility` styles.
 
 ### Where `@ds-12/ui` is used today
 
-| Location         | Tailwind v4 setup                                                                                          |
-| ---------------- | ---------------------------------------------------------------------------------------------------------- |
-| `apps/storybook` | `@tailwindcss/vite` in `.storybook/main.ts`; `@import "@ds-12/ui/tailwind.css"` in `.storybook/styles.css` |
+| Location         | Setup                                                                                    |
+| ---------------- | ---------------------------------------------------------------------------------------- |
+| `apps/storybook` | `@tailwindcss/vite` in `.storybook/main.ts`; `@import "@ds-12/ui/tailwind.css"` in CSS |
 
-Any new app or package that imports `@ds-12/ui` must follow the same pattern: install Tailwind v4, add the Vite (or PostCSS) plugin, and import `@ds-12/ui/tailwind.css` in global CSS.
+## Using in another repo
+
+Install `@ds-12/ui` from GitHub. The package is self-contained — no `@ds-12/design-tokens` dependency, no workspace protocol.
+
+**Direct dependency** (`package.json`):
+
+```json
+{
+  "dependencies": {
+    "@ds-12/ui": "github:vhnam/ds-12-vite#path:packages/ui"
+  }
+}
+```
+
+**Shorter with pnpm catalog** — define the URL once in `pnpm-workspace.yaml`:
+
+```yaml
+catalog:
+  "@ds-12/ui": "github:vhnam/ds-12-vite#path:packages/ui"
+```
+
+Then in `package.json`:
+
+```json
+{
+  "dependencies": {
+    "@ds-12/ui": "catalog:"
+  }
+}
+```
+
+**App setup:**
+
+```ts
+import { Button } from "@ds-12/ui";
+import "@ds-12/ui/styles.css";
+```
+
+Peer dependencies: `react` and `react-dom` (^19.2.6). `tailwindcss` is optional (only needed for the advanced `tailwind.css` entry).
+
+**Git installs use pre-built artifacts** in `packages/ui/dist/` (JS bundles, `styles.css`, and font files). After changing `@ds-12/ui` in this repo, run `vp run @ds-12/ui#build` and commit `packages/ui/dist/` before consumers pull the update.
 
 ## Prerequisites
 
-- Node.js `>=22.18.0`
+- Node.js `>=24.18.0`
 - [Vite+](https://viteplus.dev/guide/) (`vp` CLI) — installed as a dev dependency; pnpm is managed automatically
 
 ## Getting started
@@ -129,6 +153,14 @@ Watch and rebuild a package:
 vp run @ds-12/ui#dev
 vp run @ds-12/design-tokens#dev
 ```
+
+Build `@ds-12/ui` (JS + pre-built `styles.css`):
+
+```bash
+vp run @ds-12/ui#build
+```
+
+After changing design tokens or fonts, rebuild and commit `packages/ui/dist/` and `packages/ui/src/vendor/` so git-based consumers get the update.
 
 Common workspace commands:
 
@@ -214,9 +246,12 @@ packages/
       tokens.generated.css   # Style Dictionary output (do not edit)
       tokens.web.css         # Web platform + component token aliases
   ui/                @ds-12/ui
+    dist/                    # Pre-built JS + styles.css (committed for git installs)
+    scripts/                 # vendor-tokens, vendor-fonts, build-styles
     src/
       components/            # DS components (lowercase folder names)
-      lib/                   # Shared helpers (e.g. cn())
+      vendor/                  # Vendored tokens + fonts (copied at build)
+      lib/                     # Shared helpers (e.g. cn())
   utils/             @ds-12/utils
 apps/
   storybook/         Component stories, Playwright tests, and visual snapshots
@@ -228,9 +263,9 @@ apps/
 
 - **React 19** with **Base UI** primitives for interactive behavior
 - **CVA** (`class-variance-authority`) for variant class names
-- **Scoped CSS** (`ds-[component]` classes) backed by CSS custom properties — component styling stays in scoped CSS, not Tailwind utilities
-- **Tailwind v4** optional for app-level layout and stories; import `@ds-12/ui/tailwind.css` to bridge design tokens to Tailwind utilities via `@theme inline`
-- **Design tokens** as the single source of visual values (`var(--token)`), exported as CSS variables from `@ds-12/design-tokens/tokens.css`
+- **Tailwind v4 `@utility`** blocks for component styles, registered in `packages/ui/src/tailwind.css`
+- **Design tokens** as the single source of visual values (`var(--token)`), vendored into `@ds-12/ui` at build time
+- **Pre-built `styles.css`** for drop-in consumption (tokens, fonts, component styles) without Tailwind in the host app
 - **Storybook 10** with Playwright for visual regression and axe a11y checks in CI; interaction `play` functions run in the Storybook UI
 
 ## Tooling
