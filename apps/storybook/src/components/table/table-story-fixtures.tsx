@@ -42,7 +42,7 @@ function DemoAvatar({ disabled = false }: { disabled?: boolean }) {
   return (
     <Avatar
       size="md"
-      shape="user"
+      shape="circle"
       variant="initial"
       initials="BL"
       aria-hidden

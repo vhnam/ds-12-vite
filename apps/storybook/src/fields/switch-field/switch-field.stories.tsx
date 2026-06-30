@@ -10,6 +10,7 @@ import {
   createSwitchKeyboardFocusPlay,
   createSwitchTogglePlay,
   createSwitchWithInputA11yPlay,
+  expectDataSlotVariant,
 } from '../../lib/component-tests.ts';
 import { booleanArgType, selectArgType, textArgType } from '../../lib/story-arg-types.ts';
 import { showcaseParameters } from '../../lib/story-test-config.ts';
@@ -23,6 +24,7 @@ import {
 const meta = {
   title: 'Fields/SwitchField',
   component: SwitchField,
+  tags: ['autodocs'],
   argTypes: {
     size: selectArgType(SIZES, 'Visual size token for field typography (switch has no size variant).'),
     invalid: booleanArgType('Marks the field as invalid.'),
@@ -64,6 +66,12 @@ export const Default: Story = {
     await createSwitchA11yPlay(/selection label/i)(context);
     await createSwitchKeyboardFocusPlay(/selection label/i)(context);
     await createSwitchTogglePlay(/selection label/i)(context);
+    await expectDataSlotVariant(context.canvasElement, {
+      slot: 'selection-field',
+      variant: 'sm',
+      role: 'switch',
+      name: /selection label/i,
+    });
   },
 };
 

@@ -1,9 +1,9 @@
 ---
-description: Building a new Design System component from Figma spec using Base UI + CVA + design tokens
+description: Building a new Design System component from Figma spec using Base UI + CVA + design tokens + Tailwind v4 @utility
 globs:
   - packages/ui/src/components/**
   - packages/design-tokens/src/**
-  - apps/storybook/src/stories/**
+  - apps/storybook/src/components/**
 ---
 
 # DS Component from Figma
@@ -23,7 +23,8 @@ packages/
       generate-theme.mjs    ← regenerates tokens.theme.css
   ui/                     → @ds-12/ui
     src/
-      tailwind.css          ← Tailwind v4 entry (tokens + theme bridge)
+      tailwind.css          ← Tailwind v4 entry + migrated component @utility CSS
+      style.css             ← legacy component CSS (not yet migrated)
       components/           ← DS components (lowercase folder names)
       lib/
         utils.ts            ← cn() helper (clsx + tailwind-merge)
@@ -41,11 +42,14 @@ apps/
 
 Apps using `@ds-12/ui` must configure Tailwind v4 and import `@ds-12/ui/tailwind.css` in global CSS. Storybook does this in `.storybook/styles.css` with `@tailwindcss/vite` in `.storybook/main.ts`.
 
-Components side-effect-import their own CSS only (tokens arrive via the app-level Tailwind entry):
+**Migrated components** (Badge, Avatar, Typography) — CSS is imported in `packages/ui/src/tailwind.css`, **not** side-effect-imported from `index.tsx`:
 
-```ts
-import "./button.css";
+```css
+/* packages/ui/src/tailwind.css */
+@import "./components/badge/badge.css";
 ```
+
+**Legacy components** (Button, Chip, Input, …) — still use `@layer components` / `ds-*` classes and are bundled via `packages/ui/src/style.css`. Migrate them to the `@utility` pattern when touching them.
 
 ## Step 1 — Setup tokens.web.css
 
@@ -93,6 +97,12 @@ Resolve color values in this order:
 
 For non-color tokens (spacing, radius, typography), prefer repo tokens first; use `get_variable_defs` only when the Figma spec references a variable name that does not appear in `tokens.generated.css`.
 
+After editing `tokens.generated.css` or `tokens.web.css`, regenerate the Tailwind bridge:
+
+```bash
+vp run @ds-12/design-tokens#generate:theme
+```
+
 ## Step 2 — Fetch component from Figma
 
 Use Figma MCP (`get_design_context`) to fetch the target component by node ID.
@@ -114,85 +124,159 @@ Create files under `packages/ui/src/components/[name]/` (lowercase, e.g. `button
 ```
 [name]/
   index.tsx
-  [name].css          ← scoped styles (required for visual components)
+  [name].css          ← Tailwind v4 @utility blocks (required for visual components)
 ```
 
 ### Stack
 
-- **Base UI** (`@base-ui/react`) — interactive primitives (e.g. `Button`, `useRender`)
-- **CVA** (`class-variance-authority`) — variant class names
-- **Scoped CSS** — `ds-[name]` / `ds-[name]--[variant]` classes backed by CSS custom properties
+- **Base UI** (`@base-ui/react`) — interactive primitives (e.g. `Button`, `useRender`, `Avatar`)
+- **CVA** (`class-variance-authority`) — variant class names wired to `@utility` presets
+- **Tailwind v4 `@utility`** — component styles as named utilities in `[name].css`
 - **Design tokens** — all visual values via `var(--token)` from `@ds-12/design-tokens/tokens.css`
 - **`cn()`** — from `../../lib/utils.ts` when merging optional `className` props
 
-Do **not** use Tailwind utility classes for component styling. The repo uses token-driven scoped CSS in components. Tailwind v4 is for app-level layout and Storybook wrappers only.
+Reference implementations: `badge/`, `avatar/`, `typography/`.
 
-After editing `tokens.generated.css` or `tokens.web.css`, regenerate the Tailwind bridge:
+### Architecture — `@utility` + CVA `compoundVariants`
 
-```bash
-vp run @ds-12/design-tokens#generate:theme
-```
+Follow this split consistently:
+
+1. **`[name].css`** — `@utility` blocks for styles that are **identical across a group** or form a **named preset**:
+   - Base layout (`@utility badge`, `@utility avatar`)
+   - Child parts (`badge-icon`, `avatar-initials`)
+   - Size presets (`badge-preset-size-sm`, `avatar-preset-size-md`)
+   - Variant combination presets (`badge-neutral-subtle`, `avatar-circle`, `typography-preset-heading-h1-bold`)
+
+2. **`index.tsx`** — CVA maps props to those utility class names via `compoundVariants`. **Do not** put arbitrary Tailwind values like `bg-[var(--token)]` in CVA when a named `@utility` exists.
+
+3. **Props that change per variant** (colour, size, weight, spacing) → `compoundVariants` referencing real token-backed `@utility` presets. Only generate combinations that exist in the design tokens — do not invent pairings.
+
+4. **Props/types** — use a discriminated union when different variants support different sub-props (see `Typography`). If that adds too much complexity, use optional props + JSDoc + dev-mode `console.warn` for invalid combinations.
+
+5. **DOM attributes** — `data-slot="[name]"` and `data-variant="{variant}"` on the root element. This is the primary debug/test hook, not BEM class names.
+
+6. **Defaults** — set `defaultVariants` in CVA to the most common visual state; check actual usage in `apps/*` before assuming.
+
+### What NOT to do
+
+- Do **not** use `@apply` to bundle utilities into one BEM-style class — conflicts with `tailwind-merge` composability.
+- Do **not** use arbitrary Tailwind values in CVA (`bg-[var(--…)]`) when a named `@utility` preset is the right abstraction.
+- Do **not** guess at design tokens — if the source CSS / Figma spec has no token for a combination, stop and flag it rather than fabricating one.
+- Do **not** remove `data-slot` / `data-variant` attributes.
+- Do **not** side-effect-import `[name].css` from `index.tsx` for migrated components — register it in `tailwind.css` instead.
 
 ### Naming conventions
 
 | Layer | Pattern | Example |
 |---|---|---|
 | Folder | lowercase | `packages/ui/src/components/badge/` |
-| CSS block | `ds-[name]` | `.ds-badge` |
-| CSS modifier | `ds-[name]--[variant]` | `.ds-badge--bold` |
-| CSS element | `ds-[name]__[part]` | `.ds-badge__icon` |
-| CVA base class | `ds-[name]` | `cva("ds-badge", …)` |
+| Base utility | `[name]` | `@utility badge` |
+| Child part | `[name]-[part]` | `@utility badge-icon` |
+| Size preset | `[name]-preset-size-[size]` | `@utility badge-preset-size-sm` |
+| Variant preset | `[name]-[axis]-[value]` or `[name]-[combo]` | `@utility badge-neutral-subtle`, `@utility avatar-circle` |
+| Typography preset | `typography-preset-[variant]-[combo]` | `@utility typography-preset-paragraph-default` |
+| CVA base class | `[name]` | `cva("badge", …)` |
 
-### Component token pattern
+### Component tokens (`tokens.web.css`)
 
-Define component tokens in `tokens.web.css`:
+Define component-scoped aliases in `tokens.web.css`:
 
 ```css
 /* --- Component tokens: badge --- */
 --badge-radius: var(--radius-xsmall);
 --badge-sm-gap: var(--spacing-xxsmall);
+--badge-neutral-subtle-fill: var(--color-semantic-neutral-subtle);
+--badge-neutral-subtle-label-fill: var(--color-semantic-text-neutral-bold);
 /* TODO: needs token — current value: 20px */
 --badge-lg-icon-size: 20px;
 ```
 
-Use them in `[name].css`. For variant-specific values, set local custom properties on modifier classes:
+Consume them in `[name].css` `@utility` presets — not as intermediate `--badge-fill` indirection on modifier classes:
 
 ```css
-.ds-badge--subtle.ds-badge--neutral {
-  --badge-fill: var(--badge-neutral-subtle-fill);
-  --badge-label-fill: var(--badge-neutral-subtle-label-fill);
+@utility badge-neutral-subtle {
+  background-color: var(--badge-neutral-subtle-fill);
+  color: var(--badge-neutral-subtle-label-fill);
+}
+```
+
+### CSS file structure (`[name].css`)
+
+```css
+/* Base layout — identical across all variants */
+@utility badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--badge-radius);
 }
 
-.ds-badge {
-  background-color: var(--badge-fill);
-  color: var(--badge-label-fill);
+/* Child parts */
+@utility badge-icon {
+  display: inline-flex;
+  color: inherit;
 }
+
+/* Size presets */
+@utility badge-preset-size-sm {
+  gap: var(--badge-sm-gap);
+  padding: var(--badge-sm-padding);
+  font-size: var(--badge-sm-label-font-size);
+}
+
+/* Variant combination presets */
+@utility badge-neutral-subtle {
+  background-color: var(--badge-neutral-subtle-fill);
+  color: var(--badge-neutral-subtle-label-fill);
+}
+```
+
+Register the file in `packages/ui/src/tailwind.css`:
+
+```css
+@import "./components/badge/badge.css";
 ```
 
 ### CVA pattern
 
-Map variants to scoped CSS classes (not Tailwind strings):
+Use empty strings on variant axes; apply real classes via `compoundVariants`:
 
 ```ts
-import { cva, type VariantProps } from "class-variance-authority";
+import { cva } from "class-variance-authority";
+import { cn } from "../../lib/utils.ts";
 
-const buttonVariants = cva("ds-button", {
+const badgeVariants = cva("badge", {
   variants: {
-    variant: {
-      primary: "ds-button--primary",
-      secondary: "ds-button--secondary",
-    },
-    size: {
-      sm: "ds-button--sm",
-      md: "ds-button--md",
-    },
+    size: { sm: "", lg: "" },
+    emphasis: { subtle: "", bold: "" },
+    variant: { neutral: "", negative: "", attention: "", positive: "", information: "" },
   },
+  compoundVariants: [
+    { size: "sm", class: "badge-preset-size-sm" },
+    { size: "lg", class: "badge-preset-size-lg" },
+    { emphasis: "subtle", variant: "neutral", class: "badge-neutral-subtle" },
+    { emphasis: "bold", variant: "neutral", class: "badge-neutral-bold" },
+    // …only combinations that exist in tokens
+  ],
   defaultVariants: {
-    variant: "primary",
-    size: "md",
+    size: "lg",
+    emphasis: "subtle",
+    variant: "neutral",
   },
 });
 ```
+
+Root element:
+
+```tsx
+<span
+  className={cn(badgeVariants({ size, emphasis, variant, className }))}
+  data-slot="badge"
+  data-variant={resolvedVariant}
+  {...props}
+>
+```
+
+Separate CVA configs for child parts when they have their own size axis (e.g. `badgeIconVariants`, `avatarIconVariants`).
 
 ### Icons
 
@@ -215,11 +299,11 @@ import { Icon } from "../icon/index.tsx";
 
 ## Step 4 — Storybook
 
-Add `apps/storybook/src/stories/[name]/[name].stories.tsx`:
+Add `apps/storybook/src/components/[name]/[name].stories.tsx`:
 
 ```ts
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Button } from "@ds-12/ui/button";
+import { Badge, type BadgeVariant } from "@ds-12/ui/badge";
 ```
 
 Storybook resolves `@ds-12/ui/*` imports via the `@ds-12/ui` alias in `apps/storybook/vite.config.ts` (maps to `packages/ui/src/components`).
@@ -227,27 +311,37 @@ Storybook resolves `@ds-12/ui/*` imports via the `@ds-12/ui` alias in `apps/stor
 Add a subpath export in `packages/ui/package.json`:
 
 ```json
-"./button": "./src/components/button/index.tsx"
+"./badge": "./src/components/badge/index.tsx"
 ```
 
-Follow existing story patterns: `tags: ["autodocs"]`, variant/size controls, `AllVariants` showcase story.
+### Story patterns
+
+- Use a typed `ComponentStory` wrapper when Controls need a wider args surface than the component's discriminated union (see `TypographyStory`, `BadgeStory`, `AvatarStory`).
+- Use `argTypes` with conditional `if:` to hide invalid prop combinations (see Typography `size`/`weight` controls).
+- Assert `data-slot` and `data-variant` in `play` functions — not CSS class names.
+- Extract large showcase matrices into `[name]-story-fixtures.tsx`.
+- Follow `tags: ["autodocs"]`, variant/size controls, and a `TypesAndVariants` / `AllVariants` showcase story (`tags: ["!manifest"]`).
 
 ## Step 5 — Validate
 
 ```bash
 cd packages/ui && vp check
-cd apps/storybook && npm run build-storybook
+cd apps/storybook && pnpm run build-storybook
+cd apps/storybook && pnpm exec playwright test   # visual snapshots
 ```
+
+Run snapshot tests after style changes to confirm no visual regression.
 
 ## Output checklist
 
 - [ ] `packages/design-tokens/src/tokens.web.css` updated with component token aliases
-- [ ] `packages/ui/src/components/[name]/index.tsx` created
-- [ ] `packages/ui/src/components/[name]/[name].css` created with `ds-[name]` classes
+- [ ] `packages/ui/src/components/[name]/index.tsx` created with CVA + `data-slot` / `data-variant`
+- [ ] `packages/ui/src/components/[name]/[name].css` created with `@utility` blocks (base, parts, presets)
+- [ ] `packages/ui/src/tailwind.css` imports `[name].css`
 - [ ] `packages/ui/src/index.ts` exports the component and types
 - [ ] `packages/ui/package.json` has a `./[name]` subpath export
-- [ ] `apps/storybook/vite.config.ts` alias added
-- [ ] `apps/storybook/src/stories/[name]/[name].stories.tsx` created
+- [ ] `apps/storybook/src/components/[name]/[name].stories.tsx` created
 - [ ] Color tokens resolved via repo tokens or Figma Variables (`get_variable_defs`) before falling back to TODOs
 - [ ] All unmapped values have `/* TODO: needs token — current value: … */` comments (include Figma variable path when known)
+- [ ] Playwright snapshots pass (`pnpm exec playwright test` in `apps/storybook`)
 - [ ] List of TODOs that require Design System decisions (token missing, token wrong, design ambiguous, Figma/repo naming mismatch)

@@ -1,105 +1,102 @@
 @import "@ds-12/ui/tailwind.css";
-@source "../src";
 @import "@material-symbols/font-400/outlined.css";
 @import "@fontsource/nunito-sans/400.css";
 @import "@fontsource/nunito-sans/500.css";
 @import "@fontsource/nunito-sans/600.css";
 @import "@fontsource/nunito-sans/700.css";
 
+@source "../src";
+
 body {
-  font-family: var(--font-family-text, "Nunito Sans"), sans-serif;
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-[data-story-chip-state="hover"].ds-chip--inactive:not(:disabled):not([data-disabled]) {
-  --chip-border-color: var(--chip-hover-border-color);
+[data-story-chip-state="hover"].chip-inactive:not(:disabled):not([data-disabled]) {
+  border-color: var(--chip-hover-border-color);
 }
 
-[data-story-chip-state="hover"].ds-chip--active:not(:disabled):not([data-disabled]) {
-  --chip-border-color: var(--chip-hover-border-color);
+[data-story-chip-state="hover"].chip-active:not(:disabled):not([data-disabled]) {
+  border-color: var(--chip-hover-border-color);
 }
 
-[data-story-chip-state="pressed"].ds-chip--inactive:not(:disabled):not([data-disabled]),
-[data-story-chip-state="pressed"].ds-chip--active:not(:disabled):not([data-disabled]) {
-  --chip-fill: var(--chip-pressed-fill);
-  --chip-border-color: var(--chip-pressed-border-color);
+[data-story-chip-state="pressed"].chip-inactive:not(:disabled):not([data-disabled]),
+[data-story-chip-state="pressed"].chip-active:not(:disabled):not([data-disabled]) {
+  background-color: var(--chip-pressed-fill);
+  border-color: var(--chip-pressed-border-color);
 }
 
-[data-story-chip-state="focus"].ds-chip--inactive {
+[data-story-chip-state="focus"].chip-inactive {
   outline: var(--chip-focus-ring-width) var(--chip-focus-ring-style) var(--chip-focus-ring-color);
   outline-offset: var(--chip-focus-ring-offset-inactive);
 }
 
-[data-story-chip-state="focus"].ds-chip--active {
+[data-story-chip-state="focus"].chip-active {
   outline: var(--chip-focus-ring-width) var(--chip-focus-ring-style) var(--chip-focus-ring-color);
   outline-offset: var(--chip-focus-ring-offset-active);
 }
 
-[data-story-input-state="focus"] .ds-input:not(.ds-input--disabled):not(.ds-input--error) {
+[data-story-input-state="focus"] .input:not(.input-disabled):not(.input-error) {
   background-color: var(--input-focus-fill);
   border-bottom-color: var(--input-focus-border-color);
 }
 
-[data-story-input-state="focus"] .ds-input--sm.ds-input--default:not(.ds-input--disabled):not(.ds-input--error) {
+[data-story-input-state="focus"] .input-preset-sm-default:not(.input-disabled):not(.input-error) {
   --input-text-fill: var(--text-field-small-box-hint-focused-fill);
   --input-placeholder-fill: var(--text-field-small-box-hint-focused-fill);
   --input-icon-fill: var(--text-field-small-box-icon-focused-fill);
 }
 
-[data-story-input-state="focus"] .ds-input--sm.ds-input--suffix:not(.ds-input--disabled):not(.ds-input--error) {
+[data-story-input-state="focus"] .input-preset-sm-suffix:not(.input-disabled):not(.input-error) {
   --input-text-fill: var(--text-field-suffix-small-box-typography-focused-fill);
   --input-placeholder-fill: var(--text-field-small-box-hint-focused-fill);
   --input-icon-fill: var(--text-field-suffix-small-box-icon-focused-fill);
 }
 
-[data-story-input-state="focus"] .ds-input--lg.ds-input--default:not(.ds-input--disabled):not(.ds-input--error) {
+[data-story-input-state="focus"] .input-preset-lg-default:not(.input-disabled):not(.input-error) {
   --input-text-fill: var(--text-field-large-box-hint-focused-fill);
   --input-placeholder-fill: var(--text-field-large-box-hint-focused-fill);
   --input-icon-fill: var(--text-field-large-box-icon-focused-fill);
 }
 
-[data-story-input-state="focus"] .ds-input--lg.ds-input--suffix:not(.ds-input--disabled):not(.ds-input--error) {
+[data-story-input-state="focus"] .input-preset-lg-suffix:not(.input-disabled):not(.input-error) {
   --input-text-fill: var(--text-field-suffix-large-box-typography-focused-fill);
   --input-placeholder-fill: var(--text-field-large-box-hint-focused-fill);
   --input-icon-fill: var(--text-field-suffix-large-box-icon-focused-fill);
 }
 
-[data-story-input-state="focus"] .ds-textarea:not(.ds-textarea--disabled):not(.ds-textarea--error) {
+[data-story-input-state="focus"] .textarea:not(.textarea-disabled):not(.textarea-error) {
   background-color: var(--textarea-focus-fill);
   border-bottom-color: var(--textarea-focus-border-color);
 }
 
-[data-story-input-state="focus"] .ds-textarea:not(.ds-textarea--disabled) {
+[data-story-input-state="focus"] .textarea:not(.textarea-disabled) {
   outline: var(--textarea-focus-ring-width) var(--textarea-focus-ring-style) var(--textarea-focus-ring-color);
   outline-offset: var(--textarea-focus-ring-offset);
 }
 
-[data-story-input-state="focus"]
-  .ds-textarea--sm.ds-textarea--default:not(.ds-textarea--disabled):not(.ds-textarea--error) {
+[data-story-input-state="focus"] .textarea-preset-sm-default:not(.textarea-disabled):not(.textarea-error) {
   --textarea-text-fill: var(--text-area-small-box-hint-focused-fill);
   --textarea-icon-fill: var(--text-area-small-box-icon-focused-fill);
 }
 
-[data-story-input-state="focus"]
-  .ds-textarea--sm.ds-textarea--suffix:not(.ds-textarea--disabled):not(.ds-textarea--error) {
+[data-story-input-state="focus"] .textarea-preset-sm-suffix:not(.textarea-disabled):not(.textarea-error) {
   --textarea-text-fill: var(--text-area-small-box-hint-focused-fill);
   --textarea-icon-fill: var(--text-area-small-box-icon-focused-fill);
 }
 
-[data-story-input-state="focus"]
-  .ds-textarea--lg.ds-textarea--default:not(.ds-textarea--disabled):not(.ds-textarea--error) {
+[data-story-input-state="focus"] .textarea-preset-lg-default:not(.textarea-disabled):not(.textarea-error) {
   --textarea-text-fill: var(--text-area-large-box-hint-focused-fill);
   --textarea-icon-fill: var(--text-area-large-box-icon-focused-fill);
 }
 
-[data-story-input-state="focus"]
-  .ds-textarea--lg.ds-textarea--suffix:not(.ds-textarea--disabled):not(.ds-textarea--error) {
+[data-story-input-state="focus"] .textarea-preset-lg-suffix:not(.textarea-disabled):not(.textarea-error) {
   --textarea-text-fill: var(--text-area-large-box-hint-focused-fill);
   --textarea-icon-fill: var(--text-area-large-box-icon-focused-fill);
 }
 
-[data-story-select-state="focus"] .ds-select--sm .ds-select__trigger:not(:disabled):not(.ds-select--error) {
+[data-story-select-state="focus"] .select-preset-size-sm .select-trigger:not(:disabled) {
   --select-fill: var(--drop-down-small-box-properties-focused-fill);
   --select-border-color: var(--drop-down-small-box-properties-focused-border-color);
   --select-value-fill: var(--drop-down-small-box-hint-focused-fill);
@@ -107,7 +104,7 @@ body {
   --select-icon-fill: var(--drop-down-small-box-icon-focused-fill);
 }
 
-[data-story-select-state="focus"] .ds-select--lg .ds-select__trigger:not(:disabled):not(.ds-select--error) {
+[data-story-select-state="focus"] .select-preset-size-lg .select-trigger:not(:disabled) {
   --select-fill: var(--drop-down-large-box-properties-focused-fill);
   --select-border-color: var(--drop-down-large-box-properties-focused-border-color);
   --select-value-fill: var(--drop-down-large-box-hint-focused-fill);
@@ -115,12 +112,40 @@ body {
   --select-icon-fill: var(--drop-down-large-box-icon-focused-fill);
 }
 
-[data-story-select-state="focus"] .ds-select-field--sm:not(.ds-select-field--disabled):not(.ds-select-field--error) {
+[data-story-select-state="focus"] .select-field-preset-size-sm:not(.select-field-disabled):not(.select-field-invalid) {
   --select-field-label-fill: var(--drop-down-small-label-focused-fill);
   --select-field-helper-fill: var(--drop-down-small-helper-text-focused-fill);
 }
 
-[data-story-select-state="focus"] .ds-select-field--lg:not(.ds-select-field--disabled):not(.ds-select-field--error) {
+[data-story-select-state="focus"] .select-field-preset-size-lg:not(.select-field-disabled):not(.select-field-invalid) {
   --select-field-label-fill: var(--drop-down-large-label-focused-fill);
   --select-field-helper-fill: var(--drop-down-large-helper-text-focused-fill);
+}
+
+[data-story-combobox-state="focus"] .combobox-preset-size-sm .combobox-input-group:not([data-disabled]) {
+  --combobox-fill: var(--combo-box-small-box-properties-focused-fill);
+  --combobox-border-color: var(--combo-box-small-box-properties-focused-border-color);
+  --combobox-input-fill: var(--combo-box-small-box-hint-focused-fill);
+  --combobox-placeholder-fill: var(--combo-box-small-box-hint-focused-fill);
+  --combobox-icon-fill: var(--combo-box-small-box-icon-focused-fill);
+}
+
+[data-story-combobox-state="focus"] .combobox-preset-size-lg .combobox-input-group:not([data-disabled]) {
+  --combobox-fill: var(--combo-box-large-box-properties-focused-fill);
+  --combobox-border-color: var(--combo-box-large-box-properties-focused-border-color);
+  --combobox-input-fill: var(--combo-box-large-box-hint-focused-fill);
+  --combobox-placeholder-fill: var(--combo-box-large-box-hint-focused-fill);
+  --combobox-icon-fill: var(--combo-box-large-box-icon-focused-fill);
+}
+
+[data-story-combobox-field-state="focus"]
+  .combobox-field-preset-size-sm:not(.combobox-field-disabled):not(.combobox-field-invalid) {
+  --combobox-field-label-fill: var(--combo-box-small-label-focused-fill);
+  --combobox-field-helper-fill: var(--combo-box-small-helper-text-focused-fill);
+}
+
+[data-story-combobox-field-state="focus"]
+  .combobox-field-preset-size-lg:not(.combobox-field-disabled):not(.combobox-field-invalid) {
+  --combobox-field-label-fill: var(--combo-box-large-label-focused-fill);
+  --combobox-field-helper-fill: var(--combo-box-large-helper-text-focused-fill);
 }

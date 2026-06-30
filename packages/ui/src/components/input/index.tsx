@@ -4,7 +4,6 @@ import { createContext, type ComponentProps, type ReactNode } from 'react';
 
 import { cn } from '../../lib/utils.ts';
 import { Icon } from '../icon/index.tsx';
-import './input.css';
 
 const INPUT_ICON_SIZES = {
   sm: 20,
@@ -17,25 +16,31 @@ const ERROR_TRAILING_ICON = 'error';
 
 export const InputIconSizeContext = createContext<number | undefined>(undefined);
 
-const inputVariants = cva('ds-input', {
+const inputVariants = cva('input', {
   variants: {
     size: {
-      sm: 'ds-input--sm',
-      lg: 'ds-input--lg',
+      sm: '',
+      lg: '',
     },
     variant: {
-      default: 'ds-input--default',
-      suffix: 'ds-input--suffix',
+      default: '',
+      suffix: '',
     },
     disabled: {
-      true: 'ds-input--disabled',
-      false: null,
+      true: 'input-disabled',
+      false: '',
     },
     invalid: {
-      true: 'ds-input--error',
-      false: null,
+      true: 'input-error',
+      false: '',
     },
   },
+  compoundVariants: [
+    { size: 'sm', variant: 'default', class: 'input-preset-sm-default' },
+    { size: 'sm', variant: 'suffix', class: 'input-preset-sm-suffix' },
+    { size: 'lg', variant: 'default', class: 'input-preset-lg-default' },
+    { size: 'lg', variant: 'suffix', class: 'input-preset-lg-suffix' },
+  ],
   defaultVariants: {
     size: 'sm',
     variant: 'default',
@@ -123,17 +128,19 @@ export function Input({
             className,
           }),
         )}
+        data-slot="input"
+        data-variant={resolvedVariant}
       >
-        {resolvedLeading ? <span className="ds-input__leading">{resolvedLeading}</span> : null}
+        {resolvedLeading ? <span className="input-leading">{resolvedLeading}</span> : null}
         <BaseInput
-          className="ds-input__control"
+          className="input-control"
           disabled={isDisabled}
           aria-invalid={isInvalid || undefined}
           placeholder={placeholder}
           {...props}
         />
-        {hasSuffix ? <span className="ds-input__suffix">{suffix}</span> : null}
-        {resolvedTrailing ? <span className="ds-input__trailing">{resolvedTrailing}</span> : null}
+        {hasSuffix ? <span className="input-suffix">{suffix}</span> : null}
+        {resolvedTrailing ? <span className="input-trailing">{resolvedTrailing}</span> : null}
       </div>
     </InputIconSizeContext.Provider>
   );

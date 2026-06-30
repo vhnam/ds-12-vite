@@ -26,6 +26,9 @@
     border-color var(--transition-duration-fast) var(--transition-timing-default),
     color var(--transition-duration-fast) var(--transition-timing-default);
 
+  /* Tailwind v4 default sans stack — maps to --font-sans in tokens.theme.css */
+  --font-family-sans: var(--font-family-text), ui-sans-serif, system-ui, sans-serif;
+
   /* --- Component tokens: button (shared) --- */
   --button-radius: var(--radius-xsmall);
   --button-cursor: var(--cursor-interactive);
@@ -121,17 +124,17 @@
   --avatar-md-size: 32px;
   --avatar-lg-size: 40px;
 
-  --avatar-user-radius: var(--radius-xlarge);
-  --avatar-organisation-radius: var(--radius-small);
+  --avatar-circle-radius: var(--radius-xlarge);
+  --avatar-square-radius: var(--radius-small);
 
   --avatar-border-width: var(--border-width-small);
-  --avatar-user-border-color: var(--color-semantic-border-subtle);
+  --avatar-circle-border-color: var(--color-semantic-border-subtle);
 
-  --avatar-user-fill: var(--color-semantic-neutral-subtle);
-  --avatar-organisation-fill: var(--color-semantic-brand-bold);
+  --avatar-circle-fill: var(--color-semantic-neutral-subtle);
+  --avatar-square-fill: var(--color-semantic-brand-bold);
 
-  --avatar-user-content-fill: var(--color-semantic-text-neutral-bold);
-  --avatar-organisation-content-fill: var(--color-semantic-text-neutral-subtler);
+  --avatar-circle-content-fill: var(--color-semantic-text-neutral-bold);
+  --avatar-square-content-fill: var(--color-semantic-text-neutral-subtler);
 
   --avatar-sm-icon-size: 14px;
   --avatar-md-icon-size: 16px;

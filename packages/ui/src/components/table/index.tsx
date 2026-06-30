@@ -4,45 +4,56 @@ import type { ComponentProps, ReactNode } from 'react';
 
 import { cn } from '../../lib/utils.ts';
 import { Icon } from '../icon/index.tsx';
-import './table.css';
 
-const tableHeadVariants = cva('ds-table__head-cell', {
+const tableHeadVariants = cva('table-head-cell', {
   variants: {
     align: {
-      start: null,
-      end: 'ds-table__head-cell--end',
+      start: '',
+      end: '',
     },
     variant: {
-      default: null,
-      avatar: 'ds-table__head-cell--avatar',
+      default: '',
+      avatar: '',
     },
   },
+  compoundVariants: [{ align: 'end', class: 'table-head-cell-end' }],
   defaultVariants: {
     align: 'start',
     variant: 'default',
   },
 });
 
-const tableCellVariants = cva('ds-table__cell', {
+const tableCellVariants = cva('table-cell', {
   variants: {
     variant: {
-      default: null,
-      stacked: 'ds-table__cell--stacked',
-      avatar: 'ds-table__cell--avatar',
-      custom: 'ds-table__cell--custom',
+      default: '',
+      stacked: '',
+      avatar: '',
+      custom: '',
     },
     align: {
-      start: null,
-      end: 'ds-table__cell--end',
+      start: '',
+      end: '',
     },
     state: {
-      default: 'ds-table__cell--default',
-      hovered: 'ds-table__cell--hovered',
-      focused: 'ds-table__cell--focused',
-      highlighted: 'ds-table__cell--highlighted',
-      disabled: 'ds-table__cell--disabled',
+      default: '',
+      hovered: '',
+      focused: '',
+      highlighted: '',
+      disabled: '',
     },
   },
+  compoundVariants: [
+    { variant: 'stacked', class: 'table-cell-stacked' },
+    { variant: 'avatar', class: 'table-cell-avatar' },
+    { variant: 'custom', class: 'table-cell-custom' },
+    { align: 'end', class: 'table-cell-end' },
+    { state: 'default', class: 'table-cell-default' },
+    { state: 'hovered', class: 'table-cell-hovered' },
+    { state: 'focused', class: 'table-cell-focused' },
+    { state: 'highlighted', class: 'table-cell-highlighted' },
+    { state: 'disabled', class: 'table-cell-disabled' },
+  ],
   defaultVariants: {
     variant: 'default',
     align: 'start',
@@ -50,13 +61,14 @@ const tableCellVariants = cva('ds-table__cell', {
   },
 });
 
-const tableRowVariants = cva('ds-table__row', {
+const tableRowVariants = cva('table-row', {
   variants: {
     interactive: {
-      true: 'ds-table__row--interactive',
-      false: null,
+      true: '',
+      false: '',
     },
   },
+  compoundVariants: [{ interactive: true, class: 'table-row-interactive' }],
   defaultVariants: {
     interactive: false,
   },
@@ -136,7 +148,7 @@ export type TableCellProps = Omit<ComponentProps<'td'>, 'align'> &
 /** Bordered data table container with token-driven row, header, and cell styling. */
 export function Table({ className, children, ...props }: TableProps) {
   return (
-    <table className={cn('ds-table', className)} {...props}>
+    <table className={cn('table', className)} data-slot="table" {...props}>
       {children}
     </table>
   );
@@ -145,7 +157,7 @@ export function Table({ className, children, ...props }: TableProps) {
 /** Table header section (`thead`). */
 export function TableHeader({ className, children, ...props }: TableHeaderProps) {
   return (
-    <thead className={cn('ds-table__head', className)} {...props}>
+    <thead className={cn('table-head', className)} data-slot="table-head" {...props}>
       {children}
     </thead>
   );
@@ -154,7 +166,7 @@ export function TableHeader({ className, children, ...props }: TableHeaderProps)
 /** Table body section (`tbody`). */
 export function TableBody({ className, children, ...props }: TableBodyProps) {
   return (
-    <tbody className={cn('ds-table__body', className)} {...props}>
+    <tbody className={cn('table-body', className)} data-slot="table-body" {...props}>
       {children}
     </tbody>
   );
@@ -163,7 +175,7 @@ export function TableBody({ className, children, ...props }: TableBodyProps) {
 /** Table row (`tr`) with optional interactive hover styling. */
 export function TableRow({ className, interactive, children, ...props }: TableRowProps) {
   return (
-    <tr className={cn(tableRowVariants({ interactive, className }))} {...props}>
+    <tr className={cn(tableRowVariants({ interactive, className }))} data-slot="table-row" {...props}>
       {children}
     </tr>
   );
@@ -191,7 +203,13 @@ function TableSortButton({
   onClick?: ComponentProps<typeof BaseButton>['onClick'];
 }) {
   return (
-    <BaseButton type="button" className="ds-table__sort-button" aria-label={label} onClick={onClick}>
+    <BaseButton
+      type="button"
+      className="table-sort-button"
+      data-slot="table-sort-button"
+      aria-label={label}
+      onClick={onClick}
+    >
       <Icon name={resolveSortIcon(sortDirection)} size={20} />
     </BaseButton>
   );
@@ -219,12 +237,20 @@ export function TableHead({
     <th
       scope="col"
       className={cn(tableHeadVariants({ align: resolvedAlign, variant: resolvedVariant, className }))}
+      data-slot="table-head-cell"
+      data-variant={resolvedVariant}
       aria-sort={resolveAriaSort(sortable, sortDirection)}
       {...props}
     >
-      <div className="ds-table__head-inner">
-        {resolvedVariant === 'avatar' && avatar ? <span className="ds-table__head-avatar">{avatar}</span> : null}
-        <span className="ds-table__head-label">{children}</span>
+      <div className="table-head-inner" data-slot="table-head-inner">
+        {resolvedVariant === 'avatar' && avatar ? (
+          <span className="table-head-avatar" data-slot="table-head-avatar">
+            {avatar}
+          </span>
+        ) : null}
+        <span className="table-head-label" data-slot="table-head-label">
+          {children}
+        </span>
         {sortable ? <TableSortButton label={resolvedSortLabel} sortDirection={sortDirection} onClick={onSort} /> : null}
       </div>
     </th>
@@ -251,19 +277,31 @@ function TableCellContent({
   const isDisabled = state === 'disabled';
 
   if (variant === 'custom') {
-    return <div className="ds-table__cell-slot">{children}</div>;
+    return (
+      <div className="table-cell-slot" data-slot="table-cell-slot">
+        {children}
+      </div>
+    );
   }
 
   if (variant === 'stacked' || variant === 'avatar') {
     return (
       <>
         {variant === 'avatar' && avatar ? avatar : null}
-        <div className="ds-table__cell-stack">
-          {text ? <span className="ds-table__cell-primary">{text}</span> : null}
-          {subText ? <span className="ds-table__cell-subtext">{subText}</span> : null}
+        <div className="table-cell-stack" data-slot="table-cell-stack">
+          {text ? (
+            <span className="table-cell-primary" data-slot="table-cell-primary">
+              {text}
+            </span>
+          ) : null}
+          {subText ? (
+            <span className="table-cell-subtext" data-slot="table-cell-subtext">
+              {subText}
+            </span>
+          ) : null}
         </div>
         {showChevron && !isDisabled ? (
-          <Icon name="chevron_forward" size={20} className="ds-table__cell-chevron" />
+          <Icon name="chevron_forward" size={20} className="table-cell-chevron" data-slot="table-cell-chevron" />
         ) : null}
       </>
     );
@@ -271,8 +309,14 @@ function TableCellContent({
 
   return (
     <>
-      {text || children ? <span className="ds-table__cell-text">{text ?? children}</span> : null}
-      {showChevron && !isDisabled ? <Icon name="chevron_forward" size={20} className="ds-table__cell-chevron" /> : null}
+      {text || children ? (
+        <span className="table-cell-text" data-slot="table-cell-text">
+          {text ?? children}
+        </span>
+      ) : null}
+      {showChevron && !isDisabled ? (
+        <Icon name="chevron_forward" size={20} className="table-cell-chevron" data-slot="table-cell-chevron" />
+      ) : null}
     </>
   );
 }
@@ -305,9 +349,11 @@ export function TableCell({
           className,
         }),
       )}
+      data-slot="table-cell"
+      data-variant={resolvedVariant}
       {...props}
     >
-      <div className="ds-table__cell-inner">
+      <div className="table-cell-inner" data-slot="table-cell-inner">
         <TableCellContent
           variant={resolvedVariant}
           state={resolvedState}
@@ -319,7 +365,9 @@ export function TableCell({
           {usesChildrenOnly ? children : undefined}
         </TableCellContent>
       </div>
-      {resolvedState === 'focused' ? <span className="ds-table__cell-focus-ring" aria-hidden /> : null}
+      {resolvedState === 'focused' ? (
+        <span className="table-cell-focus-ring" data-slot="table-cell-focus-ring" aria-hidden />
+      ) : null}
     </td>
   );
 }

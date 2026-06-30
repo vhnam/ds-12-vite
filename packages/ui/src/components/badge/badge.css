@@ -1,116 +1,105 @@
-@layer components {
-  .ds-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    border-radius: var(--badge-radius);
-    background-color: var(--badge-fill);
-    color: var(--badge-label-fill);
-    white-space: nowrap;
-  }
+/* Base layout — identical across all variants */
+@utility badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border-radius: var(--badge-radius);
+  white-space: nowrap;
+}
 
-  .ds-badge--sm {
-    gap: var(--badge-sm-gap);
-    padding: var(--badge-sm-padding);
-    font-family: var(--badge-sm-label-font-family);
-    font-size: var(--badge-sm-label-font-size);
-    font-weight: var(--badge-sm-label-font-weight);
-    line-height: var(--badge-sm-label-line-height);
-    letter-spacing: var(--badge-sm-label-letter-spacing);
-  }
+/* Child parts */
+@utility badge-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+}
 
-  .ds-badge--lg {
-    gap: var(--badge-lg-gap);
-    padding: var(--badge-lg-padding-y) var(--badge-lg-padding-x);
-    font-family: var(--badge-lg-label-font-family);
-    font-size: var(--badge-lg-label-font-size);
-    font-weight: var(--badge-lg-label-font-weight);
-    line-height: var(--badge-lg-label-line-height);
-    letter-spacing: var(--badge-lg-label-letter-spacing);
-  }
+@utility badge-label {
+  overflow-wrap: break-word;
+}
 
-  .ds-badge__icon {
-    display: inline-flex;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
-    color: var(--badge-icon-fill);
-  }
+/* Size presets — spacing + label typography */
+@utility badge-preset-size-sm {
+  gap: var(--badge-sm-gap);
+  padding: var(--badge-sm-padding);
+  font-family: var(--badge-sm-label-font-family);
+  font-size: var(--badge-sm-label-font-size);
+  font-weight: var(--badge-sm-label-font-weight);
+  line-height: var(--badge-sm-label-line-height);
+  letter-spacing: var(--badge-sm-label-letter-spacing);
+}
 
-  .ds-badge--sm .ds-badge__icon {
-    width: var(--badge-sm-icon-size);
-    height: var(--badge-sm-icon-size);
-  }
+@utility badge-preset-size-lg {
+  gap: var(--badge-lg-gap);
+  padding: var(--badge-lg-padding-y) var(--badge-lg-padding-x);
+  font-family: var(--badge-lg-label-font-family);
+  font-size: var(--badge-lg-label-font-size);
+  font-weight: var(--badge-lg-label-font-weight);
+  line-height: var(--badge-lg-label-line-height);
+  letter-spacing: var(--badge-lg-label-letter-spacing);
+}
 
-  .ds-badge--lg .ds-badge__icon {
-    width: var(--badge-lg-icon-size);
-    height: var(--badge-lg-icon-size);
-  }
+/* Icon container size presets */
+@utility badge-preset-icon-sm {
+  width: var(--badge-sm-icon-size);
+  height: var(--badge-sm-icon-size);
+}
 
-  .ds-badge__label {
-    overflow-wrap: break-word;
-  }
+@utility badge-preset-icon-lg {
+  width: var(--badge-lg-icon-size);
+  height: var(--badge-lg-icon-size);
+}
 
-  /* Subtle variants */
-  .ds-badge--subtle.ds-badge--neutral {
-    --badge-fill: var(--badge-neutral-subtle-fill);
-    --badge-label-fill: var(--badge-neutral-subtle-label-fill);
-    --badge-icon-fill: var(--badge-neutral-subtle-icon-fill);
-  }
+/* Emphasis × variant colour presets */
+@utility badge-neutral-subtle {
+  background-color: var(--badge-neutral-subtle-fill);
+  color: var(--badge-neutral-subtle-label-fill);
+}
 
-  .ds-badge--subtle.ds-badge--negative {
-    --badge-fill: var(--badge-negative-subtle-fill);
-    --badge-label-fill: var(--badge-negative-subtle-label-fill);
-    --badge-icon-fill: var(--badge-negative-subtle-icon-fill);
-  }
+@utility badge-negative-subtle {
+  background-color: var(--badge-negative-subtle-fill);
+  color: var(--badge-negative-subtle-label-fill);
+}
 
-  .ds-badge--subtle.ds-badge--attention {
-    --badge-fill: var(--badge-attention-subtle-fill);
-    --badge-label-fill: var(--badge-attention-subtle-label-fill);
-    --badge-icon-fill: var(--badge-attention-subtle-icon-fill);
-  }
+@utility badge-attention-subtle {
+  background-color: var(--badge-attention-subtle-fill);
+  color: var(--badge-attention-subtle-label-fill);
+}
 
-  .ds-badge--subtle.ds-badge--positive {
-    --badge-fill: var(--badge-positive-subtle-fill);
-    --badge-label-fill: var(--badge-positive-subtle-label-fill);
-    --badge-icon-fill: var(--badge-positive-subtle-icon-fill);
-  }
+@utility badge-positive-subtle {
+  background-color: var(--badge-positive-subtle-fill);
+  color: var(--badge-positive-subtle-label-fill);
+}
 
-  .ds-badge--subtle.ds-badge--information {
-    --badge-fill: var(--badge-information-subtle-fill);
-    --badge-label-fill: var(--badge-information-subtle-label-fill);
-    --badge-icon-fill: var(--badge-information-subtle-icon-fill);
-  }
+@utility badge-information-subtle {
+  background-color: var(--badge-information-subtle-fill);
+  color: var(--badge-information-subtle-label-fill);
+}
 
-  /* Bold variants */
-  .ds-badge--bold.ds-badge--neutral {
-    --badge-fill: var(--badge-neutral-bold-fill);
-    --badge-label-fill: var(--badge-bold-label-fill);
-    --badge-icon-fill: var(--badge-bold-icon-fill);
-  }
+@utility badge-neutral-bold {
+  background-color: var(--badge-neutral-bold-fill);
+  color: var(--badge-bold-label-fill);
+}
 
-  .ds-badge--bold.ds-badge--negative {
-    --badge-fill: var(--badge-negative-bold-fill);
-    --badge-label-fill: var(--badge-bold-label-fill);
-    --badge-icon-fill: var(--badge-bold-icon-fill);
-  }
+@utility badge-negative-bold {
+  background-color: var(--badge-negative-bold-fill);
+  color: var(--badge-bold-label-fill);
+}
 
-  .ds-badge--bold.ds-badge--attention {
-    --badge-fill: var(--badge-attention-bold-fill);
-    --badge-label-fill: var(--badge-bold-label-fill);
-    --badge-icon-fill: var(--badge-bold-icon-fill);
-  }
+@utility badge-attention-bold {
+  background-color: var(--badge-attention-bold-fill);
+  color: var(--badge-bold-label-fill);
+}
 
-  .ds-badge--bold.ds-badge--positive {
-    --badge-fill: var(--badge-positive-bold-fill);
-    --badge-label-fill: var(--badge-bold-label-fill);
-    --badge-icon-fill: var(--badge-bold-icon-fill);
-  }
+@utility badge-positive-bold {
+  background-color: var(--badge-positive-bold-fill);
+  color: var(--badge-bold-label-fill);
+}
 
-  .ds-badge--bold.ds-badge--information {
-    --badge-fill: var(--badge-information-bold-fill);
-    --badge-label-fill: var(--badge-bold-label-fill);
-    --badge-icon-fill: var(--badge-bold-icon-fill);
-  }
+@utility badge-information-bold {
+  background-color: var(--badge-information-bold-fill);
+  color: var(--badge-bold-label-fill);
 }

@@ -570,3 +570,31 @@ export const comboboxTestArgs = {
   'aria-label': 'Select',
   placeholder: 'Option',
 };
+
+type DataSlotQuery = {
+  slot: string;
+  variant?: string;
+  role?: string;
+  name?: string | RegExp;
+};
+
+/** Asserts `data-slot` (and optional `data-variant`) on a component root — prefer over CSS class checks. */
+export async function expectDataSlotVariant(canvasElement: HTMLElement, query: DataSlotQuery): Promise<void> {
+  const canvas = within(canvasElement);
+  let root: Element | null = null;
+
+  if (query.role) {
+    const el = canvas.getByRole(query.role as Parameters<typeof canvas.getByRole>[0], {
+      name: query.name,
+    });
+    root = el.getAttribute('data-slot') === query.slot ? el : el.closest(`[data-slot="${query.slot}"]`);
+  } else {
+    root = canvasElement.querySelector(`[data-slot="${query.slot}"]`);
+  }
+
+  await expect(root).toBeInTheDocument();
+  await expect(root).toHaveAttribute('data-slot', query.slot);
+  if (query.variant !== undefined) {
+    await expect(root).toHaveAttribute('data-variant', query.variant);
+  }
+}

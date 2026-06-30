@@ -4,31 +4,41 @@ import { useId, type ReactNode } from 'react';
 
 import { cn } from '../../../lib/utils.ts';
 import { Input, type InputProps } from '../../input/index.tsx';
-import './selection-field.css';
 
-const selectionFieldVariants = cva('ds-selection-field', {
+const selectionFieldVariants = cva('selection-field', {
   variants: {
     size: {
-      sm: 'ds-selection-field--sm',
-      lg: 'ds-selection-field--lg',
+      sm: '',
+      lg: '',
     },
     disabled: {
-      true: 'ds-selection-field--disabled',
-      false: null,
+      true: '',
+      false: '',
     },
     invalid: {
-      true: 'ds-selection-field--error',
-      false: null,
+      true: '',
+      false: '',
     },
     supportingText: {
-      true: 'ds-selection-field--supporting-text',
-      false: null,
+      true: '',
+      false: '',
     },
     input: {
-      true: 'ds-selection-field--input',
-      false: null,
+      true: '',
+      false: '',
     },
   },
+  compoundVariants: [
+    { size: 'sm', class: 'selection-field-preset-size-sm' },
+    { size: 'lg', class: 'selection-field-preset-size-lg' },
+    { size: 'sm', disabled: true, class: 'selection-field-preset-size-sm-disabled' },
+    { size: 'lg', disabled: true, class: 'selection-field-preset-size-lg-disabled' },
+    { size: 'sm', invalid: true, class: 'selection-field-preset-size-sm-invalid' },
+    { size: 'lg', invalid: true, class: 'selection-field-preset-size-lg-invalid' },
+    { disabled: true, class: 'selection-field-disabled' },
+    { invalid: true, class: 'selection-field-gap' },
+    { input: true, class: 'selection-field-gap' },
+  ],
   defaultVariants: {
     size: 'sm',
     disabled: false,
@@ -136,21 +146,35 @@ export function SelectionFieldLayout({
           input: showInput,
           className: fieldClassName,
         }),
+        isInvalid && 'selection-field-invalid',
       )}
+      data-slot="selection-field"
+      data-variant={resolvedSize}
     >
-      <div className="ds-selection-field__row">
+      <div
+        className={cn('selection-field-row', showSupportingText && 'selection-field-row-supporting')}
+        data-slot="selection-field-row"
+      >
         {renderControl(controlId)}
         {showLabel || showSupportingText ? (
-          <div className="ds-selection-field__content">
+          <div className="selection-field-content" data-slot="selection-field-content">
             {showLabel ? (
-              <Field.Label htmlFor={controlId} className="ds-selection-field__label">
+              <Field.Label htmlFor={controlId} className="selection-field-label" data-slot="selection-field-label">
                 {label}
               </Field.Label>
             ) : null}
-            {showSupportingText ? <span className="ds-selection-field__supporting">{supportingText}</span> : null}
+            {showSupportingText ? (
+              <span className="selection-field-supporting" data-slot="selection-field-supporting">
+                {supportingText}
+              </span>
+            ) : null}
           </div>
         ) : null}
-        {showSuffix ? <span className="ds-selection-field__suffix">{suffix}</span> : null}
+        {showSuffix ? (
+          <span className="selection-field-suffix" data-slot="selection-field-suffix">
+            {suffix}
+          </span>
+        ) : null}
       </div>
       {showInput ? (
         <Input
@@ -164,7 +188,7 @@ export function SelectionFieldLayout({
         />
       ) : null}
       {isInvalid && showHelperText ? (
-        <Field.Description id={helperId} className="ds-selection-field__helper">
+        <Field.Description id={helperId} className="selection-field-helper" data-slot="selection-field-helper">
           {helperText}
         </Field.Description>
       ) : null}

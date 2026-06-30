@@ -44,6 +44,7 @@ function StateSelect({
       showLeadingIcon
       options={DEFAULT_SELECT_OPTIONS}
       placeholder="Option"
+      aria-label="Select"
       defaultValue={state === 'disabled' || state === 'error' ? 'option-1' : undefined}
       disabled={state === 'disabled'}
       invalid={state === 'error'}

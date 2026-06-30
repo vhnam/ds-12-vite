@@ -6,6 +6,7 @@ import {
   createTextboxA11yPlay,
   createTextboxDisabledPlay,
   createTextboxInvalidA11yPlay,
+  expectDataSlotVariant,
   runTextboxInteractionTests,
 } from '../../lib/component-tests.ts';
 import { booleanArgType, hiddenArgType, selectArgType, textArgType } from '../../lib/story-arg-types.ts';
@@ -60,7 +61,15 @@ type Story = StoryObj<typeof meta>;
 
 /** Use InputField (not a bare Input) whenever the field needs a visible label and helper text — the wrapper ensures they are correctly associated for accessibility. */
 export const Default: Story = {
-  play: (context) => runTextboxInteractionTests(context, 'Label'),
+  play: async (context) => {
+    await runTextboxInteractionTests(context, 'Label');
+    await expectDataSlotVariant(context.canvasElement, {
+      slot: 'input-field',
+      variant: 'default',
+      role: 'textbox',
+      name: 'Label',
+    });
+  },
 };
 
 /** Use the suffix variant when a unit or format hint should appear inline after the value, such as "kg" or "%". */

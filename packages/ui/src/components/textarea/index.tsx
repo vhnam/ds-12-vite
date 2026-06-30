@@ -3,7 +3,6 @@ import { createContext, type ComponentProps, type ReactNode } from 'react';
 
 import { cn } from '../../lib/utils.ts';
 import { Icon } from '../icon/index.tsx';
-import './textarea.css';
 
 const TEXTAREA_ICON_SIZES = {
   sm: 20,
@@ -14,25 +13,31 @@ const DEFAULT_LEADING_ICON = 'person';
 
 export const TextareaIconSizeContext = createContext<number | undefined>(undefined);
 
-const textareaVariants = cva('ds-textarea', {
+const textareaVariants = cva('textarea', {
   variants: {
     size: {
-      sm: 'ds-textarea--sm',
-      lg: 'ds-textarea--lg',
+      sm: '',
+      lg: '',
     },
     variant: {
-      default: 'ds-textarea--default',
-      suffix: 'ds-textarea--suffix',
+      default: '',
+      suffix: '',
     },
     disabled: {
-      true: 'ds-textarea--disabled',
-      false: null,
+      true: 'textarea-disabled',
+      false: '',
     },
     invalid: {
-      true: 'ds-textarea--error',
-      false: null,
+      true: 'textarea-error',
+      false: '',
     },
   },
+  compoundVariants: [
+    { size: 'sm', variant: 'default', class: 'textarea-preset-sm-default' },
+    { size: 'sm', variant: 'suffix', class: 'textarea-preset-sm-suffix' },
+    { size: 'lg', variant: 'default', class: 'textarea-preset-lg-default' },
+    { size: 'lg', variant: 'suffix', class: 'textarea-preset-lg-suffix' },
+  ],
   defaultVariants: {
     size: 'sm',
     variant: 'default',
@@ -95,7 +100,7 @@ export function Textarea({
 
   const control = (
     <textarea
-      className="ds-textarea__control"
+      className="textarea-control"
       disabled={isDisabled}
       aria-invalid={isInvalid || undefined}
       placeholder={placeholder}
@@ -115,12 +120,14 @@ export function Textarea({
             className,
           }),
         )}
+        data-slot="textarea"
+        data-variant={resolvedVariant}
       >
-        {resolvedLeading ? <span className="ds-textarea__leading">{resolvedLeading}</span> : null}
+        {resolvedLeading ? <span className="textarea-leading">{resolvedLeading}</span> : null}
         {resolvedVariant === 'suffix' ? (
-          <div className="ds-textarea__content">
+          <div className="textarea-content">
             {control}
-            {hasSuffix ? <span className="ds-textarea__suffix">{suffix}</span> : null}
+            {hasSuffix ? <span className="textarea-suffix">{suffix}</span> : null}
           </div>
         ) : (
           control

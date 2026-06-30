@@ -4,38 +4,51 @@ import type { ComponentProps } from 'react';
 
 import { cn } from '../../lib/utils.ts';
 import { getPaginationItems } from './get-pagination-items.ts';
-import './pagination.css';
 
-const paginationVariants = cva('ds-pagination', {
+const paginationVariants = cva('pagination', {
   variants: {
     size: {
-      sm: 'ds-pagination--sm',
-      lg: 'ds-pagination--lg',
+      sm: '',
+      lg: '',
     },
     layout: {
-      centered: 'ds-pagination--centered',
-      spread: 'ds-pagination--spread',
-      end: null,
+      centered: '',
+      spread: '',
+      end: '',
     },
   },
+  compoundVariants: [
+    { size: 'lg', layout: 'centered', class: 'pagination-preset-lg-centered' },
+    { size: 'lg', layout: 'spread', class: 'pagination-preset-lg-spread' },
+    { size: 'lg', layout: 'end', class: 'pagination-preset-lg-end' },
+    { size: 'sm', layout: 'end', class: 'pagination-preset-sm-end' },
+  ],
   defaultVariants: {
     size: 'lg',
     layout: 'centered',
   },
 });
 
-const paginationButtonVariants = cva('ds-pagination__button', {
+const paginationButtonVariants = cva('pagination-button', {
   variants: {
     size: {
-      sm: 'ds-pagination__button--sm',
-      lg: 'ds-pagination__button--lg',
+      sm: '',
+      lg: '',
     },
     state: {
-      default: 'ds-pagination__button--default',
-      active: 'ds-pagination__button--active',
-      disabled: 'ds-pagination__button--disabled',
+      default: '',
+      active: '',
+      disabled: '',
     },
   },
+  compoundVariants: [
+    { size: 'lg', state: 'default', class: 'pagination-button-preset-lg-default' },
+    { size: 'lg', state: 'active', class: 'pagination-button-preset-lg-active' },
+    { size: 'lg', state: 'disabled', class: 'pagination-button-preset-lg-disabled' },
+    { size: 'sm', state: 'default', class: 'pagination-button-preset-sm-default' },
+    { size: 'sm', state: 'active', class: 'pagination-button-preset-sm-active' },
+    { size: 'sm', state: 'disabled', class: 'pagination-button-preset-sm-disabled' },
+  ],
   defaultVariants: {
     size: 'lg',
     state: 'default',
@@ -109,6 +122,7 @@ function PaginationButton({
     <BaseButton
       type="button"
       className={cn(paginationButtonVariants({ size, state, className }))}
+      data-slot="pagination-button"
       disabled={isDisabled}
       focusableWhenDisabled
       onClick={onClick}
@@ -116,7 +130,7 @@ function PaginationButton({
       aria-current={ariaCurrent}
       tabIndex={state === 'disabled' && label === '...' ? -1 : undefined}
     >
-      <span className="ds-pagination__label">{label}</span>
+      <span className="pagination-label">{label}</span>
     </BaseButton>
   );
 }
@@ -180,6 +194,7 @@ export function Pagination({
     return (
       <nav
         className={cn(paginationVariants({ size: resolvedSize, layout, className }))}
+        data-slot="pagination"
         aria-label={ariaLabel}
         {...props}
       >
@@ -191,7 +206,7 @@ export function Pagination({
           onClick={() => handlePageChange(safePage - 1)}
           aria-label={previousLabel}
         />
-        <div className="ds-pagination__pages">{pageButtons}</div>
+        <div className="pagination-pages">{pageButtons}</div>
         <PaginationButton
           size={resolvedSize}
           state={safePage >= totalPages ? 'disabled' : 'default'}
@@ -207,6 +222,7 @@ export function Pagination({
   return (
     <nav
       className={cn(paginationVariants({ size: resolvedSize, layout: 'end', className }))}
+      data-slot="pagination"
       aria-label={ariaLabel}
       {...props}
     >

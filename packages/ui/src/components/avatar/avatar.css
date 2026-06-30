@@ -1,113 +1,121 @@
-@layer components {
-  .ds-avatar {
-    position: relative;
-    display: inline-flex;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    overflow: hidden;
-    border-style: var(--border-style-default);
-    border-width: var(--avatar-border-width);
-    border-color: var(--avatar-border-color);
-    border-radius: var(--avatar-radius);
-    background-color: var(--avatar-fill);
-    color: var(--avatar-content-fill);
-  }
+/* Base layout — identical across all variants */
+@utility avatar {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-style: var(--border-style-default);
+}
 
-  .ds-avatar--sm {
-    width: var(--avatar-sm-size);
-    height: var(--avatar-sm-size);
-    font-family: var(--avatar-sm-initial-font-family);
-    font-size: var(--avatar-sm-initial-font-size);
-    font-weight: var(--avatar-sm-initial-font-weight);
-    line-height: var(--avatar-sm-initial-line-height);
-    letter-spacing: var(--avatar-sm-initial-letter-spacing);
-  }
+/* Child parts */
+@utility avatar-initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  white-space: nowrap;
+}
 
-  .ds-avatar--md {
-    width: var(--avatar-md-size);
-    height: var(--avatar-md-size);
-    font-family: var(--avatar-md-initial-font-family);
-    font-size: var(--avatar-md-initial-font-size);
-    font-weight: var(--avatar-md-initial-font-weight);
-    line-height: var(--avatar-md-initial-line-height);
-    letter-spacing: var(--avatar-md-initial-letter-spacing);
-  }
+@utility avatar-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  white-space: nowrap;
+}
 
-  .ds-avatar--lg {
-    width: var(--avatar-lg-size);
-    height: var(--avatar-lg-size);
-    font-family: var(--avatar-lg-initial-font-family);
-    font-size: var(--avatar-lg-initial-font-size);
-    font-weight: var(--avatar-lg-initial-font-weight);
-    line-height: var(--avatar-lg-initial-line-height);
-    letter-spacing: var(--avatar-lg-initial-letter-spacing);
-  }
+@utility avatar-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+}
 
-  .ds-avatar--user {
-    --avatar-radius: var(--avatar-user-radius);
-    --avatar-border-color: var(--avatar-user-border-color);
-    --avatar-fill: var(--avatar-user-fill);
-    --avatar-content-fill: var(--avatar-user-content-fill);
-  }
+@utility avatar-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
 
-  .ds-avatar--organisation {
-    --avatar-radius: var(--avatar-organisation-radius);
-    --avatar-border-width: 0;
-    --avatar-border-color: transparent;
-    --avatar-fill: var(--avatar-organisation-fill);
-    --avatar-content-fill: var(--avatar-organisation-content-fill);
-  }
+/* Size presets — dimensions + initial typography */
+@utility avatar-preset-size-sm {
+  width: var(--avatar-sm-size);
+  height: var(--avatar-sm-size);
+  font-family: var(--avatar-sm-initial-font-family);
+  font-size: var(--avatar-sm-initial-font-size);
+  font-weight: var(--avatar-sm-initial-font-weight);
+  line-height: var(--avatar-sm-initial-line-height);
+  letter-spacing: var(--avatar-sm-initial-letter-spacing);
+}
 
-  .ds-avatar--image.ds-avatar--user {
-    --avatar-fill: transparent;
-  }
+@utility avatar-preset-size-md {
+  width: var(--avatar-md-size);
+  height: var(--avatar-md-size);
+  font-family: var(--avatar-md-initial-font-family);
+  font-size: var(--avatar-md-initial-font-size);
+  font-weight: var(--avatar-md-initial-font-weight);
+  line-height: var(--avatar-md-initial-line-height);
+  letter-spacing: var(--avatar-md-initial-letter-spacing);
+}
 
-  .ds-avatar--image.ds-avatar--organisation {
-    --avatar-fill: transparent;
-    --avatar-border-width: 0;
-  }
+@utility avatar-preset-size-lg {
+  width: var(--avatar-lg-size);
+  height: var(--avatar-lg-size);
+  font-family: var(--avatar-lg-initial-font-family);
+  font-size: var(--avatar-lg-initial-font-size);
+  font-weight: var(--avatar-lg-initial-font-weight);
+  line-height: var(--avatar-lg-initial-line-height);
+  letter-spacing: var(--avatar-lg-initial-letter-spacing);
+}
 
-  .ds-avatar__initials,
-  .ds-avatar__fallback {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    white-space: nowrap;
-  }
+/* Icon container size presets */
+@utility avatar-preset-icon-sm {
+  width: var(--avatar-sm-icon-size);
+  height: var(--avatar-sm-icon-size);
+}
 
-  .ds-avatar__icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--avatar-content-fill);
-  }
+@utility avatar-preset-icon-md {
+  width: var(--avatar-md-icon-size);
+  height: var(--avatar-md-icon-size);
+}
 
-  .ds-avatar--sm .ds-avatar__icon {
-    width: var(--avatar-sm-icon-size);
-    height: var(--avatar-sm-icon-size);
-  }
+@utility avatar-preset-icon-lg {
+  width: var(--avatar-lg-icon-size);
+  height: var(--avatar-lg-icon-size);
+}
 
-  .ds-avatar--md .ds-avatar__icon {
-    width: var(--avatar-md-icon-size);
-    height: var(--avatar-md-icon-size);
-  }
+/* Shape presets */
+@utility avatar-circle {
+  border-radius: var(--avatar-circle-radius);
+  border-width: var(--avatar-border-width);
+  border-color: var(--avatar-circle-border-color);
+  background-color: var(--avatar-circle-fill);
+  color: var(--avatar-circle-content-fill);
+}
 
-  .ds-avatar--lg .ds-avatar__icon {
-    width: var(--avatar-lg-icon-size);
-    height: var(--avatar-lg-icon-size);
-  }
+@utility avatar-square {
+  border-radius: var(--avatar-square-radius);
+  border-width: 0;
+  background-color: var(--avatar-square-fill);
+  color: var(--avatar-square-content-fill);
+}
 
-  .ds-avatar__image {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: inherit;
-  }
+/* Image variant overrides */
+@utility avatar-image-circle {
+  background-color: transparent;
+}
+
+@utility avatar-image-square {
+  background-color: transparent;
+  border-width: 0;
 }

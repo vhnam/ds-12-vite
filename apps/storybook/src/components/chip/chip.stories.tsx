@@ -2,7 +2,12 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { Chip } from '@ds-12/ui/chip';
 
-import { createButtonA11yPlay, createChipA11yPlay, runChipInteractionTests } from '../../lib/component-tests.ts';
+import {
+  createButtonA11yPlay,
+  createChipA11yPlay,
+  expectDataSlotVariant,
+  runChipInteractionTests,
+} from '../../lib/component-tests.ts';
 import { booleanArgType, hiddenArgType } from '../../lib/story-arg-types.ts';
 import { showcaseParameters } from '../../lib/story-test-config.ts';
 import { IconLayoutsShowcase, VariantStatesMatrixTable } from './chip-story-fixtures.tsx';
@@ -33,7 +38,14 @@ type Story = StoryObj<typeof meta>;
 
 /** Use the inactive chip as the default filter state — tapping it applies the filter and transitions to the active state. */
 export const Default: Story = {
-  play: (context) => runChipInteractionTests(context, 'Label', false),
+  play: async (context) => {
+    await runChipInteractionTests(context, 'Label', false);
+    await expectDataSlotVariant(context.canvasElement, {
+      slot: 'chip',
+      role: 'button',
+      name: 'Label',
+    });
+  },
 };
 
 /** Use the active state to indicate that a filter or option is currently selected — pair it with the inactive state to show the toggle clearly. */

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { Icon } from '@ds-12/ui/icon';
 
-import { createIconA11yPlay } from '../../lib/component-tests.ts';
+import { createIconA11yPlay, expectDataSlotVariant } from '../../lib/component-tests.ts';
 import { selectArgType, textArgType } from '../../lib/story-arg-types.ts';
 import { showcaseParameters } from '../../lib/story-test-config.ts';
 import { SizesShowcase, VARIANTS, VariantsShowcase } from './icon-story-fixtures.tsx';
@@ -37,7 +37,10 @@ type Story = StoryObj<typeof meta>;
 
 /** Use the outlined variant as the default — it works well in most contexts and avoids visual heaviness. Icons are always decorative (aria-hidden) and must be accompanied by a visible or accessible text label. */
 export const Default: Story = {
-  play: createIconA11yPlay('check_circle'),
+  play: async (context) => {
+    await createIconA11yPlay('check_circle')(context);
+    await expectDataSlotVariant(context.canvasElement, { slot: 'icon' });
+  },
 };
 
 /** Use the filled variant to communicate an active, selected, or toggled state — for example, a filled bookmark when an item is saved. */

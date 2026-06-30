@@ -7,6 +7,7 @@ import {
   createComboboxA11yPlay,
   createComboboxDisabledPlay,
   createComboboxInvalidA11yPlay,
+  expectDataSlotVariant,
   runComboboxInteractionTests,
 } from '../../lib/component-tests.ts';
 import { booleanArgType, hiddenArgType, selectArgType, textArgType } from '../../lib/story-arg-types.ts';
@@ -62,7 +63,15 @@ type Story = StoryObj<typeof meta>;
 
 /** Use SelectField when a labelled select is needed in a form — Select is the bare control without label or helper text. */
 export const Default: Story = {
-  play: (context) => runComboboxInteractionTests(context, 'Select'),
+  play: async (context) => {
+    await runComboboxInteractionTests(context, 'Select');
+    await expectDataSlotVariant(context.canvasElement, {
+      slot: 'select',
+      variant: 'sm',
+      role: 'combobox',
+      name: 'Select',
+    });
+  },
 };
 
 /** Add a leading icon to help users identify the expected selection type at a glance. */

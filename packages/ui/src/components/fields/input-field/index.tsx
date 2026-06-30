@@ -4,27 +4,32 @@ import { useId } from 'react';
 
 import { cn } from '../../../lib/utils.ts';
 import { Input, type InputProps } from '../../input/index.tsx';
-import './input-field.css';
 
-const inputFieldVariants = cva('ds-input-field', {
+const inputFieldVariants = cva('input-field', {
   variants: {
     size: {
-      sm: 'ds-input-field--sm',
-      lg: 'ds-input-field--lg',
+      sm: '',
+      lg: '',
     },
     variant: {
-      default: 'ds-input-field--default',
-      suffix: 'ds-input-field--suffix',
+      default: '',
+      suffix: '',
     },
     disabled: {
-      true: 'ds-input-field--disabled',
-      false: null,
+      true: 'input-field-disabled',
+      false: '',
     },
     invalid: {
-      true: 'ds-input-field--error',
-      false: null,
+      true: 'input-field-error',
+      false: '',
     },
   },
+  compoundVariants: [
+    { size: 'sm', variant: 'default', class: 'input-field-preset-sm-default' },
+    { size: 'sm', variant: 'suffix', class: 'input-field-preset-sm-suffix' },
+    { size: 'lg', variant: 'default', class: 'input-field-preset-lg-default' },
+    { size: 'lg', variant: 'suffix', class: 'input-field-preset-lg-suffix' },
+  ],
   defaultVariants: {
     size: 'sm',
     variant: 'default',
@@ -88,9 +93,11 @@ export function InputField({
           className: fieldClassName,
         }),
       )}
+      data-slot="input-field"
+      data-variant={resolvedVariant}
     >
       {showLabel ? (
-        <Field.Label htmlFor={inputId} className="ds-input-field__label">
+        <Field.Label htmlFor={inputId} className="input-field-label">
           {label}
         </Field.Label>
       ) : null}
@@ -105,7 +112,7 @@ export function InputField({
         {...inputProps}
       />
       {showHelperText ? (
-        <Field.Description id={helperId} className="ds-input-field__helper">
+        <Field.Description id={helperId} className="input-field-helper">
           {helperText}
         </Field.Description>
       ) : null}

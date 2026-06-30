@@ -72,6 +72,7 @@
   --color-semantic-attention-bold: var(--color-semantic-attention-bold);
   --color-semantic-attention-subtle: var(--color-semantic-attention-subtle);
   --color-semantic-border-brand-bold: var(--color-semantic-border-brand-bold);
+  --color-semantic-border-information-bold: var(--color-semantic-border-information-bold);
   --color-semantic-border-moderate: var(--color-semantic-border-moderate);
   --color-semantic-border-negative-bold: var(--color-semantic-border-negative-bold);
   --color-semantic-border-subtle: var(--color-semantic-border-subtle);
@@ -119,6 +120,7 @@
   --color-yellow-900: var(--color-yellow-900);
   --color-yellow-950: var(--color-yellow-950);
   --font-brand: var(--font-family-brand);
+  --font-sans: var(--font-family-sans);
   --font-text: var(--font-family-text);
   --text-10: var(--font-size-10);
   --text-12: var(--font-size-12);

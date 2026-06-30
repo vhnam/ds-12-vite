@@ -1,26 +1,26 @@
 import { Radio as BaseRadio } from '@base-ui/react/radio';
 import { RadioGroup as BaseRadioGroup } from '@base-ui/react/radio-group';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { cva } from 'class-variance-authority';
 import type { ComponentProps } from 'react';
 
 import { cn } from '../../lib/utils.ts';
-import './radio.css';
 
-const radioVariants = cva('ds-radio', {
+const radioVariants = cva('radio', {
   variants: {
     size: {
-      sm: 'ds-radio--sm',
-      lg: 'ds-radio--lg',
+      sm: '',
+      lg: '',
     },
     invalid: {
-      true: 'ds-radio--invalid',
-      false: null,
+      true: 'radio-invalid',
+      false: '',
     },
     disabled: {
-      true: 'ds-radio--disabled',
-      false: null,
+      true: 'radio-disabled',
+      false: '',
     },
   },
+  compoundVariants: [{ size: 'sm', class: 'radio-preset-size-sm' }],
   defaultVariants: {
     size: 'lg',
     invalid: false,
@@ -28,26 +28,32 @@ const radioVariants = cva('ds-radio', {
   },
 });
 
-export type RadioProps = Omit<ComponentProps<typeof BaseRadio.Root>, 'className'> &
-  VariantProps<typeof radioVariants> & {
-    /** Additional CSS class names applied to the root element. */
-    className?: string;
-    /**
-     * Visual size of the radio control.
-     * @default "lg"
-     */
-    size?: 'sm' | 'lg';
-    /**
-     * Marks the control as invalid and sets `aria-invalid`.
-     * @default false
-     */
-    invalid?: boolean;
-  };
+export type RadioProps = Omit<ComponentProps<typeof BaseRadio.Root>, 'className'> & {
+  /** Additional CSS class names applied to the root element. */
+  className?: string;
+  /**
+   * Visual size of the radio control.
+   * @default "lg"
+   */
+  size?: 'sm' | 'lg';
+  /**
+   * Marks the control as invalid and sets `aria-invalid`.
+   * @default false
+   */
+  invalid?: boolean;
+  /**
+   * Prevents interaction and dims the control.
+   * @default false
+   */
+  disabled?: boolean;
+};
 
 export type RadioGroupProps = ComponentProps<typeof BaseRadioGroup>;
 
 /** Circular selection control for choosing one option from a mutually exclusive set. */
 export function Radio({ className, size = 'lg', invalid = false, disabled = false, value, ...props }: RadioProps) {
+  const resolvedSize = size ?? 'lg';
+
   return (
     <BaseRadio.Root
       className={cn(
@@ -58,13 +64,15 @@ export function Radio({ className, size = 'lg', invalid = false, disabled = fals
           className,
         }),
       )}
+      data-slot="radio"
+      data-variant={resolvedSize}
       value={value}
       disabled={disabled}
       aria-invalid={invalid || undefined}
       {...props}
     >
-      <span className="ds-radio__control" aria-hidden>
-        <BaseRadio.Indicator className="ds-radio__indicator" keepMounted />
+      <span className="radio-control" aria-hidden>
+        <BaseRadio.Indicator className="radio-indicator" keepMounted />
       </span>
     </BaseRadio.Root>
   );

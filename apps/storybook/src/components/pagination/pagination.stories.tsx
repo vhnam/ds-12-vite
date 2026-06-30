@@ -3,7 +3,11 @@ import { expect, within } from 'storybook/test';
 
 import { Pagination, type PaginationProps } from '@ds-12/ui/pagination';
 
-import { createPaginationA11yPlay, runPaginationInteractionTests } from '../../lib/component-tests.ts';
+import {
+  createPaginationA11yPlay,
+  expectDataSlotVariant,
+  runPaginationInteractionTests,
+} from '../../lib/component-tests.ts';
 import { booleanArgType, numberArgType, selectArgType } from '../../lib/story-arg-types.ts';
 import { showcaseParameters } from '../../lib/story-test-config.ts';
 import {
@@ -43,7 +47,10 @@ type Story = StoryObj<typeof meta>;
 /** Use the default (numbers-only) pagination for short page ranges where all pages fit without truncation — it keeps the UI minimal and scannable. */
 export const Default: Story = {
   decorators: [interactivePaginationDecorator],
-  play: (context) => runPaginationInteractionTests(context, 1),
+  play: async (context) => {
+    await runPaginationInteractionTests(context, 1);
+    await expectDataSlotVariant(context.canvasElement, { slot: 'pagination' });
+  },
 };
 
 /** Enable navigation buttons when users benefit from a "Back / Next" affordance — useful for sequential flows like multi-step wizards or reading articles in series. */

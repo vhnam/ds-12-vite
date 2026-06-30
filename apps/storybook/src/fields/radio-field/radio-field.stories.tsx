@@ -10,6 +10,7 @@ import {
   createRadioInvalidA11yPlay,
   createRadioKeyboardFocusPlay,
   createRadioWithInputA11yPlay,
+  expectDataSlotVariant,
 } from '../../lib/component-tests.ts';
 import { booleanArgType, selectArgType, textArgType } from '../../lib/story-arg-types.ts';
 import { showcaseParameters } from '../../lib/story-test-config.ts';
@@ -23,6 +24,7 @@ import {
 const meta = {
   title: 'Fields/RadioField',
   component: RadioField,
+  tags: ['autodocs'],
   argTypes: {
     size: selectArgType(SIZES, 'Visual size of the radio control.'),
     invalid: booleanArgType('Marks the field as invalid.'),
@@ -71,6 +73,12 @@ export const Default: Story = {
   play: async (context) => {
     await createRadioA11yPlay(/selection label/i)(context);
     await createRadioKeyboardFocusPlay(/selection label/i)(context);
+    await expectDataSlotVariant(context.canvasElement, {
+      slot: 'selection-field',
+      variant: 'sm',
+      role: 'radio',
+      name: /selection label/i,
+    });
   },
 };
 

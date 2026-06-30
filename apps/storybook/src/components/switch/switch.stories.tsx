@@ -6,6 +6,7 @@ import {
   createSwitchA11yPlay,
   createSwitchDisabledPlay,
   createSwitchKeyboardFocusPlay,
+  expectDataSlotVariant,
   runSwitchInteractionTests,
 } from '../../lib/component-tests.ts';
 import { booleanArgType } from '../../lib/story-arg-types.ts';
@@ -34,7 +35,14 @@ type Story = StoryObj<typeof meta>;
 
 /** Use for immediate binary settings that take effect without a separate save action — for example, enabling notifications. */
 export const Default: Story = {
-  play: (context) => runSwitchInteractionTests(context, /enable notifications/i),
+  play: async (context) => {
+    await runSwitchInteractionTests(context, /enable notifications/i);
+    await expectDataSlotVariant(context.canvasElement, {
+      slot: 'switch',
+      role: 'switch',
+      name: /enable notifications/i,
+    });
+  },
 };
 
 /** Use the on state when a preference is enabled by default. */

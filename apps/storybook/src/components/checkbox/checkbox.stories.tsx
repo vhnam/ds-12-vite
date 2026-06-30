@@ -7,6 +7,7 @@ import {
   createCheckboxA11yPlay,
   createCheckboxDisabledPlay,
   createCheckboxKeyboardFocusPlay,
+  expectDataSlotVariant,
   runCheckboxInteractionTests,
 } from '../../lib/component-tests.ts';
 import { booleanArgType, selectArgType } from '../../lib/story-arg-types.ts';
@@ -39,7 +40,15 @@ type Story = StoryObj<typeof meta>;
 
 /** Use for standalone boolean consent or preference fields — pair with a visible label via `aria-label` or an associated `<label>`. */
 export const Default: Story = {
-  play: (context) => runCheckboxInteractionTests(context, /accept terms/i),
+  play: async (context) => {
+    await runCheckboxInteractionTests(context, /accept terms/i);
+    await expectDataSlotVariant(context.canvasElement, {
+      slot: 'checkbox',
+      variant: 'lg',
+      role: 'checkbox',
+      name: /accept terms/i,
+    });
+  },
 };
 
 /** Use the checked state when a preference is enabled by default, such as opting into notifications. */
@@ -58,7 +67,15 @@ export const Small: Story = {
   args: {
     size: 'sm',
   },
-  play: (context) => runCheckboxInteractionTests(context, /accept terms/i),
+  play: async (context) => {
+    await runCheckboxInteractionTests(context, /accept terms/i);
+    await expectDataSlotVariant(context.canvasElement, {
+      slot: 'checkbox',
+      variant: 'sm',
+      role: 'checkbox',
+      name: /accept terms/i,
+    });
+  },
 };
 
 /** Use the invalid state when validation fails — for example, when a required consent checkbox is left unchecked. */

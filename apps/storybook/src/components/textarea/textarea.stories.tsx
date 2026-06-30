@@ -6,6 +6,7 @@ import {
   createTextboxA11yPlay,
   createTextboxDisabledPlay,
   createTextboxInvalidA11yPlay,
+  expectDataSlotVariant,
   runTextboxInteractionTests,
 } from '../../lib/component-tests.ts';
 import { booleanArgType, hiddenArgType, selectArgType, textArgType } from '../../lib/story-arg-types.ts';
@@ -51,7 +52,15 @@ type Story = StoryObj<typeof meta>;
 
 /** Use a bare Textarea (without TextareaField) only in custom form layouts where you manage label association yourself — otherwise prefer TextareaField for built-in label and helper text wiring. */
 export const Default: Story = {
-  play: (context) => runTextboxInteractionTests(context, 'Input'),
+  play: async (context) => {
+    await runTextboxInteractionTests(context, 'Input');
+    await expectDataSlotVariant(context.canvasElement, {
+      slot: 'textarea',
+      variant: 'default',
+      role: 'textbox',
+      name: 'Input',
+    });
+  },
 };
 
 /** Use the suffix variant to show a live character count or limit alongside the textarea. */

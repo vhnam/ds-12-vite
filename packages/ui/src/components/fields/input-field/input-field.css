@@ -1,161 +1,158 @@
-@layer components {
-  .ds-input-field {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-    gap: var(--input-field-gap);
-  }
+/* Base layout — identical across all variants */
+@utility input-field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  gap: var(--input-field-gap);
+}
 
-  .ds-input-field__label {
-    width: 100%;
-    color: var(--input-field-label-fill);
-    font-family: var(--input-field-label-font-family);
-    font-size: var(--input-field-label-font-size);
-    font-weight: var(--input-field-label-font-weight);
-    line-height: var(--input-field-label-line-height);
-    letter-spacing: var(--input-field-label-letter-spacing);
-  }
+/* Child parts */
+@utility input-field-label {
+  width: 100%;
+  color: var(--input-field-label-fill);
+  font-family: var(--input-field-label-font-family);
+  font-size: var(--input-field-label-font-size);
+  font-weight: var(--input-field-label-font-weight);
+  line-height: var(--input-field-label-line-height);
+  letter-spacing: var(--input-field-label-letter-spacing);
+}
 
-  .ds-input-field__helper {
-    width: 100%;
-    color: var(--input-field-helper-fill);
-    font-family: var(--input-field-helper-font-family);
-    font-size: var(--input-field-helper-font-size);
-    font-weight: var(--input-field-helper-font-weight);
-    line-height: var(--input-field-helper-line-height);
-    letter-spacing: var(--input-field-helper-letter-spacing);
-  }
+@utility input-field-helper {
+  width: 100%;
+  color: var(--input-field-helper-fill);
+  font-family: var(--input-field-helper-font-family);
+  font-size: var(--input-field-helper-font-size);
+  font-weight: var(--input-field-helper-font-weight);
+  line-height: var(--input-field-helper-line-height);
+  letter-spacing: var(--input-field-helper-letter-spacing);
+}
 
-  /* Small — default */
-  .ds-input-field--sm.ds-input-field--default {
-    --input-field-gap: var(--text-field-small-spacing-item-spacing);
-    --input-field-label-fill: var(--text-field-small-label-enabled-fill);
-    --input-field-label-font-family: var(--text-field-small-label-enabled-font-family);
-    --input-field-label-font-size: var(--text-field-small-label-enabled-font-size);
-    --input-field-label-font-weight: var(--text-field-small-label-enabled-font-weight);
-    --input-field-label-line-height: var(--text-field-small-label-enabled-line-height);
-    --input-field-label-letter-spacing: var(--text-field-small-label-enabled-letter-spacing);
-    --input-field-helper-fill: var(--text-field-small-helper-text-enabled-fill);
-    --input-field-helper-font-family: var(--text-field-small-helper-text-enabled-font-family);
-    --input-field-helper-font-size: var(--text-field-small-helper-text-enabled-font-size);
-    --input-field-helper-font-weight: var(--text-field-small-helper-text-enabled-font-weight);
-    --input-field-helper-line-height: var(--text-field-small-helper-text-enabled-line-height);
-    --input-field-helper-letter-spacing: var(--text-field-small-helper-text-enabled-letter-spacing);
-  }
+@utility input-field-disabled {
+  cursor: var(--cursor-disabled);
+}
 
-  .ds-input-field--sm.ds-input-field--default:focus-within:not(.ds-input-field--disabled):not(.ds-input-field--error) {
+/* Size × variant presets */
+@utility input-field-preset-sm-default {
+  --input-field-gap: var(--text-field-small-spacing-item-spacing);
+  --input-field-label-fill: var(--text-field-small-label-enabled-fill);
+  --input-field-label-font-family: var(--text-field-small-label-enabled-font-family);
+  --input-field-label-font-size: var(--text-field-small-label-enabled-font-size);
+  --input-field-label-font-weight: var(--text-field-small-label-enabled-font-weight);
+  --input-field-label-line-height: var(--text-field-small-label-enabled-line-height);
+  --input-field-label-letter-spacing: var(--text-field-small-label-enabled-letter-spacing);
+  --input-field-helper-fill: var(--text-field-small-helper-text-enabled-fill);
+  --input-field-helper-font-family: var(--text-field-small-helper-text-enabled-font-family);
+  --input-field-helper-font-size: var(--text-field-small-helper-text-enabled-font-size);
+  --input-field-helper-font-weight: var(--text-field-small-helper-text-enabled-font-weight);
+  --input-field-helper-line-height: var(--text-field-small-helper-text-enabled-line-height);
+  --input-field-helper-letter-spacing: var(--text-field-small-helper-text-enabled-letter-spacing);
+
+  &:focus-within:not(.input-field-disabled):not(.input-field-error) {
     --input-field-label-fill: var(--text-field-small-label-focused-fill);
     --input-field-helper-fill: var(--text-field-small-helper-text-focused-fill);
   }
 
-  .ds-input-field--sm.ds-input-field--default.ds-input-field--disabled {
+  &.input-field-disabled {
     --input-field-label-fill: var(--text-field-small-label-disabled-fill);
     --input-field-helper-fill: var(--text-field-small-helper-text-disabled-fill);
   }
 
-  .ds-input-field--sm.ds-input-field--default.ds-input-field--error {
+  &.input-field-error {
     --input-field-label-fill: var(--text-field-small-label-error-fill);
     --input-field-helper-fill: var(--text-field-small-helper-text-error-fill);
   }
+}
 
-  /* Small — suffix */
-  .ds-input-field--sm.ds-input-field--suffix {
-    --input-field-gap: var(--text-field-suffix-small-spacing-item-spacing);
-    --input-field-label-fill: var(--text-field-suffix-small-label-enabled-fill);
-    --input-field-label-font-family: var(--text-field-suffix-small-label-enabled-font-family);
-    --input-field-label-font-size: var(--text-field-suffix-small-label-enabled-font-size);
-    --input-field-label-font-weight: var(--text-field-suffix-small-label-enabled-font-weight);
-    --input-field-label-line-height: var(--text-field-suffix-small-label-enabled-line-height);
-    --input-field-label-letter-spacing: var(--text-field-suffix-small-label-enabled-letter-spacing);
-    --input-field-helper-fill: var(--text-field-suffix-small-helper-text-enabled-fill);
-    --input-field-helper-font-family: var(--text-field-suffix-small-helper-text-enabled-font-family);
-    --input-field-helper-font-size: var(--text-field-suffix-small-helper-text-enabled-font-size);
-    --input-field-helper-font-weight: var(--text-field-suffix-small-helper-text-enabled-font-weight);
-    --input-field-helper-line-height: var(--text-field-suffix-small-helper-text-enabled-line-height);
-    --input-field-helper-letter-spacing: var(--text-field-suffix-small-helper-text-enabled-letter-spacing);
-  }
+@utility input-field-preset-sm-suffix {
+  --input-field-gap: var(--text-field-suffix-small-spacing-item-spacing);
+  --input-field-label-fill: var(--text-field-suffix-small-label-enabled-fill);
+  --input-field-label-font-family: var(--text-field-suffix-small-label-enabled-font-family);
+  --input-field-label-font-size: var(--text-field-suffix-small-label-enabled-font-size);
+  --input-field-label-font-weight: var(--text-field-suffix-small-label-enabled-font-weight);
+  --input-field-label-line-height: var(--text-field-suffix-small-label-enabled-line-height);
+  --input-field-label-letter-spacing: var(--text-field-suffix-small-label-enabled-letter-spacing);
+  --input-field-helper-fill: var(--text-field-suffix-small-helper-text-enabled-fill);
+  --input-field-helper-font-family: var(--text-field-suffix-small-helper-text-enabled-font-family);
+  --input-field-helper-font-size: var(--text-field-suffix-small-helper-text-enabled-font-size);
+  --input-field-helper-font-weight: var(--text-field-suffix-small-helper-text-enabled-font-weight);
+  --input-field-helper-line-height: var(--text-field-suffix-small-helper-text-enabled-line-height);
+  --input-field-helper-letter-spacing: var(--text-field-suffix-small-helper-text-enabled-letter-spacing);
 
-  .ds-input-field--sm.ds-input-field--suffix:focus-within:not(.ds-input-field--disabled):not(.ds-input-field--error) {
+  &:focus-within:not(.input-field-disabled):not(.input-field-error) {
     --input-field-label-fill: var(--text-field-suffix-small-label-focused-fill);
     --input-field-helper-fill: var(--text-field-suffix-small-helper-text-focused-fill);
   }
 
-  .ds-input-field--sm.ds-input-field--suffix.ds-input-field--disabled {
+  &.input-field-disabled {
     --input-field-label-fill: var(--text-field-suffix-small-label-disabled-fill);
     --input-field-helper-fill: var(--text-field-suffix-small-helper-text-disabled-fill);
   }
 
-  .ds-input-field--sm.ds-input-field--suffix.ds-input-field--error {
+  &.input-field-error {
     --input-field-label-fill: var(--text-field-suffix-small-label-error-fill);
     --input-field-helper-fill: var(--text-field-suffix-small-helper-text-error-fill);
   }
+}
 
-  /* Large — default */
-  .ds-input-field--lg.ds-input-field--default {
-    --input-field-gap: var(--text-field-large-spacing-item-spacing);
-    --input-field-label-fill: var(--text-field-large-label-enabled-fill);
-    --input-field-label-font-family: var(--text-field-large-label-enabled-font-family);
-    --input-field-label-font-size: var(--text-field-large-label-enabled-font-size);
-    --input-field-label-font-weight: var(--text-field-large-label-enabled-font-weight);
-    --input-field-label-line-height: var(--text-field-large-label-enabled-line-height);
-    --input-field-label-letter-spacing: var(--text-field-large-label-enabled-letter-spacing);
-    --input-field-helper-fill: var(--text-field-large-helper-text-enabled-fill);
-    --input-field-helper-font-family: var(--text-field-large-helper-text-enabled-font-family);
-    --input-field-helper-font-size: var(--text-field-large-helper-text-enabled-font-size);
-    --input-field-helper-font-weight: var(--text-field-large-helper-text-enabled-font-weight);
-    --input-field-helper-line-height: var(--text-field-large-helper-text-enabled-line-height);
-    --input-field-helper-letter-spacing: var(--text-field-large-helper-text-enabled-letter-spacing);
-  }
+@utility input-field-preset-lg-default {
+  --input-field-gap: var(--text-field-large-spacing-item-spacing);
+  --input-field-label-fill: var(--text-field-large-label-enabled-fill);
+  --input-field-label-font-family: var(--text-field-large-label-enabled-font-family);
+  --input-field-label-font-size: var(--text-field-large-label-enabled-font-size);
+  --input-field-label-font-weight: var(--text-field-large-label-enabled-font-weight);
+  --input-field-label-line-height: var(--text-field-large-label-enabled-line-height);
+  --input-field-label-letter-spacing: var(--text-field-large-label-enabled-letter-spacing);
+  --input-field-helper-fill: var(--text-field-large-helper-text-enabled-fill);
+  --input-field-helper-font-family: var(--text-field-large-helper-text-enabled-font-family);
+  --input-field-helper-font-size: var(--text-field-large-helper-text-enabled-font-size);
+  --input-field-helper-font-weight: var(--text-field-large-helper-text-enabled-font-weight);
+  --input-field-helper-line-height: var(--text-field-large-helper-text-enabled-line-height);
+  --input-field-helper-letter-spacing: var(--text-field-large-helper-text-enabled-letter-spacing);
 
-  .ds-input-field--lg.ds-input-field--default:focus-within:not(.ds-input-field--disabled):not(.ds-input-field--error) {
+  &:focus-within:not(.input-field-disabled):not(.input-field-error) {
     --input-field-label-fill: var(--text-field-large-label-focused-fill);
     --input-field-helper-fill: var(--text-field-large-helper-text-focused-fill);
   }
 
-  .ds-input-field--lg.ds-input-field--default.ds-input-field--disabled {
+  &.input-field-disabled {
     --input-field-label-fill: var(--text-field-large-label-disabled-fill);
     --input-field-helper-fill: var(--text-field-large-helper-text-disabled-fill);
   }
 
-  .ds-input-field--lg.ds-input-field--default.ds-input-field--error {
+  &.input-field-error {
     --input-field-label-fill: var(--text-field-large-label-error-fill);
     --input-field-helper-fill: var(--text-field-large-helper-text-error-fill);
   }
+}
 
-  /* Large — suffix */
-  .ds-input-field--lg.ds-input-field--suffix {
-    --input-field-gap: var(--text-field-suffix-large-spacing-item-spacing);
-    --input-field-label-fill: var(--text-field-suffix-large-label-enabled-fill);
-    --input-field-label-font-family: var(--text-field-suffix-large-label-enabled-font-family);
-    --input-field-label-font-size: var(--text-field-suffix-large-label-enabled-font-size);
-    --input-field-label-font-weight: var(--text-field-suffix-large-label-enabled-font-weight);
-    --input-field-label-line-height: var(--text-field-suffix-large-label-enabled-line-height);
-    --input-field-label-letter-spacing: var(--text-field-suffix-large-label-enabled-letter-spacing);
-    --input-field-helper-fill: var(--text-field-suffix-large-helper-text-enabled-fill);
-    --input-field-helper-font-family: var(--text-field-suffix-large-helper-text-enabled-font-family);
-    --input-field-helper-font-size: var(--text-field-suffix-large-helper-text-enabled-font-size);
-    --input-field-helper-font-weight: var(--text-field-suffix-large-helper-text-enabled-font-weight);
-    --input-field-helper-line-height: var(--text-field-suffix-large-helper-text-enabled-line-height);
-    --input-field-helper-letter-spacing: var(--text-field-suffix-large-helper-text-enabled-letter-spacing);
-  }
+@utility input-field-preset-lg-suffix {
+  --input-field-gap: var(--text-field-suffix-large-spacing-item-spacing);
+  --input-field-label-fill: var(--text-field-suffix-large-label-enabled-fill);
+  --input-field-label-font-family: var(--text-field-suffix-large-label-enabled-font-family);
+  --input-field-label-font-size: var(--text-field-suffix-large-label-enabled-font-size);
+  --input-field-label-font-weight: var(--text-field-suffix-large-label-enabled-font-weight);
+  --input-field-label-line-height: var(--text-field-suffix-large-label-enabled-line-height);
+  --input-field-label-letter-spacing: var(--text-field-suffix-large-label-enabled-letter-spacing);
+  --input-field-helper-fill: var(--text-field-suffix-large-helper-text-enabled-fill);
+  --input-field-helper-font-family: var(--text-field-suffix-large-helper-text-enabled-font-family);
+  --input-field-helper-font-size: var(--text-field-suffix-large-helper-text-enabled-font-size);
+  --input-field-helper-font-weight: var(--text-field-suffix-large-helper-text-enabled-font-weight);
+  --input-field-helper-line-height: var(--text-field-suffix-large-helper-text-enabled-line-height);
+  --input-field-helper-letter-spacing: var(--text-field-suffix-large-helper-text-enabled-letter-spacing);
 
-  .ds-input-field--lg.ds-input-field--suffix:focus-within:not(.ds-input-field--disabled):not(.ds-input-field--error) {
+  &:focus-within:not(.input-field-disabled):not(.input-field-error) {
     --input-field-label-fill: var(--text-field-suffix-large-label-focused-fill);
     --input-field-helper-fill: var(--text-field-suffix-large-helper-text-focused-fill);
   }
 
-  .ds-input-field--lg.ds-input-field--suffix.ds-input-field--disabled {
+  &.input-field-disabled {
     --input-field-label-fill: var(--text-field-suffix-large-label-disabled-fill);
     --input-field-helper-fill: var(--text-field-suffix-large-helper-text-disabled-fill);
   }
 
-  .ds-input-field--lg.ds-input-field--suffix.ds-input-field--error {
+  &.input-field-error {
     --input-field-label-fill: var(--text-field-suffix-large-label-error-fill);
     --input-field-helper-fill: var(--text-field-suffix-large-helper-text-error-fill);
-  }
-
-  .ds-input-field--disabled {
-    cursor: var(--cursor-disabled);
   }
 }

@@ -3,7 +3,6 @@ import { useContext } from 'react';
 
 import { cn } from '../../lib/utils.ts';
 import { BadgeIconSizeContext } from '../badge/index.tsx';
-import './icon.css';
 
 type IconVariant = 'outlined' | 'filled';
 type IconAlign = 'inline-start' | 'inline-end';
@@ -41,7 +40,8 @@ function Icon({ name, variant = 'outlined', align, size, className, style, ...pr
 
   return (
     <span
-      className={cn('material-symbols-outlined', 'ds-icon', className)}
+      className={cn('material-symbols-outlined', 'icon', className)}
+      data-slot="icon"
       data-align={align}
       style={{
         fontSize: resolvedSize,

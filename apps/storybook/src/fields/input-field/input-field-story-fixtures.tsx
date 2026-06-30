@@ -35,6 +35,7 @@ function StateInputField({
       defaultValue={state === 'disabled' || state === 'error' ? 'Input' : undefined}
       disabled={state === 'disabled'}
       invalid={state === 'error'}
+      helperText={state === 'error' ? 'This field is required' : 'Helper text'}
     />
   );
 

@@ -1,57 +1,57 @@
-@layer components {
-  .ds-input {
-    display: flex;
-    align-items: center;
-    box-sizing: border-box;
-    width: 100%;
-    border: none;
-    border-bottom-style: var(--input-border-style);
-    border-radius: var(--input-border-radius);
-    background-color: var(--input-fill);
-    border-bottom-color: var(--input-border-color);
-    border-bottom-width: var(--input-border-width);
-    gap: var(--input-gap);
-    padding: var(--input-padding-y) var(--input-padding-x);
-    min-height: var(--input-min-height);
-    transition: var(--input-transition);
-  }
+/* Base layout — identical across all variants */
+@utility input {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  border: none;
+  border-bottom-style: var(--input-border-style);
+  border-radius: var(--input-border-radius);
+  background-color: var(--input-fill);
+  border-bottom-color: var(--input-border-color);
+  border-bottom-width: var(--input-border-width);
+  gap: var(--input-gap);
+  padding: var(--input-padding-y) var(--input-padding-x);
+  min-height: var(--input-min-height);
+  transition: var(--input-transition);
 
-  .ds-input:focus-within {
+  &:focus-within {
     outline: none;
   }
 
-  .ds-input:focus-within:not(.ds-input--disabled):not(.ds-input--error) {
+  &:focus-within:not(.input-disabled):not(.input-error) {
     background-color: var(--input-focus-fill);
   }
+}
 
-  .ds-input__control {
-    flex: 1 1 auto;
-    min-width: 0;
-    border: none;
-    background: transparent;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    color: var(--input-text-fill);
-    font-family: var(--input-text-font-family);
-    font-size: var(--input-text-font-size);
-    font-weight: var(--input-text-font-weight);
-    line-height: var(--input-text-line-height);
-    letter-spacing: var(--input-text-letter-spacing);
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
+/* Child parts */
+@utility input-control {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  color: var(--input-text-fill);
+  font-family: var(--input-text-font-family);
+  font-size: var(--input-text-font-size);
+  font-weight: var(--input-text-font-weight);
+  line-height: var(--input-text-line-height);
+  letter-spacing: var(--input-text-letter-spacing);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 
-  .ds-input__control:focus {
+  &:focus {
     outline: none;
   }
 
-  .ds-input__control:disabled {
+  &:disabled {
     cursor: var(--cursor-disabled);
   }
 
-  .ds-input__control::placeholder {
+  &::placeholder {
     color: var(--input-placeholder-fill);
     font-family: var(--input-placeholder-font-family);
     font-size: var(--input-placeholder-font-size);
@@ -59,66 +59,79 @@
     line-height: var(--input-placeholder-line-height);
     letter-spacing: var(--input-placeholder-letter-spacing);
   }
+}
 
-  .ds-input__leading,
-  .ds-input__trailing {
-    display: inline-flex;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
-    width: var(--input-icon-size);
-    height: var(--input-icon-size);
-    color: var(--input-icon-fill);
-  }
+@utility input-leading {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--input-icon-size);
+  height: var(--input-icon-size);
+  color: var(--input-icon-fill);
+}
 
-  .ds-input__suffix {
-    flex-shrink: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    text-align: right;
-    color: var(--input-suffix-fill);
-    font-family: var(--input-suffix-font-family);
-    font-size: var(--input-suffix-font-size);
-    font-weight: var(--input-suffix-font-weight);
-    line-height: var(--input-suffix-line-height);
-    letter-spacing: var(--input-suffix-letter-spacing);
-  }
+@utility input-trailing {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--input-icon-size);
+  height: var(--input-icon-size);
+  color: var(--input-icon-fill);
+}
 
-  /* Small — default variant */
-  .ds-input--sm.ds-input--default {
-    --input-min-height: var(--text-field-small-box-properties-enabled-height);
-    --input-padding-x: var(--text-field-small-box-properties-enabled-horizontal-padding);
-    --input-padding-y: var(--text-field-small-box-properties-enabled-vertical-padding);
-    --input-gap: var(--text-field-small-box-properties-enabled-item-spacing);
-    --input-border-width: var(--text-field-small-box-properties-enabled-border-bottom);
-    --input-fill: var(--text-field-small-box-properties-enabled-fill);
-    --input-border-color: var(--input-border-color-default);
-    --input-focus-fill: var(--text-field-small-box-properties-focused-fill);
-    --input-text-fill: var(--text-field-small-box-hint-enabled-fill);
-    --input-text-font-family: var(--text-field-small-box-hint-enabled-font-family);
-    --input-text-font-size: var(--text-field-small-box-hint-enabled-font-size);
-    --input-text-font-weight: var(--text-field-small-box-hint-enabled-font-weight);
-    --input-text-line-height: var(--text-field-small-box-hint-enabled-line-height);
-    --input-text-letter-spacing: var(--text-field-small-box-hint-enabled-letter-spacing);
-    --input-placeholder-fill: var(--text-field-small-box-hint-enabled-fill);
-    --input-placeholder-font-family: var(--text-field-small-box-hint-enabled-font-family);
-    --input-placeholder-font-size: var(--text-field-small-box-hint-enabled-font-size);
-    --input-placeholder-font-weight: var(--text-field-small-box-hint-enabled-font-weight);
-    --input-placeholder-line-height: var(--text-field-small-box-hint-enabled-line-height);
-    --input-placeholder-letter-spacing: var(--text-field-small-box-hint-enabled-letter-spacing);
-    --input-icon-size: var(--text-field-small-box-icon-enabled-width);
-    --input-icon-fill: var(--text-field-small-box-icon-enabled-fill);
-  }
+@utility input-suffix {
+  flex-shrink: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: right;
+  color: var(--input-suffix-fill);
+  font-family: var(--input-suffix-font-family);
+  font-size: var(--input-suffix-font-size);
+  font-weight: var(--input-suffix-font-weight);
+  line-height: var(--input-suffix-line-height);
+  letter-spacing: var(--input-suffix-letter-spacing);
+}
 
-  .ds-input--sm.ds-input--default:focus-within:not(.ds-input--disabled):not(.ds-input--error) {
+@utility input-disabled {
+  cursor: var(--cursor-disabled);
+}
+
+/* Size × variant presets */
+@utility input-preset-sm-default {
+  --input-min-height: var(--text-field-small-box-properties-enabled-height);
+  --input-padding-x: var(--text-field-small-box-properties-enabled-horizontal-padding);
+  --input-padding-y: var(--text-field-small-box-properties-enabled-vertical-padding);
+  --input-gap: var(--text-field-small-box-properties-enabled-item-spacing);
+  --input-border-width: var(--text-field-small-box-properties-enabled-border-bottom);
+  --input-fill: var(--text-field-small-box-properties-enabled-fill);
+  --input-border-color: var(--input-border-color-default);
+  --input-focus-fill: var(--text-field-small-box-properties-focused-fill);
+  --input-text-fill: var(--text-field-small-box-hint-enabled-fill);
+  --input-text-font-family: var(--text-field-small-box-hint-enabled-font-family);
+  --input-text-font-size: var(--text-field-small-box-hint-enabled-font-size);
+  --input-text-font-weight: var(--text-field-small-box-hint-enabled-font-weight);
+  --input-text-line-height: var(--text-field-small-box-hint-enabled-line-height);
+  --input-text-letter-spacing: var(--text-field-small-box-hint-enabled-letter-spacing);
+  --input-placeholder-fill: var(--text-field-small-box-hint-enabled-fill);
+  --input-placeholder-font-family: var(--text-field-small-box-hint-enabled-font-family);
+  --input-placeholder-font-size: var(--text-field-small-box-hint-enabled-font-size);
+  --input-placeholder-font-weight: var(--text-field-small-box-hint-enabled-font-weight);
+  --input-placeholder-line-height: var(--text-field-small-box-hint-enabled-line-height);
+  --input-placeholder-letter-spacing: var(--text-field-small-box-hint-enabled-letter-spacing);
+  --input-icon-size: var(--text-field-small-box-icon-enabled-width);
+  --input-icon-fill: var(--text-field-small-box-icon-enabled-fill);
+
+  &:focus-within:not(.input-disabled):not(.input-error) {
     --input-border-color: var(--input-border-color-focus);
     --input-text-fill: var(--text-field-small-box-hint-focused-fill);
     --input-placeholder-fill: var(--text-field-small-box-hint-focused-fill);
     --input-icon-fill: var(--text-field-small-box-icon-focused-fill);
   }
 
-  .ds-input--sm.ds-input--default.ds-input--disabled {
+  &.input-disabled {
     --input-fill: var(--text-field-small-box-properties-disabled-fill);
     --input-border-color: var(--text-field-small-box-properties-disabled-border-color);
     --input-text-fill: var(--text-field-small-box-hint-disabled-fill);
@@ -126,52 +139,51 @@
     --input-icon-fill: var(--text-field-small-box-icon-disabled-fill);
   }
 
-  .ds-input--sm.ds-input--default.ds-input--error {
+  &.input-error {
     --input-fill: var(--text-field-small-box-properties-error-fill);
     --input-border-color: var(--text-field-small-box-properties-error-border-color);
     --input-text-fill: var(--text-field-small-box-hint-error-fill);
     --input-icon-fill: var(--text-field-small-box-icon-error-fill);
   }
+}
 
-  /* Small — suffix variant */
-  .ds-input--sm.ds-input--suffix {
-    --input-min-height: var(--text-field-small-box-properties-enabled-height);
-    --input-padding-x: var(--text-field-suffix-small-box-properties-enabled-horizontal-padding);
-    --input-padding-y: var(--text-field-suffix-small-box-properties-enabled-vertical-padding);
-    --input-gap: var(--text-field-suffix-small-box-properties-enabled-item-spacing);
-    --input-border-width: var(--text-field-suffix-small-box-properties-enabled-border-bottom);
-    --input-fill: var(--text-field-suffix-small-box-properties-enabled-fill);
-    --input-border-color: var(--input-border-color-default);
-    --input-focus-fill: var(--text-field-suffix-small-box-properties-focused-fill);
-    --input-text-fill: var(--text-field-suffix-small-box-typography-enabled-fill);
-    --input-text-font-family: var(--text-field-suffix-small-box-typography-enabled-font-family);
-    --input-text-font-size: var(--text-field-suffix-small-box-typography-enabled-font-size);
-    --input-text-font-weight: var(--text-field-suffix-small-box-typography-enabled-font-weight);
-    --input-text-line-height: var(--text-field-suffix-small-box-typography-enabled-line-height);
-    --input-text-letter-spacing: var(--text-field-suffix-small-box-typography-enabled-letter-spacing);
-    --input-placeholder-fill: var(--text-field-small-box-hint-enabled-fill);
-    --input-placeholder-font-family: var(--text-field-small-box-hint-enabled-font-family);
-    --input-placeholder-font-size: var(--text-field-small-box-hint-enabled-font-size);
-    --input-placeholder-font-weight: var(--text-field-small-box-hint-enabled-font-weight);
-    --input-placeholder-line-height: var(--text-field-small-box-hint-enabled-line-height);
-    --input-placeholder-letter-spacing: var(--text-field-small-box-hint-enabled-letter-spacing);
-    --input-suffix-fill: var(--text-field-suffix-small-box-suffix-fill);
-    --input-suffix-font-family: var(--text-field-suffix-small-box-suffix-font-family);
-    --input-suffix-font-size: var(--text-field-suffix-small-box-suffix-font-size);
-    --input-suffix-font-weight: var(--text-field-suffix-small-box-suffix-font-weight);
-    --input-suffix-line-height: var(--text-field-suffix-small-box-suffix-line-height);
-    --input-suffix-letter-spacing: var(--text-field-suffix-small-box-suffix-letter-spacing);
-    --input-icon-size: var(--text-field-suffix-small-box-icon-enabled-width);
-    --input-icon-fill: var(--text-field-suffix-small-box-icon-enabled-fill);
-  }
+@utility input-preset-sm-suffix {
+  --input-min-height: var(--text-field-small-box-properties-enabled-height);
+  --input-padding-x: var(--text-field-suffix-small-box-properties-enabled-horizontal-padding);
+  --input-padding-y: var(--text-field-suffix-small-box-properties-enabled-vertical-padding);
+  --input-gap: var(--text-field-suffix-small-box-properties-enabled-item-spacing);
+  --input-border-width: var(--text-field-suffix-small-box-properties-enabled-border-bottom);
+  --input-fill: var(--text-field-suffix-small-box-properties-enabled-fill);
+  --input-border-color: var(--input-border-color-default);
+  --input-focus-fill: var(--text-field-suffix-small-box-properties-focused-fill);
+  --input-text-fill: var(--text-field-suffix-small-box-typography-enabled-fill);
+  --input-text-font-family: var(--text-field-suffix-small-box-typography-enabled-font-family);
+  --input-text-font-size: var(--text-field-suffix-small-box-typography-enabled-font-size);
+  --input-text-font-weight: var(--text-field-suffix-small-box-typography-enabled-font-weight);
+  --input-text-line-height: var(--text-field-suffix-small-box-typography-enabled-line-height);
+  --input-text-letter-spacing: var(--text-field-suffix-small-box-typography-enabled-letter-spacing);
+  --input-placeholder-fill: var(--text-field-small-box-hint-enabled-fill);
+  --input-placeholder-font-family: var(--text-field-small-box-hint-enabled-font-family);
+  --input-placeholder-font-size: var(--text-field-small-box-hint-enabled-font-size);
+  --input-placeholder-font-weight: var(--text-field-small-box-hint-enabled-font-weight);
+  --input-placeholder-line-height: var(--text-field-small-box-hint-enabled-line-height);
+  --input-placeholder-letter-spacing: var(--text-field-small-box-hint-enabled-letter-spacing);
+  --input-suffix-fill: var(--text-field-suffix-small-box-suffix-fill);
+  --input-suffix-font-family: var(--text-field-suffix-small-box-suffix-font-family);
+  --input-suffix-font-size: var(--text-field-suffix-small-box-suffix-font-size);
+  --input-suffix-font-weight: var(--text-field-suffix-small-box-suffix-font-weight);
+  --input-suffix-line-height: var(--text-field-suffix-small-box-suffix-line-height);
+  --input-suffix-letter-spacing: var(--text-field-suffix-small-box-suffix-letter-spacing);
+  --input-icon-size: var(--text-field-suffix-small-box-icon-enabled-width);
+  --input-icon-fill: var(--text-field-suffix-small-box-icon-enabled-fill);
 
-  .ds-input--sm.ds-input--suffix:focus-within:not(.ds-input--disabled):not(.ds-input--error) {
+  &:focus-within:not(.input-disabled):not(.input-error) {
     --input-text-fill: var(--text-field-suffix-small-box-typography-focused-fill);
     --input-placeholder-fill: var(--text-field-small-box-hint-focused-fill);
     --input-icon-fill: var(--text-field-suffix-small-box-icon-focused-fill);
   }
 
-  .ds-input--sm.ds-input--suffix.ds-input--disabled {
+  &.input-disabled {
     --input-fill: var(--text-field-suffix-small-box-properties-disabled-fill);
     --input-border-color: var(--text-field-suffix-small-box-properties-disabled-border-color);
     --input-text-fill: var(--text-field-suffix-small-box-typography-disabled-fill);
@@ -179,47 +191,46 @@
     --input-icon-fill: var(--text-field-suffix-small-box-icon-disabled-fill);
   }
 
-  .ds-input--sm.ds-input--suffix.ds-input--error {
+  &.input-error {
     --input-fill: var(--text-field-suffix-small-box-properties-error-fill);
     --input-border-color: var(--text-field-suffix-small-box-properties-error-border-color);
     --input-text-fill: var(--text-field-suffix-small-box-typography-error-fill);
     --input-icon-fill: var(--text-field-suffix-small-box-icon-error-fill);
   }
+}
 
-  /* Large — default variant */
-  .ds-input--lg.ds-input--default {
-    --input-min-height: var(--text-field-large-box-properties-enabled-height);
-    --input-padding-x: var(--text-field-large-box-properties-enabled-horizontal-padding);
-    --input-padding-y: var(--text-field-large-box-properties-enabled-vertical-padding);
-    --input-gap: var(--text-field-large-box-properties-enabled-item-spacing);
-    --input-border-width: var(--text-field-large-box-properties-enabled-border-bottom);
-    --input-fill: var(--text-field-large-box-properties-enabled-fill);
-    --input-border-color: var(--text-field-large-box-properties-enabled-border-color);
-    --input-focus-fill: var(--text-field-large-box-properties-focused-fill);
-    --input-focus-border-color: var(--text-field-large-box-properties-focused-border-color);
-    --input-text-fill: var(--text-field-large-box-hint-enabled-fill);
-    --input-text-font-family: var(--text-field-large-box-hint-enabled-font-family);
-    --input-text-font-size: var(--text-field-large-box-hint-enabled-font-size);
-    --input-text-font-weight: var(--text-field-large-box-hint-enabled-font-weight);
-    --input-text-line-height: var(--text-field-large-box-hint-enabled-line-height);
-    --input-text-letter-spacing: var(--text-field-large-box-hint-enabled-letter-spacing);
-    --input-placeholder-fill: var(--text-field-large-box-hint-enabled-fill);
-    --input-placeholder-font-family: var(--text-field-large-box-hint-enabled-font-family);
-    --input-placeholder-font-size: var(--text-field-large-box-hint-enabled-font-size);
-    --input-placeholder-font-weight: var(--text-field-large-box-hint-enabled-font-weight);
-    --input-placeholder-line-height: var(--text-field-large-box-hint-enabled-line-height);
-    --input-placeholder-letter-spacing: var(--text-field-large-box-hint-enabled-letter-spacing);
-    --input-icon-size: var(--text-field-large-box-icon-enabled-width);
-    --input-icon-fill: var(--text-field-large-box-icon-enabled-fill);
-  }
+@utility input-preset-lg-default {
+  --input-min-height: var(--text-field-large-box-properties-enabled-height);
+  --input-padding-x: var(--text-field-large-box-properties-enabled-horizontal-padding);
+  --input-padding-y: var(--text-field-large-box-properties-enabled-vertical-padding);
+  --input-gap: var(--text-field-large-box-properties-enabled-item-spacing);
+  --input-border-width: var(--text-field-large-box-properties-enabled-border-bottom);
+  --input-fill: var(--text-field-large-box-properties-enabled-fill);
+  --input-border-color: var(--text-field-large-box-properties-enabled-border-color);
+  --input-focus-fill: var(--text-field-large-box-properties-focused-fill);
+  --input-focus-border-color: var(--text-field-large-box-properties-focused-border-color);
+  --input-text-fill: var(--text-field-large-box-hint-enabled-fill);
+  --input-text-font-family: var(--text-field-large-box-hint-enabled-font-family);
+  --input-text-font-size: var(--text-field-large-box-hint-enabled-font-size);
+  --input-text-font-weight: var(--text-field-large-box-hint-enabled-font-weight);
+  --input-text-line-height: var(--text-field-large-box-hint-enabled-line-height);
+  --input-text-letter-spacing: var(--text-field-large-box-hint-enabled-letter-spacing);
+  --input-placeholder-fill: var(--text-field-large-box-hint-enabled-fill);
+  --input-placeholder-font-family: var(--text-field-large-box-hint-enabled-font-family);
+  --input-placeholder-font-size: var(--text-field-large-box-hint-enabled-font-size);
+  --input-placeholder-font-weight: var(--text-field-large-box-hint-enabled-font-weight);
+  --input-placeholder-line-height: var(--text-field-large-box-hint-enabled-line-height);
+  --input-placeholder-letter-spacing: var(--text-field-large-box-hint-enabled-letter-spacing);
+  --input-icon-size: var(--text-field-large-box-icon-enabled-width);
+  --input-icon-fill: var(--text-field-large-box-icon-enabled-fill);
 
-  .ds-input--lg.ds-input--default:focus-within:not(.ds-input--disabled):not(.ds-input--error) {
+  &:focus-within:not(.input-disabled):not(.input-error) {
     --input-text-fill: var(--text-field-large-box-hint-focused-fill);
     --input-placeholder-fill: var(--text-field-large-box-hint-focused-fill);
     --input-icon-fill: var(--text-field-large-box-icon-focused-fill);
   }
 
-  .ds-input--lg.ds-input--default.ds-input--disabled {
+  &.input-disabled {
     --input-fill: var(--text-field-large-box-properties-disabled-fill);
     --input-border-color: var(--text-field-large-box-properties-disabled-border-color);
     --input-text-fill: var(--text-field-large-box-hint-disabled-fill);
@@ -227,53 +238,52 @@
     --input-icon-fill: var(--text-field-large-box-icon-disabled-fill);
   }
 
-  .ds-input--lg.ds-input--default.ds-input--error {
+  &.input-error {
     --input-fill: var(--text-field-large-box-properties-error-fill);
     --input-border-color: var(--text-field-large-box-properties-error-border-color);
     --input-text-fill: var(--text-field-large-box-hint-error-fill);
     --input-icon-fill: var(--text-field-large-box-icon-error-fill);
   }
+}
 
-  /* Large — suffix variant */
-  .ds-input--lg.ds-input--suffix {
-    --input-min-height: var(--text-field-large-box-properties-enabled-height);
-    --input-padding-x: var(--text-field-suffix-large-box-properties-enabled-horizontal-padding);
-    --input-padding-y: var(--text-field-suffix-large-box-properties-enabled-vertical-padding);
-    --input-gap: var(--text-field-suffix-large-box-properties-enabled-item-spacing);
-    --input-border-width: var(--text-field-suffix-large-box-properties-enabled-border-bottom);
-    --input-fill: var(--text-field-suffix-large-box-properties-enabled-fill);
-    --input-border-color: var(--text-field-suffix-large-box-properties-enabled-border-color);
-    --input-focus-fill: var(--text-field-suffix-large-box-properties-focused-fill);
-    --input-focus-border-color: var(--text-field-suffix-large-box-properties-focused-border-color);
-    --input-text-fill: var(--text-field-suffix-large-box-typography-enabled-fill);
-    --input-text-font-family: var(--text-field-suffix-large-box-typography-enabled-font-family);
-    --input-text-font-size: var(--text-field-suffix-large-box-typography-enabled-font-size);
-    --input-text-font-weight: var(--text-field-suffix-large-box-typography-enabled-font-weight);
-    --input-text-line-height: var(--text-field-suffix-large-box-typography-enabled-line-height);
-    --input-text-letter-spacing: var(--text-field-suffix-large-box-typography-enabled-letter-spacing);
-    --input-placeholder-fill: var(--text-field-large-box-hint-enabled-fill);
-    --input-placeholder-font-family: var(--text-field-large-box-hint-enabled-font-family);
-    --input-placeholder-font-size: var(--text-field-large-box-hint-enabled-font-size);
-    --input-placeholder-font-weight: var(--text-field-large-box-hint-enabled-font-weight);
-    --input-placeholder-line-height: var(--text-field-large-box-hint-enabled-line-height);
-    --input-placeholder-letter-spacing: var(--text-field-large-box-hint-enabled-letter-spacing);
-    --input-suffix-fill: var(--text-field-suffix-large-box-suffix-fill);
-    --input-suffix-font-family: var(--text-field-suffix-large-box-suffix-font-family);
-    --input-suffix-font-size: var(--text-field-suffix-large-box-suffix-font-size);
-    --input-suffix-font-weight: var(--text-field-suffix-large-box-suffix-font-weight);
-    --input-suffix-line-height: var(--text-field-suffix-large-box-suffix-line-height);
-    --input-suffix-letter-spacing: var(--text-field-suffix-large-box-suffix-letter-spacing);
-    --input-icon-size: var(--text-field-suffix-large-box-icon-enabled-width);
-    --input-icon-fill: var(--text-field-suffix-large-box-icon-enabled-fill);
-  }
+@utility input-preset-lg-suffix {
+  --input-min-height: var(--text-field-large-box-properties-enabled-height);
+  --input-padding-x: var(--text-field-suffix-large-box-properties-enabled-horizontal-padding);
+  --input-padding-y: var(--text-field-suffix-large-box-properties-enabled-vertical-padding);
+  --input-gap: var(--text-field-suffix-large-box-properties-enabled-item-spacing);
+  --input-border-width: var(--text-field-suffix-large-box-properties-enabled-border-bottom);
+  --input-fill: var(--text-field-suffix-large-box-properties-enabled-fill);
+  --input-border-color: var(--text-field-suffix-large-box-properties-enabled-border-color);
+  --input-focus-fill: var(--text-field-suffix-large-box-properties-focused-fill);
+  --input-focus-border-color: var(--text-field-suffix-large-box-properties-focused-border-color);
+  --input-text-fill: var(--text-field-suffix-large-box-typography-enabled-fill);
+  --input-text-font-family: var(--text-field-suffix-large-box-typography-enabled-font-family);
+  --input-text-font-size: var(--text-field-suffix-large-box-typography-enabled-font-size);
+  --input-text-font-weight: var(--text-field-suffix-large-box-typography-enabled-font-weight);
+  --input-text-line-height: var(--text-field-suffix-large-box-typography-enabled-line-height);
+  --input-text-letter-spacing: var(--text-field-suffix-large-box-typography-enabled-letter-spacing);
+  --input-placeholder-fill: var(--text-field-large-box-hint-enabled-fill);
+  --input-placeholder-font-family: var(--text-field-large-box-hint-enabled-font-family);
+  --input-placeholder-font-size: var(--text-field-large-box-hint-enabled-font-size);
+  --input-placeholder-font-weight: var(--text-field-large-box-hint-enabled-font-weight);
+  --input-placeholder-line-height: var(--text-field-large-box-hint-enabled-line-height);
+  --input-placeholder-letter-spacing: var(--text-field-large-box-hint-enabled-letter-spacing);
+  --input-suffix-fill: var(--text-field-suffix-large-box-suffix-fill);
+  --input-suffix-font-family: var(--text-field-suffix-large-box-suffix-font-family);
+  --input-suffix-font-size: var(--text-field-suffix-large-box-suffix-font-size);
+  --input-suffix-font-weight: var(--text-field-suffix-large-box-suffix-font-weight);
+  --input-suffix-line-height: var(--text-field-suffix-large-box-suffix-line-height);
+  --input-suffix-letter-spacing: var(--text-field-suffix-large-box-suffix-letter-spacing);
+  --input-icon-size: var(--text-field-suffix-large-box-icon-enabled-width);
+  --input-icon-fill: var(--text-field-suffix-large-box-icon-enabled-fill);
 
-  .ds-input--lg.ds-input--suffix:focus-within:not(.ds-input--disabled):not(.ds-input--error) {
+  &:focus-within:not(.input-disabled):not(.input-error) {
     --input-text-fill: var(--text-field-suffix-large-box-typography-focused-fill);
     --input-placeholder-fill: var(--text-field-large-box-hint-focused-fill);
     --input-icon-fill: var(--text-field-suffix-large-box-icon-focused-fill);
   }
 
-  .ds-input--lg.ds-input--suffix.ds-input--disabled {
+  &.input-disabled {
     --input-fill: var(--text-field-suffix-large-box-properties-disabled-fill);
     --input-border-color: var(--text-field-suffix-large-box-properties-disabled-border-color);
     --input-text-fill: var(--text-field-suffix-large-box-typography-disabled-fill);
@@ -281,14 +291,10 @@
     --input-icon-fill: var(--text-field-suffix-large-box-icon-disabled-fill);
   }
 
-  .ds-input--lg.ds-input--suffix.ds-input--error {
+  &.input-error {
     --input-fill: var(--text-field-suffix-large-box-properties-error-fill);
     --input-border-color: var(--text-field-suffix-large-box-properties-error-border-color);
     --input-text-fill: var(--text-field-suffix-large-box-typography-error-fill);
     --input-icon-fill: var(--text-field-suffix-large-box-icon-error-fill);
-  }
-
-  .ds-input--disabled {
-    cursor: var(--cursor-disabled);
   }
 }

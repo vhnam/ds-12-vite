@@ -6,6 +6,7 @@ import { ComboboxField } from '@ds-12/ui/fields/combobox-field';
 import {
   createComboboxDisabledPlay,
   createComboboxInvalidA11yPlay,
+  expectDataSlotVariant,
   runComboboxA11yAndFocusTests,
 } from '../../lib/component-tests.ts';
 import { booleanArgType, hiddenArgType, selectArgType, textArgType } from '../../lib/story-arg-types.ts';
@@ -16,6 +17,7 @@ import { ComboboxFieldStatesShowcase, DEFAULT_COMBOBOX_OPTIONS, SIZES } from './
 const meta = {
   title: 'Fields/ComboboxField',
   component: ComboboxField,
+  tags: ['autodocs'],
   argTypes: {
     size: selectArgType(SIZES, 'Visual size of the combobox control.'),
     invalid: booleanArgType('Marks the field as invalid and sets aria-invalid.'),
@@ -72,7 +74,15 @@ type Story = StoryObj<typeof meta>;
 
 /** Use ComboboxField when a labelled filterable dropdown is needed in a form. */
 export const Default: Story = {
-  play: (context) => runComboboxA11yAndFocusTests(context, 'Label'),
+  play: async (context) => {
+    await runComboboxA11yAndFocusTests(context, 'Label');
+    await expectDataSlotVariant(context.canvasElement, {
+      slot: 'combobox-field',
+      variant: 'sm',
+      role: 'combobox',
+      name: 'Label',
+    });
+  },
 };
 
 /** Use the disabled state when the field depends on a prerequisite selection. */

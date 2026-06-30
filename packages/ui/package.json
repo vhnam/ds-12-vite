@@ -51,7 +51,6 @@
     "./switch": "./dist/switch.mjs",
     "./textarea": "./dist/textarea.mjs",
     "./typography": "./dist/typography.mjs",
-    "./style.css": "./dist/style.css",
     "./tailwind.css": "./src/tailwind.css",
     "./tokens.css": "@ds-12/design-tokens/tokens.css",
     "./theme.css": "@ds-12/design-tokens/theme.css",

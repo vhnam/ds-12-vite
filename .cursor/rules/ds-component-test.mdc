@@ -117,7 +117,7 @@ import { expect, test } from "vite-plus/test";
 import { buttonVariants } from "./index.tsx";
 
 test("should include loading modifier when loading", () => {
-  expect(buttonVariants({ loading: true })).toContain("ds-button--loading");
+  expect(buttonVariants({ variant: "primary", size: "md" })).toContain("button-primary-md");
 });
 ```
 

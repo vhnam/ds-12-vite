@@ -6,6 +6,7 @@ import { SelectField } from '@ds-12/ui/fields/select-field';
 import {
   createComboboxDisabledPlay,
   createComboboxInvalidA11yPlay,
+  expectDataSlotVariant,
   runComboboxA11yAndFocusTests,
 } from '../../lib/component-tests.ts';
 import { booleanArgType, hiddenArgType, selectArgType, textArgType } from '../../lib/story-arg-types.ts';
@@ -16,6 +17,7 @@ import { DEFAULT_SELECT_OPTIONS, SelectFieldStatesShowcase, SIZES } from './sele
 const meta = {
   title: 'Fields/SelectField',
   component: SelectField,
+  tags: ['autodocs'],
   argTypes: {
     size: selectArgType(SIZES, 'Visual size of the select control.'),
     invalid: booleanArgType('Marks the field as invalid and sets aria-invalid.'),
@@ -68,7 +70,15 @@ type Story = StoryObj<typeof meta>;
 
 /** Use SelectField when a labelled single-select dropdown is needed in a form. */
 export const Default: Story = {
-  play: (context) => runComboboxA11yAndFocusTests(context, 'Label'),
+  play: async (context) => {
+    await runComboboxA11yAndFocusTests(context, 'Label');
+    await expectDataSlotVariant(context.canvasElement, {
+      slot: 'select-field',
+      variant: 'sm',
+      role: 'combobox',
+      name: 'Label',
+    });
+  },
 };
 
 /** Use the disabled state when the field depends on a prerequisite selection. */

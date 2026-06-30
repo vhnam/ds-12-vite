@@ -4,23 +4,31 @@ import { useId } from 'react';
 
 import { cn } from '../../../lib/utils.ts';
 import { Combobox, type ComboboxOption, type ComboboxProps } from '../../combobox/index.tsx';
-import './combobox-field.css';
 
-const comboboxFieldVariants = cva('ds-combobox-field', {
+const comboboxFieldVariants = cva('combobox-field', {
   variants: {
     size: {
-      sm: 'ds-combobox-field--sm',
-      lg: 'ds-combobox-field--lg',
+      sm: '',
+      lg: '',
     },
     disabled: {
-      true: 'ds-combobox-field--disabled',
-      false: null,
+      true: '',
+      false: '',
     },
     invalid: {
-      true: 'ds-combobox-field--error',
-      false: null,
+      true: '',
+      false: '',
     },
   },
+  compoundVariants: [
+    { size: 'sm', class: 'combobox-field-preset-size-sm' },
+    { size: 'lg', class: 'combobox-field-preset-size-lg' },
+    { size: 'sm', disabled: true, class: 'combobox-field-preset-size-sm-disabled' },
+    { size: 'lg', disabled: true, class: 'combobox-field-preset-size-lg-disabled' },
+    { size: 'sm', invalid: true, class: 'combobox-field-preset-size-sm-invalid' },
+    { size: 'lg', invalid: true, class: 'combobox-field-preset-size-lg-invalid' },
+    { disabled: true, class: 'combobox-field-disabled' },
+  ],
   defaultVariants: {
     size: 'sm',
     disabled: false,
@@ -86,10 +94,13 @@ export function ComboboxField({
           invalid: isInvalid,
           className: fieldClassName,
         }),
+        isInvalid && 'combobox-field-invalid',
       )}
+      data-slot="combobox-field"
+      data-variant={resolvedSize}
     >
       {showLabel ? (
-        <Field.Label htmlFor={comboboxId} className="ds-combobox-field__label">
+        <Field.Label htmlFor={comboboxId} className="combobox-field-label" data-slot="combobox-field-label">
           {label}
         </Field.Label>
       ) : null}
@@ -104,7 +115,7 @@ export function ComboboxField({
         {...comboboxProps}
       />
       {showHelperText ? (
-        <Field.Description id={helperId} className="ds-combobox-field__helper">
+        <Field.Description id={helperId} className="combobox-field-helper" data-slot="combobox-field-helper">
           {helperText}
         </Field.Description>
       ) : null}

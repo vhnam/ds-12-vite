@@ -7,6 +7,7 @@ import {
   createComboboxA11yPlay,
   createComboboxDisabledPlay,
   createComboboxInvalidA11yPlay,
+  expectDataSlotVariant,
   runComboboxInteractionTests,
 } from '../../lib/component-tests.ts';
 import { booleanArgType, hiddenArgType, selectArgType, textArgType } from '../../lib/story-arg-types.ts';
@@ -69,7 +70,15 @@ type Story = StoryObj<typeof meta>;
 
 /** Use ComboboxField when a labelled combobox is needed in a form — Combobox is the bare control without label or helper text. */
 export const Default: Story = {
-  play: (context) => runComboboxInteractionTests(context, 'Combobox'),
+  play: async (context) => {
+    await runComboboxInteractionTests(context, 'Combobox');
+    await expectDataSlotVariant(context.canvasElement, {
+      slot: 'combobox',
+      variant: 'sm',
+      role: 'combobox',
+      name: 'Combobox',
+    });
+  },
 };
 
 /** Add a leading icon to help users identify the expected search type at a glance. */

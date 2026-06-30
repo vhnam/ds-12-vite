@@ -6,6 +6,7 @@ import { Icon } from '@ds-12/ui/icon';
 import {
   createButtonDisabledPlay,
   createButtonLoadingA11yPlay,
+  expectDataSlotVariant,
   runButtonInteractionTests,
 } from '../../lib/component-tests.ts';
 import { booleanArgType, hiddenArgType, selectArgType } from '../../lib/story-arg-types.ts';
@@ -41,7 +42,15 @@ type Story = StoryObj<typeof meta>;
 
 /** Use the primary variant for the single most important action on a page or in a section — there should only be one primary button per context. */
 export const Default: Story = {
-  play: (context) => runButtonInteractionTests(context, 'Button'),
+  play: async (context) => {
+    await runButtonInteractionTests(context, 'Button');
+    await expectDataSlotVariant(context.canvasElement, {
+      slot: 'button',
+      variant: 'primary',
+      role: 'button',
+      name: 'Button',
+    });
+  },
 };
 
 /** Use the secondary variant for supporting actions that should not compete with the primary CTA. */

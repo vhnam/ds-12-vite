@@ -21,15 +21,18 @@ type SelectionFieldComponent = typeof CheckboxField | typeof SwitchField;
 function StateCheckboxField({
   state,
   layout,
+  size,
 }: {
   state: 'enabled' | 'disabled' | 'error';
   layout: 'default' | 'supporting-text' | 'input';
+  size: (typeof SIZES)[number];
 }) {
   return (
     <CheckboxField
-      size="sm"
+      size={size}
       disabled={state === 'disabled'}
       invalid={state === 'error'}
+      helperText={state === 'error' ? 'This field is required' : 'Helper Text'}
       showSupportingText={layout === 'supporting-text'}
       showSuffix={false}
       showInput={layout === 'input'}
@@ -40,15 +43,18 @@ function StateCheckboxField({
 function StateSwitchField({
   state,
   layout,
+  size,
 }: {
   state: 'enabled' | 'disabled' | 'error';
   layout: 'default' | 'supporting-text' | 'input';
+  size: (typeof SIZES)[number];
 }) {
   return (
     <SwitchField
-      size="sm"
+      size={size}
       disabled={state === 'disabled'}
       invalid={state === 'error'}
+      helperText={state === 'error' ? 'This field is required' : 'Helper Text'}
       showSupportingText={layout === 'supporting-text'}
       showSuffix={false}
       showInput={layout === 'input'}
@@ -59,17 +65,20 @@ function StateSwitchField({
 function StateRadioField({
   state,
   layout,
+  size,
 }: {
   state: 'enabled' | 'disabled' | 'error';
   layout: 'default' | 'supporting-text' | 'input';
+  size: (typeof SIZES)[number];
 }) {
   return (
     <RadioGroup defaultValue="">
       <RadioField
         value="option"
-        size="sm"
+        size={size}
         disabled={state === 'disabled'}
         invalid={state === 'error'}
+        helperText={state === 'error' ? 'This field is required' : 'Helper Text'}
         showSupportingText={layout === 'supporting-text'}
         showSuffix={false}
         showInput={layout === 'input'}
@@ -80,42 +89,71 @@ function StateRadioField({
 
 function SelectionFieldStatesShowcaseInner({
   renderField,
+  size,
 }: {
-  renderField: (state: 'enabled' | 'disabled' | 'error') => ReactNode;
+  renderField: (state: 'enabled' | 'disabled' | 'error', size: (typeof SIZES)[number]) => ReactNode;
+  size: (typeof SIZES)[number];
 }) {
   return (
     <div style={stateGroupStyle}>
       <div>
         <StoryCaption>enabled</StoryCaption>
-        {renderField('enabled')}
+        {renderField('enabled', size)}
       </div>
       <div>
         <StoryCaption>disabled</StoryCaption>
-        {renderField('disabled')}
+        {renderField('disabled', size)}
       </div>
       <div>
         <StoryCaption>error</StoryCaption>
-        {renderField('error')}
+        {renderField('error', size)}
       </div>
     </div>
   );
 }
 
-export function CheckboxFieldStatesShowcase({ layout }: { layout: 'default' | 'supporting-text' | 'input' }) {
+export function CheckboxFieldStatesShowcase({
+  layout,
+  size = 'sm',
+}: {
+  layout: 'default' | 'supporting-text' | 'input';
+  size?: (typeof SIZES)[number];
+}) {
   return (
-    <SelectionFieldStatesShowcaseInner renderField={(state) => <StateCheckboxField state={state} layout={layout} />} />
+    <SelectionFieldStatesShowcaseInner
+      size={size}
+      renderField={(state, fieldSize) => <StateCheckboxField state={state} layout={layout} size={fieldSize} />}
+    />
   );
 }
 
-export function RadioFieldStatesShowcase({ layout }: { layout: 'default' | 'supporting-text' | 'input' }) {
+export function RadioFieldStatesShowcase({
+  layout,
+  size = 'sm',
+}: {
+  layout: 'default' | 'supporting-text' | 'input';
+  size?: (typeof SIZES)[number];
+}) {
   return (
-    <SelectionFieldStatesShowcaseInner renderField={(state) => <StateRadioField state={state} layout={layout} />} />
+    <SelectionFieldStatesShowcaseInner
+      size={size}
+      renderField={(state, fieldSize) => <StateRadioField state={state} layout={layout} size={fieldSize} />}
+    />
   );
 }
 
-export function SwitchFieldStatesShowcase({ layout }: { layout: 'default' | 'supporting-text' | 'input' }) {
+export function SwitchFieldStatesShowcase({
+  layout,
+  size = 'sm',
+}: {
+  layout: 'default' | 'supporting-text' | 'input';
+  size?: (typeof SIZES)[number];
+}) {
   return (
-    <SelectionFieldStatesShowcaseInner renderField={(state) => <StateSwitchField state={state} layout={layout} />} />
+    <SelectionFieldStatesShowcaseInner
+      size={size}
+      renderField={(state, fieldSize) => <StateSwitchField state={state} layout={layout} size={fieldSize} />}
+    />
   );
 }
 

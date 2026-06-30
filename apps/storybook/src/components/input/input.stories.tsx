@@ -6,6 +6,7 @@ import {
   createTextboxA11yPlay,
   createTextboxDisabledPlay,
   createTextboxInvalidA11yPlay,
+  expectDataSlotVariant,
   runTextboxInteractionTests,
 } from '../../lib/component-tests.ts';
 import { booleanArgType, hiddenArgType, selectArgType, textArgType } from '../../lib/story-arg-types.ts';
@@ -54,7 +55,15 @@ type Story = StoryObj<typeof meta>;
 
 /** Use a bare Input (without InputField) only in custom form layouts where you manage label association yourself — otherwise prefer InputField for built-in label and helper text wiring. */
 export const Default: Story = {
-  play: (context) => runTextboxInteractionTests(context, 'Input'),
+  play: async (context) => {
+    await runTextboxInteractionTests(context, 'Input');
+    await expectDataSlotVariant(context.canvasElement, {
+      slot: 'input',
+      variant: 'default',
+      role: 'textbox',
+      name: 'Input',
+    });
+  },
 };
 
 /** Use the suffix variant when a unit or format hint should appear inline after the value, such as "kg" or "%". */
@@ -64,7 +73,15 @@ export const Suffix: Story = {
   args: {
     variant: 'suffix',
   },
-  play: createTextboxA11yPlay('Input'),
+  play: async (context) => {
+    await createTextboxA11yPlay('Input')(context);
+    await expectDataSlotVariant(context.canvasElement, {
+      slot: 'input',
+      variant: 'suffix',
+      role: 'textbox',
+      name: 'Input',
+    });
+  },
 };
 
 /** Add a leading icon to help users identify the expected input type at a glance, such as a search icon for query fields. */

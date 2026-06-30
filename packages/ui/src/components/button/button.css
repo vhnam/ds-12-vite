@@ -1,487 +1,515 @@
-@layer components {
-  .ds-button {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    border: none;
-    border-radius: var(--button-radius);
-    cursor: var(--button-cursor);
-    font-family: var(--button-label-font-family);
-    font-size: var(--button-label-font-size);
-    font-weight: var(--button-label-font-weight);
-    line-height: var(--button-label-line-height);
-    letter-spacing: var(--button-label-letter-spacing);
-    white-space: nowrap;
-    transition: var(--button-transition);
-    gap: 0;
-  }
+/* Base layout — identical across all variants */
+@utility button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border: none;
+  border-radius: var(--button-radius);
+  cursor: var(--button-cursor);
+  font-family: var(--button-label-font-family);
+  font-size: var(--button-label-font-size);
+  font-weight: var(--button-label-font-weight);
+  line-height: var(--button-label-line-height);
+  letter-spacing: var(--button-label-letter-spacing);
+  white-space: nowrap;
+  transition: var(--button-transition);
+  gap: 0;
 
-  .ds-button:disabled,
-  .ds-button[data-disabled] {
+  &:disabled,
+  &[data-disabled] {
     cursor: var(--cursor-disabled);
   }
 
-  .ds-button:focus {
+  &:focus {
     outline: none;
   }
 
-  .ds-button:focus-visible {
+  &:focus-visible {
     outline: var(--button-focus-ring-width) var(--button-focus-ring-style) var(--button-focus-ring-color);
     outline-offset: var(--button-focus-ring-offset);
   }
+}
 
-  /* Primary */
-  .ds-button--primary.ds-button--sm {
-    min-height: var(--button-new-primary-container-small-default-height);
-    min-width: var(--button-new-primary-container-small-default-min-width);
-    padding: var(--button-new-primary-container-small-default-vertical-padding)
-      var(--button-new-primary-container-small-default-horizontal-padding);
-    background-color: var(--button-new-primary-container-small-default-fill);
-    color: var(--button-new-primary-label-small-default-fill);
+/* Child parts */
+@utility button-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+
+  & svg {
+    width: 100%;
+    height: 100%;
   }
+}
 
-  .ds-button--primary.ds-button--sm:hover:not(:disabled):not([data-disabled]) {
+@utility button-label {
+  display: inline-flex;
+}
+
+@utility button-loading {
+  gap: 0;
+}
+
+@keyframes button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@utility button-loader {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  animation: button-spin 1s linear infinite;
+}
+
+@utility button-loader-sm {
+  width: var(--button-new-primary-icon-small-default-width);
+  height: var(--button-new-primary-icon-small-default-height);
+}
+
+@utility button-loader-md {
+  width: var(--button-new-primary-icon-medium-default-width);
+  height: var(--button-new-primary-icon-medium-default-height);
+}
+
+@utility button-loader-lg {
+  width: var(--button-new-primary-icon-large-default-width);
+  height: var(--button-new-primary-icon-large-default-height);
+}
+
+/* Has-icon gap presets */
+@utility button-has-icon-sm {
+  gap: var(--button-sm-icon-gap);
+}
+
+@utility button-has-icon-md {
+  gap: var(--button-md-icon-gap);
+}
+
+@utility button-has-icon-lg {
+  gap: var(--button-lg-icon-gap);
+}
+
+/* Primary × size */
+@utility button-primary-sm {
+  min-height: var(--button-new-primary-container-small-default-height);
+  min-width: var(--button-new-primary-container-small-default-min-width);
+  padding: var(--button-new-primary-container-small-default-vertical-padding)
+    var(--button-new-primary-container-small-default-horizontal-padding);
+  background-color: var(--button-new-primary-container-small-default-fill);
+  color: var(--button-new-primary-label-small-default-fill);
+
+  &:hover:not(:disabled):not([data-disabled]) {
     background-color: var(--button-new-primary-container-small-hovered-fill);
   }
 
-  .ds-button--primary.ds-button--sm:active:not(:disabled):not([data-disabled]) {
+  &:active:not(:disabled):not([data-disabled]) {
     background-color: var(--button-new-primary-container-small-pressed-fill);
   }
 
-  .ds-button--primary.ds-button--sm:disabled,
-  .ds-button--primary.ds-button--sm[data-disabled] {
+  &:disabled,
+  &[data-disabled] {
     background-color: var(--button-new-primary-container-small-disabled-fill);
     color: var(--button-new-primary-label-small-disabled-fill);
   }
 
-  .ds-button--primary.ds-button--md {
-    min-height: var(--button-new-primary-container-medium-default-height);
-    min-width: var(--button-new-primary-container-medium-default-min-width);
-    padding: var(--button-new-primary-container-medium-default-vertical-padding)
-      var(--button-new-primary-container-medium-default-horizontal-padding);
-    background-color: var(--button-new-primary-container-medium-default-fill);
-    color: var(--button-new-primary-label-medium-default-fill);
+  &:disabled .button-icon,
+  &[data-disabled] .button-icon {
+    color: var(--button-new-primary-icon-small-disabled-fill);
   }
+}
 
-  .ds-button--primary.ds-button--md:hover:not(:disabled):not([data-disabled]) {
+@utility button-primary-md {
+  min-height: var(--button-new-primary-container-medium-default-height);
+  min-width: var(--button-new-primary-container-medium-default-min-width);
+  padding: var(--button-new-primary-container-medium-default-vertical-padding)
+    var(--button-new-primary-container-medium-default-horizontal-padding);
+  background-color: var(--button-new-primary-container-medium-default-fill);
+  color: var(--button-new-primary-label-medium-default-fill);
+
+  &:hover:not(:disabled):not([data-disabled]) {
     background-color: var(--button-new-primary-container-medium-hovered-fill);
   }
 
-  .ds-button--primary.ds-button--md:active:not(:disabled):not([data-disabled]) {
+  &:active:not(:disabled):not([data-disabled]) {
     background-color: var(--button-new-primary-container-medium-pressed-fill);
   }
 
-  .ds-button--primary.ds-button--md:disabled,
-  .ds-button--primary.ds-button--md[data-disabled] {
+  &:disabled,
+  &[data-disabled] {
     background-color: var(--button-new-primary-container-medium-disabled-fill);
     color: var(--button-new-primary-label-medium-disabled-fill);
   }
 
-  .ds-button--primary.ds-button--lg {
-    min-height: var(--button-new-primary-container-large-default-height);
-    min-width: var(--button-new-primary-container-large-default-min-width);
-    padding: var(--button-new-primary-container-large-default-vertical-padding)
-      var(--button-new-primary-container-large-default-horizontal-padding);
-    background-color: var(--button-new-primary-container-large-default-fill);
-    color: var(--button-new-primary-label-large-default-fill);
+  &:disabled .button-icon,
+  &[data-disabled] .button-icon {
+    color: var(--button-new-primary-icon-medium-disabled-fill);
   }
+}
 
-  .ds-button--primary.ds-button--lg:hover:not(:disabled):not([data-disabled]) {
+@utility button-primary-lg {
+  min-height: var(--button-new-primary-container-large-default-height);
+  min-width: var(--button-new-primary-container-large-default-min-width);
+  padding: var(--button-new-primary-container-large-default-vertical-padding)
+    var(--button-new-primary-container-large-default-horizontal-padding);
+  background-color: var(--button-new-primary-container-large-default-fill);
+  color: var(--button-new-primary-label-large-default-fill);
+
+  &:hover:not(:disabled):not([data-disabled]) {
     background-color: var(--button-new-primary-container-large-hovered-fill);
   }
 
-  .ds-button--primary.ds-button--lg:active:not(:disabled):not([data-disabled]) {
+  &:active:not(:disabled):not([data-disabled]) {
     background-color: var(--button-new-primary-container-large-pressed-fill);
   }
 
-  .ds-button--primary.ds-button--lg:disabled,
-  .ds-button--primary.ds-button--lg[data-disabled] {
+  &:disabled,
+  &[data-disabled] {
     background-color: var(--button-new-primary-container-large-disabled-fill);
     color: var(--button-new-primary-label-large-disabled-fill);
   }
 
-  /* Secondary */
-  .ds-button--secondary.ds-button--sm {
-    min-height: var(--button-new-secondary-container-small-default-height);
-    min-width: var(--button-new-secondary-container-small-default-min-width);
-    padding: var(--button-new-secondary-container-small-default-vertical-padding)
-      var(--button-new-secondary-container-small-default-horizontal-padding);
-    border: var(--border-width-small) var(--border-style-default)
-      var(--button-new-secondary-container-small-default-border-color);
-    background-color: var(--button-new-secondary-container-small-default-fill);
-    color: var(--button-new-secondary-label-small-default-fill);
+  &:disabled .button-icon,
+  &[data-disabled] .button-icon {
+    color: var(--button-new-primary-icon-large-disabled-fill);
   }
+}
 
-  .ds-button--secondary.ds-button--sm:hover:not(:disabled):not([data-disabled]) {
+/* Secondary × size */
+@utility button-secondary-sm {
+  min-height: var(--button-new-secondary-container-small-default-height);
+  min-width: var(--button-new-secondary-container-small-default-min-width);
+  padding: var(--button-new-secondary-container-small-default-vertical-padding)
+    var(--button-new-secondary-container-small-default-horizontal-padding);
+  border: var(--border-width-small) var(--border-style-default)
+    var(--button-new-secondary-container-small-default-border-color);
+  background-color: var(--button-new-secondary-container-small-default-fill);
+  color: var(--button-new-secondary-label-small-default-fill);
+
+  &:hover:not(:disabled):not([data-disabled]) {
     border-color: var(--button-new-secondary-container-small-hovered-border-color);
     background-color: var(--button-new-secondary-container-small-hovered-fill);
   }
 
-  .ds-button--secondary.ds-button--sm:active:not(:disabled):not([data-disabled]) {
+  &:active:not(:disabled):not([data-disabled]) {
     border-color: var(--button-new-secondary-container-small-pressed-border-color);
     background-color: var(--button-new-secondary-container-small-pressed-fill);
   }
 
-  .ds-button--secondary.ds-button--sm:disabled,
-  .ds-button--secondary.ds-button--sm[data-disabled] {
+  &:disabled,
+  &[data-disabled] {
     border-color: var(--button-new-secondary-container-small-disabled-border-color);
     background-color: var(--button-new-secondary-container-small-disabled-fill);
     color: var(--button-new-secondary-label-small-disabled-fill);
   }
 
-  .ds-button--secondary.ds-button--md {
-    min-height: var(--button-new-secondary-container-medium-default-height);
-    min-width: var(--button-new-secondary-container-medium-default-min-width);
-    padding: var(--button-new-secondary-container-medium-default-vertical-padding)
-      var(--button-new-secondary-container-medium-default-horizontal-padding);
-    border: var(--border-width-small) var(--border-style-default)
-      var(--button-new-secondary-container-medium-default-border-color);
-    background-color: var(--button-new-secondary-container-medium-default-fill);
-    color: var(--button-new-secondary-label-medium-default-fill);
+  &:disabled .button-icon,
+  &[data-disabled] .button-icon {
+    color: var(--button-new-secondary-icon-small-disabled-fill);
   }
+}
 
-  .ds-button--secondary.ds-button--md:hover:not(:disabled):not([data-disabled]) {
+@utility button-secondary-md {
+  min-height: var(--button-new-secondary-container-medium-default-height);
+  min-width: var(--button-new-secondary-container-medium-default-min-width);
+  padding: var(--button-new-secondary-container-medium-default-vertical-padding)
+    var(--button-new-secondary-container-medium-default-horizontal-padding);
+  border: var(--border-width-small) var(--border-style-default)
+    var(--button-new-secondary-container-medium-default-border-color);
+  background-color: var(--button-new-secondary-container-medium-default-fill);
+  color: var(--button-new-secondary-label-medium-default-fill);
+
+  &:hover:not(:disabled):not([data-disabled]) {
     border-color: var(--button-new-secondary-container-medium-hovered-border-color);
     background-color: var(--button-new-secondary-container-medium-hovered-fill);
   }
 
-  .ds-button--secondary.ds-button--md:active:not(:disabled):not([data-disabled]) {
+  &:active:not(:disabled):not([data-disabled]) {
     border-color: var(--button-new-secondary-container-medium-pressed-border-color);
     background-color: var(--button-new-secondary-container-medium-pressed-fill);
   }
 
-  .ds-button--secondary.ds-button--md:disabled,
-  .ds-button--secondary.ds-button--md[data-disabled] {
+  &:disabled,
+  &[data-disabled] {
     border-color: var(--button-new-secondary-container-medium-disabled-border-color);
     background-color: var(--button-new-secondary-container-medium-disabled-fill);
     color: var(--button-new-secondary-label-medium-disabled-fill);
   }
 
-  .ds-button--secondary.ds-button--lg {
-    min-height: var(--button-new-secondary-container-large-default-height);
-    min-width: var(--button-new-secondary-container-large-default-min-width);
-    padding: var(--button-new-secondary-container-large-default-vertical-padding)
-      var(--button-new-secondary-container-large-default-horizontal-padding);
-    border: var(--border-width-small) var(--border-style-default)
-      var(--button-new-secondary-container-large-default-border-color);
-    background-color: var(--button-new-secondary-container-large-default-fill);
-    color: var(--button-new-secondary-label-large-default-fill);
+  &:disabled .button-icon,
+  &[data-disabled] .button-icon {
+    color: var(--button-new-secondary-icon-medium-disabled-fill);
   }
+}
 
-  .ds-button--secondary.ds-button--lg:hover:not(:disabled):not([data-disabled]) {
+@utility button-secondary-lg {
+  min-height: var(--button-new-secondary-container-large-default-height);
+  min-width: var(--button-new-secondary-container-large-default-min-width);
+  padding: var(--button-new-secondary-container-large-default-vertical-padding)
+    var(--button-new-secondary-container-large-default-horizontal-padding);
+  border: var(--border-width-small) var(--border-style-default)
+    var(--button-new-secondary-container-large-default-border-color);
+  background-color: var(--button-new-secondary-container-large-default-fill);
+  color: var(--button-new-secondary-label-large-default-fill);
+
+  &:hover:not(:disabled):not([data-disabled]) {
     border-color: var(--button-new-secondary-container-large-hovered-border-color);
     background-color: var(--button-new-secondary-container-large-hovered-fill);
   }
 
-  .ds-button--secondary.ds-button--lg:active:not(:disabled):not([data-disabled]) {
+  &:active:not(:disabled):not([data-disabled]) {
     border-color: var(--button-new-secondary-container-large-pressed-border-color);
     background-color: var(--button-new-secondary-container-large-pressed-fill);
   }
 
-  .ds-button--secondary.ds-button--lg:disabled,
-  .ds-button--secondary.ds-button--lg[data-disabled] {
+  &:disabled,
+  &[data-disabled] {
     border-color: var(--button-new-secondary-container-large-disabled-border-color);
     background-color: var(--button-new-secondary-container-large-disabled-fill);
     color: var(--button-new-secondary-label-large-disabled-fill);
   }
 
-  /* Danger */
-  .ds-button--danger.ds-button--sm {
-    min-height: var(--button-new-danger-container-small-default-height);
-    min-width: var(--button-new-danger-container-small-default-min-width);
-    padding: var(--button-new-danger-container-small-default-vertical-padding)
-      var(--button-new-danger-container-small-default-horizontal-padding);
-    background-color: var(--button-new-danger-container-small-default-fill);
-    color: var(--button-new-danger-label-small-default-fill);
+  &:disabled .button-icon,
+  &[data-disabled] .button-icon {
+    color: var(--button-new-secondary-icon-large-disabled-fill);
   }
+}
 
-  .ds-button--danger.ds-button--sm:hover:not(:disabled):not([data-disabled]) {
+/* Danger × size */
+@utility button-danger-sm {
+  min-height: var(--button-new-danger-container-small-default-height);
+  min-width: var(--button-new-danger-container-small-default-min-width);
+  padding: var(--button-new-danger-container-small-default-vertical-padding)
+    var(--button-new-danger-container-small-default-horizontal-padding);
+  background-color: var(--button-new-danger-container-small-default-fill);
+  color: var(--button-new-danger-label-small-default-fill);
+
+  &:hover:not(:disabled):not([data-disabled]) {
     background-color: var(--button-new-danger-container-small-hovered-fill);
   }
 
-  .ds-button--danger.ds-button--sm:active:not(:disabled):not([data-disabled]) {
+  &:active:not(:disabled):not([data-disabled]) {
     background-color: var(--button-new-danger-container-small-pressed-fill);
   }
 
-  .ds-button--danger.ds-button--sm:disabled,
-  .ds-button--danger.ds-button--sm[data-disabled] {
+  &:disabled,
+  &[data-disabled] {
     background-color: var(--button-new-danger-container-small-disabled-fill);
     color: var(--button-new-danger-label-small-disabled-fill);
   }
 
-  .ds-button--danger.ds-button--md {
-    min-height: var(--button-new-danger-container-medium-default-height);
-    min-width: var(--button-new-danger-container-medium-default-min-width);
-    padding: var(--button-new-danger-container-medium-default-vertical-padding)
-      var(--button-new-danger-container-medium-default-horizontal-padding);
-    background-color: var(--button-new-danger-container-medium-default-fill);
-    color: var(--button-new-danger-label-medium-default-fill);
+  &:disabled .button-icon,
+  &[data-disabled] .button-icon {
+    color: var(--button-new-danger-icon-small-disabled-fill);
   }
+}
 
-  .ds-button--danger.ds-button--md:hover:not(:disabled):not([data-disabled]) {
+@utility button-danger-md {
+  min-height: var(--button-new-danger-container-medium-default-height);
+  min-width: var(--button-new-danger-container-medium-default-min-width);
+  padding: var(--button-new-danger-container-medium-default-vertical-padding)
+    var(--button-new-danger-container-medium-default-horizontal-padding);
+  background-color: var(--button-new-danger-container-medium-default-fill);
+  color: var(--button-new-danger-label-medium-default-fill);
+
+  &:hover:not(:disabled):not([data-disabled]) {
     background-color: var(--button-new-danger-container-medium-hovered-fill);
   }
 
-  .ds-button--danger.ds-button--md:active:not(:disabled):not([data-disabled]) {
+  &:active:not(:disabled):not([data-disabled]) {
     background-color: var(--button-new-danger-container-medium-pressed-fill);
   }
 
-  .ds-button--danger.ds-button--md:disabled,
-  .ds-button--danger.ds-button--md[data-disabled] {
+  &:disabled,
+  &[data-disabled] {
     background-color: var(--button-new-danger-container-medium-disabled-fill);
     color: var(--button-new-danger-label-medium-disabled-fill);
   }
 
-  .ds-button--danger.ds-button--lg {
-    min-height: var(--button-new-danger-container-large-default-height);
-    min-width: var(--button-new-danger-container-large-default-min-width);
-    padding: var(--button-new-danger-container-large-default-vertical-padding)
-      var(--button-new-danger-container-large-default-horizontal-padding);
-    background-color: var(--button-new-danger-container-large-default-fill);
-    color: var(--button-new-danger-label-large-default-fill);
+  &:disabled .button-icon,
+  &[data-disabled] .button-icon {
+    color: var(--button-new-danger-icon-medium-disabled-fill);
   }
+}
 
-  .ds-button--danger.ds-button--lg:hover:not(:disabled):not([data-disabled]) {
+@utility button-danger-lg {
+  min-height: var(--button-new-danger-container-large-default-height);
+  min-width: var(--button-new-danger-container-large-default-min-width);
+  padding: var(--button-new-danger-container-large-default-vertical-padding)
+    var(--button-new-danger-container-large-default-horizontal-padding);
+  background-color: var(--button-new-danger-container-large-default-fill);
+  color: var(--button-new-danger-label-large-default-fill);
+
+  &:hover:not(:disabled):not([data-disabled]) {
     background-color: var(--button-new-danger-container-large-hovered-fill);
   }
 
-  .ds-button--danger.ds-button--lg:active:not(:disabled):not([data-disabled]) {
+  &:active:not(:disabled):not([data-disabled]) {
     background-color: var(--button-new-danger-container-large-pressed-fill);
   }
 
-  .ds-button--danger.ds-button--lg:disabled,
-  .ds-button--danger.ds-button--lg[data-disabled] {
+  &:disabled,
+  &[data-disabled] {
     background-color: var(--button-new-danger-container-large-disabled-fill);
     color: var(--button-new-danger-label-large-disabled-fill);
   }
 
-  /* Icon-only */
-  .ds-button--icon {
-    gap: 0;
-    background-color: transparent;
-    color: var(--button-new-icon-icon-default-fill);
+  &:disabled .button-icon,
+  &[data-disabled] .button-icon {
+    color: var(--button-new-danger-icon-large-disabled-fill);
   }
+}
 
-  .ds-button--icon.ds-button--sm {
-    width: var(--button-new-icon-container-default-width);
-    height: var(--button-new-icon-container-default-height);
-    min-width: var(--button-new-icon-container-default-width);
-    min-height: var(--button-new-icon-container-default-height);
-    padding: var(--spacing-xxsmall);
-  }
+/* Icon-only × size */
+@utility button-icon-sm {
+  gap: 0;
+  background-color: transparent;
+  color: var(--button-new-icon-icon-default-fill);
+  width: var(--button-new-icon-container-default-width);
+  height: var(--button-new-icon-container-default-height);
+  min-width: var(--button-new-icon-container-default-width);
+  min-height: var(--button-new-icon-container-default-height);
+  padding: var(--spacing-xxsmall);
 
-  .ds-button--icon.ds-button--md {
-    padding: var(--button-tertiary-type-icon-only-medium-padding-top)
-      var(--button-tertiary-type-icon-only-medium-padding-right)
-      var(--button-tertiary-type-icon-only-medium-padding-bottom)
-      var(--button-tertiary-type-icon-only-medium-padding-left);
-  }
-
-  .ds-button--icon.ds-button--lg {
-    padding: var(--button-tertiary-type-icon-only-large-padding-top)
-      var(--button-tertiary-type-icon-only-large-padding-right)
-      var(--button-tertiary-type-icon-only-large-padding-bottom)
-      var(--button-tertiary-type-icon-only-large-padding-left);
-  }
-
-  .ds-button--icon:hover:not(:disabled):not([data-disabled]) {
+  &:hover:not(:disabled):not([data-disabled]) {
     background-color: var(--button-new-icon-container-hovered-fill);
     color: var(--button-new-icon-icon-hovered-fill);
   }
 
-  .ds-button--icon:active:not(:disabled):not([data-disabled]) {
+  &:active:not(:disabled):not([data-disabled]) {
     background-color: var(--button-new-icon-container-pressed-fill);
     color: var(--button-new-icon-icon-pressed-fill);
   }
 
-  .ds-button--icon:disabled,
-  .ds-button--icon[data-disabled] {
+  &:disabled,
+  &[data-disabled] {
     background-color: transparent;
     color: var(--button-new-icon-icon-disabled-fill);
   }
+}
 
-  /* Icon layout */
-  .ds-button--has-icon.ds-button--primary.ds-button--sm,
-  .ds-button--has-icon.ds-button--secondary.ds-button--sm,
-  .ds-button--has-icon.ds-button--danger.ds-button--sm {
-    gap: var(--button-sm-icon-gap);
+@utility button-icon-md {
+  gap: 0;
+  background-color: transparent;
+  color: var(--button-new-icon-icon-default-fill);
+  padding: var(--button-tertiary-type-icon-only-medium-padding-top)
+    var(--button-tertiary-type-icon-only-medium-padding-right)
+    var(--button-tertiary-type-icon-only-medium-padding-bottom)
+    var(--button-tertiary-type-icon-only-medium-padding-left);
+
+  &:hover:not(:disabled):not([data-disabled]) {
+    background-color: var(--button-new-icon-container-hovered-fill);
+    color: var(--button-new-icon-icon-hovered-fill);
   }
 
-  .ds-button--has-icon.ds-button--primary.ds-button--md,
-  .ds-button--has-icon.ds-button--secondary.ds-button--md,
-  .ds-button--has-icon.ds-button--danger.ds-button--md {
-    gap: var(--button-md-icon-gap);
+  &:active:not(:disabled):not([data-disabled]) {
+    background-color: var(--button-new-icon-container-pressed-fill);
+    color: var(--button-new-icon-icon-pressed-fill);
   }
 
-  .ds-button--has-icon.ds-button--primary.ds-button--lg,
-  .ds-button--has-icon.ds-button--secondary.ds-button--lg,
-  .ds-button--has-icon.ds-button--danger.ds-button--lg {
-    gap: var(--button-lg-icon-gap);
+  &:disabled,
+  &[data-disabled] {
+    background-color: transparent;
+    color: var(--button-new-icon-icon-disabled-fill);
+  }
+}
+
+@utility button-icon-lg {
+  gap: 0;
+  background-color: transparent;
+  color: var(--button-new-icon-icon-default-fill);
+  padding: var(--button-tertiary-type-icon-only-large-padding-top)
+    var(--button-tertiary-type-icon-only-large-padding-right) var(--button-tertiary-type-icon-only-large-padding-bottom)
+    var(--button-tertiary-type-icon-only-large-padding-left);
+
+  &:hover:not(:disabled):not([data-disabled]) {
+    background-color: var(--button-new-icon-container-hovered-fill);
+    color: var(--button-new-icon-icon-hovered-fill);
   }
 
-  .ds-button__icon {
-    display: inline-flex;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
+  &:active:not(:disabled):not([data-disabled]) {
+    background-color: var(--button-new-icon-container-pressed-fill);
+    color: var(--button-new-icon-icon-pressed-fill);
   }
 
-  /* Primary icons */
-  .ds-button--primary.ds-button--sm .ds-button__icon {
-    width: var(--button-new-primary-icon-small-default-width);
-    height: var(--button-new-primary-icon-small-default-height);
-    color: var(--button-new-primary-icon-small-default-fill);
+  &:disabled,
+  &[data-disabled] {
+    background-color: transparent;
+    color: var(--button-new-icon-icon-disabled-fill);
   }
+}
 
-  .ds-button--primary.ds-button--sm:disabled .ds-button__icon,
-  .ds-button--primary.ds-button--sm[data-disabled] .ds-button__icon {
-    color: var(--button-new-primary-icon-small-disabled-fill);
-  }
+/* Icon child colour + size presets */
+@utility button-icon-primary-sm {
+  width: var(--button-new-primary-icon-small-default-width);
+  height: var(--button-new-primary-icon-small-default-height);
+  color: var(--button-new-primary-icon-small-default-fill);
+}
 
-  .ds-button--primary.ds-button--md .ds-button__icon {
-    width: var(--button-new-primary-icon-medium-default-width);
-    height: var(--button-new-primary-icon-medium-default-height);
-    color: var(--button-new-primary-icon-medium-default-fill);
-  }
+@utility button-icon-primary-md {
+  width: var(--button-new-primary-icon-medium-default-width);
+  height: var(--button-new-primary-icon-medium-default-height);
+  color: var(--button-new-primary-icon-medium-default-fill);
+}
 
-  .ds-button--primary.ds-button--md:disabled .ds-button__icon,
-  .ds-button--primary.ds-button--md[data-disabled] .ds-button__icon {
-    color: var(--button-new-primary-icon-medium-disabled-fill);
-  }
+@utility button-icon-primary-lg {
+  width: var(--button-new-primary-icon-large-default-width);
+  height: var(--button-new-primary-icon-large-default-height);
+  color: var(--button-new-primary-icon-large-default-fill);
+}
 
-  .ds-button--primary.ds-button--lg .ds-button__icon {
-    width: var(--button-new-primary-icon-large-default-width);
-    height: var(--button-new-primary-icon-large-default-height);
-    color: var(--button-new-primary-icon-large-default-fill);
-  }
+@utility button-icon-secondary-sm {
+  width: var(--button-new-secondary-icon-small-default-width);
+  height: var(--button-new-secondary-icon-small-default-height);
+  color: var(--button-new-secondary-icon-small-default-fill);
+}
 
-  .ds-button--primary.ds-button--lg:disabled .ds-button__icon,
-  .ds-button--primary.ds-button--lg[data-disabled] .ds-button__icon {
-    color: var(--button-new-primary-icon-large-disabled-fill);
-  }
+@utility button-icon-secondary-md {
+  width: var(--button-new-secondary-icon-medium-default-width);
+  height: var(--button-new-secondary-icon-medium-default-height);
+  color: var(--button-new-secondary-icon-medium-default-fill);
+}
 
-  /* Secondary icons */
-  .ds-button--secondary.ds-button--sm .ds-button__icon {
-    width: var(--button-new-secondary-icon-small-default-width);
-    height: var(--button-new-secondary-icon-small-default-height);
-    color: var(--button-new-secondary-icon-small-default-fill);
-  }
+@utility button-icon-secondary-lg {
+  width: var(--button-new-secondary-icon-large-default-width);
+  height: var(--button-new-secondary-icon-large-default-height);
+  color: var(--button-new-secondary-icon-large-default-fill);
+}
 
-  .ds-button--secondary.ds-button--sm:disabled .ds-button__icon,
-  .ds-button--secondary.ds-button--sm[data-disabled] .ds-button__icon {
-    color: var(--button-new-secondary-icon-small-disabled-fill);
-  }
+@utility button-icon-danger-sm {
+  width: var(--button-new-danger-icon-small-default-width);
+  height: var(--button-new-danger-icon-small-default-height);
+  color: var(--button-new-danger-icon-small-default-fill);
+}
 
-  .ds-button--secondary.ds-button--md .ds-button__icon {
-    width: var(--button-new-secondary-icon-medium-default-width);
-    height: var(--button-new-secondary-icon-medium-default-height);
-    color: var(--button-new-secondary-icon-medium-default-fill);
-  }
+@utility button-icon-danger-md {
+  width: var(--button-new-danger-icon-medium-default-width);
+  height: var(--button-new-danger-icon-medium-default-height);
+  color: var(--button-new-danger-icon-medium-default-fill);
+}
 
-  .ds-button--secondary.ds-button--md:disabled .ds-button__icon,
-  .ds-button--secondary.ds-button--md[data-disabled] .ds-button__icon {
-    color: var(--button-new-secondary-icon-medium-disabled-fill);
-  }
+@utility button-icon-danger-lg {
+  width: var(--button-new-danger-icon-large-default-width);
+  height: var(--button-new-danger-icon-large-default-height);
+  color: var(--button-new-danger-icon-large-default-fill);
+}
 
-  .ds-button--secondary.ds-button--lg .ds-button__icon {
-    width: var(--button-new-secondary-icon-large-default-width);
-    height: var(--button-new-secondary-icon-large-default-height);
-    color: var(--button-new-secondary-icon-large-default-fill);
-  }
+@utility button-icon-variant-sm {
+  width: var(--button-new-icon-icon-default-width);
+  height: var(--button-new-icon-icon-default-height);
+}
 
-  .ds-button--secondary.ds-button--lg:disabled .ds-button__icon,
-  .ds-button--secondary.ds-button--lg[data-disabled] .ds-button__icon {
-    color: var(--button-new-secondary-icon-large-disabled-fill);
-  }
+@utility button-icon-variant-md {
+  width: var(--button-new-icon-icon-default-width);
+  height: var(--button-new-icon-icon-default-height);
+}
 
-  /* Danger icons */
-  .ds-button--danger.ds-button--sm .ds-button__icon {
-    width: var(--button-new-danger-icon-small-default-width);
-    height: var(--button-new-danger-icon-small-default-height);
-    color: var(--button-new-danger-icon-small-default-fill);
-  }
-
-  .ds-button--danger.ds-button--sm:disabled .ds-button__icon,
-  .ds-button--danger.ds-button--sm[data-disabled] .ds-button__icon {
-    color: var(--button-new-danger-icon-small-disabled-fill);
-  }
-
-  .ds-button--danger.ds-button--md .ds-button__icon {
-    width: var(--button-new-danger-icon-medium-default-width);
-    height: var(--button-new-danger-icon-medium-default-height);
-    color: var(--button-new-danger-icon-medium-default-fill);
-  }
-
-  .ds-button--danger.ds-button--md:disabled .ds-button__icon,
-  .ds-button--danger.ds-button--md[data-disabled] .ds-button__icon {
-    color: var(--button-new-danger-icon-medium-disabled-fill);
-  }
-
-  .ds-button--danger.ds-button--lg .ds-button__icon {
-    width: var(--button-new-danger-icon-large-default-width);
-    height: var(--button-new-danger-icon-large-default-height);
-    color: var(--button-new-danger-icon-large-default-fill);
-  }
-
-  .ds-button--danger.ds-button--lg:disabled .ds-button__icon,
-  .ds-button--danger.ds-button--lg[data-disabled] .ds-button__icon {
-    color: var(--button-new-danger-icon-large-disabled-fill);
-  }
-
-  /* Icon variant icon sizing */
-  .ds-button--icon.ds-button--sm .ds-button__icon {
-    width: var(--button-new-icon-icon-default-width);
-    height: var(--button-new-icon-icon-default-height);
-  }
-
-  .ds-button--icon.ds-button--md .ds-button__icon {
-    width: var(--button-new-icon-icon-default-width);
-    height: var(--button-new-icon-icon-default-height);
-  }
-
-  .ds-button--icon.ds-button--lg .ds-button__icon {
-    width: var(--button-new-icon-icon-default-width);
-    height: var(--button-new-icon-icon-default-height);
-  }
-
-  .ds-button__icon svg {
-    width: 100%;
-    height: 100%;
-  }
-
-  /* Loading */
-  .ds-button--loading {
-    gap: 0;
-  }
-
-  .ds-button__loader {
-    display: inline-flex;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
-    animation: ds-button-spin 1s linear infinite;
-  }
-
-  .ds-button--sm .ds-button__loader {
-    width: var(--button-new-primary-icon-small-default-width);
-    height: var(--button-new-primary-icon-small-default-height);
-  }
-
-  .ds-button--md .ds-button__loader {
-    width: var(--button-new-primary-icon-medium-default-width);
-    height: var(--button-new-primary-icon-medium-default-height);
-  }
-
-  .ds-button--lg .ds-button__loader {
-    width: var(--button-new-primary-icon-large-default-width);
-    height: var(--button-new-primary-icon-large-default-height);
-  }
-
-  @keyframes ds-button-spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
+@utility button-icon-variant-lg {
+  width: var(--button-new-icon-icon-default-width);
+  height: var(--button-new-icon-icon-default-height);
 }

@@ -10,6 +10,7 @@ import {
   createCheckboxKeyboardFocusPlay,
   createCheckboxTogglePlay,
   createCheckboxWithInputA11yPlay,
+  expectDataSlotVariant,
 } from '../../lib/component-tests.ts';
 import { booleanArgType, selectArgType, textArgType } from '../../lib/story-arg-types.ts';
 import { showcaseParameters } from '../../lib/story-test-config.ts';
@@ -23,6 +24,7 @@ import {
 const meta = {
   title: 'Fields/CheckboxField',
   component: CheckboxField,
+  tags: ['autodocs'],
   argTypes: {
     size: selectArgType(SIZES, 'Visual size of the checkbox control.'),
     invalid: booleanArgType('Marks the field as invalid.'),
@@ -64,6 +66,12 @@ export const Default: Story = {
     await createCheckboxA11yPlay(/selection label/i)(context);
     await createCheckboxKeyboardFocusPlay(/selection label/i)(context);
     await createCheckboxTogglePlay(/selection label/i)(context);
+    await expectDataSlotVariant(context.canvasElement, {
+      slot: 'selection-field',
+      variant: 'sm',
+      role: 'checkbox',
+      name: /selection label/i,
+    });
   },
 };
 

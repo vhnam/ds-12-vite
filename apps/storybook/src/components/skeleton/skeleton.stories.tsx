@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { Skeleton } from '@ds-12/ui/skeleton';
 
-import { createSkeletonA11yPlay } from '../../lib/component-tests.ts';
+import { createSkeletonA11yPlay, expectDataSlotVariant } from '../../lib/component-tests.ts';
 import { selectArgType, textArgType } from '../../lib/story-arg-types.ts';
 import { showcaseParameters } from '../../lib/story-test-config.ts';
 import {
@@ -39,7 +39,15 @@ type Story = StoryObj<typeof meta>;
 
 /** Use the paragraph skeleton for body text areas while content is fetching — it signals that text is coming without exposing content length prematurely. */
 export const Default: Story = {
-  play: createSkeletonA11yPlay('Loading'),
+  play: async (context) => {
+    await createSkeletonA11yPlay('Loading')(context);
+    await expectDataSlotVariant(context.canvasElement, {
+      slot: 'skeleton',
+      variant: 'paragraph',
+      role: 'status',
+      name: 'Loading',
+    });
+  },
 };
 
 /** Use the heading skeleton while page titles or section headers are loading. */

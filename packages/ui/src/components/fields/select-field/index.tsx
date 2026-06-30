@@ -4,23 +4,31 @@ import { useId } from 'react';
 
 import { cn } from '../../../lib/utils.ts';
 import { Select, type SelectOption, type SelectProps } from '../../select/index.tsx';
-import './select-field.css';
 
-const selectFieldVariants = cva('ds-select-field', {
+const selectFieldVariants = cva('select-field', {
   variants: {
     size: {
-      sm: 'ds-select-field--sm',
-      lg: 'ds-select-field--lg',
+      sm: '',
+      lg: '',
     },
     disabled: {
-      true: 'ds-select-field--disabled',
-      false: null,
+      true: '',
+      false: '',
     },
     invalid: {
-      true: 'ds-select-field--error',
-      false: null,
+      true: '',
+      false: '',
     },
   },
+  compoundVariants: [
+    { size: 'sm', class: 'select-field-preset-size-sm' },
+    { size: 'lg', class: 'select-field-preset-size-lg' },
+    { size: 'sm', disabled: true, class: 'select-field-preset-size-sm-disabled' },
+    { size: 'lg', disabled: true, class: 'select-field-preset-size-lg-disabled' },
+    { size: 'sm', invalid: true, class: 'select-field-preset-size-sm-invalid' },
+    { size: 'lg', invalid: true, class: 'select-field-preset-size-lg-invalid' },
+    { disabled: true, class: 'select-field-disabled' },
+  ],
   defaultVariants: {
     size: 'sm',
     disabled: false,
@@ -86,10 +94,13 @@ export function SelectField({
           invalid: isInvalid,
           className: fieldClassName,
         }),
+        isInvalid && 'select-field-invalid',
       )}
+      data-slot="select-field"
+      data-variant={resolvedSize}
     >
       {showLabel ? (
-        <Field.Label htmlFor={selectId} className="ds-select-field__label">
+        <Field.Label htmlFor={selectId} className="select-field-label" data-slot="select-field-label">
           {label}
         </Field.Label>
       ) : null}
@@ -104,7 +115,7 @@ export function SelectField({
         {...selectProps}
       />
       {showHelperText ? (
-        <Field.Description id={helperId} className="ds-select-field__helper">
+        <Field.Description id={helperId} className="select-field-helper" data-slot="select-field-helper">
           {helperText}
         </Field.Description>
       ) : null}

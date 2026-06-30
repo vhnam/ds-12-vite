@@ -5,7 +5,6 @@ import { createContext, type ReactNode } from 'react';
 import { cn } from '../../lib/utils.ts';
 import { Icon } from '../icon/index.tsx';
 import { MenuItemCheckbox, MenuItemText, menuItemVariants, type MenuVariant } from '../menu/index.tsx';
-import './combobox.css';
 
 const COMBOBOX_ICON_SIZES = {
   sm: 20,
@@ -21,21 +20,29 @@ const DEFAULT_LEADING_ICON = 'person';
 
 export const ComboboxIconSizeContext = createContext<number | undefined>(undefined);
 
-const comboboxVariants = cva('ds-combobox', {
+const comboboxVariants = cva('combobox', {
   variants: {
     size: {
-      sm: 'ds-combobox--sm',
-      lg: 'ds-combobox--lg',
+      sm: '',
+      lg: '',
     },
     disabled: {
-      true: 'ds-combobox--disabled',
-      false: null,
+      true: '',
+      false: '',
     },
     invalid: {
-      true: 'ds-combobox--error',
-      false: null,
+      true: '',
+      false: '',
     },
   },
+  compoundVariants: [
+    { size: 'sm', class: 'combobox-preset-size-sm' },
+    { size: 'lg', class: 'combobox-preset-size-lg' },
+    { size: 'sm', disabled: true, class: 'combobox-preset-size-sm-disabled' },
+    { size: 'lg', disabled: true, class: 'combobox-preset-size-lg-disabled' },
+    { size: 'sm', invalid: true, class: 'combobox-preset-size-sm-invalid' },
+    { size: 'lg', invalid: true, class: 'combobox-preset-size-lg-invalid' },
+  ],
   defaultVariants: {
     size: 'sm',
     disabled: false,
@@ -96,18 +103,19 @@ function ComboboxTrailingIcons({ iconSize }: { iconSize: number }) {
   return (
     <>
       <BaseCombobox.Clear
-        className="ds-combobox__clear"
+        className="combobox-clear"
+        data-slot="combobox-clear"
         aria-label="Clear search"
         render={(props) => (
-          <button {...props} type="button" className={cn('ds-combobox__clear', props.className)}>
+          <button {...props} type="button" className={cn('combobox-clear', props.className)} data-slot="combobox-clear">
             <Icon name="backspace" size={iconSize} />
           </button>
         )}
       />
       <BaseCombobox.Icon
-        className="ds-combobox__trailing"
+        className="combobox-trailing"
         render={(props) => (
-          <span {...props} className={cn('ds-combobox__trailing', props.className)}>
+          <span {...props} className={cn('combobox-trailing', props.className)} data-slot="combobox-trailing">
             <Icon name="search" size={iconSize} />
           </span>
         )}
@@ -120,13 +128,19 @@ function ComboboxListItems({ options, variant }: { options: readonly ComboboxOpt
   const itemClassName = menuItemVariants({ variant });
 
   return (
-    <BaseCombobox.List className="ds-menu__list">
+    <BaseCombobox.List className="menu-list" data-slot="menu-list">
       {options.map((option) => (
-        <BaseCombobox.Item key={option.value} value={option.value} disabled={option.disabled} className={itemClassName}>
+        <BaseCombobox.Item
+          key={option.value}
+          value={option.value}
+          disabled={option.disabled}
+          className={itemClassName}
+          data-slot="menu-item"
+        >
           <MenuItemText>{option.label}</MenuItemText>
           {variant === 'multiple' ? (
             <MenuItemCheckbox>
-              <BaseCombobox.ItemIndicator className="ds-menu__item-checkbox-indicator">
+              <BaseCombobox.ItemIndicator className="menu-item-checkbox-indicator">
                 <Icon name="check" size={12} />
               </BaseCombobox.ItemIndicator>
             </MenuItemCheckbox>
@@ -140,8 +154,13 @@ function ComboboxListItems({ options, variant }: { options: readonly ComboboxOpt
 function ComboboxPopup({ options, variant }: { options: readonly ComboboxOption[]; variant: MenuVariant }) {
   return (
     <BaseCombobox.Portal>
-      <BaseCombobox.Positioner className="ds-combobox__positioner" sideOffset={4} align="start">
-        <BaseCombobox.Popup className="ds-combobox__popup">
+      <BaseCombobox.Positioner
+        className="combobox-positioner"
+        data-slot="combobox-positioner"
+        sideOffset={4}
+        align="start"
+      >
+        <BaseCombobox.Popup className="combobox-popup" data-slot="combobox-popup">
           <ComboboxListItems options={options} variant={variant} />
         </BaseCombobox.Popup>
       </BaseCombobox.Positioner>
@@ -252,12 +271,17 @@ function SingleCombobox({
         defaultInputValue={resolved.defaultInputValue}
         onInputValueChange={resolved.onInputValueChange}
       >
-        <div className={wrapperClassName}>
-          <BaseCombobox.InputGroup className="ds-combobox__input-group">
-            {resolved.resolvedLeading ? <span className="ds-combobox__leading">{resolved.resolvedLeading}</span> : null}
+        <div className={wrapperClassName} data-slot="combobox" data-variant={resolved.size}>
+          <BaseCombobox.InputGroup className="combobox-input-group" data-slot="combobox-input-group">
+            {resolved.resolvedLeading ? (
+              <span className="combobox-leading" data-slot="combobox-leading">
+                {resolved.resolvedLeading}
+              </span>
+            ) : null}
             <BaseCombobox.Input
               id={resolved.id}
-              className="ds-combobox__input"
+              className="combobox-input"
+              data-slot="combobox-input"
               disabled={resolved.disabled}
               aria-invalid={resolved.invalid || undefined}
               aria-describedby={resolved.ariaDescribedBy}
@@ -312,18 +336,25 @@ function MultipleCombobox({
         defaultInputValue={resolved.defaultInputValue}
         onInputValueChange={resolved.onInputValueChange}
       >
-        <div className={wrapperClassName}>
-          <BaseCombobox.InputGroup className="ds-combobox__input-group">
-            {resolved.resolvedLeading ? <span className="ds-combobox__leading">{resolved.resolvedLeading}</span> : null}
-            <BaseCombobox.Chips className="ds-combobox__chips">
+        <div className={wrapperClassName} data-slot="combobox" data-variant={resolved.size}>
+          <BaseCombobox.InputGroup className="combobox-input-group" data-slot="combobox-input-group">
+            {resolved.resolvedLeading ? (
+              <span className="combobox-leading" data-slot="combobox-leading">
+                {resolved.resolvedLeading}
+              </span>
+            ) : null}
+            <BaseCombobox.Chips className="combobox-chips" data-slot="combobox-chips">
               <BaseCombobox.Value>
                 {(selectedValue: string[]) => (
                   <>
                     {selectedValue.map((selected) => (
-                      <BaseCombobox.Chip key={selected} className="ds-combobox__chip">
-                        <span className="ds-combobox__chip-label">{getOptionLabel(resolved.options, selected)}</span>
+                      <BaseCombobox.Chip key={selected} className="combobox-chip" data-slot="combobox-chip">
+                        <span className="combobox-chip-label" data-slot="combobox-chip-label">
+                          {getOptionLabel(resolved.options, selected)}
+                        </span>
                         <BaseCombobox.ChipRemove
-                          className="ds-combobox__chip-remove"
+                          className="combobox-chip-remove"
+                          data-slot="combobox-chip-remove"
                           aria-label={`Remove ${getOptionLabel(resolved.options, selected)}`}
                         >
                           <Icon name="close" size={resolved.chipRemoveIconSize} />
@@ -332,7 +363,8 @@ function MultipleCombobox({
                     ))}
                     <BaseCombobox.Input
                       id={resolved.id}
-                      className="ds-combobox__input"
+                      className="combobox-input"
+                      data-slot="combobox-input"
                       disabled={resolved.disabled}
                       aria-invalid={resolved.invalid || undefined}
                       aria-describedby={resolved.ariaDescribedBy}

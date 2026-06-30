@@ -4,28 +4,35 @@ import type { ComponentProps, ReactNode } from 'react';
 
 import { cn } from '../../lib/utils.ts';
 import { Icon } from '../icon/index.tsx';
-import './chip.css';
 
 const CHIP_ICON_SIZE = 16;
 
 const DEFAULT_LEADING_ICON = 'filter_list';
 const DEFAULT_TRAILING_ICON = 'keyboard_arrow_down';
 
-const chipVariants = cva('ds-chip', {
+const chipVariants = cva('chip', {
   variants: {
     active: {
-      false: 'ds-chip--inactive',
-      true: 'ds-chip--active',
+      false: '',
+      true: '',
     },
     hasLeading: {
-      true: 'ds-chip--has-leading',
-      false: null,
+      true: '',
+      false: '',
     },
     hasTrailing: {
-      true: 'ds-chip--has-trailing',
-      false: null,
+      true: '',
+      false: '',
     },
   },
+  compoundVariants: [
+    { active: false, class: 'chip-inactive' },
+    { active: true, class: 'chip-active' },
+    { hasLeading: true, hasTrailing: true, class: 'chip-preset-padding-both' },
+    { hasLeading: true, hasTrailing: false, class: 'chip-preset-padding-leading' },
+    { hasLeading: false, hasTrailing: true, class: 'chip-preset-padding-trailing' },
+    { hasLeading: false, hasTrailing: false, class: 'chip-preset-padding-label' },
+  ],
   defaultVariants: {
     active: false,
     hasLeading: false,
@@ -90,14 +97,15 @@ export function Chip({
           className,
         }),
       )}
+      data-slot="chip"
       disabled={disabled}
       focusableWhenDisabled
       aria-pressed={active}
       {...props}
     >
-      {resolvedLeading ? <span className="ds-chip__icon">{resolvedLeading}</span> : null}
-      <span className="ds-chip__label">{children}</span>
-      {resolvedTrailing ? <span className="ds-chip__icon">{resolvedTrailing}</span> : null}
+      {resolvedLeading ? <span className="chip-icon">{resolvedLeading}</span> : null}
+      <span className="chip-label">{children}</span>
+      {resolvedTrailing ? <span className="chip-icon">{resolvedTrailing}</span> : null}
     </BaseButton>
   );
 }

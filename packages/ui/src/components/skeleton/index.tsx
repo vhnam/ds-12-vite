@@ -2,7 +2,6 @@ import { cva } from 'class-variance-authority';
 import type { ComponentProps, CSSProperties } from 'react';
 
 import { cn } from '../../lib/utils.ts';
-import './skeleton.css';
 
 const TEXT_VARIANTS = ['h1', 'h2', 'h3', 'h4', 'paragraph', 'label'] as const;
 const THUMBNAIL_VARIANTS = ['circle', 'square', 'rectangle'] as const;
@@ -12,29 +11,73 @@ type ThumbnailVariant = (typeof THUMBNAIL_VARIANTS)[number];
 type SkeletonVariant = TextVariant | ThumbnailVariant;
 type ThumbnailSize = '32' | '48' | '72' | '128';
 
-const skeletonVariants = cva('ds-skeleton', {
+const skeletonVariants = cva('skeleton', {
   variants: {
     variant: {
-      h1: 'ds-skeleton--h1',
-      h2: 'ds-skeleton--h2',
-      h3: 'ds-skeleton--h3',
-      h4: 'ds-skeleton--h4',
-      paragraph: 'ds-skeleton--paragraph',
-      label: 'ds-skeleton--label',
-      circle: 'ds-skeleton--circle',
-      square: 'ds-skeleton--square',
-      rectangle: 'ds-skeleton--rectangle',
+      h1: '',
+      h2: '',
+      h3: '',
+      h4: '',
+      paragraph: '',
+      label: '',
+      circle: '',
+      square: '',
+      rectangle: '',
     },
     size: {
-      '32': 'ds-skeleton--32',
-      '48': 'ds-skeleton--48',
-      '72': 'ds-skeleton--72',
-      '128': 'ds-skeleton--128',
+      '32': '',
+      '48': '',
+      '72': '',
+      '128': '',
     },
   },
+  compoundVariants: [
+    { variant: 'h1', class: 'skeleton-text skeleton-h1' },
+    { variant: 'h2', class: 'skeleton-text skeleton-h2' },
+    { variant: 'h3', class: 'skeleton-text skeleton-h3' },
+    { variant: 'h4', class: 'skeleton-text skeleton-h4' },
+    { variant: 'paragraph', class: 'skeleton-text skeleton-paragraph' },
+    { variant: 'label', class: 'skeleton-text skeleton-label' },
+    { variant: 'circle', size: '32', class: 'skeleton-thumbnail skeleton-preset-circle-32' },
+    { variant: 'circle', size: '48', class: 'skeleton-thumbnail skeleton-preset-circle-48' },
+    { variant: 'circle', size: '72', class: 'skeleton-thumbnail skeleton-preset-circle-72' },
+    { variant: 'circle', size: '128', class: 'skeleton-thumbnail skeleton-preset-circle-128' },
+    { variant: 'square', size: '32', class: 'skeleton-thumbnail skeleton-preset-square-32' },
+    { variant: 'square', size: '48', class: 'skeleton-thumbnail skeleton-preset-square-48' },
+    { variant: 'square', size: '72', class: 'skeleton-thumbnail skeleton-preset-square-72' },
+    { variant: 'square', size: '128', class: 'skeleton-thumbnail skeleton-preset-square-128' },
+    { variant: 'rectangle', size: '32', class: 'skeleton-thumbnail skeleton-preset-rectangle-32' },
+    { variant: 'rectangle', size: '48', class: 'skeleton-thumbnail skeleton-preset-rectangle-48' },
+    { variant: 'rectangle', size: '72', class: 'skeleton-thumbnail skeleton-preset-rectangle-72' },
+    { variant: 'rectangle', size: '128', class: 'skeleton-thumbnail skeleton-preset-rectangle-128' },
+  ],
   defaultVariants: {
     variant: 'paragraph',
     size: '48',
+  },
+});
+
+const skeletonBarVariants = cva('skeleton-bar', {
+  variants: {
+    variant: {
+      h1: '',
+      h2: '',
+      h3: '',
+      h4: '',
+      paragraph: '',
+      label: '',
+    },
+  },
+  compoundVariants: [
+    { variant: 'h1', class: 'skeleton-bar-h1' },
+    { variant: 'h2', class: 'skeleton-bar-h2' },
+    { variant: 'h3', class: 'skeleton-bar-h3' },
+    { variant: 'h4', class: 'skeleton-bar-h4' },
+    { variant: 'paragraph', class: 'skeleton-bar-paragraph' },
+    { variant: 'label', class: 'skeleton-bar-label' },
+  ],
+  defaultVariants: {
+    variant: 'paragraph',
   },
 });
 
@@ -98,15 +141,33 @@ export function Skeleton({
 
   if (isText) {
     return (
-      <div className={classes} style={mergedStyle} role="status" aria-busy="true" aria-label={ariaLabel} {...props}>
-        <div className="ds-skeleton__bar" aria-hidden="true" />
+      <div
+        className={classes}
+        data-slot="skeleton"
+        data-variant={resolvedVariant}
+        style={mergedStyle}
+        role="status"
+        aria-busy="true"
+        aria-label={ariaLabel}
+        {...props}
+      >
+        <div className={skeletonBarVariants({ variant: resolvedVariant })} aria-hidden="true" />
       </div>
     );
   }
 
   return (
-    <div className={classes} style={mergedStyle} role="status" aria-busy="true" aria-label={ariaLabel} {...props} />
+    <div
+      className={classes}
+      data-slot="skeleton"
+      data-variant={resolvedVariant}
+      style={mergedStyle}
+      role="status"
+      aria-busy="true"
+      aria-label={ariaLabel}
+      {...props}
+    />
   );
 }
 
-export { skeletonVariants };
+export { skeletonBarVariants, skeletonVariants };

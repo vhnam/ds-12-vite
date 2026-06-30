@@ -4,27 +4,32 @@ import { useId } from 'react';
 
 import { cn } from '../../../lib/utils.ts';
 import { Textarea, type TextareaProps } from '../../textarea/index.tsx';
-import './textarea-field.css';
 
-const textareaFieldVariants = cva('ds-textarea-field', {
+const textareaFieldVariants = cva('textarea-field', {
   variants: {
     size: {
-      sm: 'ds-textarea-field--sm',
-      lg: 'ds-textarea-field--lg',
+      sm: '',
+      lg: '',
     },
     variant: {
-      default: 'ds-textarea-field--default',
-      suffix: 'ds-textarea-field--suffix',
+      default: '',
+      suffix: '',
     },
     disabled: {
-      true: 'ds-textarea-field--disabled',
-      false: null,
+      true: 'textarea-field-disabled',
+      false: '',
     },
     invalid: {
-      true: 'ds-textarea-field--error',
-      false: null,
+      true: 'textarea-field-error',
+      false: '',
     },
   },
+  compoundVariants: [
+    { size: 'sm', variant: 'default', class: 'textarea-field-preset-sm-default' },
+    { size: 'sm', variant: 'suffix', class: 'textarea-field-preset-sm-suffix' },
+    { size: 'lg', variant: 'default', class: 'textarea-field-preset-lg-default' },
+    { size: 'lg', variant: 'suffix', class: 'textarea-field-preset-lg-suffix' },
+  ],
   defaultVariants: {
     size: 'sm',
     variant: 'default',
@@ -88,9 +93,11 @@ export function TextareaField({
           className: fieldClassName,
         }),
       )}
+      data-slot="textarea-field"
+      data-variant={resolvedVariant}
     >
       {showLabel ? (
-        <Field.Label htmlFor={textareaId} className="ds-textarea-field__label">
+        <Field.Label htmlFor={textareaId} className="textarea-field-label">
           {label}
         </Field.Label>
       ) : null}
@@ -105,7 +112,7 @@ export function TextareaField({
         {...textareaProps}
       />
       {showHelperText ? (
-        <Field.Description id={helperId} className="ds-textarea-field__helper">
+        <Field.Description id={helperId} className="textarea-field-helper">
           {helperText}
         </Field.Description>
       ) : null}

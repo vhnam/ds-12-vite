@@ -3,7 +3,7 @@ import { Avatar } from '@ds-12/ui/avatar';
 import { StoryCaption } from '../../lib/story-presentation.tsx';
 
 export const SIZES = ['sm', 'md', 'lg'] as const;
-export const SHAPES = ['user', 'organisation'] as const;
+export const SHAPES = ['circle', 'square'] as const;
 export const VARIANTS = ['initial', 'image', 'icon'] as const;
 
 export const PLACEHOLDER_IMAGE =
@@ -52,7 +52,7 @@ export function SizesShowcase() {
       {SIZES.map((size) => (
         <Avatar
           key={size}
-          shape="user"
+          shape="circle"
           size={size}
           variant="initial"
           initials="BL"

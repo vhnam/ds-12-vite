@@ -1,72 +1,78 @@
-@layer components {
-  .ds-radio {
-    --radio-control-size: var(--radio-lg-control-size);
-    --radio-indicator-size: var(--radio-lg-indicator-size);
-    --radio-border-color: var(--radio-default-false-border-color);
-    --radio-fill: var(--radio-default-false-fill);
-    --radio-active-fill: var(--radio-default-true-fill);
+@utility radio {
+  --radio-control-size: var(--radio-lg-control-size);
+  --radio-indicator-size: var(--radio-lg-indicator-size);
+  --radio-border-color: var(--radio-default-false-border-color);
+  --radio-fill: var(--radio-default-false-fill);
+  --radio-active-fill: var(--radio-default-true-fill);
 
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: content-box;
-    padding: var(--radio-padding);
-    border: none;
-    background: transparent;
-    cursor: var(--cursor-interactive);
-    vertical-align: middle;
-  }
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: content-box;
+  padding: var(--radio-padding);
+  border: none;
+  background: transparent;
+  cursor: var(--cursor-interactive);
+  vertical-align: middle;
 
-  .ds-radio--sm {
-    --radio-control-size: var(--radio-sm-control-size);
-    --radio-indicator-size: var(--radio-sm-indicator-size);
-  }
-
-  .ds-radio--disabled,
-  .ds-radio[data-disabled] {
+  &[data-disabled] {
     cursor: var(--cursor-disabled);
     --radio-border-color: var(--radio-disabled-false-border-color);
     --radio-fill: var(--radio-disabled-false-fill);
     --radio-active-fill: var(--radio-disabled-true-fill);
   }
 
-  .ds-radio--invalid:not([data-checked]) {
-    --radio-border-color: var(--radio-error-false-border-color);
-    --radio-fill: var(--radio-error-false-fill);
+  &[data-checked] .radio-control {
+    border-color: var(--radio-active-fill);
   }
 
-  .ds-radio:focus {
+  &:focus {
     outline: none;
   }
 
-  .ds-radio:focus-visible {
+  &:focus-visible {
     outline: var(--radio-focus-ring-width) var(--radio-focus-ring-style) var(--radio-focus-ring-color);
     outline-offset: var(--radio-focus-ring-offset);
     border-radius: var(--radius-large);
   }
+}
 
-  .ds-radio__control {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    width: var(--radio-control-size);
-    height: var(--radio-control-size);
-    border: var(--radio-border-width) solid var(--radio-border-color);
-    border-radius: var(--radio-radius);
-    background-color: var(--radio-fill);
-    transition: var(--radio-transition);
-  }
+@utility radio-preset-size-sm {
+  --radio-control-size: var(--radio-sm-control-size);
+  --radio-indicator-size: var(--radio-sm-indicator-size);
+}
 
-  .ds-radio[data-checked] .ds-radio__control {
-    border-color: var(--radio-active-fill);
-  }
+@utility radio-disabled {
+  cursor: var(--cursor-disabled);
+  --radio-border-color: var(--radio-disabled-false-border-color);
+  --radio-fill: var(--radio-disabled-false-fill);
+  --radio-active-fill: var(--radio-disabled-true-fill);
+}
 
-  .ds-radio__indicator {
-    width: var(--radio-indicator-size);
-    height: var(--radio-indicator-size);
-    border-radius: var(--radio-radius);
-    background-color: var(--radio-active-fill);
+@utility radio-invalid {
+  &:not([data-checked]) {
+    --radio-border-color: var(--radio-error-false-border-color);
+    --radio-fill: var(--radio-error-false-fill);
   }
+}
+
+@utility radio-control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: var(--radio-control-size);
+  height: var(--radio-control-size);
+  border: var(--radio-border-width) solid var(--radio-border-color);
+  border-radius: var(--radio-radius);
+  background-color: var(--radio-fill);
+  transition: var(--radio-transition);
+}
+
+@utility radio-indicator {
+  width: var(--radio-indicator-size);
+  height: var(--radio-indicator-size);
+  border-radius: var(--radio-radius);
+  background-color: var(--radio-active-fill);
 }

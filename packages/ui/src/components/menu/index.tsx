@@ -2,15 +2,18 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import type { ReactNode } from 'react';
 
 import { cn } from '../../lib/utils.ts';
-import './menu.css';
 
-export const menuItemVariants = cva('ds-menu__item', {
+export const menuItemVariants = cva('menu-item', {
   variants: {
     variant: {
-      single: 'ds-menu__item--single',
-      multiple: 'ds-menu__item--multiple',
+      single: '',
+      multiple: '',
     },
   },
+  compoundVariants: [
+    { variant: 'single', class: 'menu-item-single' },
+    { variant: 'multiple', class: 'menu-item-multiple' },
+  ],
   defaultVariants: {
     variant: 'single',
   },
@@ -25,7 +28,11 @@ export type MenuItemTextProps = {
 
 /** Label text for a menu list item. */
 export function MenuItemText({ className, children }: MenuItemTextProps) {
-  return <span className={cn('ds-menu__item-text', className)}>{children}</span>;
+  return (
+    <span className={cn('menu-item-text', className)} data-slot="menu-item-text">
+      {children}
+    </span>
+  );
 }
 
 export type MenuItemCheckboxProps = {
@@ -37,8 +44,8 @@ export type MenuItemCheckboxProps = {
 /** Checkbox control for multi-select menu items. Pair with a selection indicator in `children`. */
 export function MenuItemCheckbox({ className, children }: MenuItemCheckboxProps) {
   return (
-    <span className={cn('ds-menu__item-checkbox', className)} aria-hidden>
-      <span className="ds-menu__item-checkbox-control">{children}</span>
+    <span className={cn('menu-item-checkbox', className)} data-slot="menu-item-checkbox" aria-hidden>
+      <span className="menu-item-checkbox-control">{children}</span>
     </span>
   );
 }

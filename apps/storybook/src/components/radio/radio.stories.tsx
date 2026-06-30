@@ -3,7 +3,7 @@ import { expect, within } from 'storybook/test';
 
 import { Radio, RadioGroup } from '@ds-12/ui/radio';
 
-import { createRadioDisabledPlay, runRadioInteractionTests } from '../../lib/component-tests.ts';
+import { createRadioDisabledPlay, expectDataSlotVariant, runRadioInteractionTests } from '../../lib/component-tests.ts';
 import { booleanArgType, selectArgType } from '../../lib/story-arg-types.ts';
 import { showcaseParameters } from '../../lib/story-test-config.ts';
 import { RADIO_SIZES, RadioStatesMatrix } from './radio-story-fixtures.tsx';
@@ -41,7 +41,15 @@ type Story = StoryObj<typeof meta>;
 
 /** Use within a `RadioGroup` when users must pick exactly one option — for example, a delivery method selector. */
 export const Default: Story = {
-  play: (context) => runRadioInteractionTests(context, /option a/i, true),
+  play: async (context) => {
+    await runRadioInteractionTests(context, /option a/i, true);
+    await expectDataSlotVariant(context.canvasElement, {
+      slot: 'radio',
+      variant: 'lg',
+      role: 'radio',
+      name: /option a/i,
+    });
+  },
 };
 
 /** Use the small size in compact desktop layouts such as settings sidebars or comparison tables. */
@@ -49,7 +57,15 @@ export const Small: Story = {
   args: {
     size: 'sm',
   },
-  play: (context) => runRadioInteractionTests(context, /option a/i, true),
+  play: async (context) => {
+    await runRadioInteractionTests(context, /option a/i, true);
+    await expectDataSlotVariant(context.canvasElement, {
+      slot: 'radio',
+      variant: 'sm',
+      role: 'radio',
+      name: /option a/i,
+    });
+  },
 };
 
 /** Use the invalid state when no option has been selected in a required radio group. */
