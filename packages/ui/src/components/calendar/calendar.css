@@ -1,0 +1,333 @@
+/* Base layout */
+@utility calendar {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--calendar-months-gap);
+  padding: var(--calendar-padding);
+  border: var(--calendar-border-width) solid var(--calendar-border-color);
+  border-radius: var(--calendar-radius);
+  background-color: var(--calendar-fill);
+  box-shadow: var(--calendar-shadow);
+  color: var(--calendar-day-label-fill);
+  font-family: var(--calendar-day-label-font-family);
+
+  --rdp-accent-color: var(--calendar-selected-fill);
+  --rdp-accent-background-color: var(--calendar-range-middle-fill);
+  --rdp-day-height: var(--calendar-day-size);
+  --rdp-day-width: var(--calendar-day-size);
+  --rdp-day_button-height: var(--calendar-day-size);
+  --rdp-day_button-width: var(--calendar-day-size);
+  --rdp-day_button-border-radius: var(--calendar-day-radius);
+  --rdp-day_button-border: none;
+  --rdp-selected-border: none;
+  --rdp-disabled-opacity: var(--calendar-outside-opacity);
+  --rdp-outside-opacity: var(--calendar-outside-opacity);
+  --rdp-today-color: var(--calendar-day-label-fill);
+  --rdp-dropdown-gap: var(--calendar-caption-gap);
+  --rdp-months-gap: var(--calendar-months-gap);
+  --rdp-nav-height: var(--calendar-nav-height);
+  --rdp-nav_button-height: var(--calendar-nav-height);
+  --rdp-nav_button-width: var(--calendar-nav-height);
+  --rdp-nav_button-disabled-opacity: var(--calendar-outside-opacity);
+  --rdp-range_middle-background-color: var(--calendar-range-middle-fill);
+  --rdp-range_middle-color: var(--calendar-range-middle-label-fill);
+  --rdp-range_start-color: var(--calendar-selected-label-fill);
+  --rdp-range_start-background: linear-gradient(
+    var(--rdp-gradient-direction),
+    transparent 50%,
+    var(--rdp-range_middle-background-color) 50%
+  );
+  --rdp-range_start-date-background-color: var(--calendar-selected-fill);
+  --rdp-range_end-background: linear-gradient(
+    var(--rdp-gradient-direction),
+    var(--rdp-range_middle-background-color) 50%,
+    transparent 50%
+  );
+  --rdp-range_end-color: var(--calendar-selected-label-fill);
+  --rdp-range_end-date-background-color: var(--calendar-selected-fill);
+  --rdp-gradient-direction: 90deg;
+  --rdp-weekday-opacity: 1;
+  --rdp-weekday-padding: 0;
+  --rdp-weekday-text-align: center;
+}
+
+@utility calendar-default {
+  width: var(--calendar-default-width);
+}
+
+@utility calendar-range {
+  width: var(--calendar-range-width);
+  justify-content: center;
+}
+
+@utility calendar-chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--calendar-nav-icon-fill);
+}
+
+/* react-day-picker structure — scoped under .calendar */
+.calendar * {
+  box-sizing: border-box;
+}
+
+.calendar .rdp-root {
+  position: relative;
+  width: 100%;
+}
+
+.calendar .rdp-months {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--rdp-months-gap);
+  width: 100%;
+  max-width: fit-content;
+}
+
+.calendar-range .rdp-months {
+  justify-content: center;
+  max-width: 100%;
+}
+
+.calendar-range .rdp-month {
+  width: var(--calendar-range-month-width);
+}
+
+.calendar .rdp-month_grid {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.calendar .rdp-month_caption {
+  display: flex;
+  align-items: center;
+  height: var(--rdp-nav-height);
+  margin-bottom: var(--calendar-caption-margin-bottom);
+  font-family: var(--calendar-caption-label-font-family);
+  font-size: var(--calendar-caption-label-font-size);
+  font-weight: var(--calendar-caption-label-font-weight);
+  line-height: var(--calendar-caption-label-line-height);
+  letter-spacing: var(--calendar-caption-label-letter-spacing);
+  color: var(--calendar-caption-label-fill);
+}
+
+.calendar .rdp-caption_label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  white-space: nowrap;
+  color: inherit;
+  font: inherit;
+}
+
+.calendar-range .rdp-caption_label {
+  width: 100%;
+}
+
+.calendar .rdp-dropdown_root .rdp-caption_label {
+  width: auto;
+}
+
+.calendar-default .rdp-dropdowns {
+  width: var(--calendar-default-caption-width);
+  justify-content: center;
+}
+
+.calendar .rdp-dropdowns {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--rdp-dropdown-gap);
+}
+
+.calendar .rdp-dropdown_root {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--calendar-dropdown-gap);
+  height: var(--calendar-dropdown-height);
+  padding-inline: var(--calendar-dropdown-padding-start) var(--calendar-dropdown-padding-end);
+  border-radius: var(--calendar-dropdown-radius);
+  background-color: var(--calendar-dropdown-fill);
+  color: var(--calendar-caption-label-fill);
+  font-family: var(--calendar-caption-label-font-family);
+  font-size: var(--calendar-caption-label-font-size);
+  font-weight: var(--calendar-caption-label-font-weight);
+  line-height: var(--calendar-caption-label-line-height);
+  letter-spacing: var(--calendar-caption-label-letter-spacing);
+}
+
+.calendar .rdp-dropdown {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  opacity: 0;
+  cursor: inherit;
+  appearance: none;
+}
+
+.calendar .rdp-button_previous,
+.calendar .rdp-button_next {
+  width: var(--rdp-nav_button-width);
+  height: var(--rdp-nav_button-height);
+}
+
+.calendar .rdp-nav {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  height: var(--rdp-nav-height);
+}
+
+.calendar[data-nav-layout="around"] .rdp-month {
+  position: relative;
+}
+
+.calendar[data-nav-layout="around"] .rdp-month_caption {
+  justify-content: center;
+  margin-inline: var(--rdp-nav_button-width);
+}
+
+.calendar[data-nav-layout="around"] .rdp-button_previous {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  height: var(--rdp-nav-height);
+}
+
+.calendar[data-nav-layout="around"] .rdp-button_next {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  height: var(--rdp-nav-height);
+}
+
+.calendar .rdp-weekdays {
+  display: flex;
+  justify-content: space-between;
+}
+
+.calendar .rdp-weekday {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--calendar-day-size);
+  height: var(--calendar-weekday-height);
+  color: var(--calendar-weekday-fill);
+  font-family: var(--calendar-weekday-font-family);
+  font-size: var(--calendar-weekday-font-size);
+  font-weight: var(--calendar-weekday-font-weight);
+  line-height: var(--calendar-weekday-line-height);
+  letter-spacing: var(--calendar-weekday-letter-spacing);
+  text-align: center;
+}
+
+.calendar .rdp-week {
+  display: flex;
+  justify-content: space-between;
+  padding-top: var(--calendar-row-gap);
+}
+
+.calendar .rdp-day {
+  width: var(--rdp-day-width);
+  height: var(--rdp-day-height);
+  text-align: center;
+}
+
+.calendar .rdp-day_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--rdp-day_button-width);
+  height: var(--rdp-day_button-height);
+  margin: 0;
+  padding: 0;
+  border: var(--rdp-day_button-border);
+  border-radius: var(--rdp-day_button-border-radius);
+  background: var(--calendar-day-fill);
+  color: var(--calendar-day-label-fill);
+  font-family: var(--calendar-day-label-font-family);
+  font-size: var(--calendar-day-label-font-size);
+  font-weight: var(--calendar-day-label-font-weight);
+  line-height: var(--calendar-day-label-line-height);
+  letter-spacing: var(--calendar-day-label-letter-spacing);
+  cursor: var(--cursor-interactive);
+}
+
+.calendar .rdp-day_button:disabled {
+  cursor: not-allowed;
+}
+
+.calendar .rdp-outside {
+  opacity: var(--rdp-outside-opacity);
+}
+
+.calendar .rdp-outside.rdp-range_middle,
+.calendar .rdp-outside.rdp-range_start,
+.calendar .rdp-outside.rdp-range_end {
+  opacity: 1;
+}
+
+.calendar .rdp-day_button:focus-visible {
+  outline: var(--calendar-focus-ring-width) var(--calendar-focus-ring-style) var(--calendar-focus-ring-color);
+  outline-offset: var(--calendar-focus-ring-offset);
+}
+
+.calendar .rdp-selected:not(.rdp-range_middle) .rdp-day_button {
+  background-color: var(--calendar-selected-fill);
+  color: var(--calendar-selected-label-fill);
+}
+
+.calendar .rdp-selected {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.calendar .rdp-range_start {
+  background: var(--rdp-range_start-background);
+}
+
+.calendar .rdp-range_middle {
+  background-color: var(--rdp-range_middle-background-color);
+}
+
+.calendar .rdp-range_end {
+  background: var(--rdp-range_end-background);
+}
+
+.calendar .rdp-range_start.rdp-range_end {
+  background: revert;
+}
+
+.calendar .rdp-week .rdp-range_middle:first-child {
+  border-top-left-radius: var(--calendar-day-radius);
+  border-bottom-left-radius: var(--calendar-day-radius);
+}
+
+.calendar .rdp-week .rdp-range_middle:last-child {
+  border-top-right-radius: var(--calendar-day-radius);
+  border-bottom-right-radius: var(--calendar-day-radius);
+}
+
+.calendar .rdp-range_middle .rdp-day_button {
+  background: transparent;
+  border-radius: 0;
+  color: var(--calendar-range-middle-label-fill);
+}
+
+.calendar .rdp-range_start .rdp-day_button,
+.calendar .rdp-range_end .rdp-day_button {
+  background-color: var(--calendar-selected-fill);
+  color: var(--calendar-selected-label-fill);
+}

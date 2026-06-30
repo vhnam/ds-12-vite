@@ -1,5 +1,5 @@
 import type { StoryObj } from '@storybook/react-vite';
-import { expect, userEvent, within } from 'storybook/test';
+import { expect, userEvent, waitFor, within } from 'storybook/test';
 
 type PlayFunction = NonNullable<StoryObj['play']>;
 type PlayContext = Parameters<PlayFunction>[0];
@@ -559,6 +559,140 @@ export async function runSwitchInteractionTests(context: PlayContext, name: stri
   await createSwitchA11yPlay(name, false)(context);
   await createSwitchKeyboardFocusPlay(name)(context);
   await createSwitchTogglePlay(name)(context);
+}
+
+const CALENDAR_NAV_PREVIOUS = 'Go to the Previous Month';
+const CALENDAR_NAV_NEXT = 'Go to the Next Month';
+
+function getCalendarDayButton(canvasElement: HTMLElement, isoDate: string, index = 0) {
+  const dayButtons = within(canvasElement)
+    .getAllByRole('button')
+    .filter((button) => button.getAttribute('data-day') === isoDate);
+
+  if (dayButtons.length <= index) {
+    throw new Error(`Expected at least ${index + 1} day button(s) for ${isoDate}, found ${dayButtons.length}`);
+  }
+
+  return dayButtons[index];
+}
+
+export function createCalendarStructureA11yPlay(
+  options: { gridCount?: number; monthLabel?: RegExp } = {},
+): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const gridCount = options.gridCount ?? 1;
+
+    if (gridCount === 1) {
+      await expect(canvas.getByRole('grid')).toBeInTheDocument();
+      if (options.monthLabel) {
+        await expect(canvas.getByRole('grid', { name: options.monthLabel })).toBeInTheDocument();
+      }
+    } else {
+      await expect(canvas.getAllByRole('grid')).toHaveLength(gridCount);
+    }
+
+    await expect(canvas.getByRole('button', { name: CALENDAR_NAV_PREVIOUS })).toBeInTheDocument();
+    await expect(canvas.getByRole('button', { name: CALENDAR_NAV_NEXT })).toBeInTheDocument();
+  };
+}
+
+export function createCalendarSelectedDayA11yPlay(isoDate: string): PlayFunction {
+  return async ({ canvasElement }) => {
+    const dayButton = getCalendarDayButton(canvasElement, isoDate);
+
+    await expect(dayButton).toHaveAttribute('data-day', isoDate);
+    await expect(dayButton).toHaveAttribute('data-selected-single', 'true');
+    await expect(dayButton).toHaveAccessibleName(/selected/i);
+  };
+}
+
+export function createCalendarDropdownA11yPlay(): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await expect(canvas.getByLabelText('Choose the Month')).toBeInTheDocument();
+    await expect(canvas.getByLabelText('Choose the Year')).toBeInTheDocument();
+  };
+}
+
+export function createCalendarDropdownInteractionPlay(): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const monthDropdown = canvas.getByLabelText('Choose the Month');
+    const yearDropdown = canvas.getByLabelText('Choose the Year');
+
+    await userEvent.click(monthDropdown);
+    await expect(monthDropdown).toHaveFocus();
+
+    await userEvent.click(yearDropdown);
+    await expect(yearDropdown).toHaveFocus();
+  };
+}
+
+export function createCalendarMonthNavigationPlay(fromMonth: RegExp, toMonth: RegExp): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await expect(canvas.getByRole('grid', { name: fromMonth })).toBeInTheDocument();
+    await userEvent.click(canvas.getByRole('button', { name: CALENDAR_NAV_NEXT }));
+    await expect(canvas.getByRole('grid', { name: toMonth })).toBeInTheDocument();
+  };
+}
+
+export function createCalendarDaySelectPlay(isoDate: string, previouslySelectedDay?: string): PlayFunction {
+  return async ({ canvasElement }) => {
+    const dayButton = getCalendarDayButton(canvasElement, isoDate);
+
+    await userEvent.click(dayButton);
+
+    await waitFor(() => {
+      const selectedDay = getCalendarDayButton(canvasElement, isoDate);
+      if (selectedDay.getAttribute('data-selected-single') !== 'true') {
+        throw new Error(`Expected ${isoDate} to be selected`);
+      }
+    });
+
+    const selectedDayButton = getCalendarDayButton(canvasElement, isoDate);
+    await expect(selectedDayButton).toHaveAttribute('data-day', isoDate);
+    await expect(selectedDayButton).toHaveAccessibleName(/selected/i);
+    await expect(canvasElement.querySelectorAll('button[data-selected-single="true"]')).toHaveLength(1);
+
+    if (previouslySelectedDay) {
+      await expect(getCalendarDayButton(canvasElement, previouslySelectedDay)).not.toHaveAttribute(
+        'data-selected-single',
+      );
+    }
+  };
+}
+
+export function createCalendarRangeA11yPlay(startDay: string, endDay: string): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const startButton = getCalendarDayButton(canvasElement, startDay);
+    const endButton = getCalendarDayButton(canvasElement, endDay);
+
+    await expect(canvas.getAllByRole('grid')).toHaveLength(2);
+    await expect(canvas.queryByLabelText('Choose the Month')).not.toBeInTheDocument();
+    await expect(startButton).toHaveAttribute('data-day', startDay);
+    await expect(startButton).toHaveAttribute('data-range-start', 'true');
+    await expect(endButton).toHaveAttribute('data-day', endDay);
+    await expect(endButton).toHaveAttribute('data-range-end', 'true');
+    await expect(canvasElement.querySelectorAll('button[data-range-middle="true"]').length).toBeGreaterThan(0);
+  };
+}
+
+export async function runCalendarDefaultInteractionTests(context: PlayContext): Promise<void> {
+  await expectDataSlotVariant(context.canvasElement, { slot: 'calendar', variant: 'default' });
+  await createCalendarStructureA11yPlay({ monthLabel: /june 2025/i })(context);
+  await createCalendarSelectedDayA11yPlay('2025-06-25')(context);
+  await createCalendarDropdownA11yPlay()(context);
+  await createCalendarDropdownInteractionPlay()(context);
+}
+
+export async function runCalendarRangeInteractionTests(context: PlayContext): Promise<void> {
+  await expectDataSlotVariant(context.canvasElement, { slot: 'calendar', variant: 'range' });
+  await createCalendarRangeA11yPlay('2025-06-25', '2025-07-09')(context);
 }
 
 export const textboxTestArgs = {

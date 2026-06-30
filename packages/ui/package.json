@@ -29,6 +29,7 @@
     "./avatar": "./dist/avatar.mjs",
     "./badge": "./dist/badge.mjs",
     "./button": "./dist/button.mjs",
+    "./calendar": "./dist/calendar.mjs",
     "./chip": "./dist/chip.mjs",
     "./checkbox": "./dist/checkbox.mjs",
     "./divider": "./dist/divider.mjs",
@@ -69,6 +70,7 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.0.0",
+    "@daypicker/react": "catalog:",
     "@ds-12/design-tokens": "workspace:*",
     "@material-symbols/font-400": "^0.40.2",
     "class-variance-authority": "^0.7.1",

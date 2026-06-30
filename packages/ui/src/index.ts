@@ -1,8 +1,14 @@
 export { Avatar, avatarVariants, type AvatarProps } from './components/avatar/index.tsx';
 export { Badge, BadgeIconSizeContext, badgeVariants, type BadgeProps } from './components/badge/index.tsx';
-export { Chip, chipVariants, type ChipProps } from './components/chip/index.tsx';
-export { Checkbox, checkboxVariants, type CheckboxProps } from './components/checkbox/index.tsx';
 export { Button, buttonVariants, type ButtonProps } from './components/button/index.tsx';
+export {
+  Calendar,
+  calendarVariants,
+  type CalendarProps,
+  type CalendarVariant,
+  type DateRange,
+} from './components/calendar/index.tsx';
+export { Chip, chipVariants, type ChipProps } from './components/chip/index.tsx';
 export { Divider, dividerVariants, type DividerProps } from './components/divider/index.tsx';
 export { Input, InputIconSizeContext, inputVariants, type InputProps } from './components/input/index.tsx';
 export {

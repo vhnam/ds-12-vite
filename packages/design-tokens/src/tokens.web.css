@@ -596,4 +596,77 @@
   --combobox-chip-remove-size: 16px;
   --combobox-chip-remove-fill: var(--color-semantic-text-neutral-bold);
   --combobox-chips-gap: var(--spacing-xxsmall);
+
+  /* --- Component tokens: calendar --- */
+  --calendar-radius: var(--radius-small);
+  --calendar-padding: var(--spacing-small);
+  --calendar-border-width: var(--border-width-small);
+  --calendar-border-color: var(--color-semantic-border-subtle);
+  --calendar-fill: var(--color-semantic-canvas-subtle);
+  --calendar-shadow: var(--elevation-2);
+  --calendar-months-gap: var(--spacing-medium);
+  /* TODO: needs token — Figma single-month width: 250px */
+  --calendar-default-width: 250px;
+  /* TODO: needs token — Figma range calendar width: 488px */
+  --calendar-range-width: 488px;
+  /* TODO: needs token — Figma range month panel width: 224px */
+  --calendar-range-month-width: 224px;
+
+  --calendar-nav-height: 32px;
+  /* TODO: needs token — Figma nav button horizontal padding (px-3): 12px */
+  --calendar-nav-button-padding-x: 12px;
+  /* TODO: needs token — Figma nav button radius (rounded-md): 6px */
+  --calendar-nav-button-radius: 6px;
+  --calendar-nav-icon-size: 16px;
+  --calendar-nav-icon-fill: var(--color-semantic-text-neutral-bold);
+
+  /* TODO: needs token — Figma gap-1,5 between month/year dropdowns: 6px */
+  --calendar-caption-gap: 6px;
+  /* TODO: needs token — Figma default caption dropdowns wrapper width: 160px */
+  --calendar-default-caption-width: 160px;
+  --calendar-caption-margin-bottom: var(--spacing-medium);
+  --calendar-dropdown-height: 32px;
+  --calendar-dropdown-padding-start: var(--spacing-xsmall);
+  --calendar-dropdown-padding-end: var(--spacing-xxsmall);
+  --calendar-dropdown-gap: var(--spacing-xxsmall);
+  --calendar-dropdown-radius: var(--radius-small);
+  --calendar-dropdown-fill: var(--calendar-fill);
+  --calendar-dropdown-chevron-size: 12px;
+  --calendar-caption-label-fill: var(--color-semantic-text-neutral-bold);
+  --calendar-caption-label-font-family: var(--paragraph-default-strong-font-family);
+  --calendar-caption-label-font-size: var(--paragraph-default-strong-font-size);
+  --calendar-caption-label-font-weight: var(--paragraph-default-strong-font-weight);
+  --calendar-caption-label-line-height: var(--paragraph-default-strong-line-height);
+  --calendar-caption-label-letter-spacing: var(--paragraph-default-strong-letter-spacing);
+
+  --calendar-weekday-height: 21px;
+  --calendar-weekday-fill: var(--color-semantic-text-neutral-moderate);
+  --calendar-weekday-font-family: var(--paragraph-small-font-family);
+  --calendar-weekday-font-size: var(--paragraph-small-font-size);
+  --calendar-weekday-font-weight: var(--paragraph-small-font-weight);
+  --calendar-weekday-line-height: var(--paragraph-small-line-height);
+  --calendar-weekday-letter-spacing: var(--paragraph-small-letter-spacing);
+
+  --calendar-day-size: 32px;
+  --calendar-day-radius: var(--radius-small);
+  --calendar-row-gap: var(--spacing-xsmall);
+  --calendar-day-fill: transparent;
+  --calendar-day-label-fill: var(--color-semantic-text-neutral-bold);
+  --calendar-day-label-font-family: var(--paragraph-default-font-family);
+  --calendar-day-label-font-size: var(--paragraph-default-font-size);
+  --calendar-day-label-font-weight: var(--paragraph-default-font-weight);
+  --calendar-day-label-line-height: var(--paragraph-default-line-height);
+  --calendar-day-label-letter-spacing: var(--paragraph-default-letter-spacing);
+  /* TODO: needs token — Figma outside-day opacity: 0.5 */
+  --calendar-outside-opacity: 0.5;
+
+  --calendar-selected-fill: var(--color-semantic-brand-bold);
+  --calendar-selected-label-fill: var(--color-semantic-canvas-moderate);
+  --calendar-range-middle-fill: var(--color-semantic-canvas-moderate);
+  --calendar-range-middle-label-fill: var(--color-semantic-text-neutral-bolder);
+
+  --calendar-focus-ring-width: var(--focus-ring-width);
+  --calendar-focus-ring-color: var(--focus-ring-color);
+  --calendar-focus-ring-offset: var(--focus-ring-offset);
+  --calendar-focus-ring-style: var(--focus-ring-style);
 }

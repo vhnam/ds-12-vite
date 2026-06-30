@@ -28,6 +28,7 @@ catalog:
   vite-plus: latest
   vitest: 4.1.9
   "@tanstack/react-table": ^8.21.3
+  "@daypicker/react": ^10.0.1
 
 catalogMode: prefer
 

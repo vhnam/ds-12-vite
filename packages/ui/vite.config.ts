@@ -5,6 +5,7 @@ const componentEntries = {
   avatar: 'src/components/avatar/index.tsx',
   badge: 'src/components/badge/index.tsx',
   button: 'src/components/button/index.tsx',
+  calendar: 'src/components/calendar/index.tsx',
   chip: 'src/components/chip/index.tsx',
   checkbox: 'src/components/checkbox/index.tsx',
   divider: 'src/components/divider/index.tsx',
