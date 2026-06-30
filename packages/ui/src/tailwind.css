@@ -33,5 +33,5 @@
 @import "./components/table/table.css";
 @import "./components/textarea/textarea.css";
 @import "./components/typography/typography.css";
-@import "@ds-12/design-tokens/tokens.css";
-@import "@ds-12/design-tokens/theme.css";
+@import "./vendor/tokens/tokens.css";
+@import "./vendor/tokens/theme.css";

@@ -10,11 +10,14 @@
   "author": "Author Name <author.name@mail.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/author/library.git"
+    "url": "git+https://github.com/vhnam/ds-12-vite.git",
+    "directory": "packages/ui"
   },
   "files": [
     "dist",
-    "src/tailwind.css"
+    "src/tailwind.css",
+    "src/vendor",
+    "src/components"
   ],
   "type": "module",
   "sideEffects": [
@@ -52,9 +55,10 @@
     "./switch": "./dist/switch.mjs",
     "./textarea": "./dist/textarea.mjs",
     "./typography": "./dist/typography.mjs",
+    "./styles.css": "./dist/styles.css",
     "./tailwind.css": "./src/tailwind.css",
-    "./tokens.css": "@ds-12/design-tokens/tokens.css",
-    "./theme.css": "@ds-12/design-tokens/theme.css",
+    "./tokens.css": "./src/vendor/tokens/tokens.css",
+    "./theme.css": "./src/vendor/tokens/theme.css",
     "./material-symbols.css": "@material-symbols/font-400/outlined.css",
     "./package.json": "./package.json"
   },
@@ -62,23 +66,26 @@
     "access": "public"
   },
   "scripts": {
-    "build": "vp pack",
-    "dev": "vp pack --watch",
+    "vendor-tokens": "node scripts/vendor-tokens.mjs",
+    "build:styles": "node scripts/build-styles.mjs",
+    "prebuild": "node scripts/vendor-tokens.mjs",
+    "build": "vp pack && node scripts/build-styles.mjs",
+    "dev": "node scripts/vendor-tokens.mjs && vp pack --watch",
     "test": "vp test",
     "check": "vp check",
     "prepublishOnly": "vp run build"
   },
   "dependencies": {
     "@base-ui/react": "^1.0.0",
-    "@daypicker/react": "catalog:",
-    "@ds-12/design-tokens": "workspace:*",
+    "@daypicker/react": "^10.0.1",
     "@material-symbols/font-400": "^0.40.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "tailwind-merge": "^3.3.1",
-    "tailwindcss": "^4.3.1"
+    "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
+    "@ds-12/design-tokens": "workspace:*",
+    "@tailwindcss/node": "^4.3.1",
     "@tailwindcss/vite": "catalog:",
     "@tsdown/css": "^0.22.3",
     "@types/node": "catalog:",
@@ -86,6 +93,7 @@
     "@types/react-dom": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
+    "tailwindcss": "catalog:",
     "typescript": "catalog:",
     "vite-plus": "catalog:"
   },
@@ -93,5 +101,10 @@
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "tailwindcss": "^4.3.1"
+  },
+  "peerDependenciesMeta": {
+    "tailwindcss": {
+      "optional": true
+    }
   }
 }

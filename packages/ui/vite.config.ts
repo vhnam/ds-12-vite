@@ -39,7 +39,6 @@ export default defineConfig({
   pack: {
     entry: {
       index: 'src/index.ts',
-      style: 'src/style-entry.ts',
       ...componentEntries,
     },
     dts: {
@@ -61,6 +60,8 @@ export default defineConfig({
       typeCheck: true,
     },
   },
-  fmt: {},
+  fmt: {
+    ignorePatterns: ['dist/**', 'src/vendor/**'],
+  },
   plugins: tailwindPlugins,
 });
