@@ -1,4 +1,12 @@
 export { Avatar, avatarVariants, type AvatarProps } from './components/avatar/index.tsx';
+export {
+  Alert,
+  alertIconVariants,
+  alertVariants,
+  type AlertLayout,
+  type AlertProps,
+  type AlertVariant,
+} from './components/alert/index.tsx';
 export { Badge, BadgeIconSizeContext, badgeVariants, type BadgeProps } from './components/badge/index.tsx';
 export {
   Breadcrumb,

@@ -30,6 +30,7 @@
   "exports": {
     ".": "./dist/index.mjs",
     "./avatar": "./dist/avatar.mjs",
+    "./alert": "./dist/alert.mjs",
     "./badge": "./dist/badge.mjs",
     "./breadcrumb": "./dist/breadcrumb.mjs",
     "./button": "./dist/button.mjs",

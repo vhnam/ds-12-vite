@@ -352,6 +352,27 @@ export function createBadgeA11yPlay(text: string): PlayFunction {
   };
 }
 
+export function createAlertA11yPlay(text: string, role: 'alert' | 'status'): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const alert = canvas.getByRole(role);
+
+    await expect(alert).toBeVisible();
+    await expect(canvas.getByText(text)).toBeVisible();
+    await expect(alert).toHaveAttribute('data-slot', 'alert');
+  };
+}
+
+export function createAlertDismissPlay(): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const dismiss = canvas.getByRole('button', { name: /dismiss/i });
+
+    await expect(dismiss).toBeVisible();
+    await expect(dismiss).toHaveAccessibleName('Dismiss');
+  };
+}
+
 export function createIconA11yPlay(iconName: string): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);

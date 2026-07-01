@@ -1,0 +1,173 @@
+/* Base layout — identical across all variants */
+@utility alert {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* Layout presets */
+@utility alert-preset-layout-default {
+  min-width: var(--alert-default-min-width);
+  gap: var(--alert-default-gap);
+  padding: var(--alert-default-padding-y) var(--alert-default-padding-x);
+  border-radius: var(--alert-default-radius);
+}
+
+@utility alert-preset-layout-full-width {
+  gap: var(--alert-full-width-gap);
+  padding: var(--alert-full-width-padding-y) var(--alert-full-width-padding-x);
+}
+
+/* Child parts */
+@utility alert-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--alert-icon-size);
+  height: var(--alert-icon-size);
+}
+
+@utility alert-content {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+@utility alert-title {
+  overflow: hidden;
+  width: 100%;
+  color: var(--alert-title-fill);
+  font-family: var(--alert-title-font-family);
+  font-size: var(--alert-title-font-size);
+  font-weight: var(--alert-title-font-weight);
+  line-height: var(--alert-title-line-height);
+  letter-spacing: var(--alert-title-letter-spacing);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@utility alert-description {
+  overflow-wrap: break-word;
+  width: 100%;
+  color: var(--alert-description-fill);
+  font-family: var(--alert-description-font-family);
+  font-size: var(--alert-description-font-size);
+  font-weight: var(--alert-description-font-weight);
+  line-height: var(--alert-description-line-height);
+  letter-spacing: var(--alert-description-letter-spacing);
+}
+
+@utility alert-action {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  padding: var(--alert-action-padding-y) 0;
+  border: none;
+  background: transparent;
+  color: var(--alert-action-fill);
+  font-family: var(--alert-action-font-family);
+  font-size: var(--alert-action-font-size);
+  font-weight: var(--alert-action-font-weight);
+  line-height: var(--alert-action-line-height);
+  letter-spacing: var(--alert-action-letter-spacing);
+  white-space: nowrap;
+  cursor: var(--cursor-interactive);
+  transition: var(--transition-interactive);
+
+  &:hover {
+    color: var(--alert-action-hovered-fill);
+  }
+
+  &:active {
+    color: var(--alert-action-pressed-fill);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: var(--alert-focus-ring-width) var(--alert-focus-ring-style) var(--alert-focus-ring-color);
+    outline-offset: var(--alert-focus-ring-offset);
+    border-radius: var(--alert-focus-ring-radius);
+  }
+}
+
+@utility alert-dismiss {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--alert-dismiss-size);
+  height: var(--alert-dismiss-size);
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--alert-dismiss-fill);
+  cursor: var(--cursor-interactive);
+  transition: var(--transition-interactive);
+
+  &:hover {
+    color: var(--alert-dismiss-hovered-fill);
+  }
+
+  &:active {
+    color: var(--alert-dismiss-pressed-fill);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: var(--alert-focus-ring-width) var(--alert-focus-ring-style) var(--alert-focus-ring-color);
+    outline-offset: var(--alert-focus-ring-offset);
+    border-radius: var(--alert-focus-ring-radius);
+  }
+}
+
+/* Variant colour presets */
+@utility alert-negative {
+  background-color: var(--alert-negative-fill);
+}
+
+@utility alert-information {
+  background-color: var(--alert-information-fill);
+}
+
+@utility alert-positive {
+  background-color: var(--alert-positive-fill);
+}
+
+@utility alert-attention {
+  background-color: var(--alert-attention-fill);
+}
+
+@utility alert-neutral {
+  background-color: var(--alert-neutral-fill);
+}
+
+@utility alert-icon-negative {
+  color: var(--alert-negative-icon-fill);
+}
+
+@utility alert-icon-information {
+  color: var(--alert-information-icon-fill);
+}
+
+@utility alert-icon-positive {
+  color: var(--alert-positive-icon-fill);
+}
+
+@utility alert-icon-attention {
+  color: var(--alert-attention-icon-fill);
+}
+
+@utility alert-icon-neutral {
+  color: var(--alert-neutral-icon-fill);
+}

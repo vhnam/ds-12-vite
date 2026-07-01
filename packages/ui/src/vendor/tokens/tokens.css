@@ -744,4 +744,62 @@
   /* TODO: Figma label/default uses lineHeight/16 — label-default resolves to line-height-14 */
   --progress-indicator-number-line-height: var(--line-height-16);
   --progress-indicator-number-letter-spacing: var(--label-default-letter-spacing);
+
+  /* --- Component tokens: alert (Figma Banner) --- */
+  --alert-default-min-width: var(--banner-container-size-default-min-width);
+  --alert-default-radius: var(--banner-container-size-default-border-radius);
+  --alert-default-padding-x: var(--banner-container-size-default-horizontal-padding);
+  --alert-default-padding-y: var(--banner-container-size-default-vertical-padding);
+  --alert-default-gap: var(--banner-container-size-default-item-spacing);
+  --alert-full-width-padding-x: var(--banner-container-size-full-width-horizontal-padding);
+  --alert-full-width-padding-y: var(--banner-container-size-full-width-vertical-padding);
+  --alert-full-width-gap: var(--banner-container-size-full-width-item-spacing);
+
+  --alert-icon-size: var(--banner-status-icon-danger-width);
+
+  --alert-negative-fill: var(--banner-container-color-danger-fill);
+  --alert-information-fill: var(--banner-container-color-information-fill);
+  --alert-positive-fill: var(--banner-container-color-success-fill);
+  --alert-attention-fill: var(--banner-container-color-warning-fill);
+  --alert-neutral-fill: var(--banner-container-color-neutral-fill);
+
+  --alert-negative-icon-fill: var(--banner-status-icon-danger-fill);
+  --alert-information-icon-fill: var(--banner-status-icon-information-fill);
+  --alert-positive-icon-fill: var(--banner-status-icon-success-fill);
+  --alert-attention-icon-fill: var(--banner-status-icon-warning-fill);
+  --alert-neutral-icon-fill: var(--banner-status-icon-neutral-fill);
+
+  --alert-title-fill: var(--banner-typography-text-fill);
+  --alert-title-font-family: var(--banner-typography-text-font-family);
+  --alert-title-font-size: var(--banner-typography-text-font-size);
+  --alert-title-font-weight: var(--banner-typography-text-font-weight);
+  --alert-title-line-height: var(--banner-typography-text-line-height);
+  --alert-title-letter-spacing: var(--banner-typography-text-letter-spacing);
+
+  --alert-description-fill: var(--banner-typography-sub-text-fill);
+  --alert-description-font-family: var(--banner-typography-sub-text-font-family);
+  --alert-description-font-size: var(--banner-typography-sub-text-font-size);
+  --alert-description-font-weight: var(--banner-typography-sub-text-font-weight);
+  --alert-description-line-height: var(--banner-typography-sub-text-line-height);
+  --alert-description-letter-spacing: var(--banner-typography-sub-text-letter-spacing);
+
+  --alert-action-fill: var(--banner-action-button-default-fill);
+  --alert-action-hovered-fill: var(--banner-action-button-hovered-fill);
+  --alert-action-pressed-fill: var(--banner-action-button-pressed-fill);
+  --alert-action-font-family: var(--banner-action-button-default-font-family);
+  --alert-action-font-size: var(--banner-action-button-default-font-size);
+  --alert-action-font-weight: var(--banner-action-button-default-font-weight);
+  --alert-action-line-height: var(--banner-action-button-default-line-height);
+  --alert-action-letter-spacing: var(--banner-action-button-default-letter-spacing);
+  --alert-action-padding-y: var(--spacing-xxsmall);
+
+  --alert-dismiss-size: var(--banner-dismiss-button-default-width);
+  --alert-dismiss-fill: var(--banner-dismiss-button-default-fill);
+  --alert-dismiss-hovered-fill: var(--banner-dismiss-button-hovered-fill);
+  --alert-dismiss-pressed-fill: var(--banner-dismiss-button-pressed-fill);
+  --alert-focus-ring-width: var(--focus-ring-width);
+  --alert-focus-ring-color: var(--focus-ring-color);
+  --alert-focus-ring-offset: var(--focus-ring-offset);
+  --alert-focus-ring-style: var(--focus-ring-style);
+  --alert-focus-ring-radius: var(--radius-xsmall);
 }

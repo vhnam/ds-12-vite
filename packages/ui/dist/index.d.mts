@@ -1,3 +1,5 @@
+import { ComponentProps, ReactNode } from "react";
+
 import { Avatar, AvatarProps, avatarVariants } from "./avatar.mjs";
 import { Badge, BadgeIconSizeContext, BadgeProps, badgeVariants } from "./badge.mjs";
 import { Button, ButtonProps, buttonVariants } from "./button.mjs";
@@ -74,7 +76,136 @@ import {
   TypographyWeight,
   typographyVariants,
 } from "./typography.mjs";
+
+//#region src/components/alert/index.d.ts
+type AlertLayout = "default" | "fullWidth";
+type AlertVariant = "negative" | "information" | "positive" | "attention" | "neutral";
+declare const alertVariants: (
+  props?:
+    | ({
+        layout?: "default" | "fullWidth" | null | undefined;
+        variant?: "attention" | "information" | "negative" | "neutral" | "positive" | null | undefined;
+      } & import("class-variance-authority/types").ClassProp)
+    | undefined,
+) => string;
+declare const alertIconVariants: (
+  props?:
+    | ({
+        variant?: "attention" | "information" | "negative" | "neutral" | "positive" | null | undefined;
+      } & import("class-variance-authority/types").ClassProp)
+    | undefined,
+) => string;
+type AlertProps = Omit<ComponentProps<"div">, "title"> & {
+  /** Additional CSS class names applied to the root element. */ className?: string;
+  /**
+   * Container layout — `default` is a rounded inline card; `fullWidth` spans edge-to-edge without radius.
+   * @default "default"
+   */
+  layout?: AlertLayout;
+  /**
+   * Semantic colour and icon — negative for errors, positive for success, attention for warnings,
+   * information for guidance, neutral for general notices.
+   * @default "negative"
+   */
+  variant?: AlertVariant /** Primary message shown in semibold body text. */;
+  title: ReactNode /** Optional supporting detail shown below the title in regular body text. */;
+  description?: ReactNode /** Label for the optional text action rendered on the trailing edge. */;
+  actionLabel?: string /** Called when the trailing text action is activated. */;
+  onAction?: () => void /** Called when the dismiss control is activated. When omitted, the dismiss button is hidden. */;
+  onDismiss?: () => void;
+};
+/** Contextual status banner with semantic colour, optional description, action, and dismiss controls. */
+declare function Alert({
+  className,
+  layout,
+  variant,
+  title,
+  description,
+  actionLabel,
+  onAction,
+  onDismiss,
+  ...props
+}: AlertProps): import("react").JSX.Element;
+//#endregion
+//#region src/components/progress/get-progress-step-status.d.ts
+type ProgressStepStatus = "upcoming" | "current" | "past";
+/** Maps a 0-based step index and 1-based current step to a visual status. */
+declare function getProgressStepStatus(stepIndex: number, currentStep: number): ProgressStepStatus;
+//#endregion
+//#region src/components/progress/index.d.ts
+declare const ProgressIconSizeContext: import("react").Context<number | undefined>;
+declare const progressVariants: (
+  props?: ({} & import("class-variance-authority/types").ClassProp) | undefined,
+) => string;
+declare const progressStepVariants: (
+  props?:
+    | ({
+        status?: "current" | "past" | "upcoming" | null | undefined;
+      } & import("class-variance-authority/types").ClassProp)
+    | undefined,
+) => string;
+declare const progressIndicatorVariants: (
+  props?:
+    | ({
+        status?: "current" | "past" | "upcoming" | null | undefined;
+      } & import("class-variance-authority/types").ClassProp)
+    | undefined,
+) => string;
+declare const progressLabelVariants: (
+  props?:
+    | ({
+        status?: "current" | "past" | "upcoming" | null | undefined;
+      } & import("class-variance-authority/types").ClassProp)
+    | undefined,
+) => string;
+type ProgressStepItem = {
+  /** Step label shown beside the indicator. */ label: string;
+};
+type ProgressStepProps = ComponentProps<"div"> & {
+  /** Additional CSS class names applied to the step element. */ className?: string /** Step label shown beside the indicator. */;
+  label: string;
+  /**
+   * Visual state — `current` for the active step, `past` for completed steps, `upcoming` for future steps.
+   * @default "upcoming"
+   */
+  status?: ProgressStepStatus;
+  /**
+   * Step number shown inside the indicator for upcoming and current states.
+   * Ignored when `status` is `past` (checkmark is shown instead).
+   */
+  stepNumber?: number;
+};
+type ProgressProps = Omit<ComponentProps<"nav">, "children"> & {
+  /** Additional CSS class names applied to the navigation element. */ className?: string /** Ordered steps from first to last. */;
+  steps: ProgressStepItem[];
+  /**
+   * 1-based index of the active step.
+   * Steps before this index render as completed; steps after render as upcoming.
+   */
+  currentStep: number;
+};
+/** Single progress step with numbered or completed indicator and label. */
+declare function ProgressStep({
+  className,
+  label,
+  status,
+  stepNumber,
+  ...props
+}: ProgressStepProps): import("react").JSX.Element;
+/** Horizontal step indicator for multi-step flows on desktop. */
+declare function Progress({
+  className,
+  steps,
+  currentStep,
+  "aria-label": ariaLabel,
+  ...props
+}: ProgressProps): import("react").JSX.Element;
+//#endregion
 export {
+  Alert,
+  type AlertLayout,
+  type AlertProps,
+  type AlertVariant,
   Avatar,
   type AvatarProps,
   Badge,
@@ -125,6 +256,13 @@ export {
   type MenuVariant,
   Pagination,
   type PaginationProps,
+  Progress,
+  ProgressIconSizeContext,
+  type ProgressProps,
+  ProgressStep,
+  type ProgressStepItem,
+  type ProgressStepProps,
+  type ProgressStepStatus,
   Radio,
   RadioField,
   type RadioFieldProps,
@@ -167,6 +305,8 @@ export {
   type TypographySize,
   type TypographyVariant,
   type TypographyWeight,
+  alertIconVariants,
+  alertVariants,
   avatarVariants,
   badgeVariants,
   breadcrumbVariants,
@@ -183,12 +323,17 @@ export {
   dividerVariants,
   getBreadcrumbSegments,
   getPaginationItems,
+  getProgressStepStatus,
   inputFieldVariants,
   inputVariants,
   menuItemVariants,
   menuItemVariants as menuVariants,
   paginationButtonVariants,
   paginationVariants,
+  progressIndicatorVariants,
+  progressLabelVariants,
+  progressStepVariants,
+  progressVariants,
   radioVariants,
   selectFieldVariants,
   selectVariants,
