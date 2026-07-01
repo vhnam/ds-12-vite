@@ -121,6 +121,7 @@ function m({
                 selected: H,
                 onSelect: G,
                 defaultMonth: A.defaultMonth ?? H,
+                className: `[&_.rdp-month]:w-full`,
               }),
             }),
           }),

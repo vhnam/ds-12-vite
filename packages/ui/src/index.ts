@@ -1,5 +1,15 @@
 export { Avatar, avatarVariants, type AvatarProps } from './components/avatar/index.tsx';
 export { Badge, BadgeIconSizeContext, badgeVariants, type BadgeProps } from './components/badge/index.tsx';
+export {
+  Breadcrumb,
+  BreadcrumbIconSizeContext,
+  breadcrumbVariants,
+  getBreadcrumbSegments,
+  type BreadcrumbItem,
+  type BreadcrumbLinkRenderProps,
+  type BreadcrumbProps,
+  type BreadcrumbSegment,
+} from './components/breadcrumb/index.tsx';
 export { Button, buttonVariants, type ButtonProps } from './components/button/index.tsx';
 export {
   Calendar,

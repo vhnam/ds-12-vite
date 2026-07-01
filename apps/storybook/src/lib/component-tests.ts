@@ -296,6 +296,34 @@ export function createSeparatorA11yPlay(): PlayFunction {
   };
 }
 
+export function createBreadcrumbA11yPlay(): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await expect(canvas.getByRole('navigation', { name: /breadcrumb/i })).toBeInTheDocument();
+  };
+}
+
+export function createBreadcrumbLinkPlay(name: string | RegExp): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const link = canvas.getByRole('link', { name });
+
+    await expect(link).toBeInTheDocument();
+    await expect(link).toHaveAccessibleName(name);
+  };
+}
+
+export function createBreadcrumbCurrentPagePlay(name: string | RegExp): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const currentPage = canvas.getByText(name);
+
+    await expect(currentPage).toHaveAttribute('aria-current', 'page');
+    await expect(currentPage).toHaveAttribute('data-slot', 'breadcrumb-page');
+  };
+}
+
 export function createBadgeA11yPlay(text: string): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);

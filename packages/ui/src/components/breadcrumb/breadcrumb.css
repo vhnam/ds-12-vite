@@ -1,0 +1,83 @@
+/* Base layout */
+@utility breadcrumb {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+@utility breadcrumb-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@utility breadcrumb-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--breadcrumb-gap);
+}
+
+/* Label typography — Figma label/large (for desktop) */
+@utility breadcrumb-label {
+  overflow-wrap: break-word;
+  font-family: var(--breadcrumb-label-font-family);
+  font-size: var(--breadcrumb-label-font-size);
+  font-weight: var(--breadcrumb-label-font-weight);
+  line-height: var(--breadcrumb-label-line-height);
+  letter-spacing: var(--breadcrumb-label-letter-spacing);
+  white-space: nowrap;
+}
+
+@utility breadcrumb-link {
+  display: inline-flex;
+  align-items: center;
+  color: var(--breadcrumb-link-fill);
+  text-decoration: none;
+  cursor: var(--cursor-interactive);
+  transition: var(--breadcrumb-transition);
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: var(--breadcrumb-focus-ring-width) var(--breadcrumb-focus-ring-style) var(--breadcrumb-focus-ring-color);
+    outline-offset: var(--breadcrumb-focus-ring-offset);
+    border-radius: var(--breadcrumb-focus-ring-radius);
+  }
+}
+
+@utility breadcrumb-page {
+  display: inline-flex;
+  align-items: center;
+  color: var(--breadcrumb-page-fill);
+}
+
+@utility breadcrumb-separator {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  color: var(--breadcrumb-separator-fill);
+}
+
+@utility breadcrumb-ellipsis {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  color: var(--breadcrumb-separator-fill);
+}
+
+@utility breadcrumb-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--breadcrumb-icon-size);
+  height: var(--breadcrumb-icon-size);
+  color: inherit;
+}

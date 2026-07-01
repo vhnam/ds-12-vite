@@ -12,6 +12,7 @@
 
 @import "./components/avatar/avatar.css";
 @import "./components/badge/badge.css";
+@import "./components/breadcrumb/breadcrumb.css";
 @import "./components/button/button.css";
 @import "./components/calendar/calendar.css";
 @import "./components/date-picker/date-picker.css";

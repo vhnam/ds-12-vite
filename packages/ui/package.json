@@ -31,6 +31,7 @@
     ".": "./dist/index.mjs",
     "./avatar": "./dist/avatar.mjs",
     "./badge": "./dist/badge.mjs",
+    "./breadcrumb": "./dist/breadcrumb.mjs",
     "./button": "./dist/button.mjs",
     "./calendar": "./dist/calendar.mjs",
     "./date-picker": "./dist/date-picker.mjs",

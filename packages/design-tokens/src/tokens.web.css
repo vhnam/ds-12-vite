@@ -680,4 +680,24 @@
   --date-picker-popup-radius: 0;
   --date-picker-popup-padding: 0;
   --date-picker-popup-shadow: var(--calendar-shadow);
+
+  /* --- Component tokens: breadcrumb --- */
+  --breadcrumb-gap: var(--spacing-xxsmall);
+  /* TODO: needs token — Figma chevron_forward / more_horiz size: 14px */
+  --breadcrumb-icon-size: 14px;
+  --breadcrumb-label-font-family: var(--label-large-font-family);
+  --breadcrumb-label-font-size: var(--label-large-font-size);
+  --breadcrumb-label-font-weight: var(--label-large-font-weight);
+  --breadcrumb-label-letter-spacing: var(--label-large-letter-spacing);
+  /* TODO: Figma label/large (for desktop) uses lineHeight/20 — label-large token resolves to line-height-16 */
+  --breadcrumb-label-line-height: var(--line-height-20);
+  --breadcrumb-link-fill: var(--color-semantic-text-neutral-moderate);
+  --breadcrumb-page-fill: var(--color-semantic-text-neutral-bolder);
+  --breadcrumb-separator-fill: var(--color-semantic-text-neutral-moderate);
+  --breadcrumb-transition: var(--transition-interactive);
+  --breadcrumb-focus-ring-width: var(--focus-ring-width);
+  --breadcrumb-focus-ring-color: var(--focus-ring-color);
+  --breadcrumb-focus-ring-offset: var(--focus-ring-offset);
+  --breadcrumb-focus-ring-style: var(--focus-ring-style);
+  --breadcrumb-focus-ring-radius: var(--radius-xsmall);
 }

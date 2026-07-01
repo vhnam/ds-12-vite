@@ -4,6 +4,7 @@ import type { PluginOption } from 'vite-plus';
 const componentEntries = {
   avatar: 'src/components/avatar/index.tsx',
   badge: 'src/components/badge/index.tsx',
+  breadcrumb: 'src/components/breadcrumb/index.tsx',
   button: 'src/components/button/index.tsx',
   calendar: 'src/components/calendar/index.tsx',
   'date-picker': 'src/components/date-picker/index.tsx',
