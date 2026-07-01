@@ -2,11 +2,13 @@ import { ComboboxOption, ComboboxProps } from "../combobox.mjs";
 
 //#region src/components/fields/combobox-field/index.d.ts
 declare const comboboxFieldVariants: (
-  props?: {
-    size?: "lg" | "sm" | null | undefined;
-    disabled?: boolean | null | undefined;
-    invalid?: boolean | null | undefined;
-  } & import("class-variance-authority/types").ClassProp,
+  props?:
+    | ({
+        size?: "lg" | "sm" | null | undefined;
+        disabled?: boolean | null | undefined;
+        invalid?: boolean | null | undefined;
+      } & import("class-variance-authority/types").ClassProp)
+    | undefined,
 ) => string;
 type ComboboxFieldProps = Omit<ComboboxProps, "id" | "invalid" | "disabled"> & {
   /** Visible label text associated with the combobox. */ label?: string /** Helper or error text displayed below the combobox. */;

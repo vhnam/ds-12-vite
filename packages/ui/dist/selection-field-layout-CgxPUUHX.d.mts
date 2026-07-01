@@ -4,13 +4,15 @@ import { r as InputProps } from "./index-C9fHU84I.mjs";
 
 //#region src/components/fields/selection-field/selection-field-layout.d.ts
 declare const selectionFieldVariants: (
-  props?: {
-    size?: "lg" | "sm" | null | undefined;
-    disabled?: boolean | null | undefined;
-    invalid?: boolean | null | undefined;
-    supportingText?: boolean | null | undefined;
-    input?: boolean | null | undefined;
-  } & import("class-variance-authority/types").ClassProp,
+  props?:
+    | ({
+        size?: "lg" | "sm" | null | undefined;
+        disabled?: boolean | null | undefined;
+        invalid?: boolean | null | undefined;
+        supportingText?: boolean | null | undefined;
+        input?: boolean | null | undefined;
+      } & import("class-variance-authority/types").ClassProp)
+    | undefined,
 ) => string;
 type SelectionFieldBaseProps = {
   /** Visible label text associated with the selection control. */ label?: string /** Secondary descriptive text displayed below the label. */;

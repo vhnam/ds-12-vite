@@ -3,23 +3,25 @@ import { JSX } from "react";
 
 //#region src/components/typography/index.d.ts
 declare const typographyVariants: (
-  props?: {
-    variant?: "display" | "h1" | "h2" | "h3" | "h4" | "label" | "paragraph" | null | undefined;
-    size?: "lg" | "md" | "sm" | "xl" | null | undefined;
-    weight?: "bold" | "regular" | "semibold" | null | undefined;
-  } & import("class-variance-authority/types").ClassProp,
+  props?:
+    | ({
+        variant?: "display" | "h1" | "h2" | "h3" | "h4" | "label" | "paragraph" | null | undefined;
+        size?: "lg" | "md" | "sm" | "xl" | null | undefined;
+        weight?: "bold" | "regular" | "semibold" | null | undefined;
+      } & import("class-variance-authority/types").ClassProp)
+    | undefined,
 ) => string;
 type TypographyVariant = "display" | "h1" | "h2" | "h3" | "h4" | "paragraph" | "label";
 type TypographySize = "sm" | "md" | "lg" | "xl";
 type TypographyWeight = "regular" | "semibold" | "bold";
 type TypographyState = {
   slot: "typography";
-  variant: TypographyVariant;
+  variant?: TypographyVariant;
   size?: TypographySize;
   weight?: TypographyWeight;
 };
 type TypographyRender = keyof JSX.IntrinsicElements | useRender.RenderProp<TypographyState>;
-type TypographyBaseProps = Omit<useRender.ComponentProps<"div">, "render"> & {
+type TypographyBaseProps = Omit<useRender.ComponentProps<"p">, "render"> & {
   /**
    * Semantic HTML element or render prop. Use a tag name (e.g. `"h1"`, `"p"`, `"label"`)
    * to output the correct element for the chosen variant.

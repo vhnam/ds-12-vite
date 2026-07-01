@@ -657,16 +657,27 @@
   --calendar-day-label-font-weight: var(--paragraph-default-font-weight);
   --calendar-day-label-line-height: var(--paragraph-default-line-height);
   --calendar-day-label-letter-spacing: var(--paragraph-default-letter-spacing);
-  /* TODO: needs token — Figma outside-day opacity: 0.5 */
-  --calendar-outside-opacity: 0.5;
+  /* TODO: needs token — Figma outside-day opacity: 0.5; use accessible muted label color instead */
+  --calendar-outside-opacity: 1;
 
   --calendar-selected-fill: var(--color-semantic-brand-bold);
   --calendar-selected-label-fill: var(--color-semantic-canvas-moderate);
   --calendar-range-middle-fill: var(--color-semantic-canvas-moderate);
   --calendar-range-middle-label-fill: var(--color-semantic-text-neutral-bolder);
+  --calendar-outside-label-fill: var(--color-semantic-text-neutral-moderate);
 
   --calendar-focus-ring-width: var(--focus-ring-width);
   --calendar-focus-ring-color: var(--focus-ring-color);
   --calendar-focus-ring-offset: var(--focus-ring-offset);
   --calendar-focus-ring-style: var(--focus-ring-style);
+
+  /* --- Component tokens: date-picker --- */
+  --date-picker-border-style: var(--border-style-default);
+  --date-picker-transition: var(--transition-interactive);
+  --date-picker-popup-fill: transparent;
+  --date-picker-popup-border-color: transparent;
+  --date-picker-popup-border-width: 0;
+  --date-picker-popup-radius: 0;
+  --date-picker-popup-padding: 0;
+  --date-picker-popup-shadow: var(--calendar-shadow);
 }

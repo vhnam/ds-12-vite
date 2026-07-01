@@ -4,11 +4,13 @@ import { ComponentProps, ReactNode } from "react";
 
 //#region src/components/chip/index.d.ts
 declare const chipVariants: (
-  props?: {
-    active?: boolean | null | undefined;
-    hasLeading?: boolean | null | undefined;
-    hasTrailing?: boolean | null | undefined;
-  } & import("class-variance-authority/types").ClassProp,
+  props?:
+    | ({
+        active?: boolean | null | undefined;
+        hasLeading?: boolean | null | undefined;
+        hasTrailing?: boolean | null | undefined;
+      } & import("class-variance-authority/types").ClassProp)
+    | undefined,
 ) => string;
 type ChipProps = Omit<ComponentProps<typeof Button>, "className"> &
   VariantProps<typeof chipVariants> & {

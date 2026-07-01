@@ -7,15 +7,30 @@ type TextVariant = (typeof TEXT_VARIANTS)[number];
 type ThumbnailVariant = (typeof THUMBNAIL_VARIANTS)[number];
 type ThumbnailSize = "32" | "48" | "72" | "128";
 declare const skeletonVariants: (
-  props?: {
-    variant?: "circle" | "h1" | "h2" | "h3" | "h4" | "label" | "paragraph" | "rectangle" | "square" | null | undefined;
-    size?: "128" | "32" | "48" | "72" | null | undefined;
-  } & import("class-variance-authority/types").ClassProp,
+  props?:
+    | ({
+        variant?:
+          | "circle"
+          | "h1"
+          | "h2"
+          | "h3"
+          | "h4"
+          | "label"
+          | "paragraph"
+          | "rectangle"
+          | "square"
+          | null
+          | undefined;
+        size?: "128" | "32" | "48" | "72" | null | undefined;
+      } & import("class-variance-authority/types").ClassProp)
+    | undefined,
 ) => string;
 declare const skeletonBarVariants: (
-  props?: {
-    variant?: "h1" | "h2" | "h3" | "h4" | "label" | "paragraph" | null | undefined;
-  } & import("class-variance-authority/types").ClassProp,
+  props?:
+    | ({
+        variant?: "h1" | "h2" | "h3" | "h4" | "label" | "paragraph" | null | undefined;
+      } & import("class-variance-authority/types").ClassProp)
+    | undefined,
 ) => string;
 type SkeletonBaseProps = {
   /** Additional CSS class names applied to the skeleton element. */ className?: string;

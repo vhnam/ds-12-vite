@@ -3,11 +3,13 @@ import { ReactNode } from "react";
 //#region src/components/select/index.d.ts
 declare const SelectIconSizeContext: import("react").Context<number | undefined>;
 declare const selectVariants: (
-  props?: {
-    size?: "lg" | "sm" | null | undefined;
-    disabled?: boolean | null | undefined;
-    invalid?: boolean | null | undefined;
-  } & import("class-variance-authority/types").ClassProp,
+  props?:
+    | ({
+        size?: "lg" | "sm" | null | undefined;
+        disabled?: boolean | null | undefined;
+        invalid?: boolean | null | undefined;
+      } & import("class-variance-authority/types").ClassProp)
+    | undefined,
 ) => string;
 type SelectOption = {
   /** Visible label for the option. */ label: string /** Unique value submitted with the form. */;

@@ -6,11 +6,13 @@ type BadgeEmphasis = "subtle" | "bold";
 type BadgeVariant = "neutral" | "negative" | "attention" | "positive" | "information";
 declare const BadgeIconSizeContext: import("react").Context<number | undefined>;
 declare const badgeVariants: (
-  props?: {
-    size?: "lg" | "sm" | null | undefined;
-    emphasis?: "bold" | "subtle" | null | undefined;
-    variant?: "attention" | "information" | "negative" | "neutral" | "positive" | null | undefined;
-  } & import("class-variance-authority/types").ClassProp,
+  props?:
+    | ({
+        size?: "lg" | "sm" | null | undefined;
+        emphasis?: "bold" | "subtle" | null | undefined;
+        variant?: "attention" | "information" | "negative" | "neutral" | "positive" | null | undefined;
+      } & import("class-variance-authority/types").ClassProp)
+    | undefined,
 ) => string;
 type BadgeProps = ComponentProps<"span"> & {
   /** Additional CSS class names applied to the root element. */ className?: string;

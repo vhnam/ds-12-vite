@@ -8,6 +8,12 @@ export {
   type CalendarVariant,
   type DateRange,
 } from './components/calendar/index.tsx';
+export {
+  DatePicker,
+  DatePickerIconSizeContext,
+  datePickerVariants,
+  type DatePickerProps,
+} from './components/date-picker/index.tsx';
 export { Chip, chipVariants, type ChipProps } from './components/chip/index.tsx';
 export { Divider, dividerVariants, type DividerProps } from './components/divider/index.tsx';
 export { Input, InputIconSizeContext, inputVariants, type InputProps } from './components/input/index.tsx';
@@ -36,6 +42,11 @@ export {
 } from './components/combobox/index.tsx';
 export { InputField, inputFieldVariants, type InputFieldProps } from './components/fields/input-field/index.tsx';
 export { SelectField, selectFieldVariants, type SelectFieldProps } from './components/fields/select-field/index.tsx';
+export {
+  DatePickerField,
+  datePickerFieldVariants,
+  type DatePickerFieldProps,
+} from './components/fields/date-picker-field/index.tsx';
 export {
   ComboboxField,
   comboboxFieldVariants,

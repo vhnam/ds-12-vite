@@ -14,6 +14,7 @@
 @import "./components/badge/badge.css";
 @import "./components/button/button.css";
 @import "./components/calendar/calendar.css";
+@import "./components/date-picker/date-picker.css";
 @import "./components/checkbox/checkbox.css";
 @import "./components/chip/chip.css";
 @import "./components/combobox/combobox.css";
@@ -21,6 +22,7 @@
 @import "./components/fields/combobox-field/combobox-field.css";
 @import "./components/fields/input-field/input-field.css";
 @import "./components/fields/select-field/select-field.css";
+@import "./components/fields/date-picker-field/date-picker-field.css";
 @import "./components/fields/selection-field/selection-field.css";
 @import "./components/fields/textarea-field/textarea-field.css";
 @import "./components/icon/icon.css";

@@ -2,12 +2,14 @@ import { r as InputProps } from "../index-C9fHU84I.mjs";
 
 //#region src/components/fields/input-field/index.d.ts
 declare const inputFieldVariants: (
-  props?: {
-    size?: "lg" | "sm" | null | undefined;
-    variant?: "default" | "suffix" | null | undefined;
-    disabled?: boolean | null | undefined;
-    invalid?: boolean | null | undefined;
-  } & import("class-variance-authority/types").ClassProp,
+  props?:
+    | ({
+        size?: "lg" | "sm" | null | undefined;
+        variant?: "default" | "suffix" | null | undefined;
+        disabled?: boolean | null | undefined;
+        invalid?: boolean | null | undefined;
+      } & import("class-variance-authority/types").ClassProp)
+    | undefined,
 ) => string;
 type InputFieldProps = InputProps & {
   /** Visible label text associated with the input. */ label?: string /** Helper or error text displayed below the input. */;

@@ -1,7 +1,7 @@
-import { SelectOption, SelectProps } from "../select.mjs";
+import { DatePickerProps } from "../date-picker.mjs";
 
-//#region src/components/fields/select-field/index.d.ts
-declare const selectFieldVariants: (
+//#region src/components/fields/date-picker-field/index.d.ts
+declare const datePickerFieldVariants: (
   props?:
     | ({
         size?: "lg" | "sm" | null | undefined;
@@ -10,8 +10,8 @@ declare const selectFieldVariants: (
       } & import("class-variance-authority/types").ClassProp)
     | undefined,
 ) => string;
-type SelectFieldProps = Omit<SelectProps, "id" | "invalid" | "disabled"> & {
-  /** Visible label text associated with the select. */ label?: string /** Helper or error text displayed below the select. */;
+type DatePickerFieldProps = Omit<DatePickerProps, "id" | "invalid" | "disabled"> & {
+  /** Visible label text associated with the date picker. */ label?: string /** Helper or error text displayed below the date picker. */;
   helperText?: string;
   /**
    * Whether to render the label element.
@@ -25,11 +25,11 @@ type SelectFieldProps = Omit<SelectProps, "id" | "invalid" | "disabled"> & {
   showHelperText?: boolean /** Additional CSS class names applied to the field wrapper. */;
   fieldClassName?: string /** Prevents interaction with the control. */;
   disabled?: boolean /** Marks the field as invalid and sets validation styling. */;
-  invalid?: boolean /** ID applied to the select trigger. */;
+  invalid?: boolean /** ID applied to the date picker trigger. */;
   id?: string;
 };
-/** Labelled select field composed of a label, helper text, and a Select control with shared validation styling. */
-declare function SelectField({
+/** Labelled date picker field composed of a label, helper text, and a DatePicker control with shared validation styling. */
+declare function DatePickerField({
   className,
   fieldClassName,
   size,
@@ -40,8 +40,7 @@ declare function SelectField({
   showLabel,
   showHelperText,
   id: idProp,
-  options,
-  ...selectProps
-}: SelectFieldProps): import("react").JSX.Element;
+  ...datePickerProps
+}: DatePickerFieldProps): import("react").JSX.Element;
 //#endregion
-export { SelectField, SelectFieldProps, type SelectOption, selectFieldVariants };
+export { DatePickerField, DatePickerFieldProps, datePickerFieldVariants };

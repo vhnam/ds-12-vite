@@ -3,11 +3,13 @@ import { ComponentProps } from "react";
 
 //#region src/components/checkbox/index.d.ts
 declare const checkboxVariants: (
-  props?: {
-    size?: "lg" | "sm" | null | undefined;
-    invalid?: boolean | null | undefined;
-    disabled?: boolean | null | undefined;
-  } & import("class-variance-authority/types").ClassProp,
+  props?:
+    | ({
+        size?: "lg" | "sm" | null | undefined;
+        invalid?: boolean | null | undefined;
+        disabled?: boolean | null | undefined;
+      } & import("class-variance-authority/types").ClassProp)
+    | undefined,
 ) => string;
 type CheckboxProps = Omit<ComponentProps<typeof Checkbox.Root>, "className"> & {
   /** Additional CSS class names applied to the root element. */ className?: string;

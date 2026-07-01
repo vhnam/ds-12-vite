@@ -4,22 +4,28 @@ import { ComponentProps, ReactNode } from "react";
 
 //#region src/components/table/index.d.ts
 declare const tableHeadVariants: (
-  props?: {
-    align?: "end" | "start" | null | undefined;
-    variant?: "avatar" | "default" | null | undefined;
-  } & import("class-variance-authority/types").ClassProp,
+  props?:
+    | ({
+        align?: "end" | "start" | null | undefined;
+        variant?: "avatar" | "default" | null | undefined;
+      } & import("class-variance-authority/types").ClassProp)
+    | undefined,
 ) => string;
 declare const tableCellVariants: (
-  props?: {
-    variant?: "avatar" | "custom" | "default" | "stacked" | null | undefined;
-    align?: "end" | "start" | null | undefined;
-    state?: "default" | "disabled" | "focused" | "highlighted" | "hovered" | null | undefined;
-  } & import("class-variance-authority/types").ClassProp,
+  props?:
+    | ({
+        variant?: "avatar" | "custom" | "default" | "stacked" | null | undefined;
+        align?: "end" | "start" | null | undefined;
+        state?: "default" | "disabled" | "focused" | "highlighted" | "hovered" | null | undefined;
+      } & import("class-variance-authority/types").ClassProp)
+    | undefined,
 ) => string;
 declare const tableRowVariants: (
-  props?: {
-    interactive?: boolean | null | undefined;
-  } & import("class-variance-authority/types").ClassProp,
+  props?:
+    | ({
+        interactive?: boolean | null | undefined;
+      } & import("class-variance-authority/types").ClassProp)
+    | undefined,
 ) => string;
 type TableSortDirection = "ascending" | "descending" | "none";
 type TableProps = ComponentProps<"table"> & {

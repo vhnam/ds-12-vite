@@ -4,9 +4,11 @@ import { Button, ButtonProps, buttonVariants } from "./button.mjs";
 import { Calendar, CalendarProps, CalendarVariant, DateRange, calendarVariants } from "./calendar.mjs";
 import { Chip, ChipProps, chipVariants } from "./chip.mjs";
 import { Combobox, ComboboxIconSizeContext, ComboboxOption, ComboboxProps, comboboxVariants } from "./combobox.mjs";
+import { DatePicker, DatePickerIconSizeContext, DatePickerProps, datePickerVariants } from "./date-picker.mjs";
 import { Divider, DividerProps, dividerVariants } from "./divider.mjs";
 import { CheckboxField, CheckboxFieldProps } from "./fields/checkbox-field.mjs";
 import { ComboboxField, ComboboxFieldProps, comboboxFieldVariants } from "./fields/combobox-field.mjs";
+import { DatePickerField, DatePickerFieldProps, datePickerFieldVariants } from "./fields/date-picker-field.mjs";
 import { InputField, InputFieldProps, inputFieldVariants } from "./fields/input-field.mjs";
 import { RadioField, RadioFieldProps } from "./fields/radio-field.mjs";
 import { SelectField, SelectFieldProps, selectFieldVariants } from "./fields/select-field.mjs";
@@ -84,6 +86,11 @@ export {
   type ComboboxOption,
   type ComboboxProps,
   DEFAULT_ICON_SIZE,
+  DatePicker,
+  DatePickerField,
+  type DatePickerFieldProps,
+  DatePickerIconSizeContext,
+  type DatePickerProps,
   type DateRange,
   Divider,
   type DividerProps,
@@ -154,6 +161,8 @@ export {
   chipVariants,
   comboboxFieldVariants,
   comboboxVariants,
+  datePickerFieldVariants,
+  datePickerVariants,
   dividerVariants,
   getPaginationItems,
   inputFieldVariants,

@@ -3,12 +3,14 @@ import { ComponentProps, ReactNode } from "react";
 //#region src/components/textarea/index.d.ts
 declare const TextareaIconSizeContext: import("react").Context<number | undefined>;
 declare const textareaVariants: (
-  props?: {
-    size?: "lg" | "sm" | null | undefined;
-    variant?: "default" | "suffix" | null | undefined;
-    disabled?: boolean | null | undefined;
-    invalid?: boolean | null | undefined;
-  } & import("class-variance-authority/types").ClassProp,
+  props?:
+    | ({
+        size?: "lg" | "sm" | null | undefined;
+        variant?: "default" | "suffix" | null | undefined;
+        disabled?: boolean | null | undefined;
+        invalid?: boolean | null | undefined;
+      } & import("class-variance-authority/types").ClassProp)
+    | undefined,
 ) => string;
 type TextareaProps = Omit<ComponentProps<"textarea">, "className" | "size"> & {
   /** Additional CSS class names applied to the textarea wrapper. */ className?: string;

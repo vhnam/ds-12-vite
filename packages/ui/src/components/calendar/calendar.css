@@ -85,7 +85,7 @@
   flex-wrap: wrap;
   gap: var(--rdp-months-gap);
   width: 100%;
-  max-width: fit-content;
+  min-width: fit-content;
 }
 
 .calendar-range .rdp-months {
@@ -267,6 +267,10 @@
 
 .calendar .rdp-day_button:disabled {
   cursor: not-allowed;
+}
+
+.calendar .rdp-outside .rdp-day_button {
+  color: var(--calendar-outside-label-fill);
 }
 
 .calendar .rdp-outside {

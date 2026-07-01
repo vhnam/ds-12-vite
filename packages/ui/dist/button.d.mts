@@ -4,12 +4,14 @@ import { ComponentProps, ReactNode } from "react";
 
 //#region src/components/button/index.d.ts
 declare const buttonVariants: (
-  props?: {
-    variant?: "danger" | "icon" | "primary" | "secondary" | null | undefined;
-    size?: "lg" | "md" | "sm" | null | undefined;
-    hasIcon?: boolean | null | undefined;
-    loading?: boolean | null | undefined;
-  } & import("class-variance-authority/types").ClassProp,
+  props?:
+    | ({
+        variant?: "danger" | "icon" | "primary" | "secondary" | null | undefined;
+        size?: "lg" | "md" | "sm" | null | undefined;
+        hasIcon?: boolean | null | undefined;
+        loading?: boolean | null | undefined;
+      } & import("class-variance-authority/types").ClassProp)
+    | undefined,
 ) => string;
 type ButtonProps = Omit<ComponentProps<typeof Button$1>, "className"> &
   VariantProps<typeof buttonVariants> & {

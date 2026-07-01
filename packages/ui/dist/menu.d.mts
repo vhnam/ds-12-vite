@@ -3,9 +3,11 @@ import { ReactNode } from "react";
 
 //#region src/components/menu/index.d.ts
 declare const menuItemVariants: (
-  props?: {
-    variant?: "multiple" | "single" | null | undefined;
-  } & import("class-variance-authority/types").ClassProp,
+  props?:
+    | ({
+        variant?: "multiple" | "single" | null | undefined;
+      } & import("class-variance-authority/types").ClassProp)
+    | undefined,
 ) => string;
 type MenuVariant = NonNullable<VariantProps<typeof menuItemVariants>["variant"]>;
 type MenuItemTextProps = {

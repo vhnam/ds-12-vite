@@ -25,9 +25,11 @@ type CalendarRangeProps = CalendarSharedProps &
   };
 type CalendarProps = CalendarSingleProps | CalendarRangeProps;
 declare const calendarVariants: (
-  props?: {
-    variant?: "default" | "range" | null | undefined;
-  } & import("class-variance-authority/types").ClassProp,
+  props?:
+    | ({
+        variant?: "default" | "range" | null | undefined;
+      } & import("class-variance-authority/types").ClassProp)
+    | undefined,
 ) => string;
 /** Date grid for selecting a single day or a date range, styled to the DS calendar spec. */
 declare function Calendar({

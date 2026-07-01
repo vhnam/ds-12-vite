@@ -6,11 +6,13 @@ type AvatarSize = "sm" | "md" | "lg";
 type AvatarShape = "circle" | "square";
 type AvatarVariant = "initial" | "image" | "icon";
 declare const avatarVariants: (
-  props?: {
-    size?: "lg" | "md" | "sm" | null | undefined;
-    shape?: "circle" | "square" | null | undefined;
-    variant?: "icon" | "image" | "initial" | null | undefined;
-  } & import("class-variance-authority/types").ClassProp,
+  props?:
+    | ({
+        size?: "lg" | "md" | "sm" | null | undefined;
+        shape?: "circle" | "square" | null | undefined;
+        variant?: "icon" | "image" | "initial" | null | undefined;
+      } & import("class-variance-authority/types").ClassProp)
+    | undefined,
 ) => string;
 type AvatarProps = Omit<ComponentProps<typeof Avatar$1.Root>, "className"> & {
   /** Additional CSS class names applied to the root element. */ className?: string;

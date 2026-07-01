@@ -13,16 +13,20 @@ declare function getPaginationItems(currentPage: number, totalPages: number): Pa
 //#endregion
 //#region src/components/pagination/index.d.ts
 declare const paginationVariants: (
-  props?: {
-    size?: "lg" | "sm" | null | undefined;
-    layout?: "centered" | "end" | "spread" | null | undefined;
-  } & import("class-variance-authority/types").ClassProp,
+  props?:
+    | ({
+        size?: "lg" | "sm" | null | undefined;
+        layout?: "centered" | "end" | "spread" | null | undefined;
+      } & import("class-variance-authority/types").ClassProp)
+    | undefined,
 ) => string;
 declare const paginationButtonVariants: (
-  props?: {
-    size?: "lg" | "sm" | null | undefined;
-    state?: "active" | "default" | "disabled" | null | undefined;
-  } & import("class-variance-authority/types").ClassProp,
+  props?:
+    | ({
+        size?: "lg" | "sm" | null | undefined;
+        state?: "active" | "default" | "disabled" | null | undefined;
+      } & import("class-variance-authority/types").ClassProp)
+    | undefined,
 ) => string;
 type PaginationSize = "sm" | "lg";
 type PaginationBaseProps = {

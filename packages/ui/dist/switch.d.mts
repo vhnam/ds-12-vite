@@ -3,9 +3,11 @@ import { ComponentProps } from "react";
 
 //#region src/components/switch/index.d.ts
 declare const switchVariants: (
-  props?: {
-    disabled?: boolean | null | undefined;
-  } & import("class-variance-authority/types").ClassProp,
+  props?:
+    | ({
+        disabled?: boolean | null | undefined;
+      } & import("class-variance-authority/types").ClassProp)
+    | undefined,
 ) => string;
 type SwitchProps = Omit<ComponentProps<typeof Switch$1.Root>, "className"> & {
   /** Additional CSS class names applied to the root element. */ className?: string;
