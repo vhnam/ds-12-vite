@@ -1,0 +1,235 @@
+@layer components {
+  .ds-select {
+    width: 100%;
+    display: flex;
+  }
+  .ds-select__trigger {
+    box-sizing: border-box;
+    border: none;
+    border-bottom-style: var(--select-border-style);
+    border-radius: var(--select-border-radius);
+    background-color: var(--select-fill);
+    border-bottom-color: var(--select-border-color);
+    border-bottom-width: var(--select-border-width);
+    align-items: center;
+    gap: var(--select-gap);
+    width: 100%;
+    padding: var(--select-padding-y) var(--select-padding-x);
+    min-height: var(--select-min-height);
+    cursor: var(--cursor-interactive);
+    transition: var(--select-transition);
+    text-align: left;
+    font: inherit;
+    color: inherit;
+    margin: 0;
+    display: flex;
+  }
+  .ds-select__trigger:focus,
+  .ds-select__trigger:focus-visible {
+    outline: none;
+  }
+  .ds-select__value {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+    color: var(--select-value-fill);
+    font-family: var(--select-value-font-family);
+    font-size: var(--select-value-font-size);
+    font-weight: var(--select-value-font-weight);
+    line-height: var(--select-value-line-height);
+    letter-spacing: var(--select-value-letter-spacing);
+    flex: auto;
+    overflow: hidden;
+  }
+  .ds-select__value[data-placeholder] {
+    color: var(--select-placeholder-fill);
+    font-family: var(--select-placeholder-font-family);
+    font-size: var(--select-placeholder-font-size);
+    font-weight: var(--select-placeholder-font-weight);
+    line-height: var(--select-placeholder-line-height);
+    letter-spacing: var(--select-placeholder-letter-spacing);
+  }
+  .ds-select__leading,
+  .ds-select__trailing {
+    width: var(--select-icon-size);
+    height: var(--select-icon-size);
+    color: var(--select-icon-fill);
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    display: inline-flex;
+  }
+  .ds-select__positioner {
+    z-index: 50;
+    width: var(--anchor-width);
+    min-width: var(--anchor-width);
+    max-width: var(--available-width);
+    box-sizing: border-box;
+  }
+  .ds-select__popup {
+    box-sizing: border-box;
+    background-color: var(--select-popup-fill);
+    border: var(--select-popup-border-width) var(--select-border-style) var(--select-popup-border-color);
+    border-radius: var(--select-popup-radius);
+    width: 100%;
+    padding: var(--select-popup-padding);
+    box-shadow: var(--select-popup-shadow);
+    outline: none;
+    overflow: auto;
+  }
+  .ds-select__list {
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+  }
+  .ds-select__item {
+    box-sizing: border-box;
+    height: var(--select-item-height);
+    padding: var(--select-item-padding);
+    border-radius: var(--select-item-radius);
+    background-color: var(--select-item-fill);
+    color: var(--select-item-text-fill);
+    font-family: var(--select-item-text-font-family);
+    font-size: var(--select-item-text-font-size);
+    font-weight: var(--select-item-text-font-weight);
+    line-height: var(--select-item-text-line-height);
+    letter-spacing: var(--select-item-text-letter-spacing);
+    cursor: var(--cursor-interactive);
+    transition: var(--select-transition);
+    text-align: left;
+    border: none;
+    align-items: center;
+    width: 100%;
+    display: flex;
+    position: relative;
+  }
+  .ds-select__item-text {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+    line-height: var(--select-item-text-line-height);
+    flex: auto;
+    overflow: hidden;
+  }
+  .ds-select__item:focus {
+    outline: none;
+  }
+  .ds-select__item:hover:not(:focus-visible):not([data-disabled]) {
+    background-color: var(--select-item-hover-fill);
+  }
+  .ds-select__item[data-highlighted]:focus-visible:not([data-disabled]) {
+    background-color: var(--select-item-fill);
+    color: var(--select-item-text-fill);
+    font-weight: var(--select-item-text-font-weight);
+    letter-spacing: var(--select-item-text-letter-spacing);
+    box-shadow: inset 0 0 0 var(--select-item-focus-ring-width) var(--select-item-focus-ring-color);
+  }
+  .ds-select__item[data-selected]:not(:focus-visible) {
+    background-color: var(--select-item-selected-fill);
+    color: var(--select-item-selected-text-fill);
+    font-family: var(--select-item-selected-text-font-family);
+    font-size: var(--select-item-selected-text-font-size);
+    font-weight: var(--select-item-selected-text-font-weight);
+    line-height: var(--select-item-selected-text-line-height);
+    letter-spacing: var(--select-item-selected-text-letter-spacing);
+  }
+  .ds-select__item[data-disabled] {
+    cursor: var(--cursor-disabled);
+    color: var(--select-item-disabled-text-fill);
+  }
+  .ds-select--sm {
+    --select-border-radius: var(--drop-down-small-box-properties-enabled-border-radius);
+    --select-min-height: var(--text-field-small-box-properties-enabled-height);
+    --select-padding-x: var(--drop-down-small-box-properties-enabled-horizontal-padding);
+    --select-padding-y: var(--drop-down-small-box-properties-enabled-vertical-padding);
+    --select-gap: var(--drop-down-small-box-properties-enabled-item-spacing);
+    --select-border-width: var(--drop-down-small-box-properties-enabled-border-bottom);
+    --select-fill: var(--drop-down-small-box-properties-enabled-fill);
+    --select-border-color: var(--drop-down-small-box-properties-enabled-border-color);
+    --select-value-fill: var(--drop-down-small-box-hint-enabled-fill);
+    --select-value-font-family: var(--drop-down-small-box-hint-enabled-font-family);
+    --select-value-font-size: var(--drop-down-small-box-hint-enabled-font-size);
+    --select-value-font-weight: var(--drop-down-small-box-hint-enabled-font-weight);
+    --select-value-line-height: var(--drop-down-small-box-hint-enabled-line-height);
+    --select-value-letter-spacing: var(--drop-down-small-box-hint-enabled-letter-spacing);
+    --select-placeholder-fill: var(--drop-down-small-box-hint-enabled-fill);
+    --select-placeholder-font-family: var(--drop-down-small-box-hint-enabled-font-family);
+    --select-placeholder-font-size: var(--drop-down-small-box-hint-enabled-font-size);
+    --select-placeholder-font-weight: var(--drop-down-small-box-hint-enabled-font-weight);
+    --select-placeholder-line-height: var(--drop-down-small-box-hint-enabled-line-height);
+    --select-placeholder-letter-spacing: var(--drop-down-small-box-hint-enabled-letter-spacing);
+    --select-icon-size: var(--drop-down-small-box-icon-enabled-width);
+    --select-icon-fill: var(--drop-down-small-box-icon-enabled-fill);
+  }
+  .ds-select--sm .ds-select__trigger:focus-visible:not(:disabled),
+  .ds-select--sm .ds-select__trigger[data-popup-open]:not(:disabled) {
+    --select-fill: var(--drop-down-small-box-properties-focused-fill);
+    --select-border-color: var(--drop-down-small-box-properties-focused-border-color);
+    --select-value-fill: var(--drop-down-small-box-hint-focused-fill);
+    --select-placeholder-fill: var(--drop-down-small-box-hint-focused-fill);
+    --select-icon-fill: var(--drop-down-small-box-icon-focused-fill);
+  }
+  .ds-select--sm.ds-select--disabled .ds-select__trigger {
+    --select-fill: var(--drop-down-small-box-properties-disabled-fill);
+    --select-border-color: var(--drop-down-small-box-properties-disabled-border-color);
+    --select-value-fill: var(--drop-down-small-box-hint-disabled-fill);
+    --select-placeholder-fill: var(--drop-down-small-box-hint-disabled-fill);
+    --select-icon-fill: var(--drop-down-small-box-icon-disabled-fill);
+    cursor: var(--cursor-disabled);
+  }
+  .ds-select--sm.ds-select--error .ds-select__trigger {
+    --select-fill: var(--drop-down-small-box-properties-error-fill);
+    --select-border-color: var(--drop-down-small-box-properties-error-border-color);
+    --select-value-fill: var(--drop-down-small-box-hint-error-fill);
+    --select-icon-fill: var(--drop-down-small-box-icon-error-fill);
+  }
+  .ds-select--lg {
+    --select-border-radius: var(--drop-down-large-box-properties-enabled-border-radius);
+    --select-min-height: var(--text-field-large-box-properties-enabled-height);
+    --select-padding-x: var(--drop-down-large-box-properties-enabled-horizontal-padding);
+    --select-padding-y: var(--drop-down-large-box-properties-enabled-vertical-padding);
+    --select-gap: var(--drop-down-large-box-properties-enabled-item-spacing);
+    --select-border-width: var(--drop-down-large-box-properties-enabled-border-bottom);
+    --select-fill: var(--drop-down-large-box-properties-enabled-fill);
+    --select-border-color: var(--drop-down-large-box-properties-enabled-border-color);
+    --select-value-fill: var(--drop-down-large-box-hint-enabled-fill);
+    --select-value-font-family: var(--drop-down-large-box-hint-enabled-font-family);
+    --select-value-font-size: var(--drop-down-large-box-hint-enabled-font-size);
+    --select-value-font-weight: var(--drop-down-large-box-hint-enabled-font-weight);
+    --select-value-line-height: var(--drop-down-large-box-hint-enabled-line-height);
+    --select-value-letter-spacing: var(--drop-down-large-box-hint-enabled-letter-spacing);
+    --select-placeholder-fill: var(--drop-down-large-box-hint-enabled-fill);
+    --select-placeholder-font-family: var(--drop-down-large-box-hint-enabled-font-family);
+    --select-placeholder-font-size: var(--drop-down-large-box-hint-enabled-font-size);
+    --select-placeholder-font-weight: var(--drop-down-large-box-hint-enabled-font-weight);
+    --select-placeholder-line-height: var(--drop-down-large-box-hint-enabled-line-height);
+    --select-placeholder-letter-spacing: var(--drop-down-large-box-hint-enabled-letter-spacing);
+    --select-icon-size: var(--drop-down-large-box-icon-enabled-width);
+    --select-icon-fill: var(--drop-down-large-box-icon-enabled-fill);
+  }
+  .ds-select--lg .ds-select__trigger:focus-visible:not(:disabled),
+  .ds-select--lg .ds-select__trigger[data-popup-open]:not(:disabled) {
+    --select-fill: var(--drop-down-large-box-properties-focused-fill);
+    --select-border-color: var(--drop-down-large-box-properties-focused-border-color);
+    --select-value-fill: var(--drop-down-large-box-hint-focused-fill);
+    --select-placeholder-fill: var(--drop-down-large-box-hint-focused-fill);
+    --select-icon-fill: var(--drop-down-large-box-icon-focused-fill);
+  }
+  .ds-select--lg.ds-select--disabled .ds-select__trigger {
+    --select-fill: var(--drop-down-large-box-properties-disabled-fill);
+    --select-border-color: var(--drop-down-large-box-properties-disabled-border-color);
+    --select-value-fill: var(--drop-down-large-box-hint-disabled-fill);
+    --select-placeholder-fill: var(--drop-down-large-box-hint-disabled-fill);
+    --select-icon-fill: var(--drop-down-large-box-icon-disabled-fill);
+    cursor: var(--cursor-disabled);
+  }
+  .ds-select--lg.ds-select--error .ds-select__trigger {
+    --select-fill: var(--drop-down-large-box-properties-error-fill);
+    --select-border-color: var(--drop-down-large-box-properties-error-border-color);
+    --select-value-fill: var(--drop-down-large-box-hint-error-fill);
+    --select-icon-fill: var(--drop-down-large-box-icon-error-fill);
+  }
+}

@@ -74,8 +74,8 @@ export default defineConfig({
 
 ### Where `@ds-12/ui` is used today
 
-| Location         | Setup                                                                                    |
-| ---------------- | ---------------------------------------------------------------------------------------- |
+| Location         | Setup                                                                                  |
+| ---------------- | -------------------------------------------------------------------------------------- |
 | `apps/storybook` | `@tailwindcss/vite` in `.storybook/main.ts`; `@import "@ds-12/ui/tailwind.css"` in CSS |
 
 ## Using in another repo

@@ -36,12 +36,18 @@
     "generate:theme": "node scripts/generate-theme.mjs",
     "test": "vp test",
     "check": "vp check",
-    "prepublishOnly": "vp run build"
+    "prepublishOnly": "vp run build",
+    "build:tokens": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "@tokens-studio/sd-transforms": "catalog:",
+    "style-dictionary": "catalog:"
   },
   "devDependencies": {
     "@types/node": "^25.6.2",
     "@typescript/native-preview": "7.0.0-dev.20260509.2",
     "bumpp": "^11.1.0",
+    "tsx": "catalog:",
     "typescript": "^6.0.3",
     "vite-plus": "catalog:"
   }
