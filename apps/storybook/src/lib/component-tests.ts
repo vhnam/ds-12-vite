@@ -68,6 +68,19 @@ export function createButtonDisabledPlay(name: string | RegExp): PlayFunction {
   };
 }
 
+/** Native `disabled` button controls (e.g. Popover triggers) that are removed from tab order. */
+export function createNativeDisabledButtonPlay(name: string | RegExp): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getByRole('button', { name });
+
+    await expect(button).toBeDisabled();
+    await userEvent.click(canvasElement);
+    await userEvent.tab();
+    await expect(button).not.toHaveFocus();
+  };
+}
+
 export function createButtonLoadingA11yPlay(name: string | RegExp): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
