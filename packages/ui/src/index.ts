@@ -87,6 +87,20 @@ export {
   paginationVariants,
   type PaginationProps,
 } from './components/pagination/index.tsx';
+export {
+  Progress,
+  ProgressIconSizeContext,
+  ProgressStep,
+  getProgressStepStatus,
+  progressIndicatorVariants,
+  progressLabelVariants,
+  progressStepVariants,
+  progressVariants,
+  type ProgressProps,
+  type ProgressStepItem,
+  type ProgressStepProps,
+  type ProgressStepStatus,
+} from './components/progress/index.tsx';
 export { Radio, RadioGroup, radioVariants, type RadioGroupProps, type RadioProps } from './components/radio/index.tsx';
 export {
   Table,

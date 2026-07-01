@@ -700,4 +700,48 @@
   --breadcrumb-focus-ring-offset: var(--focus-ring-offset);
   --breadcrumb-focus-ring-style: var(--focus-ring-style);
   --breadcrumb-focus-ring-radius: var(--radius-xsmall);
+
+  /* --- Component tokens: progress --- */
+  --progress-gap: var(--spacing-xsmall);
+  --progress-step-gap: var(--spacing-xxsmall);
+  --progress-indicator-radius: var(--radius-medium);
+  --progress-indicator-padding: var(--spacing-xxsmall);
+  /* TODO: needs token — Figma indicator inner size: 15px */
+  --progress-indicator-inner-size: 15px;
+  /* TODO: needs token — Figma separator icon size: 24px */
+  --progress-separator-icon-size: 24px;
+  --progress-separator-fill: var(--color-semantic-text-neutral-moderate);
+
+  --progress-indicator-current-fill: var(--color-semantic-text-brand-bold);
+  --progress-indicator-past-fill: var(--color-semantic-positive-bold);
+  --progress-indicator-upcoming-border-color: var(--color-semantic-border-subtle);
+  --progress-indicator-upcoming-border-width: var(--border-width-small);
+  --progress-indicator-number-fill-current: var(--color-neutral-00);
+  --progress-indicator-number-fill-upcoming: var(--color-semantic-text-neutral-moderate);
+  --progress-indicator-check-fill: var(--color-neutral-00);
+
+  --progress-label-current-fill: var(--color-semantic-text-neutral-bolder);
+  --progress-label-upcoming-fill: var(--color-semantic-text-neutral-moderate);
+  --progress-label-past-fill: var(--color-semantic-text-neutral-moderate);
+
+  --progress-label-current-font-family: var(--paragraph-large-strong-font-family);
+  --progress-label-current-font-size: var(--paragraph-large-strong-font-size);
+  --progress-label-current-font-weight: var(--paragraph-large-strong-font-weight);
+  /* TODO: Figma body/large semibold uses lineHeight/24 — paragraph-large-strong resolves to line-height-22 */
+  --progress-label-current-line-height: var(--line-height-24);
+  --progress-label-current-letter-spacing: var(--paragraph-large-strong-letter-spacing);
+
+  --progress-label-default-font-family: var(--paragraph-large-font-family);
+  --progress-label-default-font-size: var(--paragraph-large-font-size);
+  --progress-label-default-font-weight: var(--paragraph-large-font-weight);
+  /* TODO: Figma body/large uses lineHeight/24 — paragraph-large resolves to line-height-22 */
+  --progress-label-default-line-height: var(--line-height-24);
+  --progress-label-default-letter-spacing: var(--paragraph-large-letter-spacing);
+
+  --progress-indicator-number-font-family: var(--label-default-font-family);
+  --progress-indicator-number-font-size: var(--label-default-font-size);
+  --progress-indicator-number-font-weight: var(--label-default-font-weight);
+  /* TODO: Figma label/default uses lineHeight/16 — label-default resolves to line-height-14 */
+  --progress-indicator-number-line-height: var(--line-height-16);
+  --progress-indicator-number-letter-spacing: var(--label-default-letter-spacing);
 }

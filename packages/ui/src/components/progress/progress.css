@@ -1,0 +1,137 @@
+/* Base layout */
+@utility progress {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+@utility progress-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@utility progress-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--progress-gap);
+}
+
+@utility progress-step {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--progress-step-gap);
+}
+
+/* Indicator */
+@utility progress-indicator {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: var(--progress-indicator-padding);
+  border-radius: var(--progress-indicator-radius);
+}
+
+@utility progress-indicator-upcoming {
+  border: var(--progress-indicator-upcoming-border-width) solid var(--progress-indicator-upcoming-border-color);
+  background-color: transparent;
+}
+
+@utility progress-indicator-current {
+  background-color: var(--progress-indicator-current-fill);
+}
+
+@utility progress-indicator-past {
+  background-color: var(--progress-indicator-past-fill);
+}
+
+@utility progress-indicator-number {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--progress-indicator-inner-size);
+  height: var(--progress-indicator-inner-size);
+  overflow-wrap: break-word;
+  font-family: var(--progress-indicator-number-font-family);
+  font-size: var(--progress-indicator-number-font-size);
+  font-weight: var(--progress-indicator-number-font-weight);
+  line-height: var(--progress-indicator-number-line-height);
+  letter-spacing: var(--progress-indicator-number-letter-spacing);
+  text-align: center;
+}
+
+@utility progress-indicator-number-current {
+  color: var(--progress-indicator-number-fill-current);
+}
+
+@utility progress-indicator-number-upcoming {
+  color: var(--progress-indicator-number-fill-upcoming);
+}
+
+@utility progress-indicator-check {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--progress-indicator-inner-size);
+  height: var(--progress-indicator-inner-size);
+  color: var(--progress-indicator-check-fill);
+}
+
+/* Label */
+@utility progress-label {
+  overflow-wrap: break-word;
+  white-space: nowrap;
+}
+
+@utility progress-label-current {
+  font-family: var(--progress-label-current-font-family);
+  font-size: var(--progress-label-current-font-size);
+  font-weight: var(--progress-label-current-font-weight);
+  line-height: var(--progress-label-current-line-height);
+  letter-spacing: var(--progress-label-current-letter-spacing);
+  color: var(--progress-label-current-fill);
+}
+
+@utility progress-label-upcoming {
+  font-family: var(--progress-label-default-font-family);
+  font-size: var(--progress-label-default-font-size);
+  font-weight: var(--progress-label-default-font-weight);
+  line-height: var(--progress-label-default-line-height);
+  letter-spacing: var(--progress-label-default-letter-spacing);
+  color: var(--progress-label-upcoming-fill);
+}
+
+@utility progress-label-past {
+  font-family: var(--progress-label-default-font-family);
+  font-size: var(--progress-label-default-font-size);
+  font-weight: var(--progress-label-default-font-weight);
+  line-height: var(--progress-label-default-line-height);
+  letter-spacing: var(--progress-label-default-letter-spacing);
+  color: var(--progress-label-past-fill);
+}
+
+/* Separator */
+@utility progress-separator {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  color: var(--progress-separator-fill);
+}
+
+@utility progress-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--progress-separator-icon-size);
+  height: var(--progress-separator-icon-size);
+  color: inherit;
+}

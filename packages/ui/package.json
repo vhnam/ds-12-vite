@@ -52,6 +52,7 @@
     "./menu": "./dist/menu.mjs",
     "./combobox": "./dist/combobox.mjs",
     "./pagination": "./dist/pagination.mjs",
+    "./progress": "./dist/progress.mjs",
     "./radio": "./dist/radio.mjs",
     "./table": "./dist/table.mjs",
     "./skeleton": "./dist/skeleton.mjs",

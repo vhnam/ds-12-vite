@@ -324,6 +324,24 @@ export function createBreadcrumbCurrentPagePlay(name: string | RegExp): PlayFunc
   };
 }
 
+export function createProgressA11yPlay(): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await expect(canvas.getByRole('navigation', { name: /progress/i })).toBeInTheDocument();
+  };
+}
+
+export function createProgressCurrentStepPlay(name: string | RegExp): PlayFunction {
+  return async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const currentStepLabel = canvas.getByText(name);
+    const currentStepItem = currentStepLabel.closest('[data-slot="progress-item"]');
+
+    await expect(currentStepItem).toHaveAttribute('aria-current', 'step');
+  };
+}
+
 export function createBadgeA11yPlay(text: string): PlayFunction {
   return async ({ canvasElement }) => {
     const canvas = within(canvasElement);
