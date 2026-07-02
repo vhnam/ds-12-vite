@@ -27,6 +27,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Vite+
         uses: voidzero-dev/setup-vp@v1
@@ -39,6 +41,19 @@ jobs:
 
       - name: Install dependencies
         run: vp install
+
+      - name: Detect tokens.json changes
+        uses: dorny/paths-filter@v3
+        id: tokens-filter
+        with:
+          filters: |
+            tokens-json:
+              - "packages/design-tokens/src/assets/tokens.json"
+
+      - name: Build UI package
+        if: steps.tokens-filter.outputs.tokens-json == 'true'
+        working-directory: packages/ui
+        run: pnpm build
 
       - name: Build Storybook
         run: pnpm --filter storybook run build-storybook
