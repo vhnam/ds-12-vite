@@ -16,8 +16,6 @@ const stateGroupStyle = {
   width: 327,
 } as const;
 
-type SelectionFieldComponent = typeof CheckboxField | typeof SwitchField;
-
 function StateCheckboxField({
   state,
   layout,
@@ -166,5 +164,3 @@ export function createSelectionFieldDecorator(width = 327) {
     );
   };
 }
-
-export type { SelectionFieldComponent };
