@@ -71,12 +71,11 @@
     "access": "public"
   },
   "scripts": {
-    "vendor-tokens": "node scripts/vendor-tokens.mjs",
     "vendor-fonts": "node scripts/vendor-fonts.mjs",
     "build:styles": "node scripts/build-styles.mjs",
-    "prebuild": "node scripts/vendor-tokens.mjs && node scripts/vendor-fonts.mjs",
+    "prebuild": "vp run vendor-tokens && node scripts/vendor-fonts.mjs",
     "build": "vp pack && node scripts/build-styles.mjs",
-    "dev": "node scripts/vendor-tokens.mjs && node scripts/vendor-fonts.mjs && vp pack --watch",
+    "dev": "vp run vendor-tokens && node scripts/vendor-fonts.mjs && vp pack --watch",
     "test": "vp test",
     "check": "vp check",
     "prepublishOnly": "vp run build"
