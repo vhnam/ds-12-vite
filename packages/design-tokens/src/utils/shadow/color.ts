@@ -25,7 +25,7 @@ const rgbaHexToRgba = (hex: string) => {
   return `rgba(${red}, ${green}, ${blue}, ${normalizeAlpha(alpha)})`;
 };
 
-export const getTokenValue = (part: ShadowValuePart) => part.value ?? part.$value;
+export const getTokenValue = (part: ShadowValuePart) => part.$value ?? part.value;
 
 export const getShadowColor = (part: ShadowValuePart) => {
   const raw = getTokenValue(part);

@@ -17,14 +17,13 @@ export const inlineShadowAliasReferences = (value: unknown, sourceTokens: TokenT
   const node = Object.fromEntries(
     Object.entries(value as TokenTree).map(([key, child]) => [key, inlineShadowAliasReferences(child, sourceTokens)]),
   ) as TokenTree;
-  const tokenType = node['$type'] ?? node['type'];
-  const valueKey = '$value' in node ? '$value' : 'value';
-  const tokenValue = node[valueKey];
+  const tokenType = node.$type ?? node.type;
+  const tokenValue = node.$value ?? node.value;
 
   if (tokenType === 'boxShadow' && typeof tokenValue === 'string' && SHADOW_ALIAS_PATTERN.test(tokenValue.trim())) {
     return {
       ...node,
-      [valueKey]: resolveShadowAlias(tokenValue, sourceTokens),
+      $value: resolveShadowAlias(tokenValue, sourceTokens),
     };
   }
 
@@ -38,7 +37,7 @@ export const registerShadowTransform = (sourceTokens: TokenTree) => {
     transitive: true,
     filter: (token) => (token.$type ?? token.type) === 'boxShadow',
     transform: (token) => {
-      const rawValue = token.value ?? token.$value;
+      const rawValue = token.$value ?? token.value;
       if (typeof rawValue === 'string' && /^\{[^}]+\}$/.test(rawValue.trim())) {
         return resolveShadowAlias(rawValue, sourceTokens);
       }

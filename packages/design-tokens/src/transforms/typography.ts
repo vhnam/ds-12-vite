@@ -29,8 +29,8 @@ export const flattenTypographyReferenceTree = (value: unknown): unknown => {
   const typographyChild = flattenedNode.typography;
   if (typeof typographyChild === 'object' && typographyChild !== null && !Array.isArray(typographyChild)) {
     const token = typographyChild as Record<string, unknown>;
-    const tokenValue = token.value ?? token.$value;
-    const tokenType = token.type ?? token.$type;
+    const tokenValue = token.$value ?? token.value;
+    const tokenType = token.$type ?? token.type;
     const isAlias =
       typeof tokenValue === 'string' && tokenValue.trim().startsWith('{') && tokenValue.trim().endsWith('}');
     if (tokenType === 'typography' && isAlias) {
@@ -39,8 +39,8 @@ export const flattenTypographyReferenceTree = (value: unknown): unknown => {
         Object.entries(TYPOGRAPHY_FIELD_TYPES).map(([fieldName, fieldType]) => [
           fieldName,
           {
-            value: `{${aliasPath}.${fieldName}}`,
-            type: fieldType,
+            $value: `{${aliasPath}.${fieldName}}`,
+            $type: fieldType,
           },
         ]),
       );
@@ -56,7 +56,7 @@ export const registerTypographyTransform = () => {
   StyleDictionary.registerTransform({
     name: 'care/typography/flatten',
     type: 'value',
-    filter: (token) => token.type === 'typography',
-    transform: (token) => token.value,
+    filter: (token) => (token.$type ?? token.type) === 'typography',
+    transform: (token) => token.$value ?? token.value,
   });
 };
