@@ -8,19 +8,61 @@ on:
       - "packages/ui/**"
       - "packages/design-tokens/**"
       - "apps/storybook/**"
+      - "tokens/**"
   pull_request:
     paths:
       - "packages/ui/**"
       - "packages/design-tokens/**"
       - "apps/storybook/**"
+      - "tokens/**"
 
 concurrency:
   group: storybook-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
+  sync-tokens:
+    name: Sync Design Tokens
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup Vite+
+        uses: voidzero-dev/setup-vp@v1
+        with:
+          node-version: "24"
+          cache: true
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install dependencies
+        run: vp install
+
+      - name: Transform tokens
+        run: |
+          pnpm --filter @ds-12/design-tokens run build:tokens
+          pnpm --filter @ds-12/design-tokens run generate:theme
+          pnpm --filter @ds-12/ui run vendor-tokens
+
+      - name: Commit generated tokens
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: sync design tokens [skip ci]"
+          file_pattern: |
+            packages/ui/src/vendor/tokens/**
+            packages/ui/src/styles/tokens.generated.css
+
   build:
     name: Build Storybook
+    needs: sync-tokens
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -41,9 +83,6 @@ jobs:
 
       - name: Install dependencies
         run: vp install
-
-      - name: Prepare design tokens
-        run: vp run @ds-12/ui#vendor-tokens
 
       - name: Build Storybook
         run: pnpm --filter storybook run build-storybook
