@@ -46,13 +46,25 @@ jobs:
       - name: Install dependencies
         run: vp install
 
+      - name: Detect token source changes
+        uses: dorny/paths-filter@v3
+        id: token-changes
+        with:
+          filters: |
+            tokens:
+              - "packages/design-tokens/src/assets/tokens.json"
+              - "tokens/**"
+
       - name: Transform tokens
-        run: vp run @ds-12/ui#vendor-tokens
+        if: steps.token-changes.outputs.tokens == 'true'
+        run: vp run --no-cache @ds-12/ui#vendor-tokens
 
       - name: Commit generated tokens
+        if: steps.token-changes.outputs.tokens == 'true'
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: sync design tokens [skip ci]"
+          commit_options: --no-verify
           file_pattern: |
             packages/design-tokens/src/tokens.generated.css
             packages/design-tokens/src/tokens.theme.css
@@ -81,6 +93,9 @@ jobs:
 
       - name: Install dependencies
         run: vp install
+
+      - name: Prepare design tokens
+        run: vp run @ds-12/ui#vendor-tokens
 
       - name: Build Storybook
         run: pnpm --filter storybook run build-storybook
