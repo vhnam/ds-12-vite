@@ -893,7 +893,7 @@
   --button-link-typography-small-font-weight: var(--title-default-font-weight);
   --button-link-typography-small-letter-spacing: var(--title-default-letter-spacing);
   --button-link-typography-small-line-height: var(--title-default-line-height);
-  --button-primary-background-color-default-fill: var(--color-semantic-text-neutral-bolder);
+  --button-primary-background-color-default-fill: var(--color-semantic-information-bold);
   --button-primary-background-color-disabled-fill: var(--color-semantic-canvas-disabled);
   --button-primary-background-color-hovered-fill: var(--color-semantic-brand-bold-hovered);
   --button-primary-background-color-pressed-fill: var(--color-semantic-brand-bold-pressed);
