@@ -97,15 +97,17 @@ function MenuListDemo({
   selectedValue,
   disabledValue,
   highlightedValue,
+  'aria-label': ariaLabel = 'Menu',
 }: {
   variant: MenuVariant;
   options?: readonly MenuOption[];
   selectedValue?: string;
   disabledValue?: string;
   highlightedValue?: string;
+  'aria-label'?: string;
 }) {
   return (
-    <MenuList>
+    <MenuList aria-label={ariaLabel}>
       {options.map((option) => (
         <MenuItemRow
           key={option.value}
@@ -125,19 +127,19 @@ export function MenuStatesShowcase({ variant }: { variant: MenuVariant }) {
     <div style={showcaseStyle}>
       <div>
         <StoryCaption>default</StoryCaption>
-        <MenuListDemo variant={variant} />
+        <MenuListDemo variant={variant} aria-label="Menu — default" />
       </div>
       <div>
         <StoryCaption>selected</StoryCaption>
-        <MenuListDemo variant={variant} selectedValue="item-2" />
+        <MenuListDemo variant={variant} aria-label="Menu — selected" selectedValue="item-2" />
       </div>
       <div>
         <StoryCaption>disabled</StoryCaption>
-        <MenuListDemo variant={variant} disabledValue="item-3" />
+        <MenuListDemo variant={variant} aria-label="Menu — disabled" disabledValue="item-3" />
       </div>
       <div>
         <StoryCaption>highlighted</StoryCaption>
-        <MenuListDemo variant={variant} highlightedValue="item-1" />
+        <MenuListDemo variant={variant} aria-label="Menu — highlighted" highlightedValue="item-1" />
       </div>
     </div>
   );
@@ -148,11 +150,11 @@ export function MenuVariantsShowcase() {
     <div style={showcaseStyle}>
       <div>
         <StoryCaption>single</StoryCaption>
-        <MenuListDemo variant="single" selectedValue="item-2" disabledValue="item-4" />
+        <MenuListDemo variant="single" aria-label="Menu — single" selectedValue="item-2" disabledValue="item-4" />
       </div>
       <div>
         <StoryCaption>multiple</StoryCaption>
-        <MenuListDemo variant="multiple" selectedValue="item-2" disabledValue="item-4" />
+        <MenuListDemo variant="multiple" aria-label="Menu — multiple" selectedValue="item-2" disabledValue="item-4" />
       </div>
     </div>
   );

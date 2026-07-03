@@ -1,4 +1,4 @@
-import { n as selectionFieldVariants, t as SelectionFieldBaseProps } from "../selection-field-layout-CgxPUUHX.mjs";
+import { n as selectionFieldVariants, t as SelectionFieldBaseProps } from "../selection-field-layout-CHorFcIc.mjs";
 import { SwitchProps } from "../switch.mjs";
 
 //#region src/components/fields/switch-field/index.d.ts

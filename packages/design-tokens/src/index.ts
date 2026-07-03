@@ -11,7 +11,7 @@ import { inlineShadowAliasReferences, registerShadowTransform } from './transfor
 import { flattenTypographyReferenceTree, registerTypographyTransform } from './transforms/typography';
 import { postProcessVariablesCss } from './utils/css';
 import { buildElevationCustomProperties } from './utils/shadow';
-import { getCssFilePath, getDistPath, getSourceFile, loadSourceTokensFromFile } from './utils/theme-files';
+import { getCssFilePath, getSourceFile, loadSourceTokensFromFile } from './utils/theme-files';
 import { isPrimitiveToken } from './utils/token-filter';
 
 await register(StyleDictionary);
@@ -28,7 +28,6 @@ if (tokenSetKeys.length > 1) {
 }
 const firstSetKey = tokenSetKeys[0];
 const sourceTokens = (firstSetKey ? tokenSets[firstSetKey] : rawTokens) as typeof rawTokens;
-const distPath = getDistPath();
 registerShadowTransform(sourceTokens);
 registerLineHeightPxTransform();
 registerTypographyTransform();
@@ -85,7 +84,7 @@ const build = async () => {
     }
     await sd.buildAllPlatforms();
 
-    const cssFilePath = getCssFilePath(distPath);
+    const cssFilePath = getCssFilePath();
     postProcessVariablesCss(cssFilePath, buildElevationCustomProperties(sourceTokens));
   } finally {
     rmSync(tempTokensDir, { recursive: true, force: true });

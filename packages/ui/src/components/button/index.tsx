@@ -1,6 +1,6 @@
 import { Button as BaseButton } from '@base-ui/react/button';
 import { cva, type VariantProps } from 'class-variance-authority';
-import type { ComponentProps, ReactNode } from 'react';
+import { isValidElement, type ComponentProps, type ReactElement, type ReactNode } from 'react';
 
 import { cn } from '../../lib/utils.ts';
 
@@ -98,6 +98,41 @@ const buttonLoaderVariants = cva('button-loader', {
   },
 });
 
+function getNodeText(node: ReactNode): string | undefined {
+  if (node === null || node === undefined || typeof node === 'boolean') {
+    return undefined;
+  }
+
+  if (typeof node === 'string' || typeof node === 'number') {
+    return String(node);
+  }
+
+  if (Array.isArray(node)) {
+    const text = node.map(getNodeText).filter(Boolean).join(' ');
+    return text || undefined;
+  }
+
+  if (isValidElement(node)) {
+    return getNodeText((node as ReactElement<{ children?: ReactNode }>).props.children);
+  }
+
+  return undefined;
+}
+
+function getIconAccessibleName(icon: ReactNode): string | undefined {
+  if (!isValidElement(icon)) {
+    return undefined;
+  }
+
+  const { name, children } = icon.props as { name?: string; children?: ReactNode };
+
+  if (typeof name === 'string') {
+    return name.replace(/_/g, ' ');
+  }
+
+  return getNodeText(children);
+}
+
 function ButtonLoader({ size }: { size: 'sm' | 'md' | 'lg' }) {
   return (
     <span className={buttonLoaderVariants({ size })} aria-hidden="true">
@@ -160,7 +195,18 @@ export function Button({
   const showTrailingIcon = hasIcon && iconPosition === 'right' && !isIconOnly;
   const label = isIconOnly && typeof children === 'string' ? undefined : children;
   const textLabel = typeof children === 'string' ? children : undefined;
-  const resolvedAriaLabel = ariaLabel ?? (isIconOnly ? textLabel : undefined) ?? (loading ? textLabel : undefined);
+  const iconLabel = isIconOnly ? getIconAccessibleName(resolvedIcon) : undefined;
+  const resolvedAriaLabel =
+    ariaLabel ??
+    (isIconOnly ? (textLabel ?? iconLabel) : undefined) ??
+    (loading ? (textLabel ?? iconLabel) : undefined);
+
+  if (process.env.NODE_ENV !== 'production' && isIconOnly && !resolvedAriaLabel && !loading) {
+    console.warn(
+      'Button: icon-only buttons require an accessible name via aria-label, string children, or an Icon name.',
+    );
+  }
+
   const iconClassName = buttonIconVariants({ variant: resolvedVariant, size: resolvedSize });
 
   return (

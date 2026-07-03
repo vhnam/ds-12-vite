@@ -30,8 +30,8 @@ type SelectionFieldBaseProps = {
    */
   showSupportingText?: boolean;
   /**
-   * Whether to render the suffix element.
-   * @default true
+   * Whether to render the suffix element. Only shown when `suffix` is provided.
+   * @default false
    */
   showSuffix?: boolean;
   /**

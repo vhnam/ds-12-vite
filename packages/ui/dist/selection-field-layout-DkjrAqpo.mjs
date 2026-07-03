@@ -3,7 +3,7 @@ import { cva as n } from "class-variance-authority";
 import { useId as r } from "react";
 import { jsx as i, jsxs as a } from "react/jsx-runtime";
 
-import { Input as t } from "./input.mjs";
+import { _ as t } from "./icon-C8br3Qrh.mjs";
 import { t as e } from "./utils-tOxW8rXw.mjs";
 const s = n(`selection-field`, {
   variants: {
@@ -34,11 +34,11 @@ function c({
   disabled: d,
   label: f = `Selection label`,
   supportingText: p = `Supporting text`,
-  suffix: m = `Suffix`,
+  suffix: m,
   helperText: h = `Helper Text`,
   showLabel: g = !0,
   showSupportingText: _ = !1,
-  showSuffix: v = !0,
+  showSuffix: v = !1,
   showHelperText: y = !0,
   showInput: b = !1,
   inputProps: x,
@@ -50,7 +50,8 @@ function c({
     E = `${w}-helper`,
     D = !!d,
     O = !!u,
-    k = l ?? `sm`;
+    k = l ?? `sm`,
+    A = !!m && v;
   return a(o.Root, {
     disabled: D,
     invalid: O,
@@ -89,7 +90,7 @@ function c({
                 ],
               })
             : null,
-          v
+          A
             ? i(`span`, { className: `selection-field-suffix`, "data-slot": `selection-field-suffix`, children: m })
             : null,
         ],

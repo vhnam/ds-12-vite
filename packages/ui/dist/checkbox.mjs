@@ -2,7 +2,7 @@ import { Checkbox as i } from "@base-ui/react/checkbox";
 import { cva as n } from "class-variance-authority";
 import { jsx as r } from "react/jsx-runtime";
 
-import { Icon as t } from "./icon.mjs";
+import { n as t } from "./icon-C8br3Qrh.mjs";
 import { t as e } from "./utils-tOxW8rXw.mjs";
 const a = n(`checkbox`, {
   variants: {

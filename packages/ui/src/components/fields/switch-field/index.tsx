@@ -55,6 +55,7 @@ export function SwitchField({
         <Switch
           id={controlId}
           className={className}
+          invalid={invalid}
           disabled={disabled}
           checked={checked}
           defaultChecked={defaultChecked}

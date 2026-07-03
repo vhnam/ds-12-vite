@@ -47,7 +47,6 @@ type ComboboxProps = ComboboxSharedProps & {
   defaultValue?: string | string[] | null /** Called when the selected value or values change. */;
   onValueChange?: (value: string | string[] | null) => void;
 };
-/** Filterable text input with a dropdown list, optional leading icon, multi-select chips, and error and disabled states. */
 declare function Combobox({
   multiple,
   value,

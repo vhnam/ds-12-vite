@@ -125,6 +125,7 @@
     --radius-small: var(--radius-small);
     --radius-xlarge: var(--radius-xlarge);
     --radius-xsmall: var(--radius-xsmall);
+    --radius-xxlarge: var(--radius-xxlarge);
     --radius-xxsmall: var(--radius-xxsmall);
     --spacing-large: var(--spacing-large);
     --spacing-medium: var(--spacing-medium);
@@ -965,6 +966,7 @@
   --radius-small: 8px;
   --radius-xlarge: 32px;
   --radius-xsmall: 4px;
+  --radius-xxlarge: 64px;
   --radius-xxsmall: 2px;
   --search-bar-large-container-enabled-height: 44px;
   --search-bar-large-container-focused-height: 44px;

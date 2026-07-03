@@ -1,2 +1,2 @@
-import { i as e, n as t, r as n, t as r } from "./breadcrumb-D_bz7zHR.mjs";
-export { r as Breadcrumb, t as BreadcrumbIconSizeContext, n as breadcrumbVariants, e as getBreadcrumbSegments };
+import { A as e, O as t, j as n, k as r } from "./icon-C8br3Qrh.mjs";
+export { t as Breadcrumb, r as BreadcrumbIconSizeContext, e as breadcrumbVariants, n as getBreadcrumbSegments };

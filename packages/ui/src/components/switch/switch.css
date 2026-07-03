@@ -38,6 +38,10 @@
   }
 }
 
+@utility switch-invalid {
+  --switch-focus-ring-color: var(--checkbox-error-false-border-color);
+}
+
 @utility switch-thumb {
   display: block;
   flex-shrink: 0;

@@ -2,7 +2,7 @@ import { Button as o } from "@base-ui/react/button";
 import { cva as n } from "class-variance-authority";
 import { Fragment as r, jsx as i, jsxs as a } from "react/jsx-runtime";
 
-import { Icon as t } from "./icon.mjs";
+import { n as t } from "./icon-C8br3Qrh.mjs";
 import { t as e } from "./utils-tOxW8rXw.mjs";
 const s = n(`table-head-cell`, {
     variants: { align: { start: ``, end: `` }, variant: { default: ``, avatar: `` } },

@@ -1,6 +1,6 @@
 import { Button as BaseButton } from '@base-ui/react/button';
 import { cva, type VariantProps } from 'class-variance-authority';
-import type { ComponentProps, ReactNode } from 'react';
+import { isValidElement, type ComponentProps, type ReactElement, type ReactNode } from 'react';
 
 import { cn } from '../../lib/utils.ts';
 import { Icon } from '../icon/index.tsx';
@@ -99,6 +99,27 @@ function resolveSortLabel(heading: string, sortDirection?: TableSortDirection) {
   return `Sort by ${heading}`;
 }
 
+function getNodeText(node: ReactNode): string | undefined {
+  if (node === null || node === undefined || typeof node === 'boolean') {
+    return undefined;
+  }
+
+  if (typeof node === 'string' || typeof node === 'number') {
+    return String(node);
+  }
+
+  if (Array.isArray(node)) {
+    const text = node.map(getNodeText).filter(Boolean).join(' ');
+    return text || undefined;
+  }
+
+  if (isValidElement(node)) {
+    return getNodeText((node as ReactElement<{ children?: ReactNode }>).props.children);
+  }
+
+  return undefined;
+}
+
 export type TableProps = ComponentProps<'table'> & {
   /** Additional CSS class names applied to the table element. */
   className?: string;
@@ -135,6 +156,11 @@ export type TableHeadProps = Omit<ComponentProps<'th'>, 'align'> &
 export type TableCellProps = Omit<ComponentProps<'td'>, 'align'> &
   VariantProps<typeof tableCellVariants> & {
     className?: string;
+    /**
+     * Static visual state for design previews and Storybook.
+     * Interactive rows apply hover and focus styles automatically via CSS when `state` is `"default"`.
+     */
+    state?: TableCellState;
     /** Primary text for default, stacked, and avatar variants. */
     text?: string;
     /** Secondary text for stacked and avatar variants. */
@@ -230,7 +256,7 @@ export function TableHead({
 }: TableHeadProps) {
   const resolvedAlign = align ?? 'start';
   const resolvedVariant = variant ?? 'default';
-  const heading = typeof children === 'string' || typeof children === 'number' ? String(children) : 'column';
+  const heading = getNodeText(children) ?? 'column';
   const resolvedSortLabel = sortLabel ?? resolveSortLabel(heading, sortDirection);
 
   return (

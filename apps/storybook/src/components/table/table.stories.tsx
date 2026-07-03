@@ -13,10 +13,14 @@ type TableStoryArgs = ComponentProps<typeof Table> & {
   state: (typeof CELL_STATES)[number];
 };
 
+function TableStory({ state: _state, ...props }: TableStoryArgs) {
+  return <Table {...props} />;
+}
+
 /** Data table with header and body cell primitives for text, stacked, avatar, badge, and custom content. */
-const meta: Meta<TableStoryArgs> = {
+const meta = {
   title: 'Components/Table',
-  component: Table,
+  component: TableStory,
   tags: ['autodocs'],
   argTypes: {
     state: selectArgType(CELL_STATES, 'Visual state applied to a single body cell.'),
@@ -24,11 +28,11 @@ const meta: Meta<TableStoryArgs> = {
   args: {
     state: 'default',
   },
-};
+} satisfies Meta<typeof TableStory>;
 
 export default meta;
 
-type Story = StoryObj<TableStoryArgs>;
+type Story = StoryObj<typeof meta>;
 
 /** Use a basic text table for straightforward record lists — no sorting or rich cell content required. */
 export const Default: Story = {
@@ -154,7 +158,7 @@ export const RightAligned: Story = {
 
 /** Showcase of header cell variants — for human reference only. */
 export const HeadVariants: Story = {
-  tags: ['a11y-debt'],
+  tags: ['!manifest', 'a11y-debt'],
   parameters: showcaseParameters,
   render: () => <HeadVariantsShowcase />,
   play: async ({ canvasElement }) => {
@@ -165,7 +169,7 @@ export const HeadVariants: Story = {
 
 /** Showcase of body cell content types and states — for human reference only. */
 export const CellStates: Story = {
-  tags: ['a11y-debt'],
+  tags: ['!manifest', 'a11y-debt'],
   parameters: showcaseParameters,
   render: () => <CellStatesShowcase />,
   play: async ({ canvasElement }) => {
@@ -176,7 +180,7 @@ export const CellStates: Story = {
 
 /** Showcase of the full multi-column table with avatars, badges, currency, and row actions — for human reference only. */
 export const FullExample: Story = {
-  tags: ['a11y-debt'],
+  tags: ['!manifest', 'a11y-debt'],
   parameters: showcaseParameters,
   render: () => <FullTableShowcase />,
   play: async ({ canvasElement }) => {

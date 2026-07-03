@@ -99,10 +99,14 @@ export type DatePickerProps = DatePickerCalendarProps & {
    * Accessible name when no visible label is provided — use DatePickerField for labelled forms.
    */
   'aria-label'?: string;
+  /**
+   * Locale used for display formatting. Defaults to the runtime locale when omitted.
+   */
+  locale?: Intl.LocalesArgument;
 };
 
-function formatDisplayDate(date: Date): string {
-  return date.toLocaleDateString('en-US', {
+function formatDisplayDate(date: Date, locale?: Intl.LocalesArgument): string {
+  return date.toLocaleDateString(locale, {
     month: 'short',
     day: 'numeric',
     year: 'numeric',
@@ -136,6 +140,7 @@ export function DatePicker({
   required,
   'aria-describedby': ariaDescribedBy,
   'aria-label': ariaLabel,
+  locale,
   ...calendarProps
 }: DatePickerProps) {
   const resolvedSize = size ?? 'sm';
@@ -203,13 +208,13 @@ export function DatePicker({
               data-slot="date-picker-value"
               data-placeholder={selectedDate ? undefined : ''}
             >
-              {selectedDate ? formatDisplayDate(selectedDate) : placeholder}
+              {selectedDate ? formatDisplayDate(selectedDate, locale) : placeholder}
             </span>
             <span className="date-picker-trailing" data-slot="date-picker-trailing">
               <Icon name="calendar_today" size={iconSize} />
             </span>
           </BasePopover.Trigger>
-          {name ? (
+          {name && !isDisabled ? (
             <input
               type="hidden"
               name={name}
@@ -228,6 +233,7 @@ export function DatePicker({
             <BasePopover.Popup className="date-picker-popup" data-slot="date-picker-popup">
               <Calendar
                 {...calendarProps}
+                locale={locale}
                 variant="default"
                 mode="single"
                 selected={selectedDate}

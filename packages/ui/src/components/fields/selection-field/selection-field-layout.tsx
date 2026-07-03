@@ -68,8 +68,8 @@ export type SelectionFieldBaseProps = {
    */
   showSupportingText?: boolean;
   /**
-   * Whether to render the suffix element.
-   * @default true
+   * Whether to render the suffix element. Only shown when `suffix` is provided.
+   * @default false
    */
   showSuffix?: boolean;
   /**
@@ -115,11 +115,11 @@ export function SelectionFieldLayout({
   disabled,
   label = 'Selection label',
   supportingText = 'Supporting text',
-  suffix = 'Suffix',
+  suffix,
   helperText = 'Helper Text',
   showLabel = true,
   showSupportingText = false,
-  showSuffix = true,
+  showSuffix = false,
   showHelperText = true,
   showInput = false,
   inputProps,
@@ -132,6 +132,7 @@ export function SelectionFieldLayout({
   const isDisabled = Boolean(disabled);
   const isInvalid = Boolean(invalid);
   const resolvedSize = size ?? 'sm';
+  const shouldShowSuffix = Boolean(suffix) && showSuffix;
 
   return (
     <Field.Root
@@ -170,7 +171,7 @@ export function SelectionFieldLayout({
             ) : null}
           </div>
         ) : null}
-        {showSuffix ? (
+        {shouldShowSuffix ? (
           <span className="selection-field-suffix" data-slot="selection-field-suffix">
             {suffix}
           </span>

@@ -134,10 +134,18 @@ export const SingleStates: Story = {
   render: () => <MenuStatesShowcase variant="single" />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
+    const selectedList = canvas.getByRole('listbox', { name: /menu — selected/i });
+    const disabledList = canvas.getByRole('listbox', { name: /menu — disabled/i });
 
     await expect(canvas.getAllByRole('option')).toHaveLength(DEFAULT_MENU_OPTIONS.length * 4);
-    await expect(canvas.getAllByRole('option', { name: /item two/i })[1]).toHaveAttribute('aria-selected', 'true');
-    await expect(canvas.getAllByRole('option', { name: /item three/i })[2]).toHaveAttribute('aria-disabled', 'true');
+    await expect(within(selectedList).getByRole('option', { name: /item two/i })).toHaveAttribute(
+      'aria-selected',
+      'true',
+    );
+    await expect(within(disabledList).getByRole('option', { name: /item three/i })).toHaveAttribute(
+      'aria-disabled',
+      'true',
+    );
   },
 };
 
@@ -148,10 +156,11 @@ export const MultipleStates: Story = {
   render: () => <MenuStatesShowcase variant="multiple" />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const selectedOptions = canvas.getAllByRole('option', { name: /item two/i });
+    const selectedList = canvas.getByRole('listbox', { name: /menu — selected/i });
+    const selectedOption = within(selectedList).getByRole('option', { name: /item two/i });
 
-    await expect(selectedOptions[1]).toHaveAttribute('aria-selected', 'true');
-    await expect(selectedOptions[1].querySelector('[data-slot="menu-item-checkbox"]')).toBeInTheDocument();
+    await expect(selectedOption).toHaveAttribute('aria-selected', 'true');
+    await expect(selectedOption.querySelector('[data-slot="menu-item-checkbox"]')).toBeInTheDocument();
   },
 };
 
@@ -162,8 +171,8 @@ export const Variants: Story = {
   render: () => <MenuVariantsShowcase />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const singleList = canvas.getAllByRole('listbox')[0];
-    const multipleList = canvas.getAllByRole('listbox')[1];
+    const singleList = canvas.getByRole('listbox', { name: /menu — single/i });
+    const multipleList = canvas.getByRole('listbox', { name: /menu — multiple/i });
 
     await expect(singleList.querySelector('[data-slot="menu-item-checkbox"]')).not.toBeInTheDocument();
     await expect(multipleList.querySelector('[data-slot="menu-item-checkbox"]')).toBeInTheDocument();

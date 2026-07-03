@@ -136,6 +136,16 @@ type TypographyVariant = 'display' | 'h1' | 'h2' | 'h3' | 'h4' | 'paragraph' | '
 type TypographySize = 'sm' | 'md' | 'lg' | 'xl';
 type TypographyWeight = 'regular' | 'semibold' | 'bold';
 
+const VARIANT_DEFAULT_TAG: Record<TypographyVariant, keyof JSX.IntrinsicElements> = {
+  display: 'p',
+  h1: 'h1',
+  h2: 'h2',
+  h3: 'h3',
+  h4: 'h4',
+  paragraph: 'p',
+  label: 'span',
+};
+
 type TypographyState = {
   slot: 'typography';
   variant?: TypographyVariant;
@@ -270,9 +280,10 @@ function Typography({ className, variant, size, weight, children, render, ...pro
     weight: resolved.weight,
   };
   const isTagName = typeof render === 'string';
+  const defaultTagName = isTagName ? render : VARIANT_DEFAULT_TAG[variant ?? 'paragraph'];
 
   return useRender({
-    defaultTagName: isTagName ? render : 'div',
+    defaultTagName,
     props: mergeProps<'div'>(
       {
         className: cn(typographyVariants({ ...resolved, className })),

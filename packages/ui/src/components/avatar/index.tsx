@@ -100,6 +100,10 @@ export type AvatarProps = Omit<ComponentProps<typeof BaseAvatar.Root>, 'classNam
    */
   alt?: string;
   /**
+   * Accessible name for the avatar. Defaults from `initials`, `alt`, or a generic label.
+   */
+  'aria-label'?: string;
+  /**
    * Custom icon element used when `variant` is `"icon"` or as an image fallback
    * when no initials are provided.
    */
@@ -118,6 +122,26 @@ function AvatarIconContent({ shape, size, icon }: { shape: AvatarShape; size: Av
   );
 }
 
+function getAvatarAriaProps(
+  resolvedVariant: AvatarVariant,
+  accessibleLabel: string | undefined,
+  src?: string,
+  alt?: string,
+): { role?: 'img'; 'aria-label'?: string } {
+  if (resolvedVariant === 'image' && src && alt) {
+    return {};
+  }
+
+  if (!accessibleLabel) {
+    return {};
+  }
+
+  return {
+    role: 'img',
+    'aria-label': accessibleLabel,
+  };
+}
+
 /** Displays a profile image with initials, photo, or fallback icon. Available in circle and square shapes with small, medium, and large sizes. */
 export function Avatar({
   className,
@@ -128,16 +152,25 @@ export function Avatar({
   src,
   alt = '',
   icon,
+  'aria-label': ariaLabel,
   ...props
 }: AvatarProps) {
   const resolvedSize = size ?? 'md';
   const resolvedShape = shape ?? 'circle';
   const resolvedVariant = variant ?? 'initial';
   const avatarClassName = cn(avatarVariants({ size, shape, variant, className }));
+  const accessibleLabel = ariaLabel ?? (initials ? initials : resolvedVariant === 'image' && alt ? alt : 'User avatar');
+  const avatarAriaProps = getAvatarAriaProps(resolvedVariant, accessibleLabel, src, alt);
 
   if (resolvedVariant === 'image') {
     return (
-      <BaseAvatar.Root className={avatarClassName} data-slot="avatar" data-variant={resolvedVariant} {...props}>
+      <BaseAvatar.Root
+        className={avatarClassName}
+        data-slot="avatar"
+        data-variant={resolvedVariant}
+        {...avatarAriaProps}
+        {...props}
+      >
         {src ? <BaseAvatar.Image className="avatar-image" src={src} alt={alt} /> : null}
         <BaseAvatar.Fallback className="avatar-fallback" delay={0}>
           {initials ? (
@@ -151,9 +184,19 @@ export function Avatar({
   }
 
   return (
-    <BaseAvatar.Root className={avatarClassName} data-slot="avatar" data-variant={resolvedVariant} {...props}>
+    <BaseAvatar.Root
+      className={avatarClassName}
+      data-slot="avatar"
+      data-variant={resolvedVariant}
+      {...avatarAriaProps}
+      {...props}
+    >
       {resolvedVariant === 'initial' ? (
-        <AvatarInitials>{initials ?? ''}</AvatarInitials>
+        initials ? (
+          <AvatarInitials>{initials}</AvatarInitials>
+        ) : (
+          <AvatarIconContent shape={resolvedShape} size={resolvedSize} icon={icon} />
+        )
       ) : (
         <AvatarIconContent shape={resolvedShape} size={resolvedSize} icon={icon} />
       )}

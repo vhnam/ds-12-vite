@@ -17,6 +17,7 @@ import { InputFieldStatesShowcase, SIZES, VARIANTS } from './input-field-story-f
 const meta = {
   title: 'Fields/InputField',
   component: InputField,
+  tags: ['autodocs'],
   argTypes: {
     size: selectArgType(SIZES, 'Visual size of the input control.'),
     variant: selectArgType(VARIANTS, 'Layout variant — default for standard fields, suffix for inline unit hints.'),

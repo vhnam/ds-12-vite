@@ -1,6 +1,6 @@
 import { jsx as r } from "react/jsx-runtime";
 
-import { n as e, t } from "../selection-field-layout-Bj6R9jEa.mjs";
+import { n as e, t } from "../selection-field-layout-DkjrAqpo.mjs";
 import { Switch as n } from "../switch.mjs";
 function i({
   className: e,
@@ -41,7 +41,7 @@ function i({
     inputProps: _,
     id: v,
     renderControl: (t) =>
-      r(n, { id: t, className: e, disabled: s, checked: y, defaultChecked: b, onCheckedChange: x, ...S }),
+      r(n, { id: t, className: e, invalid: o, disabled: s, checked: y, defaultChecked: b, onCheckedChange: x, ...S }),
   });
 }
 export { i as SwitchField, e as switchFieldVariants };

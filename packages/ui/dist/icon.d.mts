@@ -16,7 +16,7 @@ type IconProps = ComponentProps<"span"> & {
    */
   align?: IconAlign;
   /**
-   * Icon size in pixels. Inherits from parent Badge when nested inside one.
+   * Icon size in pixels. Inherits from the nearest parent component context when nested inside one.
    * @default 20
    */
   size?: number;

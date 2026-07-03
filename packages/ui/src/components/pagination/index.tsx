@@ -151,6 +151,14 @@ export function Pagination({
   const resolvedSize = size ?? 'lg';
   const resolvedShowNavigation = showNavigation ?? resolvedSize === 'lg';
   const safePage = Math.min(Math.max(page, 1), Math.max(totalPages, 1));
+  const isPageClamped = page !== safePage;
+
+  if (process.env.NODE_ENV !== 'production' && isPageClamped) {
+    console.warn(
+      `Pagination: page ${page} is out of bounds for totalPages ${totalPages}. Rendering page ${safePage} instead.`,
+    );
+  }
+
   const items = getPaginationItems(safePage, totalPages);
   const layout = resolvedSize === 'lg' && resolvedShowNavigation && totalPages >= 5 ? 'spread' : 'centered';
 
@@ -195,6 +203,7 @@ export function Pagination({
       <nav
         className={cn(paginationVariants({ size: resolvedSize, layout, className }))}
         data-slot="pagination"
+        data-page-clamped={isPageClamped || undefined}
         aria-label={ariaLabel}
         {...props}
       >
@@ -223,6 +232,7 @@ export function Pagination({
     <nav
       className={cn(paginationVariants({ size: resolvedSize, layout: 'end', className }))}
       data-slot="pagination"
+      data-page-clamped={isPageClamped || undefined}
       aria-label={ariaLabel}
       {...props}
     >

@@ -1,5 +1,6 @@
 import { DayPicker, getDefaultClassNames, type DateRange, type DayPickerProps } from '@daypicker/react';
 import { cva } from 'class-variance-authority';
+import { useMemo } from 'react';
 
 import { cn } from '../../lib/utils.ts';
 import {
@@ -21,6 +22,10 @@ type CalendarSharedProps = {
    * @default "default"
    */
   variant?: CalendarVariant;
+  /**
+   * Locale used for month and caption formatting. Defaults to the runtime locale when omitted.
+   */
+  locale?: Intl.LocalesArgument;
 };
 
 type CalendarSingleProps = CalendarSharedProps &
@@ -72,6 +77,7 @@ function getVariantDefaults(variant: CalendarVariant) {
 export function Calendar({
   className,
   variant = 'default',
+  locale,
   showOutsideDays = true,
   components,
   classNames,
@@ -82,8 +88,28 @@ export function Calendar({
   const layout = getVariantDefaults(resolvedVariant);
   const defaultClassNames = getDefaultClassNames();
 
+  const resolvedComponents = useMemo(
+    () => ({
+      Root: (rootProps: Parameters<typeof CalendarRoot>[0]) => (
+        <CalendarRoot
+          {...rootProps}
+          className={cn(calendarVariants({ variant: resolvedVariant }), className, rootProps.className)}
+          data-slot="calendar"
+          data-variant={resolvedVariant}
+        />
+      ),
+      Chevron: CalendarChevron,
+      DayButton: CalendarDayButton,
+      PreviousMonthButton: CalendarPreviousMonthButton,
+      NextMonthButton: CalendarNextMonthButton,
+      ...components,
+    }),
+    [resolvedVariant, className, components],
+  );
+
   return (
     <DayPicker
+      locale={locale}
       showOutsideDays={showOutsideDays}
       numberOfMonths={layout.numberOfMonths}
       captionLayout={layout.captionLayout}
@@ -94,31 +120,17 @@ export function Calendar({
       }}
       formatters={{
         formatCaption: (date) =>
-          date.toLocaleDateString('en-US', {
+          date.toLocaleDateString(locale, {
             month: 'long',
             year: 'numeric',
           }),
         formatMonthDropdown: (date) =>
-          date.toLocaleDateString('en-US', {
+          date.toLocaleDateString(locale, {
             month: 'short',
           }),
         ...formatters,
       }}
-      components={{
-        Root: (rootProps) => (
-          <CalendarRoot
-            {...rootProps}
-            className={cn(calendarVariants({ variant: resolvedVariant }), className, rootProps.className)}
-            data-slot="calendar"
-            data-variant={resolvedVariant}
-          />
-        ),
-        Chevron: CalendarChevron,
-        DayButton: CalendarDayButton,
-        PreviousMonthButton: CalendarPreviousMonthButton,
-        NextMonthButton: CalendarNextMonthButton,
-        ...components,
-      }}
+      components={resolvedComponents}
       {...(props as DayPickerProps)}
     />
   );

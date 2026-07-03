@@ -39,16 +39,17 @@ const i = t(`m-0 text-semantic-text-neutral-bolder`, {
     ],
     defaultVariants: { variant: `paragraph`, size: `md`, weight: `regular` },
   }),
-  a = new Set([`h1`, `h2`, `h3`, `h4`]);
-function o(e, t, n) {
+  a = { display: `p`, h1: `h1`, h2: `h2`, h3: `h3`, h4: `h4`, paragraph: `p`, label: `span` },
+  o = new Set([`h1`, `h2`, `h3`, `h4`]);
+function s(e, t, n) {
   if (
     process.env.NODE_ENV !== `production` &&
     (e === `display` &&
       (t !== void 0 || n !== void 0) &&
       console.warn(`[Typography] variant="display" does not accept size or weight props.`),
-    a.has(e) && t !== void 0 && console.warn(`[Typography] variant="${e}" does not accept a size prop.`),
+    o.has(e) && t !== void 0 && console.warn(`[Typography] variant="${e}" does not accept a size prop.`),
     e === `label` && n !== void 0 && console.warn(`[Typography] variant="label" does not accept a weight prop.`),
-    a.has(e) &&
+    o.has(e) &&
       n === `semibold` &&
       console.warn(`[Typography] variant="${e}" only supports weight="regular" or weight="bold".`),
     e === `paragraph`)
@@ -61,23 +62,23 @@ function o(e, t, n) {
         console.warn(`[Typography] paragraph size="xl" only supports weight="semibold".`));
   }
 }
-function s(e, t, n) {
-  if ((o(e, t, n), e === `display`)) return { variant: e, size: void 0, weight: void 0 };
+function c(e, t, n) {
+  if ((s(e, t, n), e === `display`)) return { variant: e, size: void 0, weight: void 0 };
   if (e === `label`) return { variant: e, size: t ?? `md`, weight: void 0 };
-  if (a.has(e)) return { variant: e, size: void 0, weight: n ?? `bold` };
+  if (o.has(e)) return { variant: e, size: void 0, weight: n ?? `bold` };
   let r = t ?? `md`,
     i = n ?? `regular`;
   return (r === `sm` && (i = `regular`), r === `xl` && (i = `semibold`), { variant: e, size: r, weight: i });
 }
-function c({ className: t, variant: a, size: o, weight: c, children: l, render: u, ...d }) {
-  let f = s(a, o, c),
-    p = { slot: `typography`, variant: a, size: f.size, weight: f.weight },
-    m = typeof u == `string`;
+function l({ className: t, variant: o, size: s, weight: l, children: u, render: d, ...f }) {
+  let p = c(o, s, l),
+    m = { slot: `typography`, variant: o, size: p.size, weight: p.weight },
+    h = typeof d == `string`;
   return r({
-    defaultTagName: m ? u : `div`,
-    props: n({ className: e(i({ ...f, className: t })), children: l, "data-slot": `typography`, "data-variant": a }, d),
-    render: m ? void 0 : u,
-    state: p,
+    defaultTagName: h ? d : a[o ?? `paragraph`],
+    props: n({ className: e(i({ ...p, className: t })), children: u, "data-slot": `typography`, "data-variant": o }, f),
+    render: h ? void 0 : d,
+    state: m,
   });
 }
-export { c as Typography, i as typographyVariants };
+export { l as Typography, i as typographyVariants };

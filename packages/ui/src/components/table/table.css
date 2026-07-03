@@ -257,4 +257,8 @@
     --table-cell-fill: var(--table-cell-hover-fill);
     cursor: var(--cursor-interactive);
   }
+
+  &:focus-within .table-cell:not(.table-cell-disabled):not(.table-cell-highlighted):not(.table-cell-focused) {
+    --table-cell-fill: var(--table-cell-hover-fill);
+  }
 }

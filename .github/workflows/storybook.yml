@@ -50,6 +50,10 @@ jobs:
             tokens-json:
               - "packages/design-tokens/src/assets/tokens.json"
 
+      - name: Regenerate design tokens
+        if: steps.tokens-filter.outputs.tokens-json == 'true'
+        run: pnpm --filter @ds-12/design-tokens run build:tokens && pnpm --filter @ds-12/design-tokens run generate:theme
+
       - name: Build UI package
         if: steps.tokens-filter.outputs.tokens-json == 'true'
         working-directory: packages/ui

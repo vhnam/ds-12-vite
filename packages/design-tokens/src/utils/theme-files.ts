@@ -7,7 +7,7 @@ export const getSourceFile = () => path.resolve(process.cwd(), 'src/assets/token
 
 export const getDistPath = () => path.resolve(process.cwd(), 'dist');
 
-export const getCssFilePath = (distPath: string) => path.join(distPath, 'variables.css');
+export const getCssFilePath = () => path.resolve(process.cwd(), 'src/tokens.generated.css');
 
 export const loadSourceTokensFromFile = (sourceFile: string): TokenTree =>
   JSON.parse(readFileSync(sourceFile, 'utf8')) as TokenTree;

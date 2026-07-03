@@ -60,8 +60,9 @@ function BreadcrumbSeparatorIcon() {
 
 function BreadcrumbEllipsisIcon() {
   return (
-    <span className="breadcrumb-ellipsis" data-slot="breadcrumb-ellipsis" aria-hidden="true">
-      <span className="breadcrumb-icon">
+    <span className="breadcrumb-ellipsis" data-slot="breadcrumb-ellipsis">
+      <span className="sr-only">Collapsed breadcrumb items</span>
+      <span className="breadcrumb-icon" aria-hidden="true">
         <Icon name="more_horiz" size={BREADCRUMB_ICON_SIZE} />
       </span>
     </span>

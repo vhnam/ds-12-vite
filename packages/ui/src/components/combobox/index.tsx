@@ -385,10 +385,39 @@ function MultipleCombobox({
 }
 
 /** Filterable text input with a dropdown list, optional leading icon, multi-select chips, and error and disabled states. */
+function normalizeMultipleValue(value: string | string[] | null | undefined): string[] | undefined {
+  if (value === undefined) {
+    return undefined;
+  }
+
+  if (value === null || value === '') {
+    return [];
+  }
+
+  const values = Array.isArray(value) ? value : [value];
+  return values.filter((item) => item !== '');
+}
+
+function normalizeSingleValue(value: string | string[] | null | undefined): string | null | undefined {
+  if (value === undefined) {
+    return undefined;
+  }
+
+  if (value === null || value === '') {
+    return null;
+  }
+
+  if (Array.isArray(value)) {
+    return value.find((item) => item !== '') ?? null;
+  }
+
+  return value;
+}
+
 export function Combobox({ multiple = false, value, defaultValue, onValueChange, ...sharedProps }: ComboboxProps) {
   if (multiple) {
-    const multipleValue = Array.isArray(value) ? value : value ? [value] : undefined;
-    const multipleDefaultValue = Array.isArray(defaultValue) ? defaultValue : defaultValue ? [defaultValue] : undefined;
+    const multipleValue = normalizeMultipleValue(value);
+    const multipleDefaultValue = normalizeMultipleValue(defaultValue);
 
     return (
       <MultipleCombobox
@@ -403,8 +432,8 @@ export function Combobox({ multiple = false, value, defaultValue, onValueChange,
   return (
     <SingleCombobox
       {...sharedProps}
-      value={Array.isArray(value) ? (value[0] ?? null) : value}
-      defaultValue={Array.isArray(defaultValue) ? (defaultValue[0] ?? null) : defaultValue}
+      value={normalizeSingleValue(value)}
+      defaultValue={normalizeSingleValue(defaultValue)}
       onValueChange={onValueChange ? (nextValue) => onValueChange(nextValue) : undefined}
     />
   );

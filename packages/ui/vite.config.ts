@@ -2,6 +2,7 @@ import { defineConfig, lazyPlugins } from 'vite-plus';
 import type { PluginOption } from 'vite-plus';
 
 const componentEntries = {
+  alert: 'src/components/alert/index.tsx',
   avatar: 'src/components/avatar/index.tsx',
   badge: 'src/components/badge/index.tsx',
   breadcrumb: 'src/components/breadcrumb/index.tsx',
@@ -17,6 +18,7 @@ const componentEntries = {
   menu: 'src/components/menu/index.tsx',
   combobox: 'src/components/combobox/index.tsx',
   pagination: 'src/components/pagination/index.tsx',
+  progress: 'src/components/progress/index.tsx',
   radio: 'src/components/radio/index.tsx',
   table: 'src/components/table/index.tsx',
   skeleton: 'src/components/skeleton/index.tsx',

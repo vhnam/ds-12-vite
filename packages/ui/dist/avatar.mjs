@@ -2,7 +2,7 @@ import { Avatar as n } from "@base-ui/react/avatar";
 import { cva as r } from "class-variance-authority";
 import { jsx as i, jsxs as a } from "react/jsx-runtime";
 
-import { Icon as t } from "./icon.mjs";
+import { n as t } from "./icon-C8br3Qrh.mjs";
 import { t as e } from "./utils-tOxW8rXw.mjs";
 const o = { sm: 14, md: 16, lg: 20 },
   s = { circle: `person`, square: `apartment` },

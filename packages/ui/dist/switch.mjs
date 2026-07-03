@@ -4,18 +4,27 @@ import { jsx as n } from "react/jsx-runtime";
 
 import { t as e } from "./utils-tOxW8rXw.mjs";
 const i = t(`switch`, {
-  variants: { disabled: { true: `switch-disabled`, false: `` } },
-  defaultVariants: { disabled: !1 },
+  variants: { invalid: { true: `switch-invalid`, false: `` }, disabled: { true: `switch-disabled`, false: `` } },
+  defaultVariants: { invalid: !1, disabled: !1 },
 });
-function a({ className: t, disabled: a = !1, checked: o, defaultChecked: s, onCheckedChange: c, ...l }) {
+function a({
+  className: t,
+  invalid: a = !1,
+  disabled: o = !1,
+  checked: s,
+  defaultChecked: c,
+  onCheckedChange: l,
+  ...u
+}) {
   return n(r.Root, {
-    className: e(i({ disabled: a, className: t })),
+    className: e(i({ invalid: a, disabled: o, className: t })),
     "data-slot": `switch`,
-    checked: o,
-    defaultChecked: s,
-    disabled: a,
-    onCheckedChange: c,
-    ...l,
+    checked: s,
+    defaultChecked: c,
+    disabled: o,
+    "aria-invalid": a || void 0,
+    onCheckedChange: l,
+    ...u,
     children: n(r.Thumb, { className: `switch-thumb` }),
   });
 }

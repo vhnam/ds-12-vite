@@ -32,6 +32,7 @@ export {
   datePickerVariants,
   type DatePickerProps,
 } from './components/date-picker/index.tsx';
+export { Checkbox, checkboxVariants, type CheckboxProps } from './components/checkbox/index.tsx';
 export { Chip, chipVariants, type ChipProps } from './components/chip/index.tsx';
 export { Divider, dividerVariants, type DividerProps } from './components/divider/index.tsx';
 export { Input, InputIconSizeContext, inputVariants, type InputProps } from './components/input/index.tsx';

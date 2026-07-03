@@ -6,12 +6,17 @@ import { cn } from '../../lib/utils.ts';
 
 const switchVariants = cva('switch', {
   variants: {
+    invalid: {
+      true: 'switch-invalid',
+      false: '',
+    },
     disabled: {
       true: 'switch-disabled',
       false: '',
     },
   },
   defaultVariants: {
+    invalid: false,
     disabled: false,
   },
 });
@@ -19,6 +24,11 @@ const switchVariants = cva('switch', {
 export type SwitchProps = Omit<ComponentProps<typeof BaseSwitch.Root>, 'className'> & {
   /** Additional CSS class names applied to the root element. */
   className?: string;
+  /**
+   * Marks the control as invalid and sets `aria-invalid`.
+   * @default false
+   */
+  invalid?: boolean;
   /**
    * Prevents interaction and dims the control.
    * @default false
@@ -29,6 +39,7 @@ export type SwitchProps = Omit<ComponentProps<typeof BaseSwitch.Root>, 'classNam
 /** Pill-shaped toggle for binary on/off settings such as feature flags or preferences. */
 export function Switch({
   className,
+  invalid = false,
   disabled = false,
   checked,
   defaultChecked,
@@ -39,6 +50,7 @@ export function Switch({
     <BaseSwitch.Root
       className={cn(
         switchVariants({
+          invalid,
           disabled,
           className,
         }),
@@ -47,6 +59,7 @@ export function Switch({
       checked={checked}
       defaultChecked={defaultChecked}
       disabled={disabled}
+      aria-invalid={invalid || undefined}
       onCheckedChange={onCheckedChange}
       {...props}
     >

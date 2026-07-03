@@ -87,7 +87,16 @@ function CalendarDayButton({ className, day, modifiers, children, ...props }: Da
   const ref = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    if (modifiers.focused) ref.current?.focus();
+    if (!modifiers.focused) {
+      return;
+    }
+
+    const button = ref.current;
+    if (!button || document.activeElement === button) {
+      return;
+    }
+
+    button.focus({ preventScroll: true });
   }, [modifiers.focused]);
 
   const isSelectedSingle =

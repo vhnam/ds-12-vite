@@ -1,5 +1,5 @@
-import { n as CheckboxProps } from "../index-CWwbAwBe.mjs";
-import { n as selectionFieldVariants, t as SelectionFieldBaseProps } from "../selection-field-layout-CgxPUUHX.mjs";
+import { CheckboxProps } from "../checkbox.mjs";
+import { n as selectionFieldVariants, t as SelectionFieldBaseProps } from "../selection-field-layout-CHorFcIc.mjs";
 
 //#region src/components/fields/checkbox-field/index.d.ts
 type CheckboxFieldProps = Omit<CheckboxProps, "size" | "invalid" | "disabled" | "id" | "className"> &
