@@ -47,18 +47,16 @@ jobs:
         run: vp install
 
       - name: Transform tokens
-        run: |
-          pnpm --filter @ds-12/design-tokens run build:tokens
-          pnpm --filter @ds-12/design-tokens run generate:theme
-          pnpm --filter @ds-12/ui run vendor-tokens
+        run: vp run @ds-12/ui#vendor-tokens
 
       - name: Commit generated tokens
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: sync design tokens [skip ci]"
           file_pattern: |
+            packages/design-tokens/src/tokens.generated.css
+            packages/design-tokens/src/tokens.theme.css
             packages/ui/src/vendor/tokens/**
-            packages/ui/src/styles/tokens.generated.css
 
   build:
     name: Build Storybook
