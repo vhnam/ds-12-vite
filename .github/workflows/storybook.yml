@@ -66,8 +66,7 @@ jobs:
           commit_message: "chore: sync design tokens [skip ci]"
           commit_options: --no-verify
           file_pattern: |
-            packages/design-tokens/src/tokens.generated.css
-            packages/design-tokens/src/tokens.theme.css
+            packages/design-tokens/src/tokens*.css
             packages/ui/src/vendor/tokens/**
 
   build:

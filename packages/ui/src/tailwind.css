@@ -40,8 +40,8 @@
 @import "./components/textarea/textarea.css";
 @import "./components/typography/typography.css";
 
-@import "./vendor/tokens/tokens.css";
-@import "./vendor/tokens/theme.css";
+@import "@ds-12/design-tokens/tokens.css";
+@import "@ds-12/design-tokens/theme.css";
 
 @import "./vendor/fonts/400.css";
 @import "./vendor/fonts/500.css";
