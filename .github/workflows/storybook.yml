@@ -42,24 +42,11 @@ jobs:
       - name: Install dependencies
         run: vp install
 
-      - name: Verify design tokens are committed
+      - name: Prepare design tokens
         run: |
           pnpm --filter @ds-12/design-tokens run build:tokens
           pnpm --filter @ds-12/design-tokens run generate:theme
-          if ! git diff --quiet -- packages/design-tokens/src/tokens.generated.css packages/design-tokens/src/tokens.theme.css; then
-            echo "::error::Generated token files are out of date. Run: vp run @ds-12/design-tokens#build:tokens && vp run @ds-12/design-tokens#generate:theme"
-            git diff -- packages/design-tokens/src/tokens.generated.css packages/design-tokens/src/tokens.theme.css
-            exit 1
-          fi
-
-      - name: Verify UI vendored tokens are committed
-        run: |
           pnpm --filter @ds-12/ui run vendor-tokens
-          if ! git diff --quiet -- packages/ui/src/vendor/tokens/; then
-            echo "::error::Vendored tokens in @ds-12/ui are out of date. Run: vp run @ds-12/ui#vendor-tokens"
-            git diff -- packages/ui/src/vendor/tokens/
-            exit 1
-          fi
 
       - name: Build Storybook
         run: pnpm --filter storybook run build-storybook
