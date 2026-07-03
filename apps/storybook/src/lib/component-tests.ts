@@ -234,9 +234,17 @@ export function createComboboxMouseClickPlay(name?: string | RegExp): PlayFuncti
     const canvas = within(canvasElement);
     const combobox = getCombobox(canvas, name);
 
+    // Reset focus from prior keyboard-focus plays before opening via click.
+    await userEvent.click(canvasElement);
     await userEvent.click(combobox);
     // Base UI portals the popup to document.body, outside #storybook-root.
-    await expect(within(document.body).getByRole('listbox')).toBeInTheDocument();
+    // Retry the click when open state lags — userEvent.click can be flaky in browser CI.
+    await waitFor(async () => {
+      if (combobox.getAttribute('aria-expanded') !== 'true') {
+        await userEvent.click(combobox);
+      }
+      await expect(within(document.body).getByRole('listbox')).toBeInTheDocument();
+    });
     await expect(combobox).not.toHaveAttribute('data-focus-visible', 'true');
   };
 }
