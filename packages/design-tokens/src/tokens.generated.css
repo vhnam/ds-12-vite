@@ -520,8 +520,8 @@
   --color-semantic-text-neutral-subtler: var(--color-neutral-00);
   --color-semantic-text-positive-bold: var(--color-green-700);
   --display-default-font-family: var(--font-family-text);
-  --display-default-font-size: var(--font-size-48);
-  --display-default-font-weight: var(--font-weight-bold);
+  --display-default-font-size: var(--font-size-56);
+  --display-default-font-weight: var(--font-weight-semi-bold);
   --display-default-letter-spacing: var(--letter-spacing-dense);
   --display-default-line-height: var(--line-height-36);
   --drop-down-box-properties-active-border-radius: var(--radius-xsmall), var(--radius-xsmall) ,0,0;
@@ -893,7 +893,7 @@
   --button-link-typography-small-font-weight: var(--title-default-font-weight);
   --button-link-typography-small-letter-spacing: var(--title-default-letter-spacing);
   --button-link-typography-small-line-height: var(--title-default-line-height);
-  --button-primary-background-color-default-fill: var(--color-semantic-brand-bold);
+  --button-primary-background-color-default-fill: var(--color-semantic-text-neutral-bolder);
   --button-primary-background-color-disabled-fill: var(--color-semantic-canvas-disabled);
   --button-primary-background-color-hovered-fill: var(--color-semantic-brand-bold-hovered);
   --button-primary-background-color-pressed-fill: var(--color-semantic-brand-bold-pressed);
