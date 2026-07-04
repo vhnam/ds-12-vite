@@ -71,12 +71,6 @@ jobs:
           path: apps/storybook/storybook-static
           retention-days: 1
 
-      - name: Upload Pages artifact
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: apps/storybook/storybook-static
-
   test:
     name: Test Storybook
     needs: build
@@ -116,8 +110,13 @@ jobs:
 
   deploy:
     name: Deploy to GitHub Pages
-    needs: build
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [build, test]
+    if: |
+      always() &&
+      !cancelled() &&
+      needs.build.result == 'success' &&
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
       pages: write
@@ -127,6 +126,18 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: storybook-static
+          path: apps/storybook/storybook-static
+
+      - name: Upload Pages artifact
+        id: pages-artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: apps/storybook/storybook-static
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
