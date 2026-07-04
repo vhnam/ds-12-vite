@@ -25,12 +25,16 @@ jobs:
     name: Build Storybook
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
 
       - name: Setup Vite+
         uses: voidzero-dev/setup-vp@v1
@@ -47,8 +51,15 @@ jobs:
       - name: Prepare design tokens
         run: vp run @ds-12/design-tokens#generate:theme
 
-      - name: Check committed token CSS is in sync
-        run: git diff --exit-code -- packages/design-tokens/src
+      - name: Sync committed token CSS
+        run: |
+          if ! git diff --quiet -- packages/design-tokens/src; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add packages/design-tokens/src
+            git commit -m "chore: sync design tokens [skip ci]"
+            git push
+          fi
 
       - name: Build Storybook
         run: pnpm --filter storybook run build-storybook
