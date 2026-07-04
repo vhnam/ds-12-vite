@@ -120,8 +120,8 @@
   --drop-down-box-properties-disabled-border-bottom: 1px;
   --drop-down-box-properties-error-border-bottom: 1px;
   --drop-down-box-properties-inactive-border-bottom: 1px;
-  --font-family-brand: 'Nunito Sans'; /** Brand primary typeface */
-  --font-family-text: 'Nunito Sans'; /** paragraph text */
+  --font-family-brand: "Nunito Sans"; /** Brand primary typeface */
+  --font-family-text: "Nunito Sans"; /** paragraph text */
   --font-size-10: 10px;
   --font-size-12: 12px;
   --font-size-14: 14px;
@@ -275,7 +275,9 @@
   --text-field-suffix-box-properties-error-border-bottom: 1px;
   --text-field-suffix-box-properties-inactive-border-bottom: 1px;
   --toast-action-button-height: 28px;
-  --toast-container-box-shadow: 0 0 1px 0 rgba(0, 0, 5, 0), 0 4px 8px 0 rgba(0, 0, 8, 0), 0 16px 24px 0 rgba(0, 0, 8, 0), 0 30px 50px 0 rgba(0, 0, 18, 0);
+  --toast-container-box-shadow:
+    0 0 1px 0 rgba(0, 0, 5, 0), 0 4px 8px 0 rgba(0, 0, 8, 0), 0 16px 24px 0 rgba(0, 0, 8, 0),
+    0 30px 50px 0 rgba(0, 0, 18, 0);
   --toast-container-min-width: 343px;
   --toast-status-icon-danger-height: 24px;
   --toast-status-icon-danger-width: 24px;
@@ -480,7 +482,12 @@
   --chip-inactive-container-border-radius: var(--radius-xlarge);
   --chip-inactive-container-horizontal-padding: var(--spacing-xsmall);
   --chip-inactive-container-vertical-padding: var(--spacing-xxsmall);
-  --color-gradient-skeleton: linear-gradient(90deg, var(--color-neutral-50) 0%,var(--color-neutral-100) 50%, var(--color-neutral-50) 100%);
+  --color-gradient-skeleton: linear-gradient(
+    90deg,
+    var(--color-neutral-50) 0%,
+    var(--color-neutral-100) 50%,
+    var(--color-neutral-50) 100%
+  );
   --color-semantic-attention-bold: var(--color-yellow-600);
   --color-semantic-attention-subtle: var(--color-yellow-100);
   --color-semantic-border-brand-bold: var(--color-brand-500);
@@ -524,19 +531,19 @@
   --display-default-font-weight: var(--font-weight-semi-bold);
   --display-default-letter-spacing: var(--letter-spacing-dense);
   --display-default-line-height: var(--line-height-36);
-  --drop-down-box-properties-active-border-radius: var(--radius-xsmall), var(--radius-xsmall) ,0,0;
+  --drop-down-box-properties-active-border-radius: var(--radius-xsmall), var(--radius-xsmall), 0, 0;
   --drop-down-box-properties-active-horizontal-padding: var(--spacing-small);
   --drop-down-box-properties-active-item-spacing: var(--spacing-xsmall);
   --drop-down-box-properties-active-vertical-padding: var(--spacing-small);
-  --drop-down-box-properties-disabled-border-radius: var(--radius-xsmall), var(--radius-xsmall) ,0,0;
+  --drop-down-box-properties-disabled-border-radius: var(--radius-xsmall), var(--radius-xsmall), 0, 0;
   --drop-down-box-properties-disabled-horizontal-padding: var(--spacing-small);
   --drop-down-box-properties-disabled-item-spacing: var(--spacing-xsmall);
   --drop-down-box-properties-disabled-vertical-padding: var(--spacing-small);
-  --drop-down-box-properties-error-border-radius: var(--radius-xsmall), var(--radius-xsmall) ,0,0;
+  --drop-down-box-properties-error-border-radius: var(--radius-xsmall), var(--radius-xsmall), 0, 0;
   --drop-down-box-properties-error-horizontal-padding: var(--spacing-small);
   --drop-down-box-properties-error-item-spacing: var(--spacing-xsmall);
   --drop-down-box-properties-error-vertical-padding: var(--spacing-small);
-  --drop-down-box-properties-inactive-border-radius: var(--radius-xsmall), var(--radius-xsmall) ,0,0;
+  --drop-down-box-properties-inactive-border-radius: var(--radius-xsmall), var(--radius-xsmall), 0, 0;
   --drop-down-box-properties-inactive-horizontal-padding: var(--spacing-small);
   --drop-down-box-properties-inactive-item-spacing: var(--spacing-xsmall);
   --drop-down-box-properties-inactive-vertical-padding: var(--spacing-small);
@@ -726,36 +733,36 @@
   --tag-properties-small-horizontal-padding: var(--spacing-xxsmall);
   --tag-properties-small-item-spacing: var(--spacing-xxsmall);
   --tag-properties-small-vertical-padding: var(--spacing-xxsmall);
-  --text-field-box-properties-active-border-radius: var(--radius-xsmall), var(--radius-xsmall) ,0,0;
+  --text-field-box-properties-active-border-radius: var(--radius-xsmall), var(--radius-xsmall), 0, 0;
   --text-field-box-properties-active-horizontal-padding: var(--spacing-small);
   --text-field-box-properties-active-item-spacing: var(--spacing-xsmall);
   --text-field-box-properties-active-vertical-padding: var(--spacing-small);
-  --text-field-box-properties-disabled-border-radius: var(--radius-xsmall), var(--radius-xsmall) ,0,0;
+  --text-field-box-properties-disabled-border-radius: var(--radius-xsmall), var(--radius-xsmall), 0, 0;
   --text-field-box-properties-disabled-horizontal-padding: var(--spacing-small);
   --text-field-box-properties-disabled-item-spacing: var(--spacing-xsmall);
   --text-field-box-properties-disabled-vertical-padding: var(--spacing-small);
-  --text-field-box-properties-error-border-radius: var(--radius-xsmall), var(--radius-xsmall) ,0,0;
+  --text-field-box-properties-error-border-radius: var(--radius-xsmall), var(--radius-xsmall), 0, 0;
   --text-field-box-properties-error-horizontal-padding: var(--spacing-small);
   --text-field-box-properties-error-item-spacing: var(--spacing-xsmall);
   --text-field-box-properties-error-vertical-padding: var(--spacing-small);
-  --text-field-box-properties-inactive-border-radius: var(--radius-xsmall), var(--radius-xsmall) ,0,0;
+  --text-field-box-properties-inactive-border-radius: var(--radius-xsmall), var(--radius-xsmall), 0, 0;
   --text-field-box-properties-inactive-horizontal-padding: var(--spacing-small);
   --text-field-box-properties-inactive-item-spacing: var(--spacing-xsmall);
   --text-field-box-properties-inactive-vertical-padding: var(--spacing-small);
   --text-field-spacing-item-spacing: var(--spacing-xxsmall);
-  --text-field-suffix-box-properties-active-border-radius: var(--radius-xsmall), var(--radius-xsmall) ,0,0;
+  --text-field-suffix-box-properties-active-border-radius: var(--radius-xsmall), var(--radius-xsmall), 0, 0;
   --text-field-suffix-box-properties-active-horizontal-padding: var(--spacing-small);
   --text-field-suffix-box-properties-active-item-spacing: var(--spacing-xsmall);
   --text-field-suffix-box-properties-active-vertical-padding: var(--spacing-small);
-  --text-field-suffix-box-properties-disabled-border-radius: var(--radius-xsmall), var(--radius-xsmall) ,0,0;
+  --text-field-suffix-box-properties-disabled-border-radius: var(--radius-xsmall), var(--radius-xsmall), 0, 0;
   --text-field-suffix-box-properties-disabled-horizontal-padding: var(--spacing-small);
   --text-field-suffix-box-properties-disabled-item-spacing: var(--spacing-xsmall);
   --text-field-suffix-box-properties-disabled-vertical-padding: var(--spacing-small);
-  --text-field-suffix-box-properties-error-border-radius: var(--radius-xsmall), var(--radius-xsmall) ,0,0;
+  --text-field-suffix-box-properties-error-border-radius: var(--radius-xsmall), var(--radius-xsmall), 0, 0;
   --text-field-suffix-box-properties-error-horizontal-padding: var(--spacing-small);
   --text-field-suffix-box-properties-error-item-spacing: var(--spacing-xsmall);
   --text-field-suffix-box-properties-error-vertical-padding: var(--spacing-small);
-  --text-field-suffix-box-properties-inactive-border-radius: var(--radius-xsmall), var(--radius-xsmall) ,0,0;
+  --text-field-suffix-box-properties-inactive-border-radius: var(--radius-xsmall), var(--radius-xsmall), 0, 0;
   --text-field-suffix-box-properties-inactive-horizontal-padding: var(--spacing-small);
   --text-field-suffix-box-properties-inactive-item-spacing: var(--spacing-xsmall);
   --text-field-suffix-box-properties-inactive-vertical-padding: var(--spacing-small);
@@ -893,7 +900,7 @@
   --button-link-typography-small-font-weight: var(--title-default-font-weight);
   --button-link-typography-small-letter-spacing: var(--title-default-letter-spacing);
   --button-link-typography-small-line-height: var(--title-default-line-height);
-  --button-primary-background-color-default-fill: var(--color-semantic-information-bold);
+  --button-primary-background-color-default-fill: var(--color-semantic-brand-bold);
   --button-primary-background-color-disabled-fill: var(--color-semantic-canvas-disabled);
   --button-primary-background-color-hovered-fill: var(--color-semantic-brand-bold-hovered);
   --button-primary-background-color-pressed-fill: var(--color-semantic-brand-bold-pressed);
@@ -1451,5 +1458,7 @@
   --elevation-0: 0 0 1px 0 rgba(0, 0, 10, 0), 0 0 2px 0 rgba(0, 0, 15, 0), 0 4px 8px 0 rgba(0, 0, 10, 0);
   --elevation-1: 0 0 1px 0 rgba(0, 0, 10, 0), 0 2px 6px 0 rgba(0, 0, 10, 0), 0 10px 20px 0 rgba(0, 0, 10, 0);
   --elevation-2: 0 0 1px 0 rgba(0, 0, 10, 0), 0 2px 6px 0 rgba(0, 0, 10, 0), 0 16px 30px 0 rgba(0, 0, 20, 0);
-  --elevation-3: 0 0 1px 0 rgba(0, 0, 5, 0), 0 4px 8px 0 rgba(0, 0, 8, 0), 0 16px 24px 0 rgba(0, 0, 8, 0), 0 30px 50px 0 rgba(0, 0, 18, 0);
+  --elevation-3:
+    0 0 1px 0 rgba(0, 0, 5, 0), 0 4px 8px 0 rgba(0, 0, 8, 0), 0 16px 24px 0 rgba(0, 0, 8, 0),
+    0 30px 50px 0 rgba(0, 0, 18, 0);
 }
