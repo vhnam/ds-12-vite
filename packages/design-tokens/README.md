@@ -14,7 +14,7 @@ In this monorepo, `@ds-12/design-tokens` is a workspace package. Consumers in ot
 }
 ```
 
-`@ds-12/ui` vendors these files at build time, so apps using only `@ds-12/ui` do not need a separate design-tokens dependency.
+`@ds-12/ui` imports these files at build time and inlines them into `dist/styles.css`, so apps using only `@ds-12/ui` do not need a separate design-tokens dependency.
 
 ## Usage
 
@@ -74,7 +74,7 @@ vp run @ds-12/design-tokens#build:tokens
 vp run @ds-12/design-tokens#generate:theme
 ```
 
-5. If `@ds-12/ui` is a consumer, rebuild it so vendored tokens stay in sync:
+5. If `@ds-12/ui` is a consumer, rebuild it so `dist/styles.css` picks up the token changes:
 
 ```bash
 vp run @ds-12/ui#build

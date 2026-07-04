@@ -160,7 +160,7 @@ Build `@ds-12/ui` (JS + pre-built `styles.css`):
 vp run @ds-12/ui#build
 ```
 
-After changing design tokens or fonts, rebuild and commit `packages/ui/dist/` and `packages/ui/src/vendor/` so git-based consumers get the update.
+After changing design tokens, rebuild and commit `packages/ui/dist/`. After font changes, also commit `packages/ui/src/vendor/fonts/` so git-based consumers get the update.
 
 Common workspace commands:
 
