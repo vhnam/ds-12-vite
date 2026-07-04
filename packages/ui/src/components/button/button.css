@@ -68,18 +68,18 @@
 }
 
 @utility button-loader-sm {
-  width: var(--button-primary-icon-small-default-width);
-  height: var(--button-primary-icon-small-default-height);
+  width: var(--button-sm-icon-size);
+  height: var(--button-sm-icon-size);
 }
 
 @utility button-loader-md {
-  width: var(--button-primary-icon-medium-default-width);
-  height: var(--button-primary-icon-medium-default-height);
+  width: var(--button-md-icon-size);
+  height: var(--button-md-icon-size);
 }
 
 @utility button-loader-lg {
-  width: var(--button-primary-icon-large-default-width);
-  height: var(--button-primary-icon-large-default-height);
+  width: var(--button-lg-icon-size);
+  height: var(--button-lg-icon-size);
 }
 
 /* Has-icon gap presets */
@@ -97,419 +97,407 @@
 
 /* Primary × size */
 @utility button-primary-sm {
-  min-height: var(--button-primary-container-small-default-height);
-  min-width: var(--button-primary-container-small-default-min-width);
-  padding: var(--button-primary-container-small-default-vertical-padding)
-    var(--button-primary-container-small-default-horizontal-padding);
-  background-color: var(--button-primary-container-small-default-fill);
-  color: var(--button-primary-label-small-default-fill);
+  min-height: var(--button-sm-height);
+  min-width: var(--button-primary-type-small-min-width);
+  padding: var(--button-primary-type-small-padding-top) var(--button-primary-type-small-padding-left);
+  background-color: var(--button-primary-background-color-default-fill);
+  color: var(--button-primary-foreground-color-default-fill);
 
   &:hover:not(:disabled):not([data-disabled]) {
-    background-color: var(--button-primary-container-small-hovered-fill);
+    background-color: var(--button-primary-background-color-hovered-fill);
   }
 
   &:active:not(:disabled):not([data-disabled]) {
-    background-color: var(--button-primary-container-small-pressed-fill);
+    background-color: var(--button-primary-background-color-pressed-fill);
   }
 
   &:disabled,
   &[data-disabled] {
-    background-color: var(--button-primary-container-small-disabled-fill);
-    color: var(--button-primary-label-small-disabled-fill);
+    background-color: var(--button-primary-background-color-disabled-fill);
+    color: var(--button-primary-foreground-color-disabled-fill);
   }
 
   &:disabled .button-icon,
   &[data-disabled] .button-icon {
-    color: var(--button-primary-icon-small-disabled-fill);
+    color: var(--button-primary-foreground-color-disabled-fill);
   }
 }
 
 @utility button-primary-md {
-  min-height: var(--button-primary-container-medium-default-height);
-  min-width: var(--button-primary-container-medium-default-min-width);
-  padding: var(--button-primary-container-medium-default-vertical-padding)
-    var(--button-primary-container-medium-default-horizontal-padding);
-  background-color: var(--button-primary-container-medium-default-fill);
-  color: var(--button-primary-label-medium-default-fill);
+  min-height: var(--button-md-height);
+  min-width: var(--button-primary-type-medium-min-width);
+  padding: var(--button-primary-type-medium-padding-top) var(--button-primary-type-medium-padding-left);
+  background-color: var(--button-primary-background-color-default-fill);
+  color: var(--button-primary-foreground-color-default-fill);
 
   &:hover:not(:disabled):not([data-disabled]) {
-    background-color: var(--button-primary-container-medium-hovered-fill);
+    background-color: var(--button-primary-background-color-hovered-fill);
   }
 
   &:active:not(:disabled):not([data-disabled]) {
-    background-color: var(--button-primary-container-medium-pressed-fill);
+    background-color: var(--button-primary-background-color-pressed-fill);
   }
 
   &:disabled,
   &[data-disabled] {
-    background-color: var(--button-primary-container-medium-disabled-fill);
-    color: var(--button-primary-label-medium-disabled-fill);
+    background-color: var(--button-primary-background-color-disabled-fill);
+    color: var(--button-primary-foreground-color-disabled-fill);
   }
 
   &:disabled .button-icon,
   &[data-disabled] .button-icon {
-    color: var(--button-primary-icon-medium-disabled-fill);
+    color: var(--button-primary-foreground-color-disabled-fill);
   }
 }
 
 @utility button-primary-lg {
-  min-height: var(--button-primary-container-large-default-height);
-  min-width: var(--button-primary-container-large-default-min-width);
-  padding: var(--button-primary-container-large-default-vertical-padding)
-    var(--button-primary-container-large-default-horizontal-padding);
-  background-color: var(--button-primary-container-large-default-fill);
-  color: var(--button-primary-label-large-default-fill);
+  min-height: var(--button-lg-height);
+  min-width: var(--button-primary-type-large-min-width);
+  padding: var(--button-primary-type-large-padding-top) var(--button-primary-type-large-padding-left);
+  background-color: var(--button-primary-background-color-default-fill);
+  color: var(--button-primary-foreground-color-default-fill);
 
   &:hover:not(:disabled):not([data-disabled]) {
-    background-color: var(--button-primary-container-large-hovered-fill);
+    background-color: var(--button-primary-background-color-hovered-fill);
   }
 
   &:active:not(:disabled):not([data-disabled]) {
-    background-color: var(--button-primary-container-large-pressed-fill);
+    background-color: var(--button-primary-background-color-pressed-fill);
   }
 
   &:disabled,
   &[data-disabled] {
-    background-color: var(--button-primary-container-large-disabled-fill);
-    color: var(--button-primary-label-large-disabled-fill);
+    background-color: var(--button-primary-background-color-disabled-fill);
+    color: var(--button-primary-foreground-color-disabled-fill);
   }
 
   &:disabled .button-icon,
   &[data-disabled] .button-icon {
-    color: var(--button-primary-icon-large-disabled-fill);
+    color: var(--button-primary-foreground-color-disabled-fill);
   }
 }
 
 /* Secondary × size */
 @utility button-secondary-sm {
-  min-height: var(--button-secondary-container-small-default-height);
-  min-width: var(--button-secondary-container-small-default-min-width);
-  padding: var(--button-secondary-container-small-default-vertical-padding)
-    var(--button-secondary-container-small-default-horizontal-padding);
-  border: var(--border-width-small) var(--border-style-default)
-    var(--button-secondary-container-small-default-border-color);
-  background-color: var(--button-secondary-container-small-default-fill);
-  color: var(--button-secondary-label-small-default-fill);
+  min-height: var(--button-sm-height);
+  min-width: var(--button-secondary-type-small-min-width);
+  padding: var(--button-secondary-type-small-padding-top) var(--button-secondary-type-small-padding-left);
+  border: var(--border-width-small) var(--border-style-default) var(--button-tertiary-border-color-default-fill);
+  background-color: var(--button-secondary-background-color-default-fill);
+  color: var(--button-secondary-foreground-color-default-fill);
 
   &:hover:not(:disabled):not([data-disabled]) {
-    border-color: var(--button-secondary-container-small-hovered-border-color);
-    background-color: var(--button-secondary-container-small-hovered-fill);
+    border-color: var(--button-tertiary-border-color-hovered-fill);
+    background-color: var(--button-secondary-background-color-hovered-fill);
   }
 
   &:active:not(:disabled):not([data-disabled]) {
-    border-color: var(--button-secondary-container-small-pressed-border-color);
-    background-color: var(--button-secondary-container-small-pressed-fill);
+    border-color: var(--button-tertiary-border-color-pressed-fill);
+    background-color: var(--button-secondary-background-color-pressed-fill);
   }
 
   &:disabled,
   &[data-disabled] {
-    border-color: var(--button-secondary-container-small-disabled-border-color);
-    background-color: var(--button-secondary-container-small-disabled-fill);
-    color: var(--button-secondary-label-small-disabled-fill);
+    border-color: var(--button-tertiary-border-color-disabled-fill);
+    background-color: var(--button-secondary-background-color-disabled-fill);
+    color: var(--button-secondary-foreground-color-disabled-fill);
   }
 
   &:disabled .button-icon,
   &[data-disabled] .button-icon {
-    color: var(--button-secondary-icon-small-disabled-fill);
+    color: var(--button-secondary-foreground-color-disabled-fill);
   }
 }
 
 @utility button-secondary-md {
-  min-height: var(--button-secondary-container-medium-default-height);
-  min-width: var(--button-secondary-container-medium-default-min-width);
-  padding: var(--button-secondary-container-medium-default-vertical-padding)
-    var(--button-secondary-container-medium-default-horizontal-padding);
-  border: var(--border-width-small) var(--border-style-default)
-    var(--button-secondary-container-medium-default-border-color);
-  background-color: var(--button-secondary-container-medium-default-fill);
-  color: var(--button-secondary-label-medium-default-fill);
+  min-height: var(--button-md-height);
+  min-width: var(--button-secondary-type-medium-min-width);
+  padding: var(--button-secondary-type-medium-padding-top) var(--button-secondary-type-medium-padding-left);
+  border: var(--border-width-small) var(--border-style-default) var(--button-tertiary-border-color-default-fill);
+  background-color: var(--button-secondary-background-color-default-fill);
+  color: var(--button-secondary-foreground-color-default-fill);
 
   &:hover:not(:disabled):not([data-disabled]) {
-    border-color: var(--button-secondary-container-medium-hovered-border-color);
-    background-color: var(--button-secondary-container-medium-hovered-fill);
+    border-color: var(--button-tertiary-border-color-hovered-fill);
+    background-color: var(--button-secondary-background-color-hovered-fill);
   }
 
   &:active:not(:disabled):not([data-disabled]) {
-    border-color: var(--button-secondary-container-medium-pressed-border-color);
-    background-color: var(--button-secondary-container-medium-pressed-fill);
+    border-color: var(--button-tertiary-border-color-pressed-fill);
+    background-color: var(--button-secondary-background-color-pressed-fill);
   }
 
   &:disabled,
   &[data-disabled] {
-    border-color: var(--button-secondary-container-medium-disabled-border-color);
-    background-color: var(--button-secondary-container-medium-disabled-fill);
-    color: var(--button-secondary-label-medium-disabled-fill);
+    border-color: var(--button-tertiary-border-color-disabled-fill);
+    background-color: var(--button-secondary-background-color-disabled-fill);
+    color: var(--button-secondary-foreground-color-disabled-fill);
   }
 
   &:disabled .button-icon,
   &[data-disabled] .button-icon {
-    color: var(--button-secondary-icon-medium-disabled-fill);
+    color: var(--button-secondary-foreground-color-disabled-fill);
   }
 }
 
 @utility button-secondary-lg {
-  min-height: var(--button-secondary-container-large-default-height);
-  min-width: var(--button-secondary-container-large-default-min-width);
-  padding: var(--button-secondary-container-large-default-vertical-padding)
-    var(--button-secondary-container-large-default-horizontal-padding);
-  border: var(--border-width-small) var(--border-style-default)
-    var(--button-secondary-container-large-default-border-color);
-  background-color: var(--button-secondary-container-large-default-fill);
-  color: var(--button-secondary-label-large-default-fill);
+  min-height: var(--button-lg-height);
+  min-width: var(--button-secondary-type-large-min-width);
+  padding: var(--button-secondary-type-large-padding-top) var(--button-secondary-type-large-padding-left);
+  border: var(--border-width-small) var(--border-style-default) var(--button-tertiary-border-color-default-fill);
+  background-color: var(--button-secondary-background-color-default-fill);
+  color: var(--button-secondary-foreground-color-default-fill);
 
   &:hover:not(:disabled):not([data-disabled]) {
-    border-color: var(--button-secondary-container-large-hovered-border-color);
-    background-color: var(--button-secondary-container-large-hovered-fill);
+    border-color: var(--button-tertiary-border-color-hovered-fill);
+    background-color: var(--button-secondary-background-color-hovered-fill);
   }
 
   &:active:not(:disabled):not([data-disabled]) {
-    border-color: var(--button-secondary-container-large-pressed-border-color);
-    background-color: var(--button-secondary-container-large-pressed-fill);
+    border-color: var(--button-tertiary-border-color-pressed-fill);
+    background-color: var(--button-secondary-background-color-pressed-fill);
   }
 
   &:disabled,
   &[data-disabled] {
-    border-color: var(--button-secondary-container-large-disabled-border-color);
-    background-color: var(--button-secondary-container-large-disabled-fill);
-    color: var(--button-secondary-label-large-disabled-fill);
+    border-color: var(--button-tertiary-border-color-disabled-fill);
+    background-color: var(--button-secondary-background-color-disabled-fill);
+    color: var(--button-secondary-foreground-color-disabled-fill);
   }
 
   &:disabled .button-icon,
   &[data-disabled] .button-icon {
-    color: var(--button-secondary-icon-large-disabled-fill);
+    color: var(--button-secondary-foreground-color-disabled-fill);
   }
 }
 
 /* Danger × size */
 @utility button-danger-sm {
-  min-height: var(--button-danger-container-small-default-height);
-  min-width: var(--button-danger-container-small-default-min-width);
-  padding: var(--button-danger-container-small-default-vertical-padding)
-    var(--button-danger-container-small-default-horizontal-padding);
-  background-color: var(--button-danger-container-small-default-fill);
-  color: var(--button-danger-label-small-default-fill);
+  min-height: var(--button-sm-height);
+  min-width: var(--button-danger-type-small-min-width);
+  padding: var(--button-danger-type-small-padding-top) var(--button-danger-type-small-padding-left);
+  background-color: var(--button-danger-background-color-default-fill);
+  color: var(--button-danger-foreground-color-default-fill);
 
   &:hover:not(:disabled):not([data-disabled]) {
-    background-color: var(--button-danger-container-small-hovered-fill);
+    background-color: var(--button-danger-background-color-hovered-fill);
   }
 
   &:active:not(:disabled):not([data-disabled]) {
-    background-color: var(--button-danger-container-small-pressed-fill);
+    background-color: var(--button-danger-background-color-pressed-fill);
   }
 
   &:disabled,
   &[data-disabled] {
-    background-color: var(--button-danger-container-small-disabled-fill);
-    color: var(--button-danger-label-small-disabled-fill);
+    background-color: var(--button-danger-background-color-disabled-fill);
+    color: var(--button-danger-foreground-color-disabled-fill);
   }
 
   &:disabled .button-icon,
   &[data-disabled] .button-icon {
-    color: var(--button-danger-icon-small-disabled-fill);
+    color: var(--button-danger-foreground-color-disabled-fill);
   }
 }
 
 @utility button-danger-md {
-  min-height: var(--button-danger-container-medium-default-height);
-  min-width: var(--button-danger-container-medium-default-min-width);
-  padding: var(--button-danger-container-medium-default-vertical-padding)
-    var(--button-danger-container-medium-default-horizontal-padding);
-  background-color: var(--button-danger-container-medium-default-fill);
-  color: var(--button-danger-label-medium-default-fill);
+  min-height: var(--button-md-height);
+  min-width: var(--button-danger-type-medium-min-width);
+  padding: var(--button-danger-type-medium-padding-top) var(--button-danger-type-medium-padding-left);
+  background-color: var(--button-danger-background-color-default-fill);
+  color: var(--button-danger-foreground-color-default-fill);
 
   &:hover:not(:disabled):not([data-disabled]) {
-    background-color: var(--button-danger-container-medium-hovered-fill);
+    background-color: var(--button-danger-background-color-hovered-fill);
   }
 
   &:active:not(:disabled):not([data-disabled]) {
-    background-color: var(--button-danger-container-medium-pressed-fill);
+    background-color: var(--button-danger-background-color-pressed-fill);
   }
 
   &:disabled,
   &[data-disabled] {
-    background-color: var(--button-danger-container-medium-disabled-fill);
-    color: var(--button-danger-label-medium-disabled-fill);
+    background-color: var(--button-danger-background-color-disabled-fill);
+    color: var(--button-danger-foreground-color-disabled-fill);
   }
 
   &:disabled .button-icon,
   &[data-disabled] .button-icon {
-    color: var(--button-danger-icon-medium-disabled-fill);
+    color: var(--button-danger-foreground-color-disabled-fill);
   }
 }
 
 @utility button-danger-lg {
-  min-height: var(--button-danger-container-large-default-height);
-  min-width: var(--button-danger-container-large-default-min-width);
-  padding: var(--button-danger-container-large-default-vertical-padding)
-    var(--button-danger-container-large-default-horizontal-padding);
-  background-color: var(--button-danger-container-large-default-fill);
-  color: var(--button-danger-label-large-default-fill);
+  min-height: var(--button-lg-height);
+  min-width: var(--button-danger-type-large-min-width);
+  padding: var(--button-danger-type-large-padding-top) var(--button-danger-type-large-padding-left);
+  background-color: var(--button-danger-background-color-default-fill);
+  color: var(--button-danger-foreground-color-default-fill);
 
   &:hover:not(:disabled):not([data-disabled]) {
-    background-color: var(--button-danger-container-large-hovered-fill);
+    background-color: var(--button-danger-background-color-hovered-fill);
   }
 
   &:active:not(:disabled):not([data-disabled]) {
-    background-color: var(--button-danger-container-large-pressed-fill);
+    background-color: var(--button-danger-background-color-pressed-fill);
   }
 
   &:disabled,
   &[data-disabled] {
-    background-color: var(--button-danger-container-large-disabled-fill);
-    color: var(--button-danger-label-large-disabled-fill);
+    background-color: var(--button-danger-background-color-disabled-fill);
+    color: var(--button-danger-foreground-color-disabled-fill);
   }
 
   &:disabled .button-icon,
   &[data-disabled] .button-icon {
-    color: var(--button-danger-icon-large-disabled-fill);
+    color: var(--button-danger-foreground-color-disabled-fill);
   }
 }
 
-/* Icon-only × size */
+/* Icon-only × size (maps to button.tertiary in Tokens Studio) */
 @utility button-icon-sm {
   gap: 0;
   background-color: transparent;
-  color: var(--button-icon-icon-default-fill);
-  width: var(--button-icon-container-default-width);
-  height: var(--button-icon-container-default-height);
-  min-width: var(--button-icon-container-default-width);
-  min-height: var(--button-icon-container-default-height);
+  color: var(--button-tertiary-foreground-color-default-fill);
+  width: var(--button-icon-only-sm-size);
+  height: var(--button-icon-only-sm-size);
+  min-width: var(--button-icon-only-sm-size);
+  min-height: var(--button-icon-only-sm-size);
   padding: var(--spacing-xxsmall);
 
   &:hover:not(:disabled):not([data-disabled]) {
-    background-color: var(--button-icon-container-hovered-fill);
-    color: var(--button-icon-icon-hovered-fill);
+    background-color: var(--button-icon-only-hovered-fill);
+    color: var(--button-icon-only-icon-hovered-fill);
   }
 
   &:active:not(:disabled):not([data-disabled]) {
-    background-color: var(--button-icon-container-pressed-fill);
-    color: var(--button-icon-icon-pressed-fill);
+    background-color: var(--button-icon-only-pressed-fill);
+    color: var(--button-icon-only-icon-pressed-fill);
   }
 
   &:disabled,
   &[data-disabled] {
     background-color: transparent;
-    color: var(--button-icon-icon-disabled-fill);
+    color: var(--button-tertiary-foreground-color-disabled-fill);
   }
 }
 
 @utility button-icon-md {
   gap: 0;
   background-color: transparent;
-  color: var(--button-icon-icon-default-fill);
+  color: var(--button-tertiary-foreground-color-default-fill);
   padding: var(--button-tertiary-type-icon-only-medium-padding-top)
     var(--button-tertiary-type-icon-only-medium-padding-right)
     var(--button-tertiary-type-icon-only-medium-padding-bottom)
     var(--button-tertiary-type-icon-only-medium-padding-left);
 
   &:hover:not(:disabled):not([data-disabled]) {
-    background-color: var(--button-icon-container-hovered-fill);
-    color: var(--button-icon-icon-hovered-fill);
+    background-color: var(--button-icon-only-hovered-fill);
+    color: var(--button-icon-only-icon-hovered-fill);
   }
 
   &:active:not(:disabled):not([data-disabled]) {
-    background-color: var(--button-icon-container-pressed-fill);
-    color: var(--button-icon-icon-pressed-fill);
+    background-color: var(--button-icon-only-pressed-fill);
+    color: var(--button-icon-only-icon-pressed-fill);
   }
 
   &:disabled,
   &[data-disabled] {
     background-color: transparent;
-    color: var(--button-icon-icon-disabled-fill);
+    color: var(--button-tertiary-foreground-color-disabled-fill);
   }
 }
 
 @utility button-icon-lg {
   gap: 0;
   background-color: transparent;
-  color: var(--button-icon-icon-default-fill);
+  color: var(--button-tertiary-foreground-color-default-fill);
   padding: var(--button-tertiary-type-icon-only-large-padding-top)
     var(--button-tertiary-type-icon-only-large-padding-right) var(--button-tertiary-type-icon-only-large-padding-bottom)
     var(--button-tertiary-type-icon-only-large-padding-left);
 
   &:hover:not(:disabled):not([data-disabled]) {
-    background-color: var(--button-icon-container-hovered-fill);
-    color: var(--button-icon-icon-hovered-fill);
+    background-color: var(--button-icon-only-hovered-fill);
+    color: var(--button-icon-only-icon-hovered-fill);
   }
 
   &:active:not(:disabled):not([data-disabled]) {
-    background-color: var(--button-icon-container-pressed-fill);
-    color: var(--button-icon-icon-pressed-fill);
+    background-color: var(--button-icon-only-pressed-fill);
+    color: var(--button-icon-only-icon-pressed-fill);
   }
 
   &:disabled,
   &[data-disabled] {
     background-color: transparent;
-    color: var(--button-icon-icon-disabled-fill);
+    color: var(--button-tertiary-foreground-color-disabled-fill);
   }
 }
 
 /* Icon child colour + size presets */
 @utility button-icon-primary-sm {
-  width: var(--button-primary-icon-small-default-width);
-  height: var(--button-primary-icon-small-default-height);
-  color: var(--button-primary-icon-small-default-fill);
+  width: var(--button-sm-icon-size);
+  height: var(--button-sm-icon-size);
+  color: var(--button-primary-foreground-color-default-fill);
 }
 
 @utility button-icon-primary-md {
-  width: var(--button-primary-icon-medium-default-width);
-  height: var(--button-primary-icon-medium-default-height);
-  color: var(--button-primary-icon-medium-default-fill);
+  width: var(--button-md-icon-size);
+  height: var(--button-md-icon-size);
+  color: var(--button-primary-foreground-color-default-fill);
 }
 
 @utility button-icon-primary-lg {
-  width: var(--button-primary-icon-large-default-width);
-  height: var(--button-primary-icon-large-default-height);
-  color: var(--button-primary-icon-large-default-fill);
+  width: var(--button-lg-icon-size);
+  height: var(--button-lg-icon-size);
+  color: var(--button-primary-foreground-color-default-fill);
 }
 
 @utility button-icon-secondary-sm {
-  width: var(--button-secondary-icon-small-default-width);
-  height: var(--button-secondary-icon-small-default-height);
-  color: var(--button-secondary-icon-small-default-fill);
+  width: var(--button-sm-icon-size);
+  height: var(--button-sm-icon-size);
+  color: var(--button-secondary-foreground-color-default-fill);
 }
 
 @utility button-icon-secondary-md {
-  width: var(--button-secondary-icon-medium-default-width);
-  height: var(--button-secondary-icon-medium-default-height);
-  color: var(--button-secondary-icon-medium-default-fill);
+  width: var(--button-md-icon-size);
+  height: var(--button-md-icon-size);
+  color: var(--button-secondary-foreground-color-default-fill);
 }
 
 @utility button-icon-secondary-lg {
-  width: var(--button-secondary-icon-large-default-width);
-  height: var(--button-secondary-icon-large-default-height);
-  color: var(--button-secondary-icon-large-default-fill);
+  width: var(--button-lg-icon-size);
+  height: var(--button-lg-icon-size);
+  color: var(--button-secondary-foreground-color-default-fill);
 }
 
 @utility button-icon-danger-sm {
-  width: var(--button-danger-icon-small-default-width);
-  height: var(--button-danger-icon-small-default-height);
-  color: var(--button-danger-icon-small-default-fill);
+  width: var(--button-sm-icon-size);
+  height: var(--button-sm-icon-size);
+  color: var(--button-danger-foreground-color-default-fill);
 }
 
 @utility button-icon-danger-md {
-  width: var(--button-danger-icon-medium-default-width);
-  height: var(--button-danger-icon-medium-default-height);
-  color: var(--button-danger-icon-medium-default-fill);
+  width: var(--button-md-icon-size);
+  height: var(--button-md-icon-size);
+  color: var(--button-danger-foreground-color-default-fill);
 }
 
 @utility button-icon-danger-lg {
-  width: var(--button-danger-icon-large-default-width);
-  height: var(--button-danger-icon-large-default-height);
-  color: var(--button-danger-icon-large-default-fill);
+  width: var(--button-lg-icon-size);
+  height: var(--button-lg-icon-size);
+  color: var(--button-danger-foreground-color-default-fill);
 }
 
 @utility button-icon-variant-sm {
-  width: var(--button-icon-icon-default-width);
-  height: var(--button-icon-icon-default-height);
+  width: var(--button-icon-only-icon-size);
+  height: var(--button-icon-only-icon-size);
 }
 
 @utility button-icon-variant-md {
-  width: var(--button-icon-icon-default-width);
-  height: var(--button-icon-icon-default-height);
+  width: var(--button-icon-only-icon-size);
+  height: var(--button-icon-only-icon-size);
 }
 
 @utility button-icon-variant-lg {
-  width: var(--button-icon-icon-default-width);
-  height: var(--button-icon-icon-default-height);
+  width: var(--button-icon-only-icon-size);
+  height: var(--button-icon-only-icon-size);
 }

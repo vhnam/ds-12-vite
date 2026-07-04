@@ -49,22 +49,19 @@
   --button-md-icon-gap: var(--spacing-xxsmall);
   --button-lg-icon-gap: var(--spacing-xxsmall);
 
-  /* --- Component tokens: button primary (aliases) --- */
-  --button-primary-radius: var(--button-radius);
-  --button-primary-cursor: var(--button-cursor);
-  --button-primary-transition: var(--button-transition);
-  --button-primary-focus-ring-width: var(--button-focus-ring-width);
-  --button-primary-focus-ring-color: var(--button-focus-ring-color);
-  --button-primary-focus-ring-offset: var(--button-focus-ring-offset);
-  --button-primary-focus-ring-style: var(--button-focus-ring-style);
-  --button-primary-label-font-family: var(--button-label-font-family);
-  --button-primary-label-font-size: var(--button-label-font-size);
-  --button-primary-label-font-weight: var(--button-label-font-weight);
-  --button-primary-label-line-height: var(--button-label-line-height);
-  --button-primary-label-letter-spacing: var(--button-label-letter-spacing);
-  --button-primary-sm-icon-gap: var(--button-sm-icon-gap);
-  --button-primary-md-icon-gap: var(--button-md-icon-gap);
-  --button-primary-lg-icon-gap: var(--button-lg-icon-gap);
+  /* Web-only button dimensions (not exported from Tokens Studio) */
+  --button-sm-height: 32px;
+  --button-md-height: 38px;
+  --button-lg-height: 44px;
+  --button-sm-icon-size: 20px;
+  --button-md-icon-size: 22px;
+  --button-lg-icon-size: 24px;
+  --button-icon-only-sm-size: 32px;
+  --button-icon-only-icon-size: 24px;
+  --button-icon-only-hovered-fill: var(--color-semantic-neutral-subtle);
+  --button-icon-only-pressed-fill: var(--button-tertiary-background-color-pressed-fill);
+  --button-icon-only-icon-hovered-fill: var(--color-semantic-text-neutral-bold);
+  --button-icon-only-icon-pressed-fill: var(--color-semantic-text-brand-bold);
 
   /* --- Component tokens: badge --- */
   --badge-radius: var(--radius-xsmall);
