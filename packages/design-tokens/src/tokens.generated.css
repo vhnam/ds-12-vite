@@ -921,7 +921,6 @@
   --button-primary-typography-small-font-weight: var(--title-default-font-weight);
   --button-primary-typography-small-letter-spacing: var(--title-default-letter-spacing);
   --button-primary-typography-small-line-height: var(--title-default-line-height);
-  --button-secondary-background-color-default-fill: var(--color-semantic-brand-subtle);
   --button-secondary-background-color-disabled-fill: var(--color-semantic-canvas-disabled);
   --button-secondary-background-color-hovered-fill: var(--color-semantic-brand-subtle-hovered);
   --button-secondary-background-color-pressed-fill: var(--color-semantic-brand-subtle-pressed);
