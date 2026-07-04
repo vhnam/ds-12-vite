@@ -922,8 +922,7 @@
   --button-primary-typography-small-letter-spacing: var(--title-default-letter-spacing);
   --button-primary-typography-small-line-height: var(--title-default-line-height);
   --button-secondary-background-color-disabled-fill: var(--color-semantic-canvas-disabled);
-  --button-secondary-background-color-hovered-fill: var(--color-semantic-brand-subtle-hovered);
-  --button-secondary-background-color-pressed-fill: var(--color-semantic-brand-subtle-pressed);
+  --button-secondary-background-color-hovered-fill: var(--color-semantic-canvas-subtle);
   --button-secondary-foreground-color-default-fill: var(--color-semantic-brand-bold-pressed);
   --button-secondary-foreground-color-disabled-fill: var(--color-semantic-text-neutral-disabled);
   --button-secondary-typography-large-font-family: var(--title-large-font-family);
