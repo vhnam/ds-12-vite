@@ -1,9 +1,10 @@
-import { Button as a } from "@base-ui/react/button";
+import { Button as o } from "@base-ui/react/button";
 import { cva as t } from "class-variance-authority";
-import { Fragment as n, jsx as r, jsxs as i } from "react/jsx-runtime";
+import { isValidElement as n } from "react";
+import { Fragment as r, jsx as i, jsxs as a } from "react/jsx-runtime";
 
 import { t as e } from "./utils-tOxW8rXw.mjs";
-const o = t(`button`, {
+const s = t(`button`, {
     variants: {
       variant: { primary: ``, secondary: ``, danger: ``, icon: `` },
       size: { sm: ``, md: ``, lg: `` },
@@ -29,7 +30,7 @@ const o = t(`button`, {
     ],
     defaultVariants: { variant: `primary`, size: `md`, hasIcon: !1, loading: !1 },
   }),
-  s = t(`button-icon`, {
+  c = t(`button-icon`, {
     variants: { variant: { primary: ``, secondary: ``, danger: ``, icon: `` }, size: { sm: ``, md: ``, lg: `` } },
     compoundVariants: [
       { variant: `primary`, size: `sm`, class: `button-icon-primary-sm` },
@@ -47,19 +48,31 @@ const o = t(`button`, {
     ],
     defaultVariants: { variant: `primary`, size: `md` },
   }),
-  c = t(`button-loader`, {
+  l = t(`button-loader`, {
     variants: { size: { sm: `button-loader-sm`, md: `button-loader-md`, lg: `button-loader-lg` } },
     defaultVariants: { size: `md` },
   });
-function l({ size: e }) {
-  return r(`span`, {
-    className: c({ size: e }),
+function u(e) {
+  if (!(e == null || typeof e == `boolean`)) {
+    if (typeof e == `string` || typeof e == `number`) return String(e);
+    if (Array.isArray(e)) return e.map(u).filter(Boolean).join(` `) || void 0;
+    if (n(e)) return u(e.props.children);
+  }
+}
+function d(e) {
+  if (!n(e)) return;
+  let { name: t, children: r } = e.props;
+  return typeof t == `string` ? t.replace(/_/g, ` `) : u(r);
+}
+function f({ size: e }) {
+  return i(`span`, {
+    className: l({ size: e }),
     "aria-hidden": `true`,
-    children: r(`svg`, {
+    children: i(`svg`, {
       viewBox: `0 0 24 24`,
       fill: `none`,
       xmlns: `http://www.w3.org/2000/svg`,
-      children: r(`circle`, {
+      children: i(`circle`, {
         cx: `12`,
         cy: `12`,
         r: `9`,
@@ -72,52 +85,60 @@ function l({ size: e }) {
     }),
   });
 }
-function u({
+function p({
   children: t,
-  className: c,
-  variant: u = `primary`,
-  size: d = `md`,
-  icon: f,
-  iconPosition: p = `left`,
-  loading: m = !1,
-  disabled: h,
-  "aria-label": g,
-  ..._
+  className: n,
+  variant: l = `primary`,
+  size: u = `md`,
+  icon: p,
+  iconPosition: m = `left`,
+  loading: h = !1,
+  disabled: g,
+  "aria-label": _,
+  ...v
 }) {
-  let v = u ?? `primary`,
-    y = d ?? `md`,
-    b = v === `icon`,
-    x = !!(h || m),
-    S = b ? (f ?? t) : f,
-    C = !!S && !m,
-    w = C && p === `left`,
-    T = C && p === `right` && !b,
-    E = b && typeof t == `string` ? void 0 : t,
-    D = typeof t == `string` ? t : void 0,
-    O = g ?? (b ? D : void 0) ?? (m ? D : void 0),
-    k = s({ variant: v, size: y });
-  return r(a, {
-    className: e(o({ variant: v, size: y, hasIcon: C && !b, loading: m, className: c })),
-    disabled: x,
+  let y = l ?? `primary`,
+    b = u ?? `md`,
+    x = y === `icon`,
+    S = !!(g || h),
+    C = x ? (p ?? t) : p,
+    w = !!C && !h,
+    T = w && m === `left`,
+    E = w && m === `right` && !x,
+    D = x && typeof t == `string` ? void 0 : t,
+    O = typeof t == `string` ? t : void 0,
+    k = x ? d(C) : void 0,
+    A = _ ?? (x ? (O ?? k) : void 0) ?? (h ? (O ?? k) : void 0);
+  process.env.NODE_ENV !== `production` &&
+    x &&
+    !A &&
+    !h &&
+    console.warn(
+      `Button: icon-only buttons require an accessible name via aria-label, string children, or an Icon name.`,
+    );
+  let j = c({ variant: y, size: b });
+  return i(o, {
+    className: e(s({ variant: y, size: b, hasIcon: w && !x, loading: h, className: n })),
+    disabled: S,
     focusableWhenDisabled: !0,
     "data-slot": `button`,
-    "data-variant": v,
-    "aria-label": O,
-    "aria-busy": m || void 0,
-    ..._,
-    children: m
-      ? r(l, { size: y })
-      : b
-        ? S
-          ? r(`span`, { className: k, children: S })
+    "data-variant": y,
+    "aria-label": A,
+    "aria-busy": h || void 0,
+    ...v,
+    children: h
+      ? i(f, { size: b })
+      : x
+        ? C
+          ? i(`span`, { className: j, children: C })
           : null
-        : i(n, {
+        : a(r, {
             children: [
-              w ? r(`span`, { className: k, children: S }) : null,
-              E ? r(`span`, { className: `button-label`, children: E }) : null,
-              T ? r(`span`, { className: k, children: S }) : null,
+              T ? i(`span`, { className: j, children: C }) : null,
+              D ? i(`span`, { className: `button-label`, children: D }) : null,
+              E ? i(`span`, { className: j, children: C }) : null,
             ],
           }),
   });
 }
-export { u as Button, o as buttonVariants };
+export { p as Button, s as buttonVariants };

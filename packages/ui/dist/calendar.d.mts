@@ -10,6 +10,10 @@ type CalendarSharedProps = {
    * @default "default"
    */
   variant?: CalendarVariant;
+  /**
+   * Locale used for month and caption formatting. Defaults to the runtime locale when omitted.
+   */
+  locale?: Intl.LocalesArgument;
 };
 type CalendarSingleProps = CalendarSharedProps &
   Omit<DayPickerProps, "mode" | "className" | "numberOfMonths" | "captionLayout" | "navLayout"> & {
@@ -35,6 +39,7 @@ declare const calendarVariants: (
 declare function Calendar({
   className,
   variant,
+  locale,
   showOutsideDays,
   components,
   classNames,

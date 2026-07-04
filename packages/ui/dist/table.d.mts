@@ -27,6 +27,7 @@ declare const tableRowVariants: (
       } & import("class-variance-authority/types").ClassProp)
     | undefined,
 ) => string;
+type TableCellState = NonNullable<VariantProps<typeof tableCellVariants>["state"]>;
 type TableSortDirection = "ascending" | "descending" | "none";
 type TableProps = ComponentProps<"table"> & {
   /** Additional CSS class names applied to the table element. */ className?: string;
@@ -52,7 +53,12 @@ type TableHeadProps = Omit<ComponentProps<"th">, "align"> &
   };
 type TableCellProps = Omit<ComponentProps<"td">, "align"> &
   VariantProps<typeof tableCellVariants> & {
-    className?: string /** Primary text for default, stacked, and avatar variants. */;
+    className?: string;
+    /**
+     * Static visual state for design previews and Storybook.
+     * Interactive rows apply hover and focus styles automatically via CSS when `state` is `"default"`.
+     */
+    state?: TableCellState /** Primary text for default, stacked, and avatar variants. */;
     text?: string /** Secondary text for stacked and avatar variants. */;
     subText?: string /** Avatar element for the avatar variant. */;
     avatar?: ReactNode /** Shows a trailing chevron icon. */;

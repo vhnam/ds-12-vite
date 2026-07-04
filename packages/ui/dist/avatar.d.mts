@@ -47,6 +47,10 @@ type AvatarProps = Omit<ComponentProps<typeof Avatar$1.Root>, "className"> & {
    */
   alt?: string;
   /**
+   * Accessible name for the avatar. Defaults from `initials`, `alt`, or a generic label.
+   */
+  "aria-label"?: string;
+  /**
    * Custom icon element used when `variant` is `"icon"` or as an image fallback
    * when no initials are provided.
    */
@@ -62,6 +66,7 @@ declare function Avatar({
   src,
   alt,
   icon,
+  "aria-label": ariaLabel,
   ...props
 }: AvatarProps): import("react").JSX.Element;
 //#endregion

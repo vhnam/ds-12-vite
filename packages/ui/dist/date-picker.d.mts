@@ -50,6 +50,10 @@ type DatePickerProps = DatePickerCalendarProps & {
    * Accessible name when no visible label is provided — use DatePickerField for labelled forms.
    */
   "aria-label"?: string;
+  /**
+   * Locale used for display formatting. Defaults to the runtime locale when omitted.
+   */
+  locale?: Intl.LocalesArgument;
 };
 /** Date input with a popup calendar for selecting a single day. */
 declare function DatePicker({
@@ -71,6 +75,7 @@ declare function DatePicker({
   required,
   "aria-describedby": ariaDescribedBy,
   "aria-label": ariaLabel,
+  locale,
   ...calendarProps
 }: DatePickerProps): import("react").JSX.Element;
 //#endregion

@@ -54,7 +54,7 @@ function O() {
     ],
   });
 }
-function ee(e, t, n) {
+function k(e, t, n) {
   return e.type === `ellipsis`
     ? h(O, {}, t)
     : e.render
@@ -74,7 +74,7 @@ function ee(e, t, n) {
             t,
           );
 }
-function k({ className: t, items: n, collapsed: r = !1, renderLink: i, "aria-label": a = `Breadcrumb`, ...o }) {
+function ee({ className: t, items: n, collapsed: r = !1, renderLink: i, "aria-label": a = `Breadcrumb`, ...o }) {
   let s = C(n, r),
     c = r && n.length > 3;
   return h(T.Provider, {
@@ -94,7 +94,7 @@ function k({ className: t, items: n, collapsed: r = !1, renderLink: i, "aria-lab
             {
               className: `breadcrumb-item`,
               "data-slot": `breadcrumb-item`,
-              children: [ee(e, `${e.type}-${t}`, i), n ? null : h(D, {})],
+              children: [k(e, `${e.type}-${t}`, i), n ? null : h(D, {})],
             },
             `${e.type}-${t}`,
           );
@@ -103,10 +103,10 @@ function k({ className: t, items: n, collapsed: r = !1, renderLink: i, "aria-lab
     }),
   });
 }
-const te = { sm: 20, lg: 24 },
-  ne = { sm: 16, lg: 16 },
-  A = c(void 0),
-  j = o(`combobox`, {
+const A = { sm: 20, lg: 24 },
+  j = { sm: 16, lg: 16 },
+  M = c(void 0),
+  N = o(`combobox`, {
     variants: { size: { sm: ``, lg: `` }, disabled: { true: ``, false: `` }, invalid: { true: ``, false: `` } },
     compoundVariants: [
       { size: `sm`, class: `combobox-preset-size-sm` },
@@ -118,10 +118,10 @@ const te = { sm: 20, lg: 24 },
     ],
     defaultVariants: { size: `sm`, disabled: !1, invalid: !1 },
   });
-function M(e, t) {
+function P(e, t) {
   return e.find((e) => e.value === t)?.label ?? t;
 }
-function N({ iconSize: t }) {
+function F({ iconSize: t }) {
   return g(m, {
     children: [
       h(_.Clear, {
@@ -150,7 +150,7 @@ function N({ iconSize: t }) {
     ],
   });
 }
-function P({ options: e, variant: t }) {
+function te({ options: e, variant: t }) {
   let a = i({ variant: t });
   return h(_.List, {
     className: `menu-list`,
@@ -180,7 +180,7 @@ function P({ options: e, variant: t }) {
     ),
   });
 }
-function F({ options: e, variant: t }) {
+function I({ options: e, variant: t }) {
   return h(_.Portal, {
     children: h(_.Positioner, {
       className: `combobox-positioner`,
@@ -190,17 +190,17 @@ function F({ options: e, variant: t }) {
       children: h(_.Popup, {
         className: `combobox-popup`,
         "data-slot": `combobox-popup`,
-        children: h(P, { options: e, variant: t }),
+        children: h(te, { options: e, variant: t }),
       }),
     }),
   });
 }
-function I(e) {
+function L(e) {
   let t = e.size ?? `sm`,
     n = !!e.disabled,
     r = !!e.invalid,
-    i = te[t],
-    a = ne[t],
+    i = A[t],
+    a = j[t],
     o = e.showLeadingIcon ?? !1,
     s = o ? (e.leadingIcon ?? h($, { name: `person`, size: i })) : null;
   return {
@@ -228,10 +228,10 @@ function I(e) {
     resolvedLeading: s,
   };
 }
-function re({ value: t, defaultValue: n, onValueChange: r, ...i }) {
-  let a = I(i),
-    o = e(j({ size: a.size, disabled: a.disabled, invalid: a.invalid, className: a.className }));
-  return h(A.Provider, {
+function ne({ value: t, defaultValue: n, onValueChange: r, ...i }) {
+  let a = L(i),
+    o = e(N({ size: a.size, disabled: a.disabled, invalid: a.invalid, className: a.className }));
+  return h(M.Provider, {
     value: a.iconSize,
     children: g(_.Root, {
       items: a.options,
@@ -274,19 +274,19 @@ function re({ value: t, defaultValue: n, onValueChange: r, ...i }) {
                 "aria-label": a.ariaLabel,
                 placeholder: a.placeholder,
               }),
-              h(N, { iconSize: a.iconSize }),
+              h(F, { iconSize: a.iconSize }),
             ],
           }),
         }),
-        h(F, { options: a.options, variant: `single` }),
+        h(I, { options: a.options, variant: `single` }),
       ],
     }),
   });
 }
-function ie({ value: t, defaultValue: n, onValueChange: r, ...i }) {
-  let a = I(i),
-    o = e(j({ size: a.size, disabled: a.disabled, invalid: a.invalid, className: a.className }));
-  return h(A.Provider, {
+function re({ value: t, defaultValue: n, onValueChange: r, ...i }) {
+  let a = L(i),
+    o = e(N({ size: a.size, disabled: a.disabled, invalid: a.invalid, className: a.className }));
+  return h(M.Provider, {
     value: a.iconSize,
     children: g(_.Root, {
       items: a.options,
@@ -337,12 +337,12 @@ function ie({ value: t, defaultValue: n, onValueChange: r, ...i }) {
                                 h(`span`, {
                                   className: `combobox-chip-label`,
                                   "data-slot": `combobox-chip-label`,
-                                  children: M(a.options, e),
+                                  children: P(a.options, e),
                                 }),
                                 h(_.ChipRemove, {
                                   className: `combobox-chip-remove`,
                                   "data-slot": `combobox-chip-remove`,
-                                  "aria-label": `Remove ${M(a.options, e)}`,
+                                  "aria-label": `Remove ${P(a.options, e)}`,
                                   children: h($, { name: `close`, size: a.chipRemoveIconSize }),
                                 }),
                               ],
@@ -364,28 +364,28 @@ function ie({ value: t, defaultValue: n, onValueChange: r, ...i }) {
                     }),
                 }),
               }),
-              h(N, { iconSize: a.iconSize }),
+              h(F, { iconSize: a.iconSize }),
             ],
           }),
         }),
-        h(F, { options: a.options, variant: `multiple` }),
+        h(I, { options: a.options, variant: `multiple` }),
       ],
     }),
   });
 }
-function L(e) {
+function R(e) {
   if (e !== void 0) return e === null || e === `` ? [] : (Array.isArray(e) ? e : [e]).filter((e) => e !== ``);
 }
-function R(e) {
+function ie(e) {
   if (e !== void 0) return e === null || e === `` ? null : Array.isArray(e) ? (e.find((e) => e !== ``) ?? null) : e;
 }
 function ae({ multiple: e = !1, value: t, defaultValue: n, onValueChange: r, ...i }) {
   if (e) {
-    let e = L(t),
-      a = L(n);
-    return h(ie, { ...i, value: e, defaultValue: a, onValueChange: r ? (e) => r(e) : void 0 });
+    let e = R(t),
+      a = R(n);
+    return h(re, { ...i, value: e, defaultValue: a, onValueChange: r ? (e) => r(e) : void 0 });
   }
-  return h(re, { ...i, value: R(t), defaultValue: R(n), onValueChange: r ? (e) => r(e) : void 0 });
+  return h(ne, { ...i, value: ie(t), defaultValue: ie(n), onValueChange: r ? (e) => r(e) : void 0 });
 }
 const oe = { left: `arrow_back_ios_new`, right: `arrow_forward_ios`, down: `arrow_drop_down`, up: `arrow_drop_up` };
 function se({ className: t, disabled: n, orientation: r = `right`, size: i }) {
@@ -459,40 +459,42 @@ function pe(e) {
 function V({
   className: t,
   variant: n = `default`,
-  showOutsideDays: r = !0,
-  components: i,
-  classNames: a,
-  formatters: o,
-  ...s
+  locale: r,
+  showOutsideDays: i = !0,
+  components: a,
+  classNames: o,
+  formatters: s,
+  ...c
 }) {
-  let c = n ?? `default`,
-    l = pe(c),
-    u = b(),
-    f = d(
+  let l = n ?? `default`,
+    u = pe(l),
+    f = b(),
+    p = d(
       () => ({
         Root: (n) =>
-          h(ce, { ...n, className: e(B({ variant: c }), t, n.className), "data-slot": `calendar`, "data-variant": c }),
+          h(ce, { ...n, className: e(B({ variant: l }), t, n.className), "data-slot": `calendar`, "data-variant": l }),
         Chevron: se,
         DayButton: de,
         PreviousMonthButton: le,
         NextMonthButton: ue,
-        ...i,
+        ...a,
       }),
-      [c, t, i],
+      [l, t, a],
     );
   return h(y, {
-    showOutsideDays: r,
-    numberOfMonths: l.numberOfMonths,
-    captionLayout: l.captionLayout,
-    navLayout: l.navLayout,
-    classNames: { ...u, ...a },
+    locale: r,
+    showOutsideDays: i,
+    numberOfMonths: u.numberOfMonths,
+    captionLayout: u.captionLayout,
+    navLayout: u.navLayout,
+    classNames: { ...f, ...o },
     formatters: {
-      formatCaption: (e) => e.toLocaleDateString(`en-US`, { month: `long`, year: `numeric` }),
-      formatMonthDropdown: (e) => e.toLocaleDateString(`en-US`, { month: `short` }),
-      ...o,
+      formatCaption: (e) => e.toLocaleDateString(r, { month: `long`, year: `numeric` }),
+      formatMonthDropdown: (e) => e.toLocaleDateString(r, { month: `short` }),
+      ...s,
     },
-    components: f,
-    ...s,
+    components: p,
+    ...c,
   });
 }
 const me = { sm: 20, lg: 24 },
@@ -509,8 +511,8 @@ const me = { sm: 20, lg: 24 },
     ],
     defaultVariants: { size: `sm`, disabled: !1, invalid: !1 },
   });
-function he(e) {
-  return e.toLocaleDateString(`en-US`, { month: `short`, day: `numeric`, year: `numeric` });
+function he(e, t) {
+  return e.toLocaleDateString(t, { month: `short`, day: `numeric`, year: `numeric` });
 }
 function ge(e) {
   return `${e.getFullYear()}-${String(e.getMonth() + 1).padStart(2, `0`)}-${String(e.getDate()).padStart(2, `0`)}`;
@@ -534,64 +536,65 @@ function _e({
   required: b,
   "aria-describedby": x,
   "aria-label": S,
-  ...C
+  locale: C,
+  ...w
 }) {
-  let w = n ?? `sm`,
-    T = !!i,
-    E = !!r,
-    D = me[w],
-    O = s ? (o ?? h($, { name: `event`, size: D })) : null,
-    [ee, k] = p(l),
-    [te, ne] = p(d ?? !1),
-    A = c !== void 0,
-    j = f !== void 0,
-    M = A ? c : ee,
-    N = j ? f : te,
-    P = (e) => {
-      (j || ne(e), m?.(e));
+  let T = n ?? `sm`,
+    E = !!i,
+    D = !!r,
+    O = me[T],
+    k = s ? (o ?? h($, { name: `event`, size: O })) : null,
+    [ee, A] = p(l),
+    [j, M] = p(d ?? !1),
+    N = c !== void 0,
+    P = f !== void 0,
+    F = N ? c : ee,
+    te = P ? f : j,
+    I = (e) => {
+      (P || M(e), m?.(e));
     },
-    F = (e) => {
-      (A || k(e), u?.(e), P(!1));
+    L = (e) => {
+      (N || A(e), u?.(e), I(!1));
     };
   return h(H.Provider, {
-    value: D,
+    value: O,
     children: g(v.Root, {
-      open: N,
-      onOpenChange: P,
+      open: te,
+      onOpenChange: I,
       modal: !1,
       children: [
         g(`div`, {
-          className: e(U({ size: w, disabled: T, invalid: E, className: t })),
+          className: e(U({ size: T, disabled: E, invalid: D, className: t })),
           "data-slot": `date-picker`,
-          "data-variant": w,
+          "data-variant": T,
           children: [
             g(v.Trigger, {
               id: _,
               className: `date-picker-trigger`,
               "data-slot": `date-picker-trigger`,
-              disabled: T,
-              "aria-invalid": E || void 0,
+              disabled: E,
+              "aria-invalid": D || void 0,
               "aria-describedby": x,
-              "aria-disabled": T || void 0,
+              "aria-disabled": E || void 0,
               "aria-label": S,
               children: [
-                O
-                  ? h(`span`, { className: `date-picker-leading`, "data-slot": `date-picker-leading`, children: O })
+                k
+                  ? h(`span`, { className: `date-picker-leading`, "data-slot": `date-picker-leading`, children: k })
                   : null,
                 h(`span`, {
                   className: `date-picker-value`,
                   "data-slot": `date-picker-value`,
-                  "data-placeholder": M ? void 0 : ``,
-                  children: M ? he(M) : a,
+                  "data-placeholder": F ? void 0 : ``,
+                  children: F ? he(F, C) : a,
                 }),
                 h(`span`, {
                   className: `date-picker-trailing`,
                   "data-slot": `date-picker-trailing`,
-                  children: h($, { name: `calendar_today`, size: D }),
+                  children: h($, { name: `calendar_today`, size: O }),
                 }),
               ],
             }),
-            y && !T ? h(`input`, { type: `hidden`, name: y, value: M ? ge(M) : ``, required: b }) : null,
+            y && !E ? h(`input`, { type: `hidden`, name: y, value: F ? ge(F) : ``, required: b }) : null,
           ],
         }),
         h(v.Portal, {
@@ -604,12 +607,13 @@ function _e({
               className: `date-picker-popup`,
               "data-slot": `date-picker-popup`,
               children: h(V, {
-                ...C,
+                ...w,
+                locale: C,
                 variant: `default`,
                 mode: `single`,
-                selected: M,
-                onSelect: F,
-                defaultMonth: C.defaultMonth ?? M,
+                selected: F,
+                onSelect: L,
+                defaultMonth: w.defaultMonth ?? F,
                 className: `[&_.rdp-month]:w-full`,
               }),
             }),
@@ -966,7 +970,7 @@ function Me(e, t) {
 function Ne(e) {
   let n = l(t),
     r = l(T),
-    i = l(A),
+    i = l(M),
     a = l(H),
     o = l(W),
     s = l(q),
@@ -989,9 +993,9 @@ function $({ name: t, variant: n = `outlined`, align: r, size: i, className: a, 
 export {
   E as A,
   V as C,
-  j as D,
-  A as E,
-  k as O,
+  N as D,
+  M as E,
+  ee as O,
   U as S,
   ae as T,
   ye as _,

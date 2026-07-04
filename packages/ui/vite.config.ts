@@ -70,19 +70,4 @@ export default defineConfig({
     ignorePatterns: ['dist/**', 'src/vendor/**'],
   },
   plugins: tailwindPlugins,
-  run: {
-    tasks: {
-      'vendor-tokens': {
-        command: 'node scripts/vendor-tokens.mjs',
-        dependsOn: ['@ds-12/design-tokens#generate:theme'],
-        input: [
-          'scripts/vendor-tokens.mjs',
-          { pattern: 'packages/design-tokens/src/tokens.generated.css', base: 'workspace' },
-          { pattern: 'packages/design-tokens/src/tokens.web.css', base: 'workspace' },
-          { pattern: 'packages/design-tokens/src/tokens.theme.css', base: 'workspace' },
-        ],
-        output: ['src/vendor/tokens/**'],
-      },
-    },
-  },
 });

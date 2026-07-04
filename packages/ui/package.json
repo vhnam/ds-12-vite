@@ -62,8 +62,6 @@
     "./typography": "./dist/typography.mjs",
     "./styles.css": "./dist/styles.css",
     "./tailwind.css": "./src/tailwind.css",
-    "./tokens.css": "./src/vendor/tokens/tokens.css",
-    "./theme.css": "./src/vendor/tokens/theme.css",
     "./material-symbols.css": "@material-symbols/font-400/outlined.css",
     "./package.json": "./package.json"
   },
@@ -73,9 +71,9 @@
   "scripts": {
     "vendor-fonts": "node scripts/vendor-fonts.mjs",
     "build:styles": "node scripts/build-styles.mjs",
-    "prebuild": "vp run vendor-tokens && node scripts/vendor-fonts.mjs",
+    "prebuild": "vp run @ds-12/design-tokens#generate:theme && node scripts/vendor-fonts.mjs",
     "build": "vp pack && node scripts/build-styles.mjs",
-    "dev": "vp run vendor-tokens && node scripts/vendor-fonts.mjs && vp pack --watch",
+    "dev": "vp run @ds-12/design-tokens#generate:theme && node scripts/vendor-fonts.mjs && vp pack --watch",
     "test": "vp test",
     "check": "vp check",
     "prepublishOnly": "vp run build"

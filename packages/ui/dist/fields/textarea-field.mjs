@@ -3,7 +3,7 @@ import { cva as n } from "class-variance-authority";
 import { useId as r } from "react";
 import { jsx as i, jsxs as a } from "react/jsx-runtime";
 
-import { r as t } from "../icon-C8br3Qrh.mjs";
+import { r as t } from "../icon-X93sOh_U.mjs";
 import { t as e } from "../utils-tOxW8rXw.mjs";
 const s = n(`textarea-field`, {
   variants: {

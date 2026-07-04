@@ -2,7 +2,7 @@ import { Avatar as n } from "@base-ui/react/avatar";
 import { cva as r } from "class-variance-authority";
 import { jsx as i, jsxs as a } from "react/jsx-runtime";
 
-import { n as t } from "./icon-C8br3Qrh.mjs";
+import { n as t } from "./icon-X93sOh_U.mjs";
 import { t as e } from "./utils-tOxW8rXw.mjs";
 const o = { sm: 14, md: 16, lg: 20 },
   s = { circle: `person`, square: `apartment` },
@@ -34,42 +34,49 @@ function d({ shape: e, size: n, icon: r }) {
   let a = o[n];
   return i(`span`, { className: l({ size: n }), children: r ?? i(t, { name: s[e], size: a }) });
 }
-function f({
+function f(e, t, n, r) {
+  return (e === `image` && n && r) || !t ? {} : { role: `img`, "aria-label": t };
+}
+function p({
   className: t,
   size: r = `md`,
   shape: o = `circle`,
   variant: s = `initial`,
   initials: l,
-  src: f,
-  alt: p = ``,
-  icon: m,
-  ...h
+  src: p,
+  alt: m = ``,
+  icon: h,
+  "aria-label": g,
+  ..._
 }) {
-  let g = r ?? `md`,
-    _ = o ?? `circle`,
-    v = s ?? `initial`,
-    y = e(c({ size: r, shape: o, variant: s, className: t }));
-  return v === `image`
+  let v = r ?? `md`,
+    y = o ?? `circle`,
+    b = s ?? `initial`,
+    x = e(c({ size: r, shape: o, variant: s, className: t })),
+    S = f(b, g ?? (l || (b === `image` && m ? m : `User avatar`)), p, m);
+  return b === `image`
     ? a(n.Root, {
-        className: y,
+        className: x,
         "data-slot": `avatar`,
-        "data-variant": v,
-        ...h,
+        "data-variant": b,
+        ...S,
+        ..._,
         children: [
-          f ? i(n.Image, { className: `avatar-image`, src: f, alt: p }) : null,
+          p ? i(n.Image, { className: `avatar-image`, src: p, alt: m }) : null,
           i(n.Fallback, {
             className: `avatar-fallback`,
             delay: 0,
-            children: l ? i(u, { children: l }) : i(d, { shape: _, size: g, icon: m }),
+            children: l ? i(u, { children: l }) : i(d, { shape: y, size: v, icon: h }),
           }),
         ],
       })
     : i(n.Root, {
-        className: y,
+        className: x,
         "data-slot": `avatar`,
-        "data-variant": v,
-        ...h,
-        children: v === `initial` ? i(u, { children: l ?? `` }) : i(d, { shape: _, size: g, icon: m }),
+        "data-variant": b,
+        ...S,
+        ..._,
+        children: b === `initial` && l ? i(u, { children: l }) : i(d, { shape: y, size: v, icon: h }),
       });
 }
-export { f as Avatar, c as avatarVariants };
+export { p as Avatar, c as avatarVariants };

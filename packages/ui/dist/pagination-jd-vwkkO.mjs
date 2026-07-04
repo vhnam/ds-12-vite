@@ -82,12 +82,16 @@ function l({
   let g = u ?? `lg`,
     _ = d ?? g === `lg`,
     v = Math.min(Math.max(i, 1), Math.max(s, 1)),
-    y = a(v, s),
-    b = g === `lg` && _ && s >= 5 ? `spread` : `centered`,
-    x = (e) => {
+    y = i !== v;
+  process.env.NODE_ENV !== `production` &&
+    y &&
+    console.warn(`Pagination: page ${i} is out of bounds for totalPages ${s}. Rendering page ${v} instead.`);
+  let b = a(v, s),
+    x = g === `lg` && _ && s >= 5 ? `spread` : `centered`,
+    S = (e) => {
       e < 1 || e > s || e === v || l?.(e);
     },
-    S = y.map((e, t) => {
+    C = b.map((e, t) => {
       if (e.type === `ellipsis`)
         return n(
           c,
@@ -101,7 +105,7 @@ function l({
           size: g,
           state: r ? `active` : `default`,
           label: String(e.page),
-          onClick: () => x(e.page),
+          onClick: () => S(e.page),
           "aria-label": `Page ${e.page}`,
           "aria-current": r ? `page` : void 0,
         },
@@ -110,8 +114,9 @@ function l({
     });
   return _
     ? r(`nav`, {
-        className: e(o({ size: g, layout: b, className: t })),
+        className: e(o({ size: g, layout: x, className: t })),
         "data-slot": `pagination`,
+        "data-page-clamped": y || void 0,
         "aria-label": m,
         ...h,
         children: [
@@ -120,16 +125,16 @@ function l({
             state: v <= 1 ? `disabled` : `default`,
             label: f,
             disabled: v <= 1,
-            onClick: () => x(v - 1),
+            onClick: () => S(v - 1),
             "aria-label": f,
           }),
-          n(`div`, { className: `pagination-pages`, children: S }),
+          n(`div`, { className: `pagination-pages`, children: C }),
           n(c, {
             size: g,
             state: v >= s ? `disabled` : `default`,
             label: p,
             disabled: v >= s,
-            onClick: () => x(v + 1),
+            onClick: () => S(v + 1),
             "aria-label": p,
           }),
         ],
@@ -137,9 +142,10 @@ function l({
     : n(`nav`, {
         className: e(o({ size: g, layout: `end`, className: t })),
         "data-slot": `pagination`,
+        "data-page-clamped": y || void 0,
         "aria-label": m,
         ...h,
-        children: S,
+        children: C,
       });
 }
 export { a as i, s as n, o as r, l as t };

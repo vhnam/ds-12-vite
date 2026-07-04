@@ -1,6 +1,6 @@
 # @ds-12/ui
 
-React component library for the DS-12 design system. Components are built on [Base UI](https://base-ui.com/) primitives, styled with Tailwind v4 `@utility` blocks, and driven by vendored design tokens.
+React component library for the DS-12 design system. Components are built on [Base UI](https://base-ui.com/) primitives, styled with Tailwind v4 `@utility` blocks, and driven by design tokens from `@ds-12/design-tokens`.
 
 ## Install
 
@@ -47,7 +47,7 @@ Use this when you want Tailwind utilities in your app and control over the build
 @import "@material-symbols/font-400/outlined.css";
 ```
 
-`@ds-12/ui/tailwind.css` includes Tailwind, vendored tokens, fonts, and all component `@utility` styles.
+`@ds-12/ui/tailwind.css` includes Tailwind, design tokens (imported from `@ds-12/design-tokens`), fonts, and all component `@utility` styles.
 
 ## Components
 
@@ -68,9 +68,9 @@ Subpath imports follow the export map in `package.json` (for example `@ds-12/ui/
 | -------------------------------- | ----------------------------------------------------- |
 | `@ds-12/ui/styles.css`           | Pre-built bundle (tokens, fonts, component styles)    |
 | `@ds-12/ui/tailwind.css`         | Tailwind v4 entry for apps that compile their own CSS |
-| `@ds-12/ui/tokens.css`           | Design token CSS variables only                       |
-| `@ds-12/ui/theme.css`            | `@theme` bridge for Tailwind                          |
 | `@ds-12/ui/material-symbols.css` | Material Symbols font (for `Icon`)                    |
+
+Raw token CSS (variables only, `@theme` bridge) is exported by the source package: `@ds-12/design-tokens/tokens.css` and `@ds-12/design-tokens/theme.css`.
 
 ## Development
 
@@ -93,7 +93,7 @@ vp check
 vp test
 ```
 
-The build copies design tokens and fonts into `src/vendor/`, bundles components with `vp pack`, then compiles `dist/styles.css` from `src/tailwind.css`.
+The build regenerates token CSS in `@ds-12/design-tokens`, copies fonts into `src/vendor/`, bundles components with `vp pack`, then compiles `dist/styles.css` from `src/tailwind.css` (which imports tokens directly from `@ds-12/design-tokens`).
 
 **Git installs use pre-built artifacts** in `dist/`. After changing components, tokens, or fonts, run `vp run @ds-12/ui#build` and commit `dist/` and `src/vendor/` before consumers pull the update.
 
@@ -102,6 +102,6 @@ The build copies design tokens and fonts into `src/vendor/`, bundles components 
 - **React 19** + **Base UI** for accessible interactive primitives
 - **CVA** for variant class names
 - **Tailwind v4 `@utility`** blocks registered in `src/tailwind.css`
-- **Design tokens** vendored from `@ds-12/design-tokens` at build time (no runtime dependency)
+- **Design tokens** imported from `@ds-12/design-tokens` (single source of truth; inlined into `dist/styles.css` at build time)
 
 See the [monorepo README](../../README.md) for Storybook, CI, and workspace-wide commands.

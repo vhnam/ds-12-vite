@@ -2,7 +2,7 @@ import { Button as a } from "@base-ui/react/button";
 import { cva as n } from "class-variance-authority";
 import { jsx as r, jsxs as i } from "react/jsx-runtime";
 
-import { n as t } from "./icon-C8br3Qrh.mjs";
+import { n as t } from "./icon-X93sOh_U.mjs";
 import { t as e } from "./utils-tOxW8rXw.mjs";
 const o = n(`chip`, {
   variants: {

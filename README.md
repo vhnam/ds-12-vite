@@ -70,7 +70,7 @@ export default defineConfig({
 @import "@material-symbols/font-400/outlined.css";
 ```
 
-`@ds-12/ui/tailwind.css` includes Tailwind v4, vendored design tokens, Nunito Sans, and all component `@utility` styles.
+`@ds-12/ui/tailwind.css` includes Tailwind v4, design tokens from `@ds-12/design-tokens`, Nunito Sans, and all component `@utility` styles.
 
 ### Where `@ds-12/ui` is used today
 
@@ -247,10 +247,10 @@ packages/
       tokens.web.css         # Web platform + component token aliases
   ui/                @ds-12/ui
     dist/                    # Pre-built JS + styles.css (committed for git installs)
-    scripts/                 # vendor-tokens, vendor-fonts, build-styles
+    scripts/                 # vendor-fonts, build-styles
     src/
       components/            # DS components (lowercase folder names)
-      vendor/                  # Vendored tokens + fonts (copied at build)
+      vendor/                  # Vendored fonts (copied at build)
       lib/                     # Shared helpers (e.g. cn())
   utils/             @ds-12/utils
 apps/
@@ -264,7 +264,7 @@ apps/
 - **React 19** with **Base UI** primitives for interactive behavior
 - **CVA** (`class-variance-authority`) for variant class names
 - **Tailwind v4 `@utility`** blocks for component styles, registered in `packages/ui/src/tailwind.css`
-- **Design tokens** as the single source of visual values (`var(--token)`), vendored into `@ds-12/ui` at build time
+- **Design tokens** as the single source of visual values (`var(--token)`), imported by `@ds-12/ui` from `@ds-12/design-tokens` and inlined into `dist/styles.css` at build time
 - **Pre-built `styles.css`** for drop-in consumption (tokens, fonts, component styles) without Tailwind in the host app
 - **Storybook 10** with Playwright for visual regression and axe a11y checks in CI; interaction `play` functions run in the Storybook UI
 
