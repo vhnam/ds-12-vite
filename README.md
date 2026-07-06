@@ -7,7 +7,7 @@ A React design system monorepo built with [Vite+](https://viteplus.dev/guide/). 
 | Package                | Description                                                                     |
 | ---------------------- | ------------------------------------------------------------------------------- |
 | `@ds-12/design-tokens` | CSS design tokens (`tokens.generated.css` + web extensions in `tokens.web.css`) |
-| `@ds-12/ui`            | React components styled with scoped CSS and design tokens                       |
+| `@ds-12/ui`            | React composition-layer components styled with scoped CSS and design tokens       |
 | `@ds-12/utils`         | Shared utilities                                                                |
 
 ## Apps
@@ -16,9 +16,34 @@ A React design system monorepo built with [Vite+](https://viteplus.dev/guide/). 
 | ---------------- | ------------------------------------------------------------------------------------------------- |
 | `apps/storybook` | Storybook for browsing components, docs, interaction tests, and Playwright a11y/visual regression |
 
+## Component layers
+
+DS-12 UI stacks three component layers. Each layer has a single responsibility; avoid mixing concerns across layers.
+
+```
+Application components          ← your app (pages, forms, domain widgets)
+        │  import @ds-12/ui
+        ▼
+Composition components          ← @ds-12/ui (this repo: packages/ui)
+        │  wrap + style
+        ▼
+Primitive components            ← Base UI (@base-ui/react)
+        │  styled with
+        ▼
+Design tokens                   ← @ds-12/design-tokens
+```
+
+| Layer | Where | Role |
+| ----- | ----- | ---- |
+| **Primitive** | `@base-ui/react` (dependency) | Headless, accessible interactive primitives (`Button`, `Field.Root`, `Avatar.Root`, etc.). Behavior and a11y only — no DS visual styling. |
+| **Composition** | `@ds-12/ui` (`packages/ui`) | DS-styled components: thin wrappers around Base UI, CVA variants, token-backed `@utility` CSS, `data-slot` attributes. **This is what the design system ships.** |
+| **Application** | Consumer apps | App-specific UI built by composing `@ds-12/ui` exports. No duplicate DS styling; import `styles.css` or `tailwind.css` once at the app root. |
+
+**In this monorepo:** `packages/ui` owns the composition layer. `apps/storybook` documents and tests it. Application-layer examples live in consumer repos (or Storybook demo/fixture stories, not in `packages/ui`).
+
 ## Components
 
-`@ds-12/ui` currently includes:
+`@ds-12/ui` (composition layer) currently includes:
 
 - Avatar, Badge, Button, Calendar, Chip, Checkbox, Divider, Icon
 - Input, Select, Menu, Combobox, Textarea, Radio, Switch, Skeleton, Table, Pagination, Typography
@@ -261,8 +286,9 @@ apps/
 
 ## Architecture
 
-- **React 19** with **Base UI** primitives for interactive behavior
-- **CVA** (`class-variance-authority`) for variant class names
+- **Three component layers** — Base UI primitives → `@ds-12/ui` composition → application components in consumer apps (see [Component layers](#component-layers))
+- **React 19** with **Base UI** primitives for interactive behavior at the primitive layer
+- **CVA** (`class-variance-authority`) for variant class names in the composition layer
 - **Tailwind v4 `@utility`** blocks for component styles, registered in `packages/ui/src/tailwind.css`
 - **Design tokens** as the single source of visual values (`var(--token)`), imported by `@ds-12/ui` from `@ds-12/design-tokens` and inlined into `dist/styles.css` at build time
 - **Pre-built `styles.css`** for drop-in consumption (tokens, fonts, component styles) without Tailwind in the host app

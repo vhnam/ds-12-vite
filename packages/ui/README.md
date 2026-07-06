@@ -1,6 +1,6 @@
 # @ds-12/ui
 
-React component library for the DS-12 design system. Components are built on [Base UI](https://base-ui.com/) primitives, styled with Tailwind v4 `@utility` blocks, and driven by design tokens from `@ds-12/design-tokens`.
+React **composition-layer** component library for the DS-12 design system. `@ds-12/ui` wraps [Base UI](https://base-ui.com/) primitives with DS styling — Tailwind v4 `@utility` blocks and design tokens from `@ds-12/design-tokens`. Consumer apps build **application-layer** UI on top of these exports.
 
 ## Install
 
@@ -97,11 +97,30 @@ The build regenerates token CSS in `@ds-12/design-tokens`, copies fonts into `sr
 
 **Git installs use pre-built artifacts** in `dist/`. After changing components, tokens, or fonts, run `vp run @ds-12/ui#build` and commit `dist/` and `src/vendor/` before consumers pull the update.
 
+## Component layers
+
+| Layer           | Package / location         | Responsibility                                                                                 |
+| --------------- | -------------------------- | ---------------------------------------------------------------------------------------------- |
+| **Primitive**   | `@base-ui/react`           | Headless behavior and accessibility (`Button`, `Field.Root`, `Avatar.Root`, …). No DS visuals. |
+| **Composition** | `@ds-12/ui` (this package) | DS-styled components: wrap Base UI, CVA variants, token-backed CSS, `data-slot` attributes.    |
+| **Application** | Your app                   | Pages, layouts, and domain widgets composed from `@ds-12/ui` exports.                          |
+
+```
+Your app  →  @ds-12/ui  →  @base-ui/react  →  @ds-12/design-tokens
+(application)  (composition)   (primitive)        (tokens)
+```
+
+**Rules for this package (composition layer):**
+
+- Wrap Base UI primitives — do not reimplement focus, keyboard, or ARIA behavior.
+- Keep composition thin: styling, variants, and DS-specific structure only.
+- Do not add app-specific or page-level components here; those belong in the application layer.
+
 ## Architecture
 
-- **React 19** + **Base UI** for accessible interactive primitives
+- **React 19** + **Base UI** at the primitive layer (dependency, not re-exported)
 - **CVA** for variant class names
 - **Tailwind v4 `@utility`** blocks registered in `src/tailwind.css`
 - **Design tokens** imported from `@ds-12/design-tokens` (single source of truth; inlined into `dist/styles.css` at build time)
 
-See the [monorepo README](../../README.md) for Storybook, CI, and workspace-wide commands.
+See the [monorepo README](../../README.md) for the full layer model, Storybook, CI, and workspace-wide commands.

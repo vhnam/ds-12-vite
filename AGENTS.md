@@ -28,7 +28,7 @@ Toolchain: **Vite+ (`vp`) + pnpm**. Not Nx.
 | Path                     | Package                | Purpose                                                                              |
 | ------------------------ | ---------------------- | ------------------------------------------------------------------------------------ |
 | `packages/design-tokens` | `@ds-12/design-tokens` | Design tokens: Tokens Studio JSON → Style Dictionary → CSS variables                 |
-| `packages/ui`            | `@ds-12/ui`            | React component library (Base UI + CVA + Tailwind v4 `@utility` CSS)                 |
+| `packages/ui`            | `@ds-12/ui`            | Composition-layer React components (Base UI + CVA + Tailwind v4 `@utility` CSS)      |
 | `packages/utils`         | `@ds-12/utils`         | Shared TypeScript utilities (no UI)                                                  |
 | `apps/storybook`         | `storybook`            | Stories, Playwright visual/a11y tests, Vitest interaction tests, GitHub Pages deploy |
 
@@ -97,7 +97,33 @@ vp run @ds-12/design-tokens#build           # generate:theme + pack
 
 ---
 
+## Component layers
+
+DS-12 UI has three component layers. Stay in the correct layer when adding or changing code.
+
+```
+Application components     ← consumer apps (not packages/ui)
+        │ import
+        ▼
+Composition components     ← @ds-12/ui (packages/ui/src/components/)
+        │ wrap
+        ▼
+Primitive components       ← Base UI (@base-ui/react)
+```
+
+| Layer | Location | Owns | Do not |
+| ----- | -------- | ---- | ------ |
+| **Primitive** | `@base-ui/react` (npm dependency) | Headless behavior, focus management, ARIA, keyboard interaction | DS colors, spacing, typography, or variant styling |
+| **Composition** | `packages/ui/src/components/` | CVA variants, `@utility` CSS, `data-slot`, thin wrappers around Base UI | App pages, domain logic, reimplementing primitive a11y |
+| **Application** | Consumer app source (outside this repo) | Pages, layouts, forms, domain widgets built from `@ds-12/ui` | Duplicate DS component styles; import primitives from `@base-ui/react` when `@ds-12/ui` already exposes the control |
+
+`apps/storybook` documents and tests the **composition** layer. Story fixtures and demos may illustrate application patterns but must not become new DS components in `packages/ui` unless they belong in the design system.
+
+---
+
 ## Component architecture
+
+Composition-layer conventions (`packages/ui`).
 
 ### File layout
 
@@ -140,9 +166,9 @@ const fooVariants = cva("foo", {
 - Use discriminated unions when variant axes are mutually exclusive (see `Typography`).
 - `className` merged last via `cn()` — import with a relative path: `import { cn } from '../../lib/utils.ts'`. Do not use the package alias `@ds-12/ui/utils`; no such export exists.
 
-### Base UI
+### Base UI (primitive layer)
 
-Interactive primitives wrap `@base-ui/react` (`Button`, `Avatar.Root`, `Field.Root`, etc.). DS-12 adds styling and thin composition only.
+Composition components wrap `@base-ui/react` (`Button`, `Avatar.Root`, `Field.Root`, etc.). `@ds-12/ui` adds styling and thin composition only — never replace primitive-layer behavior.
 
 ---
 
@@ -243,6 +269,8 @@ Use `fieldClassName` for the wrapper, `className` for the inner control.
 
 ### Components
 
+- **Do not add application-layer components** to `packages/ui` — pages, layouts, and domain widgets belong in consumer apps.
+- **Do not import `@base-ui/react` in apps** when `@ds-12/ui` already exposes the control — use the composition layer.
 - **Do not use `@apply`** anywhere in component CSS.
 - **Do not hardcode** colors, spacing, or typography in component CSS.
 - **Do not invent `compoundVariants`** — only combinations that exist in the component's CVA config and design tokens.

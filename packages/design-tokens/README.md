@@ -84,6 +84,8 @@ vp run @ds-12/ui#build
 
 Style Dictionary reads `src/assets/tokens.json` via `src/index.ts` (`build:tokens` script) and writes `src/tokens.generated.css`. Custom transforms handle shadows, typography flattening, and line-height units. `scripts/generate-theme.mjs` scans generated and web token files to produce `src/tokens.theme.css`.
 
+Full step-by-step workflow (Tokens Studio export → CSS): [docs/TOKEN_PIPELINE.md](./docs/TOKEN_PIPELINE.md).
+
 Set `SD_STRICT_REFERENCES=true` to fail the build on broken token references instead of logging warnings.
 
 ## Development
@@ -121,4 +123,4 @@ vp test
 - **Web layer** (`tokens.web.css`) for platform-specific values and component token aliases without polluting the generated primitives
 - **Theme bridge** (`tokens.theme.css`) for Tailwind v4 utility class generation
 
-See the [monorepo README](../../README.md) for workspace-wide commands and how tokens flow into `@ds-12/ui`.
+See the [monorepo README](../../README.md) for the three-layer component model (primitive → composition → application) and workspace-wide commands.

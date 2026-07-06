@@ -10,6 +10,16 @@ globs:
 
 Use this rule when building a new Design System component from a Figma spec.
 
+## Component layers
+
+New DS components belong in the **composition** layer (`packages/ui`). They wrap **primitive** Base UI parts and are consumed by the **application** layer in consumer apps.
+
+| Layer | Where | This rule applies? |
+| ----- | ----- | ------------------ |
+| Primitive | `@base-ui/react` | No — use as-is; do not fork |
+| Composition | `packages/ui/src/components/` | **Yes** — Figma spec → DS component here |
+| Application | Consumer app | No — compose `@ds-12/ui` exports instead |
+
 ## Project structure
 
 ```
