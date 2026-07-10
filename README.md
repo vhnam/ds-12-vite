@@ -7,7 +7,7 @@ A React design system monorepo built with [Vite+](https://viteplus.dev/guide/). 
 | Package                | Description                                                                     |
 | ---------------------- | ------------------------------------------------------------------------------- |
 | `@ds-12/design-tokens` | CSS design tokens (`tokens.generated.css` + web extensions in `tokens.web.css`) |
-| `@ds-12/ui`            | React composition-layer components styled with scoped CSS and design tokens       |
+| `@ds-12/ui`            | React composition-layer components styled with scoped CSS and design tokens     |
 | `@ds-12/utils`         | Shared utilities                                                                |
 
 ## Apps
@@ -33,11 +33,11 @@ Primitive components            ← Base UI (@base-ui/react)
 Design tokens                   ← @ds-12/design-tokens
 ```
 
-| Layer | Where | Role |
-| ----- | ----- | ---- |
-| **Primitive** | `@base-ui/react` (dependency) | Headless, accessible interactive primitives (`Button`, `Field.Root`, `Avatar.Root`, etc.). Behavior and a11y only — no DS visual styling. |
-| **Composition** | `@ds-12/ui` (`packages/ui`) | DS-styled components: thin wrappers around Base UI, CVA variants, token-backed `@utility` CSS, `data-slot` attributes. **This is what the design system ships.** |
-| **Application** | Consumer apps | App-specific UI built by composing `@ds-12/ui` exports. No duplicate DS styling; import `styles.css` or `tailwind.css` once at the app root. |
+| Layer           | Where                         | Role                                                                                                                                                             |
+| --------------- | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Primitive**   | `@base-ui/react` (dependency) | Headless, accessible interactive primitives (`Button`, `Field.Root`, `Avatar.Root`, etc.). Behavior and a11y only — no DS visual styling.                        |
+| **Composition** | `@ds-12/ui` (`packages/ui`)   | DS-styled components: thin wrappers around Base UI, CVA variants, token-backed `@utility` CSS, `data-slot` attributes. **This is what the design system ships.** |
+| **Application** | Consumer apps                 | App-specific UI built by composing `@ds-12/ui` exports. No duplicate DS styling; import `styles.css` or `tailwind.css` once at the app root.                     |
 
 **In this monorepo:** `packages/ui` owns the composition layer. `apps/storybook` documents and tests it. Application-layer examples live in consumer repos (or Storybook demo/fixture stories, not in `packages/ui`).
 
